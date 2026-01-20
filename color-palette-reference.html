@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garage Café - Color Palette Reference</title>
+    <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            padding: 3rem;
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        h1 {
+            font-family: 'Yeseva One', serif;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #2C1810;
+        }
+        
+        h2 {
+            font-family: 'Yeseva One', serif;
+            font-size: 2rem;
+            margin: 2rem 0 1rem;
+            color: #2C1810;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+        
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .color-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .color-swatch {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+        }
+        
+        .color-info {
+            padding: 1.5rem;
+        }
+        
+        .color-name {
+            font-family: 'Yeseva One', serif;
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #2C1810;
+        }
+        
+        .color-values {
+            font-family: monospace;
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .usage {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #888;
+        }
+        
+        .typography-section {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            margin-top: 3rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .font-example {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+        
+        .font-name {
+            font-size: 0.9rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1rem;
+        }
+        
+        .example-heading {
+            font-family: 'Yeseva One', serif;
+            font-size: 2.5rem;
+            color: #2C1810;
+            margin-bottom: 0.5rem;
+        }
+        
+        .example-body {
+            font-family: 'Roboto', Arial, sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #5D4037;
+        }
+        
+        .example-nav {
+            font-family: 'Lucida Sans', 'Lucida Sans Regular', sans-serif;
+            font-size: 1rem;
+            color: #8D6E63;
+        }
+    </style>
+</head>
+<body>
+    <h1>Garage Café Color Palette</h1>
+    <p class="subtitle">Style Guide Reference - Approved by Client</p>
+    
+    <h2>Primary Colors</h2>
+    <div class="palette-grid">
+        <div class="color-card">
+            <div class="color-swatch" style="background: #2C1810;">
+                #2C1810
+            </div>
+            <div class="color-info">
+                <div class="color-name">Dark Brown</div>
+                <div class="color-values">
+                    HEX: #2C1810<br>
+                    RGB: 44, 24, 16<br>
+                    CSS: --dark-brown
+                </div>
+                <div class="usage">
+                    <strong>Usage:</strong> Primary backgrounds, navigation bar, footer, hero gradients
+                </div>
+            </div>
+        </div>
+        
+        <div class="color-card">
+            <div class="color-swatch" style="background: #5D4037;">
+                #5D4037
+            </div>
+            <div class="color-info">
+                <div class="color-name">Medium Brown</div>
+                <div class="color-values">
+                    HEX: #5D4037<br>
+                    RGB: 93, 64, 55<br>
+                    CSS: --medium-brown
+                </div>
+                <div class="usage">
+                    <strong>Usage:</strong> Secondary backgrounds, gradient overlays, text content
+                </div>
+            </div>
+        </div>
+        
+        <div class="color-card">
+            <div class="color-swatch" style="background: #8D6E63;">
+                #8D6E63
+            </div>
+            <div class="color-info">
+                <div class="color-name">Light Brown</div>
+                <div class="color-values">
+                    HEX: #8D6E63<br>
+                    RGB: 141, 110, 99<br>
+                    CSS: --light-brown
+                </div>
+                <div class="usage">
+                    <strong>Usage:</strong> Buttons, accents, hover states, links, social icons
+                </div>
+            </div>
+        </div>
+        
+        <div class="color-card">
+            <div class="color-swatch" style="background: #BCAAA4; color: #2C1810;">
+                #BCAAA4
+            </div>
+            <div class="color-info">
+                <div class="color-name">Lighter Brown</div>
+                <div class="color-values">
+                    HEX: #BCAAA4<br>
+                    RGB: 188, 170, 164<br>
+                    CSS: --lighter-brown
+                </div>
+                <div class="usage">
+                    <strong>Usage:</strong> Card backgrounds, subtle text, navigation links, gradients
+                </div>
+            </div>
+        </div>
+        
+        <div class="color-card">
+            <div class="color-swatch" style="background: #F5F5DC; color: #2C1810;">
+                #F5F5DC
+            </div>
+            <div class="color-info">
+                <div class="color-name">Off-White</div>
+                <div class="color-values">
+                    HEX: #F5F5DC<br>
+                    RGB: 245, 245, 220<br>
+                    CSS: --off-white
+                </div>
+                <div class="usage">
+                    <strong>Usage:</strong> Text on dark backgrounds, section backgrounds, highlights
+                </div>
+            </div>
+        </div>
+        
+        <div class="color-card">
+            <div class="color-swatch" style="background: #FFF8E7; color: #2C1810;">
+                #FFF8E7
+            </div>
+            <div class="color-info">
+                <div class="color-name">Cream</div>
+                <div class="color-values">
+                    HEX: #FFF8E7<br>
+                    RGB: 255, 248, 231<br>
+                    CSS: --cream
+                </div>
+                <div class="usage">
+                    <strong>Usage:</strong> Main body background, light sections, form inputs
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="typography-section">
+        <h2>Typography</h2>
+        
+        <div class="font-example">
+            <div class="font-name">Headings - Yeseva One (Serif)</div>
+            <div class="example-heading">Welcome to Garage Café</div>
+            <p style="margin-top: 1rem; color: #666;">Used for: All page headings (h1, h2, h3), section titles, logo</p>
+        </div>
+        
+        <div class="font-example">
+            <div class="font-name">Body Text - Roboto & Arial (Sans-serif)</div>
+            <div class="example-body">
+                Located in Mawaque, Mabalacat City, Pampanga, Garage Café is your friendly neighborhood coffee shop offering quality drinks and comfort food in a welcoming atmosphere.
+            </div>
+            <p style="margin-top: 1rem; color: #666;">Used for: Paragraphs, descriptions, card content, all body text</p>
+        </div>
+        
+        <div class="font-example">
+            <div class="font-name">Navigation - Lucida Sans (Condensed)</div>
+            <div class="example-nav">
+                Home • About • Menu • Blog • Contact
+            </div>
+            <p style="margin-top: 1rem; color: #666;">Used for: Navigation menu items only</p>
+        </div>
+    </div>
+    
+    <div class="typography-section">
+        <h2>Color Combinations</h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 2rem;">
+            <div style="background: #2C1810; color: #F5F5DC; padding: 2rem; border-radius: 10px;">
+                <h3 style="font-family: 'Yeseva One', serif; margin-bottom: 1rem;">Dark on Light</h3>
+                <p>Hero sections, headers, and footer areas use dark brown backgrounds with off-white text for maximum contrast and readability.</p>
+            </div>
+            
+            <div style="background: #FFF8E7; color: #2C1810; padding: 2rem; border-radius: 10px; border: 2px solid #BCAAA4;">
+                <h3 style="font-family: 'Yeseva One', serif; margin-bottom: 1rem;">Light Backgrounds</h3>
+                <p>Main content areas use cream backgrounds with dark brown text, providing a warm, comfortable reading experience.</p>
+            </div>
+            
+            <div style="background: linear-gradient(135deg, #BCAAA4 0%, #FFF8E7 100%); color: #2C1810; padding: 2rem; border-radius: 10px;">
+                <h3 style="font-family: 'Yeseva One', serif; margin-bottom: 1rem;">Gradient Accents</h3>
+                <p>Cards and feature sections use subtle gradients from lighter brown to cream for visual interest and depth.</p>
+            </div>
+        </div>
+    </div>
+    
+    <div style="background: white; padding: 2rem; border-radius: 15px; margin-top: 3rem; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+        <h2>Implementation Notes</h2>
+        <ul style="line-height: 2; color: #5D4037;">
+            <li><strong>Warm & Comfort:</strong> The brown palette creates an inviting, cozy café atmosphere</li>
+            <li><strong>Readability:</strong> High contrast between dark browns and light creams ensures text is easy to read</li>
+            <li><strong>Modern Functional:</strong> Clean design with warm colors balances traditional café feel with modern web aesthetics</li>
+            <li><strong>Brand Consistency:</strong> All colors derived from approved style guide for consistent brand identity</li>
+            <li><strong>Accessibility:</strong> Color combinations meet WCAG contrast requirements for web accessibility</li>
+        </ul>
+    </div>
+    
+    <div style="margin-top: 3rem; padding: 2rem; background: #2C1810; color: #F5F5DC; border-radius: 15px; text-align: center;">
+        <p style="font-size: 0.9rem;">
+            <strong>Domain:</strong> www.visitgaragecafe.com<br>
+            <strong>Hosting:</strong> Hostinger<br>
+            <strong>Design Team:</strong> Alimurung, Arcilla, David, Tolentino (WD-301)<br>
+            <strong>Course:</strong> Web Search Engine Optimization and Analytics (2191-6WSEA)
+        </p>
+    </div>
+</body>
+</html>

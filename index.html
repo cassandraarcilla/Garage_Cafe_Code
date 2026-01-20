@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garage Café</title>
+    <meta name="description" content="Garage Café in Mawaque, Mabalacat City, Pampanga. Affordable coffee shop near Metro Clark Homes offering comfort food, study hub, and event coffee setups.">
+    <meta name="keywords" content="Garage Café, GRG Café, Coffee shop Mabalacat Pampanga, Café near Metro Clark Homes, Local café Pampanga">
+    <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="GRG/Icons/Garage Cafe logo ICON.png" type="image/png">
+
+    <style>
+        :root {
+            --dark-brown: #2C1810;
+            --medium-brown: #5D4037;
+            --light-brown: #8D6E63;
+            --lighter-brown: #BCAAA4;
+            --off-white: #F5F5DC;
+            --cream: #FFF8E7;
+            --accent-gold: #D4AF37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: var(--cream);
+            color: var(--dark-brown);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(44, 24, 16, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 0;
+            background: rgba(44, 24, 16, 0.98);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .logo-text {
+            font-family: 'Yeseva One', serif;
+            font-size: 1.8rem;
+            color: var(--off-white);
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--lighter-brown);
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--off-white);
+        }
+        
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(135deg, rgba(93, 64, 55, 0.85) 0%, rgba(44, 24, 16, 0.9) 100%),
+                        url('grg/HOME/header.jpg') center/cover no-repeat fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(44, 24, 16, 0.4) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+            animation: slideUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Yeseva One', serif;
+            font-size: 5rem;
+            color: var(--off-white);
+            margin-bottom: 1.5rem;
+            letter-spacing: 4px;
+            line-height: 1.2;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+            animation: fadeInScale 1s ease-out 0.5s both;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .hero .tagline {
+            font-size: 1.5rem;
+            color: var(--lighter-brown);
+            margin-bottom: 3rem;
+            font-weight: 300;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+            animation: slideUp 1s ease-out 0.7s both;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 3rem;
+            background: linear-gradient(135deg, var(--light-brown), var(--medium-brown));
+            color: var(--off-white);
+            text-decoration: none;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            margin: 0 0.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            background: linear-gradient(135deg, var(--accent-gold), var(--light-brown));
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+        }
+
+        .cta-button.outline {
+            background: transparent;
+            border: 2px solid var(--off-white);
+            color: var(--off-white);
+        }
+
+        .cta-button.outline:hover {
+            background: var(--off-white);
+            color: var(--dark-brown);
+            border-color: var(--off-white);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-family: 'Yeseva One', serif;
+            font-size: 3rem;
+            color: var(--dark-brown);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--light-brown), var(--accent-gold), var(--light-brown));
+            border-radius: 2px;
+        }
+
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: var(--medium-brown);
+            font-weight: 300;
+            margin-top: 1.5rem;
+        }
+
+        /* Features Grid */
+        .features {
+            background: linear-gradient(135deg, var(--off-white) 0%, var(--cream) 100%);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(44, 24, 16, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--light-brown), var(--accent-gold));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(44, 24, 16, 0.15);
+        }
+
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            transition: transform 0.4s ease;
+            display: block;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .feature-card h3 {
+            font-family: 'Yeseva One', serif;
+            font-size: 1.8rem;
+            color: var(--dark-brown);
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: var(--medium-brown);
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* About Section */
+        .about-section {
+            background: linear-gradient(135deg, var(--dark-brown) 0%, #1a0e08 100%);
+            color: var(--off-white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(141, 110, 99, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .about-section .section-title {
+            color: var(--off-white);
+        }
+
+        .about-section .section-subtitle {
+            color: var(--lighter-brown);
+        }
+
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: var(--lighter-brown);
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+        }
+
+        /* Stats */
+        .stats {
+            background: linear-gradient(to bottom, var(--cream), var(--off-white));
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            text-align: center;
+        }
+
+        .stat-item {
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(44, 24, 16, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(44, 24, 16, 0.12);
+        }
+
+        .stat-number {
+            font-family: 'Yeseva One', serif;
+            font-size: 3.5rem;
+            background: linear-gradient(135deg, var(--light-brown), var(--accent-gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            color: var(--medium-brown);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to bottom, var(--dark-brown), #0f0805);
+            color: var(--lighter-brown);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Yeseva One', serif;
+            font-size: 1.5rem;
+            color: var(--off-white);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent-gold);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--lighter-brown);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--off-white);
+            padding-left: 5px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--medium-brown), var(--light-brown));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            padding: 10px;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--accent-gold), var(--light-brown));
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            padding: 10px;
+        }
+
+        .social-links img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(141, 110, 99, 0.3);
+            font-size: 0.9rem;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--light-brown), var(--accent-gold));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+                letter-spacing: 2px;
+            }
+
+            .hero .tagline {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-button {
+                display: block;
+                margin: 0.5rem auto;
+                max-width: 300px;
+            }
+
+            .stat-number {
+                font-size: 2.5rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo" onerror="this.style.display='none'">
+                <span class="logo-text"></span>
+            </div>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>GARAGE CAFÉ</h1>
+            <p class="tagline">Your Neighborhood Coffee Shop in Mabalacat City</p>
+            <div>
+                <a href="menu.html" class="cta-button">View Menu</a>
+                <a href="contact.html" class="cta-button outline">Visit Us</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Why Choose Garage Café?</h2>
+                <p class="section-subtitle">More than just coffee - it's community</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <h3>Affordable Quality</h3>
+                    <p>Budget-friendly coffee and comfort food without compromising on taste. Perfect for students and professionals alike.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Study & Work Hub</h3>
+                    <p>Quiet, comfortable space with Wi-Fi and power outlets. Ideal for studying, working remotely, or catching up on projects.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <h3>Local Community</h3>
+                    <p>Conveniently located near Metro Clark Homes in Mawaque. Supporting local businesses and building neighborhood connections.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">500+</span>
+                    <span class="stat-label">Happy Customers</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">50+</span>
+                    <span class="stat-label">Menu Items</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Fresh Daily</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">7 Days</span>
+                    <span class="stat-label">Open Weekly</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section">
+        <div class="container">
+            <div class="about-content">
+                <div class="section-header">
+                    <h2 class="section-title">Welcome to Garage Café</h2>
+                    <p class="section-subtitle">Your friendly neighborhood coffee shop</p>
+                </div>
+                <p>Located in Mawaque, Mabalacat City, Pampanga, we're more than just a coffee shop. We're your local gathering place offering quality drinks and comfort food in a welcoming atmosphere.</p>
+                <p>We serve students, employees, families, and coffee lovers with affordable options, meal pre-orders, and event coffee setups for birthdays, meetings, and small gatherings.</p>
+                <a href="about.html" class="cta-button" style="margin-top: 2rem;">Learn More About Us</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>GARAGE CAFÉ</h3>
+                <p>Mawaque, Mabalacat City, Pampanga</p>
+                <p>Near Metro Clark Homes, Sapang Biabas</p>
+                <p>visitgaragecafe.com</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/p/Garage-Caf%C3%A9-61567205202489/" aria-label="Facebook">
+                        <img src="GRG/Icons/facebook.png" alt="Facebook" onerror="this.style.display='none'">
+                    </a>
+                    <a href="https://www.instagram.com/garagecafe.1110/" aria-label="Instagram">
+                        <img src="GRG/Icons/instagram.png" alt="Instagram" onerror="this.style.display='none'">
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Dine In</a></li>
+                    <li><a href="#">Meal Pre-Orders</a></li>
+                    <li><a href="#">Event Coffee Setups</a></li>
+                    <li><a href="#">Study Space</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Garage Café. All rights reserved. | www.visitgaragecafe.com</p>
+        </div>
+    </footer>
+
+    <div class="scroll-top" id="scrollTop">↑</div>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll to top button
+        const scrollTop = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        scrollTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

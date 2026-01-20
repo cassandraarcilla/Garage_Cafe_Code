@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu - Garage Café</title>
+    <meta name="description" content="Explore Garage Café's menu featuring affordable coffee, comfort food, and drinks. Budget-friendly options for students and professionals in Mabalacat City.">
+    <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="GRG/Icons/Garage Cafe logo ICON.png" type="image/png">
+    <style>
+        :root {
+            --dark-brown: #2C1810;
+            --medium-brown: #5D4037;
+            --light-brown: #8D6E63;
+            --lighter-brown: #BCAAA4;
+            --off-white: #F5F5DC;
+            --cream: #FFF8E7;
+            --accent-gold: #D4AF37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: var(--cream);
+            color: var(--dark-brown);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(44, 24, 16, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 0;
+            background: rgba(44, 24, 16, 0.98);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .logo-text {
+            font-family: 'Yeseva One', serif;
+            font-size: 1.8rem;
+            color: var(--off-white);
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--lighter-brown);
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--off-white);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, rgba(93, 64, 55, 0.85) 0%, rgba(44, 24, 16, 0.9) 100%),
+                        url('grg/MENU/menu_header.jpg') center/cover no-repeat fixed;
+            padding: 12rem 2rem 6rem;
+            text-align: center;
+            color: var(--off-white);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(44, 24, 16, 0.4) 100%);
+            z-index: 1;
+        }
+
+        .page-header h1 {
+            font-family: 'Yeseva One', serif;
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 5px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+            animation: slideUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            color: var(--lighter-brown);
+            position: relative;
+            z-index: 2;
+            font-weight: 300;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+            animation: slideUp 1s ease-out 0.5s both;
+        }
+
+        /* Menu Section */
+        .menu-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-header h2 {
+            font-family: 'Yeseva One', serif;
+            font-size: 3rem;
+            color: var(--dark-brown);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-header h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--light-brown), var(--accent-gold), var(--light-brown));
+            border-radius: 2px;
+        }
+
+        .section-header p {
+            color: var(--medium-brown);
+            font-size: 1.2rem;
+            margin-top: 1.5rem;
+            font-weight: 300;
+        }
+
+        /* Category Title */
+        .category-title {
+            font-family: 'Yeseva One', serif;
+            font-size: 2rem;
+            color: var(--dark-brown);
+            margin: 3rem 0 2rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .category-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 2px;
+            background: var(--accent-gold);
+        }
+
+        /* Menu Grid */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+        }
+
+        .menu-item {
+            background: white;
+            padding: 2rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(44, 24, 16, 0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .menu-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--light-brown), var(--accent-gold));
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .menu-item:hover::before {
+            transform: scaleX(1);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(44, 24, 16, 0.15);
+        }
+
+        .item-image {
+            width: 100%;
+            max-width: 280px;
+            height: auto;
+            border-radius: 15px;
+            margin: 0 auto 1.5rem;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .menu-item:hover .item-image {
+            transform: scale(1.05);
+        }
+
+        .item-header {
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 1rem;
+            align-items: start;
+        }
+
+        .item-name {
+            font-family: 'Yeseva One', serif;
+            font-size: 1.8rem;
+            color: var(--dark-brown);
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-price {
+            font-size: 1.2rem;
+            color: var(--accent-gold);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .item-description {
+            color: var(--medium-brown);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-weight: 300;
+        }
+
+        .item-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, var(--light-brown), var(--medium-brown));
+            color: var(--off-white);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .tag.new {
+            background: linear-gradient(135deg, #d32f2f, #c62828);
+        }
+
+        .tag.blended {
+            background: linear-gradient(135deg, #795548, #a1887f);
+        }
+
+        /* Alternating Section Backgrounds */
+        .menu-section:nth-child(even) {
+            background: linear-gradient(135deg, var(--off-white) 0%, var(--cream) 100%);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to bottom, var(--dark-brown), #0f0805);
+            color: var(--lighter-brown);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Yeseva One', serif;
+            font-size: 1.5rem;
+            color: var(--off-white);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent-gold);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--lighter-brown);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--off-white);
+            padding-left: 5px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--medium-brown), var(--light-brown));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            padding: 10px;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--accent-gold), var(--light-brown));
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .social-links img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(141, 110, 99, 0.3);
+            font-size: 0.9rem;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--light-brown), var(--accent-gold));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1.5rem;
+                font-size: 0.9rem;
+            }
+
+            .logo-text {
+                font-size: 1.5rem;
+            }
+
+            .page-header {
+                padding: 10rem 2rem 4rem;
+            }
+
+            .page-header h1 {
+                font-size: 3rem;
+                letter-spacing: 2px;
+            }
+
+            .section-header h2 {
+                font-size: 2.5rem;
+            }
+
+            .category-title {
+                font-size: 1.8rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .menu-section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+            }
+
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="container">
+            <div class="logo">
+                <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo" onerror="this.style.display='none'">
+                <span class="logo-text"></span>
+            </div>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html" class="active">Menu</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <h1>Our Menu</h1>
+        <p>Affordable coffee & comfort food for everyone</p>
+    </section>
+
+    <!-- Coffee Based -->
+    <section class="menu-section">
+        <div class="section-header">
+            <h2>Coffee Based</h2>
+            <p>Espresso drinks and favorites</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="grg/MENU/americano.png" alt="Americano" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Americano</h3>
+                    <span class="item-price">Hot ₱90</span>
+                </div>
+                <p class="item-description">Smooth espresso with hot water. Bold yet balanced.</p>
+                <div class="item-tags"><span class="tag">Hot</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/latte.png" alt="Latte" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Latte</h3>
+                    <span class="item-price">Hot ₱130 / Cold ₱120</span>
+                </div>
+                <p class="item-description">Smooth espresso with steamed milk.</p>
+                <div class="item-tags"><span class="tag">Hot</span><span class="tag">Cold</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/spanish_latte.png" alt="Spanish Latte" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Spanish Latte</h3>
+                    <span class="item-price">Hot ₱135 / Cold ₱125</span>
+                </div>
+                <p class="item-description">Sweet and creamy with condensed milk.</p>
+                <div class="item-tags"><span class="tag">Hot</span><span class="tag">Cold</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/irish_creme.png" alt="Irish Creme" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Irish Creme</h3>
+                    <span class="item-price">Hot ₱140</span>
+                </div>
+                <p class="item-description">Smooth Irish cream flavor with rich espresso.</p>
+                <div class="item-tags"><span class="tag">Hot</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/biscoff_espresso.png" alt="Biscoff Espresso" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Biscoff Espresso</h3>
+                    <span class="item-price">Hot ₱160 / Cold ₱145</span>
+                </div>
+                <p class="item-description">Signature biscoff cookie flavor meets bold espresso.</p>
+                <div class="item-tags"><span class="tag">Hot</span><span class="tag">Cold</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/mocha_espresso.png" alt="Mocha Espresso" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Mocha Espresso</h3>
+                    <span class="item-price">Hot ₱160 / Cold ₱150</span>
+                </div>
+                <p class="item-description">Rich chocolate meets espresso. Perfect balance of sweet and strong.</p>
+                <div class="item-tags"><span class="tag">Hot</span><span class="tag">Cold</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/strawberry_espresso.png" alt="Strawberry Espresso" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Strawberry Espresso</h3>
+                    <span class="item-price">Cold ₱130</span>
+                </div>
+                <p class="item-description">Refreshing strawberry flavor with espresso kick.</p>
+                <div class="item-tags"><span class="tag">Cold</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Specials -->
+    <section class="menu-section">
+        <div class="section-header">
+            <h2>Specials</h2>
+            <p>Signature creations and new favorites</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="grg/MENU/raspy_mocha.png" alt="Raspy Mocha" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Raspy Mocha</h3>
+                    <span class="item-price">Hot ₱205 / Cold ₱190</span>
+                </div>
+                <p class="item-description">Raspberry and mocha fusion. Sweet, fruity, and indulgent.</p>
+                <div class="item-tags"><span class="tag new">NEW</span><span class="tag">Hot</span><span class="tag">Cold</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/caramel_macchiato.png" alt="Caramel Macchiato" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Caramel Macchiato</h3>
+                    <span class="item-price">Hot ₱170 / Cold ₱190</span>
+                </div>
+                <p class="item-description">Layered perfection with caramel sweetness and espresso kick.</p>
+                <div class="item-tags"><span class="tag new">NEW</span><span class="tag">Hot</span><span class="tag">Cold</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/coffee_jelly(frap).png" alt="Coffee Jelly Frappe" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Coffee Jelly Frappe</h3>
+                    <span class="item-price">Cold ₱140</span>
+                </div>
+                <p class="item-description">Blended coffee frappe with coffee jelly cubes. Refreshing and fun!</p>
+                <div class="item-tags"><span class="tag new">NEW</span><span class="tag">Cold</span><span class="tag blended">Blended</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Non-Coffee -->
+    <section class="menu-section">
+        <div class="section-header">
+            <h2>Non-Coffee</h2>
+            <p>Delicious drinks without the caffeine</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="grg/MENU/milky_biscoff.png" alt="Milky Biscoff" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Milky Biscoff</h3>
+                    <span class="item-price">₱140</span>
+                </div>
+                <p class="item-description">Creamy biscoff cookie flavor in every sip.</p>
+                <div class="item-tags"><span class="tag">No Coffee</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/milky_choco.png" alt="Milky Choco" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Milky Choco</h3>
+                    <span class="item-price">₱135</span>
+                </div>
+                <p class="item-description">Rich and creamy chocolate milk.</p>
+                <div class="item-tags"><span class="tag">No Coffee</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/strawberry_milk.png" alt="Strawberry Milk" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Strawberry Milk</h3>
+                    <span class="item-price">₱125</span>
+                </div>
+                <p class="item-description">Sweet strawberry flavor with creamy milk.</p>
+                <div class="item-tags"><span class="tag">No Coffee</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Frappe -->
+    <section class="menu-section">
+        <div class="section-header">
+            <h2>Frappe</h2>
+            <p>Blended and refreshing</p>
+        </div>
+
+        <h3 class="category-title">Coffee Based</h3>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="grg/MENU/biscoff_frappe.png" alt="Biscoff Frappe" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Biscoff Espresso Frappe</h3>
+                    <span class="item-price">₱160</span>
+                </div>
+                <p class="item-description">Blended biscoff espresso frappe.</p>
+                <div class="item-tags"><span class="tag blended">Blended</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/mocha_frappe.png" alt="Mocha Frappe" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Mocha Espresso Frappe</h3>
+                    <span class="item-price">₱175</span>
+                </div>
+                <p class="item-description">Blended chocolate and espresso frappe.</p>
+                <div class="item-tags"><span class="tag blended">Blended</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/irish_creme_frappe.png" alt="Irish Creme Frappe" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Irish Creme Frappe</h3>
+                    <span class="item-price">₱175</span>
+                </div>
+                <p class="item-description">Blended Irish cream frappe.</p>
+                <div class="item-tags"><span class="tag blended">Blended</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/mocha_mint_frappe.png" alt="Mocha Mint Frappe" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Mocha Mint Frappe</h3>
+                    <span class="item-price">₱190</span>
+                </div>
+                <p class="item-description">Refreshing mint and chocolate frappe.</p>
+                <div class="item-tags"><span class="tag new">NEW</span><span class="tag blended">Blended</span></div>
+            </div>
+        </div>
+
+        <h3 class="category-title">Non-Coffee</h3>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="grg/MENU/biscoff_nc_frappe.png" alt="Biscoff Non-Coffee Frappe" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Biscoff Frappe (No Coffee)</h3>
+                    <span class="item-price">₱145</span>
+                </div>
+                <p class="item-description">Blended biscoff frappe without coffee.</p>
+                <div class="item-tags"><span class="tag blended">Blended</span><span class="tag">No Coffee</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/chocolate_frappe.png" alt="Choco Frappe" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Chocolate Frappe</h3>
+                    <span class="item-price">₱145</span>
+                </div>
+                <p class="item-description">Blended chocolate frappe.</p>
+                <div class="item-tags"><span class="tag blended">Blended</span><span class="tag">No Coffee</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/vanilla_frappe.png" alt="Vanilla Frappe" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Vanilla Frappe</h3>
+                    <span class="item-price">₱125</span>
+                </div>
+                <p class="item-description">Classic vanilla frappe.</p>
+                <div class="item-tags"><span class="tag blended">Blended</span><span class="tag">No Coffee</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/minty_choco_frappe.png" alt="Minty Choco Frappe" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Minty Choco Frappe</h3>
+                    <span class="item-price">₱160</span>
+                </div>
+                <p class="item-description">Cool mint and chocolate blended frappe.</p>
+                <div class="item-tags"><span class="tag new">NEW</span><span class="tag blended">Blended</span><span class="tag">No Coffee</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Yogurt -->
+    <section class="menu-section">
+        <div class="section-header">
+            <h2>Yogurt</h2>
+            <p>Fresh and healthy yogurt drinks</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="grg/MENU/strawberry_yogurt.png" alt="Strawberry Yogurt" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Strawberry Yogurt</h3>
+                    <span class="item-price">₱190</span>
+                </div>
+                <p class="item-description">Fresh strawberry yogurt drink.</p>
+                <div class="item-tags"><span class="tag">Healthy</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/blueberry_yogurt.png" alt="Blueberry Yogurt" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Blueberry Yogurt</h3>
+                    <span class="item-price">₱190</span>
+                </div>
+                <p class="item-description">Fresh blueberry yogurt drink.</p>
+                <div class="item-tags"><span class="tag">Healthy</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food -->
+    <section class="menu-section">
+        <div class="section-header">
+            <h2>Food</h2>
+            <p>Delicious snacks and comfort food</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="grg/MENU/pizza.png" alt="Pizza" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Pizza</h3>
+                </div>
+                <p class="item-description">Fresh baked pizza. Ask about today's flavors!</p>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/nachos.png" alt="Nachos" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Nachos</h3>
+                </div>
+                <p class="item-description">Crispy nachos with toppings.</p>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/empanada.png" alt="Empanada" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Empanada</h3>
+                </div>
+                <p class="item-description">Filipino-style empanada. Ham & Cheese or Chicken Truffle.</p>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/fries.png" alt="Fries" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Fries</h3>
+                </div>
+                <p class="item-description">Choose from Sour Cream, BBQ, Cheese, or Plain.</p>
+                <div class="item-tags"><span class="tag">Popular</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/buffalo_fries.png" alt="Buffalo Fries" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Buffalo Fries</h3>
+                </div>
+                <p class="item-description">Spicy buffalo-flavored fries.</p>
+                <div class="item-tags"><span class="tag">Spicy</span></div>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/corndog.png" alt="Corndog" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Corndog</h3>
+                </div>
+                <p class="item-description">Classic corndog on a stick.</p>
+            </div>
+
+            <div class="menu-item">
+                <img src="grg/MENU/waffle.png" alt="Waffle" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Waffle</h3>
+                </div>
+                <p class="item-description">Choose from Chocolate, Strawberry, Nutella, or Classic.</p>
+                <div class="item-tags"><span class="tag">Sweet</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>GARAGE CAFÉ</h3>
+                <p>Mawaque, Mabalacat City, Pampanga</p>
+                <p>Near Metro Clark Homes, Sapang Biabas</p>
+                <p>visitgaragecafe.com</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/p/Garage-Caf%C3%A9-61567205202489/" aria-label="Facebook">
+                        <img src="GRG/Icons/facebook.png" alt="Facebook" onerror="this.style.display='none'">
+                    </a>
+                    <a href="https://www.instagram.com/garagecafe.1110/" aria-label="Instagram">
+                        <img src="GRG/Icons/instagram.png" alt="Instagram" onerror="this.style.display='none'">
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Dine In</a></li>
+                    <li><a href="#">Meal Pre-Orders</a></li>
+                    <li><a href="#">Event Coffee Setups</a></li>
+                    <li><a href="#">Study Space</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Garage Café. All rights reserved. | www.visitgaragecafe.com</p>
+        </div>
+    </footer>
+
+    <div class="scroll-top" id="scrollTop">↑</div>
+
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll to top button
+        const scrollTop = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        scrollTop.addEventListener('click', function() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
