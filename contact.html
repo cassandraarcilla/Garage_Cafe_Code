@@ -27,10 +27,41 @@ body { font-family:'Roboto', Arial, sans-serif; background: var(--cream); color:
 nav { position:fixed; top:0; width:100%; background: rgba(44,24,16,0.95); backdrop-filter:blur(10px); z-index:1000; padding:1.5rem 0; box-shadow:0 4px 20px rgba(0,0,0,0.15); transition:all 0.3s ease; }
 nav.scrolled { padding:1rem 0; background: rgba(44,24,16,0.98); }
 nav .container { max-width:1200px; margin:0 auto; padding:0 2rem; display:flex; justify-content:space-between; align-items:center; }
-.logo { display:flex; align-items:center; gap:0.8rem; transition: transform 0.3s ease; }
+.logo { display:flex; align-items:center; gap:0.8rem; transition: transform 0.3s ease; z-index:1001; }
 .logo:hover { transform: scale(1.05); }
 .logo img { height:50px; width:auto; filter: brightness(0) invert(1); }
 .logo-text { font-family:'Yeseva One', serif; font-size:1.8rem; color: var(--off-white); letter-spacing:2px; text-shadow:2px 2px 4px rgba(0,0,0,0.3); }
+
+/* Hamburger Menu */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 1001;
+    padding: 0.6rem;
+    gap: 5px;
+}
+
+.hamburger span {
+    width: 32px;
+    height: 3px;
+    background: var(--off-white);
+    transition: all 0.3s ease;
+    border-radius: 3px;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(9px, 9px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(9px, -9px);
+}
+
 nav ul { display:flex; list-style:none; gap:2.5rem; }
 nav a { color: var(--lighter-brown); text-decoration:none; font-weight:500; letter-spacing:1px; position:relative; transition:color 0.3s ease; padding:0.5rem 0; }
 nav a::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background: var(--accent-gold); transition: width 0.3s ease; }
@@ -60,7 +91,6 @@ nav a:hover, nav a.active { color: var(--off-white); }
 
 /* Image Gallery */
 .contact-images { display:grid; grid-template-columns:1fr; gap:2rem; }
-@media(min-width:768px){ .contact-images { grid-template-columns:1fr; } }
 .image-card { background:white; padding:1.5rem; border-radius:25px; box-shadow:0 10px 30px rgba(44,24,16,0.08); transition:transform 0.3s ease, box-shadow 0.3s ease; }
 .image-card:hover { transform: translateY(-10px); box-shadow:0 20px 50px rgba(44,24,16,0.15); }
 .image-placeholder { width:100%; height:250px; border-radius:15px; overflow:hidden; margin-bottom:1rem; display:flex; align-items:center; justify-content:center; }
@@ -81,6 +111,7 @@ nav a:hover, nav a.active { color: var(--off-white); }
 .map-section { padding:6rem 2rem; background: var(--off-white); }
 .map-section h2 { font-family:'Yeseva One', serif; font-size:3rem; color:var(--dark-brown); margin-bottom:3rem; text-align:center; position:relative; display:inline-block; }
 .map-section h2::after { content:''; position:absolute; bottom:-10px; left:50%; transform:translateX(-50%); width:80px; height:3px; background:linear-gradient(90deg,var(--light-brown),var(--accent-gold),var(--light-brown)); }
+.map-section .container { text-align:center; }
 .map-container { max-width:1200px; margin:0 auto; background:white; padding:2rem; border-radius:25px; box-shadow:0 10px 30px rgba(44,24,16,0.08); }
 .map-placeholder { width:100%; height:450px; border-radius:15px; overflow:hidden; }
 .map-placeholder iframe { width:100%; height:100%; border:none; border-radius:15px; }
@@ -90,8 +121,10 @@ footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color
 .footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:3rem; max-width:1200px; margin:0 auto 3rem; }
 .footer-section h3 { font-family:'Yeseva One', serif; font-size:1.5rem; color: var(--off-white); margin-bottom:1.5rem; position:relative; display:inline-block; }
 .footer-section h3::after { content:''; position:absolute; bottom:-8px; left:0; width:50px; height:2px; background: var(--accent-gold); }
-.footer-section p,a { color: var(--lighter-brown); text-decoration:none; display:block; margin-bottom:0.5rem; transition:all 0.3s ease; }
+.footer-section p, .footer-section a { color: var(--lighter-brown); text-decoration:none; display:block; margin-bottom:0.5rem; transition:all 0.3s ease; }
 .footer-section a:hover { color: var(--off-white); padding-left:5px; }
+.footer-links { list-style:none; }
+.footer-links li { margin-bottom:0.8rem; }
 .social-links { display:flex; gap:1rem; margin-top:1rem; }
 .social-links a { width:45px; height:45px; background:linear-gradient(135deg,var(--medium-brown),var(--light-brown)); border-radius:50%; display:flex; align-items:center; justify-content:center; transition: all 0.4s ease; box-shadow:0 4px 10px rgba(0,0,0,0.2); padding:10px; }
 .social-links a:hover { background:linear-gradient(135deg,var(--accent-gold),var(--light-brown)); transform: translateY(-5px) rotate(5deg); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
@@ -107,20 +140,132 @@ footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color
 @keyframes fadeIn {0%{opacity:0;}100%{opacity:1;}}
 @keyframes slideUp {0%{opacity:0; transform:translateY(20px);}100%{opacity:1; transform:translateY(0);}}
 
-@media(max-width:968px){ .contact-grid{grid-template-columns:1fr; gap:2rem;} }
-@media(max-width:768px){ nav ul{gap:1.5rem;font-size:0.9rem;} .logo-text{font-size:1.5rem;} .page-hero h1{font-size:3rem;} .page-hero p{font-size:1.1rem;} .contact-info{padding:2rem;} .contact-info h2{font-size:2rem;} .hours-section h2,.map-section h2{font-size:2.5rem;} }
-@media(max-width:480px){ .page-hero h1{font-size:2.5rem;} nav ul{gap:1rem;} .scroll-top{bottom:20px; right:20px; width:45px; height:45px;} }
+/* ============================================
+   TABLET & MOBILE RESPONSIVENESS
+   ============================================ */
+@media screen and (max-width: 1024px) {
+    .hamburger { display: flex; }
+
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: rgba(44, 24, 16, 0.98);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-top: 100px;
+        padding-left: 2rem;
+        gap: 2.5rem;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+        z-index: 999;
+    }
+
+    nav ul.active { right: 0; }
+    
+    /* Force grid to 1 column on tablets and mobile */
+    .contact-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .page-hero h1 { font-size: 3rem; }
+    .contact-info { padding: 2rem; }
+}
+
+
+/* ============================================
+   TABLET & MOBILE - HAMBURGER MENU
+   ============================================ */
+@media screen and (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+
+    nav ul {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 280px;
+        height: 100vh;
+        background: rgba(44, 24, 16, 0.98);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-top: 100px;
+        padding-left: 2rem;
+        gap: 2.5rem;
+        transition: right 0.3s ease;
+        box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+    }
+
+    nav ul.active {
+        right: 0;
+    }
+
+    nav li {
+        width: 100%;
+    }
+
+    nav a {
+        font-size: 1.3rem;
+        display: block;
+        padding: 0.8rem 0;
+    }
+
+    .logo-text { font-size:1.5rem; }
+    .page-hero h1 { font-size:3rem; }
+    .page-hero p { font-size:1.1rem; }
+    .contact-info { padding:2rem; }
+    .contact-info h2 { font-size:2rem; }
+    .hours-section h2, .map-section h2 { font-size:2.5rem; }
+}
+
+@media screen and (max-width: 480px) {
+    nav ul {
+        width: 260px;
+        padding-left: 1.5rem;
+        gap: 2rem;
+    }
+
+    .page-hero h1 { font-size: 2.5rem; }
+
+    /* Fix image sizing for small mobile viewports */
+    .image-placeholder {
+        height: 250px; /* Forces a consistent landscape height */
+        max-height: 300px;
+    }
+
+    .contact-images {
+        gap: 1.5rem;
+    }
+
+    .image-card {
+        padding: 1rem; /* Smaller padding to save space */
+    }
+
+    .scroll-top { bottom: 20px; right: 20px; width: 45px; height: 45px; }
+}
 </style>
 </head>
 <body>
 
 <nav id="navbar">
     <div class="container">
-        <div class="logo">
-            <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo">
-            <span class="logo-text"></span>
+        <a href="index.html" class="logo">
+            <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo" onerror="this.style.display='none'">
+        </a>
+        
+        <div class="hamburger" id="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
         </div>
-        <ul>
+        
+        <ul id="navMenu">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="menu.html">Menu</a></li>
@@ -154,8 +299,8 @@ footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color
             <div class="info-item">
                 <h3>Follow Us</h3>
                 <div class="social-links">
-                    <a href="#"><img src="GRG/Icons/facebook.png" alt="Facebook"></a>
-                    <a href="#"><img src="GRG/Icons/instagram.png" alt="Instagram"></a>
+                    <a href="https://www.facebook.com/p/Garage-Caf%C3%A9-61567205202489/"><img src="GRG/Icons/facebook.png" alt="Facebook"></a>
+                    <a href="https://www.instagram.com/garagecafe.1110/"><img src="GRG/Icons/instagram.png" alt="Instagram"></a>
                 </div>
             </div>
         </div>
@@ -212,15 +357,15 @@ footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color
         <p>Mawaque, Mabalacat City, Pampanga</p>
         <p>Near Metro Clark Homes, Sapang Biabas</p>
         <p>visitgaragecafe.com</p>
-       <div class="social-links">
-                    <a href="https://www.facebook.com/p/Garage-Caf%C3%A9-61567205202489/" aria-label="Facebook">
-                        <img src="GRG/Icons/facebook.png" alt="Facebook" onerror="this.style.display='none'">
-                    </a>
-                    <a href="https://www.instagram.com/garagecafe.1110/" aria-label="Instagram">
-                        <img src="GRG/Icons/instagram.png" alt="Instagram" onerror="this.style.display='none'">
-                    </a>
-                </div>
-            </div>
+        <div class="social-links">
+            <a href="https://www.facebook.com/p/Garage-Caf%C3%A9-61567205202489/" aria-label="Facebook">
+                <img src="GRG/Icons/facebook.png" alt="Facebook" onerror="this.style.display='none'">
+            </a>
+            <a href="https://www.instagram.com/garagecafe.1110/" aria-label="Instagram">
+                <img src="GRG/Icons/instagram.png" alt="Instagram" onerror="this.style.display='none'">
+            </a>
+        </div>
+    </div>
     <div class="footer-section">
         <h3>Quick Links</h3>
         <ul class="footer-links">
@@ -247,6 +392,35 @@ footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color
 <div class="scroll-top" id="scrollTop">↑</div>
 
 <script>
+// Hamburger menu toggle
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+
+hamburger.addEventListener('click', function() {
+    hamburger.classList.toggle('active');
+    navMenu.classList.toggle('active');
+});
+
+// Close menu when clicking on a link
+const navLinks = document.querySelectorAll('nav ul li a');
+navLinks.forEach(link => {
+    link.addEventListener('click', function() {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    });
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', function(event) {
+    const isClickInsideNav = navMenu.contains(event.target);
+    const isClickOnHamburger = hamburger.contains(event.target);
+    
+    if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    }
+});
+
 // Navbar scroll
 window.addEventListener('scroll', function(){
     document.getElementById('navbar').classList.toggle('scrolled', window.scrollY>100);

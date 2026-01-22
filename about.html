@@ -69,6 +69,7 @@
             align-items: center;
             gap: 0.8rem;
             transition: transform 0.3s ease;
+            z-index: 1001;
         }
 
         .logo:hover {
@@ -87,6 +88,38 @@
             color: var(--off-white);
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* ===========================
+        HAMBURGER MENU RESPONSIVE
+        =========================== */
+        .hamburger {
+            display: none; /* default hidden for desktop >1024px */
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 0.6rem;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 32px;
+            height: 3px;
+            background: var(--off-white);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(9px, 9px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(9px, -9px);
         }
 
         nav ul {
@@ -245,24 +278,17 @@
             font-weight: 300;
         }
 
-       .video-placeholder {
-        width: 100%;
-        max-width: 800px; /* optional max width */
-        aspect-ratio: 16 / 9; /* maintains 16:9 ratio */
-        background-color: #000; /* black background before video loads */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 12px;
-        overflow: hidden;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-        margin: 20px auto;
-    }
-      .video-placeholder .video {
-       width: 100%;
-       height: 100%;
-       object-fit: cover; /* ensures video covers container nicely */
-    }
+        .video-container {
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
         
         /* Values Grid */
         .values-grid {
@@ -443,7 +469,6 @@
             background: linear-gradient(135deg, var(--accent-gold), var(--light-brown));
             transform: translateY(-5px) rotate(5deg);
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-            padding: 10px;
         }
 
         .social-links img {
@@ -460,54 +485,150 @@
             font-size: 0.9rem;
         }
         
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .page-header h1 {
-                font-size: 3.5rem;
+        /* ============================================
+           TABLET VIEWPORT (481px to 1024px)
+           ============================================ */
+        /* HAMBURGER MENU FOR 1024px AND BELOW */
+        @media screen and (max-width: 1024px) {
+            .hamburger {
+                display: flex;
             }
-            .two-column {
-                grid-template-columns: 1fr;
-            }
-        }
 
-        @media (max-width: 768px) {
             nav ul {
-                gap: 1.5rem;
-                font-size: 0.9rem;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(44, 24, 16, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding-top: 100px;
+                padding-left: 2rem;
+                gap: 2.5rem;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+                z-index: 999;
             }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                font-size: 1.3rem;
+                display: block;
+                padding: 0.8rem 0;
+            }
+
             .logo-text {
                 font-size: 1.5rem;
             }
+
+            .two-column {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+        }
+
+
+
+        /* ============================================
+           TABLET & MOBILE - HAMBURGER MENU
+           ============================================ */
+        @media screen and (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(44, 24, 16, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding-top: 100px;
+                padding-left: 2rem;
+                gap: 2.5rem;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                font-size: 1.3rem;
+                display: block;
+                padding: 0.8rem 0;
+            }
+
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
             .page-header {
                 padding: 10rem 2rem 4rem;
             }
+            
             .page-header h1 {
                 font-size: 2.5rem;
                 letter-spacing: 2px;
             }
+            
             .section-title {
                 font-size: 2.5rem;
             }
+            
             .values-grid {
                 grid-template-columns: 1fr;
             }
+            
             .content-section {
                 padding: 4rem 1.5rem;
             }
         }
 
-        @media (max-width: 480px) {
+        @media screen and (max-width: 480px) {
+            nav ul {
+                width: 260px;
+                padding-left: 1.5rem;
+                gap: 2rem;
+            }
+
+            nav a {
+                font-size: 1.2rem;
+            }
+
             .page-header h1 {
                 font-size: 2rem;
             }
-            nav ul {
-                gap: 1rem;
-            }
+            
             .scroll-top {
                 bottom: 20px;
                 right: 20px;
                 width: 45px;
                 height: 45px;
+            }
+
+            .vision-section .section-title::after {
+                left: 50%;
+                transform: translateX(-50%);
             }
         }
     </style>
@@ -515,11 +636,17 @@
 <body>
     <nav id="navbar">
         <div class="container">
-            <div class="logo">
+            <a href="index.html" class="logo">
                 <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo" onerror="this.style.display='none'">
-                <span class="logo-text"></span>
+            </a>
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <ul>
+            
+            <ul id="navMenu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html" class="active">About</a></li>
                 <li><a href="menu.html">Menu</a></li>
@@ -544,11 +671,11 @@
                 <p>More than just a café, we're transforming into a workspace and study hub where you can relax, work, and connect with others in the community.</p>
             </div>
             <div class="video-container">
-                <video width="640" height="360" controls>
+                <video controls>
                     <source src="GRG/ABOUT/GRG_CAFE_Vid_1.MOV" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-</div>
+            </div>
         </div>
     </section>
 
@@ -578,7 +705,9 @@
     <section class="content-section">
         <div class="vision-section">
             <div class="section-label">Our Vision</div>
-            <h2 class="section-title">Building Community</h2>
+                <div class="vision-section">
+                    <h2 class="section-title">Building Community</h2>
+                </div>
             <p>We envision Garage Café as more than just an ordinary food establishment. Our goal is to be a true community hub—a place where neighbors meet, students study, professionals work, and everyone feels welcome.</p>
             <p>Located conveniently near Metro Clark Homes in Sapang Biabas, we're proud to serve the Mawaque community and contribute to the growing local business scene in Mabalacat City.</p>
         </div>
@@ -631,6 +760,35 @@
     <div class="scroll-top" id="scrollTop">↑</div>
 
     <script>
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = navMenu.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
         // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
@@ -656,20 +814,6 @@
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
-            });
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
             });
         });
     </script>

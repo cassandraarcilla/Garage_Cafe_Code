@@ -70,6 +70,7 @@
             align-items: center;
             gap: 0.8rem;
             transition: transform 0.3s ease;
+            z-index: 1001;
         }
 
         .logo:hover {
@@ -88,6 +89,36 @@
             color: var(--off-white);
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 0.6rem;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 32px;
+            height: 3px;
+            background: var(--off-white);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(9px, 9px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(9px, -9px);
         }
 
         nav ul {
@@ -595,14 +626,92 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav ul {
-                gap: 1.5rem;
-                font-size: 0.9rem;
+        /* ============================================
+           TABLET VIEWPORT (481px to 1024px)
+           ============================================ */
+        /* TABLET & MOBILE - HAMBURGER MENU (≤1024px) */
+        @media screen and (max-width: 1024px) {
+            .hamburger {
+                display: flex;
             }
 
-            .logo {
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px; /* slightly wider for tablets */
+                height: 100vh;
+                background: rgba(44, 24, 16, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding-top: 100px;
+                padding-left: 2rem;
+                gap: 2.5rem;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+                z-index: 1000;
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                font-size: 1.3rem;
+                display: block;
+                padding: 0.8rem 0;
+            }
+
+            .logo-text {
+                font-size: 1.5rem;
+            }
+        }
+
+        /* ============================================
+           TABLET & MOBILE - HAMBURGER MENU
+           ============================================ */
+        @media screen and (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(44, 24, 16, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding-top: 100px;
+                padding-left: 2rem;
+                gap: 2.5rem;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                font-size: 1.3rem;
+                display: block;
+                padding: 0.8rem 0;
+            }
+
+            .logo-text {
                 font-size: 1.5rem;
             }
 
@@ -638,13 +747,19 @@
             }
         }
 
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2.5rem;
+        @media screen and (max-width: 480px) {
+            nav ul {
+                width: 260px;
+                padding-left: 1.5rem;
+                gap: 2rem;
             }
 
-            nav ul {
-                gap: 1rem;
+            nav a {
+                font-size: 1.2rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
             }
 
             .scroll-top {
@@ -659,11 +774,17 @@
 <body>
     <nav id="navbar">
         <div class="container">
-            <div class="logo">
+            <a href="index.html" class="logo">
                 <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo" onerror="this.style.display='none'">
-                <span class="logo-text"></span>
+            </a>
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <ul>
+            
+            <ul id="navMenu">
                 <li><a href="index.html" class="active">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="menu.html">Menu</a></li>
@@ -794,6 +915,35 @@
     <div class="scroll-top" id="scrollTop">↑</div>
 
     <script>
+        // Hamburger menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+        
+        hamburger.addEventListener('click', function() {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav ul li a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = navMenu.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
         // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
@@ -803,38 +953,4 @@
                 navbar.classList.remove('scrolled');
             }
         });
-
-        // Scroll to top button
-        const scrollTop = document.getElementById('scrollTop');
-        
-        window.addEventListener('scroll', function() {
-            if (window.scrollY > 300) {
-                scrollTop.classList.add('visible');
-            } else {
-                scrollTop.classList.remove('visible');
-            }
-        });
-
-        scrollTop.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
     </script>
-</body>
-</html>

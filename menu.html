@@ -68,6 +68,7 @@
             align-items: center;
             gap: 0.8rem;
             transition: transform 0.3s ease;
+            z-index: 1001;
         }
 
         .logo:hover {
@@ -86,6 +87,36 @@
             color: var(--off-white);
             letter-spacing: 2px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 0.6rem;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 32px;
+            height: 3px;
+            background: var(--off-white);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(9px, 9px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(9px, -9px);
         }
 
         nav ul {
@@ -501,69 +532,218 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav ul {
-                gap: 1.5rem;
-                font-size: 0.9rem;
-            }
-
-            .logo-text {
-                font-size: 1.5rem;
-            }
-
-            .page-header {
-                padding: 10rem 2rem 4rem;
-            }
-
-            .page-header h1 {
-                font-size: 3rem;
-                letter-spacing: 2px;
-            }
-
-            .section-header h2 {
-                font-size: 2.5rem;
-            }
-
-            .category-title {
-                font-size: 1.8rem;
-            }
-
+        /* Large Desktop Full HD (1920px and above) */
+        @media screen and (min-width: 1920px) {
             .menu-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(4, 1fr); /* 4 items per row */
+                gap: 3.5rem; /* slightly bigger gap for large screens */
             }
 
             .menu-section {
-                padding: 4rem 1.5rem;
+                padding: 8rem 4rem; /* more spacing for large screens */
             }
-        }
 
-        @media (max-width: 480px) {
             .page-header h1 {
+                font-size: 6rem;
+            }
+
+            .section-header h2 {
+                font-size: 3.5rem;
+            }
+
+            .category-title {
                 font-size: 2.5rem;
             }
 
+            .menu-item {
+                padding: 2.5rem;
+                border-radius: 30px;
+            }
+
+            .item-name {
+                font-size: 2rem;
+            }
+
+            .item-price {
+                font-size: 1.3rem;
+            }
+
+            .item-description {
+                font-size: 1.1rem;
+            }
+
+            .item-image {
+                max-width: 320px;
+            }
+        }
+
+        /* ============================================
+        TABLET & MOBILE - HAMBURGER MENU
+        ============================================ */
+        @media screen and (max-width: 768px) {
+        .hamburger {
+            display: flex;
+        }
+        
+        nav ul {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 280px;
+            height: 100vh;
+            background: rgba(44, 24, 16, 0.98);
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            padding-top: 100px;
+            padding-left: 2rem;
+            gap: 2.5rem;
+            transition: right 0.3s ease;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+        }
+        
+        nav ul.active {
+            right: 0;
+        }
+        
+        nav li {
+            width: 100%;
+        }
+        
+        nav a {
+            font-size: 1.3rem;
+            display: block;
+            padding: 0.8rem 0;
+        }
+        
+        .logo-text {
+            font-size: 1.5rem;
+        }
+        
+        .page-header {
+            padding: 10rem 2rem 4rem;
+        }
+        
+        .page-header h1 {
+            font-size: 3rem;
+            letter-spacing: 2px;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+        }
+        
+        .category-title {
+            font-size: 1.8rem;
+        }
+        
+        .menu-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+        
+        .menu-section {
+            padding: 4rem 1.5rem;
+        }
+        
+        .menu-item {
+            padding: 1.5rem;
+        }
+        
+        .item-name {
+            font-size: 1.4rem;
+        }
+        
+        .item-price {
+            font-size: 1rem;
+        }
+        
+        .item-description {
+            font-size: 0.9rem;
+        }
+        }
+
+        /* ============================================
+        MOBILE VIEWPORT (max-width: 480px)
+        ============================================ */
+        @media screen and (max-width: 480px) {
+
             nav ul {
+                width: 260px;
+                padding-left: 1.5rem;
+                gap: 2rem;
+            }
+
+            nav a {
+                font-size: 1.1rem;
+            }
+
+            .page-header h1 {
+                font-size: 2.3rem;
+            }
+
+            /* ✅ KEEP MENU IN GRID (2 columns) */
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
+            }
+
+            /* ✅ MAKE MENU ITEMS SMALLER */
+            .menu-item {
+                padding: 1rem;
+                border-radius: 18px;
+            }
+
+            .item-image {
+                max-width: 140px;
+                margin-bottom: 1rem;
+            }
+
+            .item-name {
+                font-size: 1.1rem;
+            }
+
+            .item-price {
+                font-size: 0.9rem;
+            }
+
+            .item-description {
+                font-size: 0.8rem;
+                line-height: 1.5;
+            }
+
+            .tag {
+                font-size: 0.65rem;
+                padding: 0.3rem 0.6rem;
             }
 
             .scroll-top {
                 bottom: 20px;
                 right: 20px;
-                width: 45px;
-                height: 45px;
+                width: 42px;
+                height: 42px;
             }
         }
+
+
+
     </style>
 </head>
 <body>
     <nav id="navbar">
         <div class="container">
-            <div class="logo">
+            <a href="index.html" class="logo">
                 <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo" onerror="this.style.display='none'">
-                <span class="logo-text"></span>
+            </a>
+
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <ul>
+            
+            <ul id="navMenu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="menu.html" class="active">Menu</a></li>
@@ -974,10 +1154,36 @@
     <div class="scroll-top" id="scrollTop">↑</div>
 
     <script>
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        const navLinks = document.querySelectorAll('nav a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
         // Navbar scroll effect
-        window.addEventListener('scroll', function() {
-            const navbar = document.getElementById('navbar');
-            if (window.scrollY > 100) {
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
@@ -985,17 +1191,17 @@
         });
 
         // Scroll to top button
-        const scrollTop = document.getElementById('scrollTop');
+        const scrollTopBtn = document.getElementById('scrollTop');
         
-        window.addEventListener('scroll', function() {
+        window.addEventListener('scroll', () => {
             if (window.scrollY > 300) {
-                scrollTop.classList.add('visible');
+                scrollTopBtn.classList.add('visible');
             } else {
-                scrollTop.classList.remove('visible');
+                scrollTopBtn.classList.remove('visible');
             }
         });
 
-        scrollTop.addEventListener('click', function() {
+        scrollTopBtn.addEventListener('click', () => {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -1017,4 +1223,4 @@
         });
     </script>
 </body>
-</html>
+</html
