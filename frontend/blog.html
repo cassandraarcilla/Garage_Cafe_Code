@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog - Garage Café | Coffee Tips & Local Stories</title>
+    <meta name="description" content="Read the latest from Garage Café Mabalacat - coffee tips, local stories, and updates from your neighborhood café near Metro Clark Homes.">
+    <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="GRG/Icons/Garage Cafe logo ICON.png" type="image/png">
+    <style>
+        :root {
+            --dark-brown: #2C1810;
+            --medium-brown: #5D4037;
+            --light-brown: #8D6E63;
+            --lighter-brown: #BCAAA4;
+            --off-white: #F5F5DC;
+            --cream: #FFF8E7;
+            --accent-gold: #D4AF37;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Roboto', Arial, sans-serif;
+            background: var(--cream);
+            color: var(--dark-brown);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(44, 24, 16, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 0;
+            background: rgba(44, 24, 16, 0.98);
+        }
+
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            transition: transform 0.3s ease;
+            z-index: 1001;
+            text-decoration: none;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo img {
+            height: 50px;
+            width: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .logo-text {
+            font-family: 'Yeseva One', serif;
+            font-size: 1.8rem;
+            color: var(--off-white);
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            z-index: 1001;
+            padding: 0.6rem;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            width: 32px;
+            height: 3px;
+            background: var(--off-white);
+            transition: all 0.3s ease;
+            border-radius: 3px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(9px, 9px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(9px, -9px);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        nav a {
+            color: var(--lighter-brown);
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 1px;
+            position: relative;
+            transition: color 0.3s ease;
+            padding: 0.5rem 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--off-white);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, rgba(93, 64, 55, 0.85) 0%, rgba(44, 24, 16, 0.9) 100%),
+                        url('grg/BLOG/blog_header.jpg') center/cover no-repeat fixed;
+            padding: 12rem 2rem 6rem;
+            text-align: center;
+            color: var(--off-white);
+            position: relative;
+            overflow: hidden;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(44, 24, 16, 0.4) 100%);
+            z-index: 1;
+        }
+
+        .page-header h1 {
+            font-family: 'Yeseva One', serif;
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 5px;
+            position: relative;
+            z-index: 2;
+            text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+            animation: slideUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            color: var(--lighter-brown);
+            position: relative;
+            z-index: 2;
+            font-weight: 300;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
+        }
+
+        /* Blog Grid */
+        .blog-section {
+            padding: 6rem 2rem;
+            min-height: 50vh;
+        }
+
+        .blog-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 4rem 2rem;
+            font-size: 1.2rem;
+            color: var(--medium-brown);
+        }
+
+        .no-blogs {
+            text-align: center;
+            padding: 4rem 2rem;
+            font-size: 1.2rem;
+            color: var(--medium-brown);
+        }
+
+        .no-blogs p {
+            margin-bottom: 1rem;
+        }
+
+        /* Blog Card */
+        .blog-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(44, 24, 16, 0.08);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            animation: fadeInUp 0.6s ease-out both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .blog-card:nth-child(1) { animation-delay: 0.1s; }
+        .blog-card:nth-child(2) { animation-delay: 0.2s; }
+        .blog-card:nth-child(3) { animation-delay: 0.3s; }
+        .blog-card:nth-child(4) { animation-delay: 0.4s; }
+        .blog-card:nth-child(5) { animation-delay: 0.5s; }
+        .blog-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .blog-card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 25px 60px rgba(44, 24, 16, 0.18);
+        }
+
+        .blog-image-container {
+            overflow: hidden;
+            position: relative;
+            height: 250px;
+            background: var(--lighter-brown);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .blog-card:hover .blog-image {
+            transform: scale(1.15);
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            font-size: 0.85rem;
+            color: var(--light-brown);
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            font-weight: 600;
+        }
+
+        .blog-author {
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .blog-category {
+            background: linear-gradient(135deg, var(--accent-gold), #f0c929);
+            color: var(--dark-brown);
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+        }
+
+        .blog-card h3 {
+            font-family: 'Yeseva One', serif;
+            font-size: 1.75rem;
+            color: var(--dark-brown);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+            min-height: 2.6em;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .blog-excerpt {
+            color: var(--medium-brown);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 5.4em;
+        }
+
+        /* Handle HTML content in excerpt */
+        .blog-excerpt p {
+            margin: 0;
+            display: inline;
+        }
+
+        .blog-excerpt strong,
+        .blog-excerpt em {
+            font-weight: inherit;
+            font-style: inherit;
+        }
+
+        .read-more {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--dark-brown);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .read-more::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover .read-more {
+            color: var(--accent-gold);
+        }
+
+        .blog-card:hover .read-more::after {
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        footer {
+            background: linear-gradient(to bottom, var(--dark-brown), #0f0805);
+            color: var(--lighter-brown);
+            padding: 4rem 2rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-section h3 {
+            font-family: 'Yeseva One', serif;
+            font-size: 1.5rem;
+            color: var(--off-white);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent-gold);
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: var(--lighter-brown);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: var(--off-white);
+            padding-left: 5px;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--medium-brown), var(--light-brown));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            padding: 10px;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(135deg, var(--accent-gold), var(--light-brown));
+            transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .social-links img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            filter: brightness(0) invert(1);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(141, 110, 99, 0.3);
+            font-size: 0.9rem;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--light-brown), var(--accent-gold));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }        
+
+        /* RESPONSIVE DESIGN */
+        @media screen and (max-width: 1024px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(44, 24, 16, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding-top: 100px;
+                padding-left: 2rem;
+                gap: 2.5rem;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+                z-index: 999;
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                font-size: 1.3rem;
+                display: block;
+                padding: 0.8rem 0;
+            }
+
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .page-header {
+                padding: 10rem 2rem 4rem;
+            }
+            
+            .page-header h1 {
+                font-size: 3rem;
+                letter-spacing: 3px;
+            }
+            
+            .blog-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 2.5rem;
+            }
+            
+            .blog-section {
+                padding: 4rem 1.5rem;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .blog-card h3 {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            nav ul {
+                width: 260px;
+                padding-left: 1.5rem;
+                gap: 2rem;
+            }
+
+            nav a {
+                font-size: 1.2rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+            }
+            
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+
+            .blog-card h3 {
+                font-size: 1.4rem;
+                min-height: auto;
+            }
+
+            .blog-content {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo" onerror="this.style.display='none'">
+            </a>
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="blog.html" class="active">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <h1>Coffee Chronicles</h1>
+        <p>Stories from your neighborhood café</p>
+    </section>
+
+    <section class="blog-section">
+    <div class="blog-grid" id="blogGrid">
+        <p class="loading">Loading blogs...</p>
+    </div>
+    </section>
+
+
+    <div class="scroll-top" id="scrollTop">↑</div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>GARAGE CAFÉ</h3>
+                <p>Mawaque, Mabalacat City, Pampanga</p>
+                <p>Near Metro Clark Homes, Sapang Biabas</p>
+                <p>visitgaragecafe.com</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/p/Garage-Caf%C3%A9-61567205202489/" aria-label="Facebook">
+                        <img src="GRG/Icons/facebook.png" alt="Facebook" onerror="this.style.display='none'">
+                    </a>
+                    <a href="https://www.instagram.com/garagecafe.1110/" aria-label="Instagram">
+                        <img src="GRG/Icons/instagram.png" alt="Instagram" onerror="this.style.display='none'">
+                    </a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Dine In</a></li>
+                    <li><a href="#">Meal Pre-Orders</a></li>
+                    <li><a href="#">Event Coffee Setups</a></li>
+                    <li><a href="#">Study Space</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2025 Garage Café. | www.visitgaragecafe.com</p>
+        </div>
+    </footer>
+
+<script>
+        // Hamburger Menu Toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a link
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Scroll to top button
+        const scrollTop = document.getElementById('scrollTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollTop.classList.add('visible');
+            } else {
+                scrollTop.classList.remove('visible');
+            }
+        });
+
+        scrollTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Load blogs from API
+        async function loadBlogs() {
+            const blogGrid = document.getElementById('blogGrid');
+            
+            try {
+                const res = await fetch('/api/blogs');
+                const blogs = await res.json();
+
+                if (blogs.length === 0) {
+                    blogGrid.innerHTML = '<div class="no-blogs"><p>No blog posts yet.</p><p>Check back soon for coffee stories and local updates!</p></div>';
+                    return;
+                }
+
+                blogGrid.innerHTML = '';
+
+                blogs.forEach(blog => {
+                    const blogCard = document.createElement('article');
+                    blogCard.className = 'blog-card';
+                    
+                    // CHANGE 1: Updated the click handler to go to blog-single.html with the ID
+                    blogCard.onclick = () => window.location.href = `blog-single.html?id=${blog._id}`;
+
+                    // Strip HTML tags from excerpt for display
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = blog.excerpt;
+                    const cleanExcerpt = tempDiv.textContent || tempDiv.innerText || '';
+
+                    blogCard.innerHTML = `
+                        <div class="blog-image-container">
+                            <img src="${blog.imageUrl}" alt="${blog.title}" class="blog-image" onerror="this.src='GRG/BLOG/blog_header.jpg'">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span class="blog-author">By ${blog.author}</span>
+                                <span class="blog-category">${blog.category}</span>
+                            </div>
+                            <h3>${blog.title}</h3>
+                            <div class="blog-excerpt">${cleanExcerpt}</div>
+                            <a href="blog-single.html?id=${blog._id}" class="read-more">Read More</a>
+                        </div>
+                    `;
+
+                    blogGrid.appendChild(blogCard);
+                });
+
+            } catch (error) {
+                console.error('Failed to load blogs:', error);
+                blogGrid.innerHTML = '<div class="no-blogs"><p>Unable to load blogs at this time.</p><p>Please try again later.</p></div>';
+            }
+        }
+
+        // Load blogs when page loads
+        loadBlogs();
+    </script>
+</body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Why Garage Café is the Go-To Coffee Shop in Mabalacat City | Garage Café</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Discover why Garage Café in Mawaque, Mabalacat City is quickly becoming the favorite local café. Coffee, comfort, community, and budget-friendly meals.">
+    <meta name="keywords" content="Garage Café, coffee shop Mabalacat City, local café Mawaque, community café, study hub, budget-friendly café">
+    <meta name="author" content="Garage Café">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Why Garage Café is the Go-To Coffee Shop in Mabalacat City | Garage Café">
+    <meta property="og:description" content="Coffee, comfort, and community in Mawaque, Mabalacat City. Learn why Garage Café is the local favorite in Pampanga.">
+    <meta property="og:image" content="img/blog-1.jpg">
+    <meta property="og:url" content="https://visitgaragecafe.com/Blog/sample-blog/index.html">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Why Garage Café is the Go-To Coffee Shop in Mabalacat City">
+    <meta name="twitter:description" content="Discover Garage Café, your neighborhood coffee spot in Mawaque, Mabalacat City.">
+    <meta name="twitter:image" content="img/blog1.png">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="../../GRG/Icons/Garage Cafe logo ICON.png" type="image/png">
+
+    <style>
+        :root {
+            --dark-brown: #2C1810;
+            --medium-brown: #5D4037;
+            --light-brown: #8D6E63;
+            --lighter-brown: #BCAAA4;
+            --cream: #FFF8E7;
+            --accent-gold: #D4AF37;
+            --off-white: #F5F5DC;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: var(--cream);
+            line-height: 1.8;
+            color: var(--dark-brown);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--dark-brown);
+            padding: 1.5rem 0;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+        nav a {
+            color: var(--off-white);
+            text-decoration: none;
+            font-weight: 500;
+            margin: 0 1.5rem;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-gold);
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after { width: 100%; }
+        nav a:hover { color: var(--accent-gold); }
+
+        /* Post Header */
+        .post-header {
+            height: 60vh;
+            min-height: 400px;
+            background: linear-gradient(rgba(44, 24, 16, 0.5), rgba(44, 24, 16, 0.7)),
+                        url('img/img1.jpg') center/cover no-repeat;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        .post-header h1 {
+            font-family: 'Yeseva One', serif;
+            font-size: 3.5rem;
+            max-width: 900px;
+            margin: 0;
+            line-height: 1.2;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+        }
+
+        /* Post Container */
+        .post-container {
+            max-width: 850px;
+            margin: -100px auto 5rem;
+            background: white;
+            padding: 5rem;
+            border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(44, 24, 16, 0.1);
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Meta Information */
+        .meta {
+            color: var(--light-brown);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 2.5rem;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .category-tag {
+            background: linear-gradient(135deg, var(--accent-gold), #f0c929);
+            color: var(--dark-brown);
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+
+        /* Content Styles */
+        .content p { margin-bottom: 1.8rem; font-size: 1.15rem; color: #4a3728; }
+        .content h2 {
+            font-family: 'Yeseva One', serif;
+            color: var(--medium-brown);
+            font-size: 2rem;
+            margin: 3rem 0 1.5rem;
+            line-height: 1.3;
+        }
+        .content h3 {
+            font-family: 'Yeseva One', serif;
+            color: var(--light-brown);
+            font-size: 1.5rem;
+            margin: 2.5rem 0 1rem;
+            line-height: 1.4;
+        }
+        .content strong { color: var(--dark-brown); font-weight: 600; }
+
+        /* Back Link */
+        .back-link {
+            display: inline-block;
+            margin-top: 4rem;
+            color: var(--dark-brown);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid var(--accent-gold);
+            padding-bottom: 4px;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+        }
+        .back-link:hover { color: var(--accent-gold); transform: translateX(-5px); }
+
+        /* Scroll to Top Button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--light-brown), var(--accent-gold));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 999;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        .scroll-top.visible { opacity: 1; visibility: visible; }
+        .scroll-top:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .post-container { margin: -50px 1.5rem 3rem; padding: 2.5rem 2rem; border-radius: 30px; }
+            .post-header { height: 50vh; }
+            .post-header h1 { font-size: 2.2rem; }
+            .meta { flex-direction: column; gap: 0.8rem; align-items: flex-start; }
+            .content h2 { font-size: 1.6rem; margin: 2rem 0 1rem; }
+            .content h3 { font-size: 1.3rem; margin: 1.5rem 0 0.8rem; }
+            .content p { font-size: 1.05rem; }
+            nav a { margin: 0 0.8rem; font-size: 0.85rem; }
+        }
+
+        @media (max-width: 480px) {
+            .post-container { padding: 2rem 1.5rem; }
+            .post-header h1 { font-size: 1.8rem; }
+            .content h2 { font-size: 1.4rem; }
+            .scroll-top { bottom: 20px; right: 20px; width: 45px; height: 45px; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="../../index.html">HOME</a>
+        <a href="../../blog.html">BLOG FEED</a>
+        <a href="../../menu.html">MENU</a>
+    </nav>
+
+    <header class="post-header">
+        <h1>Why Garage Café is the Go-To Coffee Shop in Mabalacat City</h1>
+    </header>
+
+    <article class="post-container">
+        <div class="meta">
+            <span>By Anne Alimurung</span>
+            <span class="category-tag">Community</span>
+        </div>
+
+        <div class="content">
+            <p>Finding a great cup of coffee is easy, but finding a place that feels like home is a different story. In the heart of Mawaque, Mabalacat City, Garage Café isn't just a place to grab a quick caffeine fix; it’s a space built with love, designed for the community, and tailored for the modern lifestyle of Pampanga residents.</p>
+
+            <h2>A Hidden Gem Near Metro Clark Homes</h2>
+            <p>Location is everything. For those living in the residential clusters of Mabalacat, you no longer have to brave the traffic of Clark or Angeles City to find a premium coffee experience. As a café near Metro Clark Homes and Sapang Biabas, Garage Café offers a peaceful escape right in your backyard. Whether you are a student looking for a quiet corner or a professional needing a change of scenery, our doors are open.</p>
+
+            <h2>The Perfect Blend of Comfort and Productivity</h2>
+            <p>Our theme—Warm Comfort and Streamlined Functionality—is reflected in every corner of the shop. We’ve traded the cold, sterile feel of big-chain coffee shops for a palette of rich browns and soft off-whites.</p>
+            <p>But we know you need more than just good vibes to get work done. That’s why we’ve optimized our space to be the premier study and work hub in Mabalacat:</p>
+            <ul>
+                <li><strong>Reliable Wi-Fi:</strong> For those endless Zoom meetings or research papers.</li>
+                <li><strong>Power Outlets:</strong> Strategically placed so your devices stay as charged as you are.</li>
+                <li><strong>Quiet Ambiance:</strong> A calm environment that fosters focus and creativity.</li>
+            </ul>
+
+            <h2>Quality That Fits Your Budget</h2>
+            <p>We believe that "specialty" shouldn't mean "expensive." Garage Café has earned its reputation as a budget-friendly coffee shop in Pampanga. From our signature espresso drinks to our hearty comfort food, our menu is designed to provide maximum value. Whether you’re stopping in for a quick snack or pre-ordering meals for a busy week, you’re getting quality ingredients served with local hospitality.</p>
+
+            <h2>More Than Just a Café</h2>
+            <p>Garage Café has grown alongside the Mawaque community. What started as a small passion project has expanded into a full-service experience, including:</p>
+            <ul>
+                <li><strong>Event Coffee Setups:</strong> Bringing the Garage Café experience to your birthdays and meetings.</li>
+                <li><strong>Meal Pre-Orders:</strong> Helping busy families and employees eat well without the stress of cooking.</li>
+                <li><strong>A Neighborhood Hub:</strong> A place where neighbors become friends over a shared love for local brew.</li>
+            </ul>
+
+            <h2>Visit Us Today</h2>
+            <p>The next time you’re searching for a coffee shop in Mabalacat, Pampanga, look no further than the neighborhood spot that knows you best. Come for the coffee, stay for the comfort, and leave with a sense of connection.</p>
+            <p><strong>Find us in Mawaque, Mabalacat City—just a stone's throw from Metro Clark Homes.</strong></p>
+        </div>
+
+        <a href="../../blog.html" class="back-link">← BACK TO ALL STORIES</a>
+    </article>
+
+    <div class="scroll-top" id="scrollTop">↑</div>
+
+    <script>
+        const scrollTop = document.getElementById('scrollTop');
+        window.addEventListener('scroll', function() {
+            if (window.scrollY > 300) scrollTop.classList.add('visible');
+            else scrollTop.classList.remove('visible');
+        });
+        scrollTop.addEventListener('click', function() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>

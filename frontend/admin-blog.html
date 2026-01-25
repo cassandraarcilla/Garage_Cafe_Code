@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Blog - Garage Café</title>
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<link rel="icon" href="GRG/Icons/Garage Cafe logo ICON.png" type="image/png">
+
+<style>
+:root {
+    --dark-brown: #2C1810;
+    --medium-brown: #5D4037;
+    --light-brown: #8D6E63;
+    --lighter-brown: #BCAAA4;
+    --off-white: #F5F5DC;
+    --cream: #FFF8E7;
+    --accent-gold: #D4AF37;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Roboto', Arial, sans-serif;
+    background: var(--cream);
+    color: var(--dark-brown);
+    line-height: 1.6;
+    padding: 40px 20px;
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 3rem;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(44, 24, 16, 0.08);
+}
+
+/* Login Container */
+.login-container {
+    max-width: 450px;
+    margin: 100px auto;
+    background: white;
+    padding: 3rem;
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(44, 24, 16, 0.08);
+}
+
+.login-container h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.login-container h1::after {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.error-message {
+    background: #ffebee;
+    color: #c62828;
+    padding: 1rem;
+    border-radius: 12px;
+    margin-bottom: 1rem;
+    border-left: 4px solid #c62828;
+    display: none;
+}
+
+.error-message.show {
+    display: block;
+}
+
+.logout-btn {
+    width: auto;
+    padding: 0.8rem 1.5rem;
+    margin-left: auto;
+    display: block;
+    background: linear-gradient(135deg, #c62828, #e53935);
+    margin-bottom: 1rem;
+}
+
+.logout-btn:hover {
+    background: linear-gradient(135deg, #b71c1c, #c62828);
+}
+
+/* Hide/Show sections */
+.hidden {
+    display: none;
+}
+
+h1 {
+    font-family: 'Yeseva One', serif;
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+    color: var(--dark-brown);
+    font-weight: 400;
+    line-height: 1.2;
+    position: relative;
+    display: inline-block;
+}
+
+h1::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--light-brown), var(--accent-gold), var(--light-brown));
+    border-radius: 2px;
+}
+
+/* Form Styles */
+#blogForm, #loginForm {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--off-white);
+    border-radius: 20px;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="file"] {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    margin: 0.5rem 0 1rem;
+    border: 2px solid var(--lighter-brown);
+    border-radius: 12px;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 1rem;
+    color: var(--dark-brown);
+    background: white;
+    transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: var(--accent-gold);
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+input[type="file"] {
+    padding: 0.8rem 1.2rem;
+    cursor: pointer;
+}
+
+input[type="file"]::file-selector-button {
+    background: linear-gradient(135deg, var(--light-brown), var(--accent-gold));
+    color: white;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-right: 1rem;
+    transition: all 0.3s ease;
+}
+
+input[type="file"]::file-selector-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(44, 24, 16, 0.2);
+}
+
+/* Quill Editor */
+#editor {
+    height: 250px;
+    background: white;
+    border-radius: 12px;
+    margin: 1rem 0;
+    border: 2px solid var(--lighter-brown);
+}
+
+.ql-toolbar {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-color: var(--lighter-brown) !important;
+    background: var(--off-white);
+}
+
+.ql-container {
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    border-color: var(--lighter-brown) !important;
+    font-family: 'Roboto', Arial, sans-serif;
+    font-size: 1rem;
+}
+
+/* Buttons */
+button {
+    width: 100%;
+    padding: 1rem 2rem;
+    margin: 1rem 0 0.5rem;
+    background: linear-gradient(135deg, var(--light-brown), var(--accent-gold));
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 15px rgba(44, 24, 16, 0.2);
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(44, 24, 16, 0.3);
+}
+
+button:active {
+    transform: translateY(-1px);
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    margin-top: 2rem;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(44, 24, 16, 0.05);
+}
+
+thead {
+    background: linear-gradient(135deg, var(--dark-brown), var(--medium-brown));
+}
+
+th {
+    padding: 1.2rem 1rem;
+    color: var(--off-white);
+    font-weight: 600;
+    text-align: left;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+td {
+    padding: 1.2rem 1rem;
+    border-bottom: 1px solid var(--lighter-brown);
+    color: var(--medium-brown);
+}
+
+tbody tr {
+    transition: all 0.3s ease;
+}
+
+tbody tr:hover {
+    background: var(--off-white);
+    transform: scale(1.01);
+}
+
+tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Action Buttons in Table */
+td button {
+    width: auto;
+    padding: 0.6rem 1.2rem;
+    margin: 0.2rem;
+    font-size: 0.9rem;
+    display: inline-block;
+}
+
+td button:first-child {
+    background: linear-gradient(135deg, var(--medium-brown), var(--light-brown));
+}
+
+td button:last-child {
+    background: linear-gradient(135deg, #c62828, #e53935);
+}
+
+td button:first-child:hover {
+    background: linear-gradient(135deg, var(--light-brown), var(--accent-gold));
+}
+
+td button:last-child:hover {
+    background: linear-gradient(135deg, #b71c1c, #c62828);
+}
+
+/* Hidden Input */
+input[type="hidden"] {
+    display: none;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 1024px) {
+    .container, .login-container {
+        padding: 2rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        padding: 20px 10px;
+    }
+
+    .container, .login-container {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    table {
+        font-size: 0.9rem;
+    }
+
+    th, td {
+        padding: 0.8rem 0.5rem;
+    }
+
+    td button {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.85rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    #editor {
+        height: 200px;
+    }
+
+    table {
+        font-size: 0.85rem;
+    }
+
+    th, td {
+        padding: 0.6rem 0.3rem;
+    }
+
+    td button {
+        display: block;
+        width: 100%;
+        margin: 0.3rem 0;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Login Section -->
+<div id="loginSection" class="login-container">
+    <h1>Admin Login</h1>
+    <form id="loginForm">
+        <div class="error-message" id="loginError">Invalid username or password</div>
+        <input type="text" id="username" placeholder="Username" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+</div>
+
+<!-- Admin Panel Section -->
+<div id="adminSection" class="container hidden">
+    <button class="logout-btn" id="logoutBtn">Logout</button>
+    <h1>Admin Blog Panel</h1>
+
+    <form id="blogForm" enctype="multipart/form-data">
+        <input type="hidden" id="blogId">
+
+        <input type="text" id="title" placeholder="Title" required>
+        <input type="text" id="author" placeholder="Author" required>
+        <input type="text" id="category" placeholder="Category" required>
+
+        <div id="editor"></div>
+
+        <input type="file" id="image" accept="image/*">
+        <button type="submit">Save Blog</button>
+    </form>
+
+    <table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Author</th>
+        <th>Category</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody id="blogsTable"></tbody>
+    </table>
+</div>
+
+<script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+<script>
+// Default credentials (CHANGE THESE!)
+const ADMIN_USERNAME = 'admin';
+const ADMIN_PASSWORD = 'garage123';
+
+// Check if already logged in
+if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+    document.getElementById('loginSection').classList.add('hidden');
+    document.getElementById('adminSection').classList.remove('hidden');
+}
+
+// Login form handler
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+    const errorMsg = document.getElementById('loginError');
+    
+    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+        sessionStorage.setItem('adminLoggedIn', 'true');
+        document.getElementById('loginSection').classList.add('hidden');
+        document.getElementById('adminSection').classList.remove('hidden');
+        errorMsg.classList.remove('show');
+    } else {
+        errorMsg.classList.add('show');
+    }
+});
+
+// Logout handler
+document.getElementById('logoutBtn').addEventListener('click', function() {
+    sessionStorage.removeItem('adminLoggedIn');
+    document.getElementById('loginSection').classList.remove('hidden');
+    document.getElementById('adminSection').classList.add('hidden');
+    document.getElementById('username').value = '';
+    document.getElementById('password').value = '';
+});
+</script>
+<script src="admin-blog.js"></script>
+</body>
+</html>

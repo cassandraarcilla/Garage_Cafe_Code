@@ -1,0 +1,27 @@
+{
+  "name": "garage_cafe_code---copy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cassandraarcilla/Garage_Cafe_Code.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cassandraarcilla/Garage_Cafe_Code/issues"
+  },
+  "homepage": "https://github.com/cassandraarcilla/Garage_Cafe_Code#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
+    "mongodb": "^7.0.0",
+    "mongoose": "^9.1.5",
+    "multer": "^2.0.2"
+  }
+}
