@@ -2,7 +2,9 @@ const blogForm = document.getElementById('blogForm');
 const blogsTable = document.getElementById('blogsTable');
 const quill = new Quill('#editor', { theme: 'snow' });
 
-const API = '/api/blogs';
+// ✅ Use Render backend URL
+const BASE_URL = 'https://garage-cafe.onrender.com';
+const API = `${BASE_URL}/api/blogs`;
 
 // Load blogs
 async function loadBlogs() {
