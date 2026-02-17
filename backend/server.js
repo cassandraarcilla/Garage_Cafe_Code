@@ -27,9 +27,9 @@ const MONGO_URI = process.env.MONGO_URI ||
 console.log("Connecting to MongoDB URI:", MONGO_URI);
 
 mongoose.connect(MONGO_URI)
-  .then(() => console.log("✅ MongoDB Connected"))
+  .then(() => console.log("MongoDB Connected"))
   .catch(err => {
-    console.error("❌ MongoDB connection error:", err.message);
+    console.error("MongoDB connection error:", err.message);
     process.exit(1);
   });
 
@@ -115,5 +115,5 @@ app.delete('/api/blogs/:id', async (req, res) => {
 
 // ---------------- START SERVER ----------------
 app.listen(PORT, () => {
-  console.log(`🚀 Garage Cafe API & Frontend running on port ${PORT}`);
+  console.log(`Garage Cafe API & Frontend running on port ${PORT}`);
 });
