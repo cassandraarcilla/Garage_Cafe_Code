@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title id="pageTitle">Blog | Garage Café</title>
     <meta name="description" content="Read the latest from Garage Café Mabalacat - coffee tips, local stories, and updates from your neighborhood café near Metro Clark Homes.">
+    <meta name="keywords" content="local café Mawaque, coffee shop Mabalacat City, Garage Café Pampanga, community café, support local business, study café near me">
     <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="GRG/Icons/Garage Cafe logo ICON.png" type="image/png">
     <style>
@@ -28,6 +29,7 @@
             overflow-x: hidden;
         }
 
+        /* Simple Navigation */
         nav {
             background: var(--dark-brown);
             padding: clamp(0.75rem, 2vw, 1.2rem) 1rem;
@@ -51,10 +53,9 @@
 
         nav a:hover { color: var(--accent-gold); }
 
-        /* Post Header — background set dynamically via CSS variable */
+        /* Post Header */
         .post-header {
             height: clamp(50vh, 60vh, 70vh);
-            background-image: linear-gradient(rgba(44, 24, 16, 0.6), rgba(44, 24, 16, 0.8)), var(--hero-bg-url, url('GRG/BLOG/blog_header.jpg'));
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -65,6 +66,18 @@
             color: white;
             text-align: center;
             padding: 1rem;
+            position: relative;
+        }
+
+        .post-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(rgba(44, 24, 16, 0.6), rgba(44, 24, 16, 0.8));
+            z-index: 1;
         }
 
         .post-header h1 {
@@ -75,18 +88,26 @@
             padding: 0 1rem;
             line-height: 1.2;
             word-wrap: break-word;
+            position: relative;
+            z-index: 2;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
+        /* Post Container */
         .post-container {
             max-width: 850px;
-            margin: clamp(-40px, -8vw, -100px) auto clamp(3rem, 5vw, 5rem);
+            margin: -50px auto 3rem;
             background: white;
             padding: clamp(2rem, 5vw, 5rem);
             border-radius: clamp(20px, 4vw, 40px);
             box-shadow: 0 30px 60px rgba(44, 24, 16, 0.1);
             width: calc(100% - 2rem);
+            position: relative;
+            z-index: 3;
         }
 
+        /* Meta Information */
         .meta {
             color: var(--light-brown);
             text-transform: uppercase;
@@ -112,11 +133,12 @@
             white-space: nowrap;
         }
 
+        /* Content Styling */
         .content { word-wrap: break-word; overflow-wrap: break-word; }
 
         .content p {
-            margin-bottom: clamp(1.2rem, 2.5vw, 1.8rem);
-            font-size: clamp(1rem, 2.2vw, 1.15rem);
+            margin-bottom: 1.5rem;
+            font-size: 1.15rem;
             color: #4a3728;
             line-height: 1.75;
         }
@@ -124,29 +146,27 @@
         .content h2 {
             font-family: 'Yeseva One', serif;
             color: var(--medium-brown);
-            font-size: clamp(1.5rem, 3.5vw, 2rem);
-            margin: clamp(2rem, 4vw, 3rem) 0 clamp(1rem, 2vw, 1.5rem);
-            line-height: 1.3;
+            font-size: 2rem;
+            margin: 2.5rem 0 1.5rem;
         }
 
         .content h3 {
             font-family: 'Yeseva One', serif;
             color: var(--medium-brown);
-            font-size: clamp(1.3rem, 3vw, 1.6rem);
-            margin: clamp(1.5rem, 3vw, 2.5rem) 0 clamp(0.8rem, 1.5vw, 1.2rem);
-            line-height: 1.3;
+            font-size: 1.6rem;
+            margin: 2rem 0 1.2rem;
         }
 
         .content strong { font-weight: 600; color: var(--dark-brown); }
 
         .content ul, .content ol {
-            margin: clamp(1rem, 2vw, 1.5rem) 0;
-            padding-left: clamp(1.5rem, 3vw, 2rem);
+            margin: 1.5rem 0;
+            padding-left: 2rem;
         }
 
         .content li {
             margin-bottom: 0.75rem;
-            font-size: clamp(1rem, 2.2vw, 1.15rem);
+            font-size: 1.15rem;
             color: #4a3728;
         }
 
@@ -154,21 +174,22 @@
             width: 100%;
             max-width: 100%;
             height: auto;
-            border-radius: clamp(10px, 2vw, 15px);
-            margin: clamp(1.5rem, 3vw, 2rem) 0;
+            border-radius: 15px;
+            margin: 2rem 0;
             box-shadow: 0 10px 30px rgba(44, 24, 16, 0.15);
             display: block;
         }
 
         .content * { max-width: 100%; }
 
+        /* Back Link */
         .back-link {
             display: inline-block;
-            margin-top: clamp(2.5rem, 4vw, 4rem);
+            margin-top: 3rem;
             color: var(--dark-brown);
             text-decoration: none;
             font-weight: 700;
-            font-size: clamp(0.85rem, 2vw, 1rem);
+            font-size: 1rem;
             border-bottom: 2px solid var(--accent-gold);
             padding-bottom: 2px;
             transition: 0.3s;
@@ -178,26 +199,28 @@
 
         .loading {
             text-align: center;
-            padding: clamp(50px, 10vw, 100px) 20px;
-            font-size: clamp(1rem, 2vw, 1.1rem);
+            padding: 100px 20px;
+            font-size: 1.1rem;
             color: var(--light-brown);
         }
 
+        /* Scroll to top button */
         .scroll-top {
             position: fixed;
-            bottom: clamp(20px, 3vw, 30px);
-            right: clamp(20px, 3vw, 30px);
-            width: clamp(45px, 8vw, 50px);
-            height: clamp(45px, 8vw, 50px);
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(135deg, var(--light-brown), var(--accent-gold));
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: clamp(1.3rem, 2.5vw, 1.5rem);
+            font-size: 1.5rem;
             cursor: pointer;
-            opacity: 0; visibility: hidden;
+            opacity: 0;
+            visibility: hidden;
             transition: all 0.3s ease;
             z-index: 999;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
@@ -207,12 +230,181 @@
         .scroll-top.visible { opacity: 1; visibility: visible; }
         .scroll-top:hover { transform: translateY(-3px); }
 
-        @media (max-width: 374px) {
-            nav a { margin: 0 0.3rem; font-size: 0.7rem; }
+        /* ============================================
+           LARGE DESKTOP FULL HD (1920px and above)
+           ============================================ */
+        @media screen and (min-width: 1920px) {
+            nav {
+                padding: 1.5rem 0;
+            }
+
+            nav a {
+                font-size: 1.1rem;
+                margin: 0 1.5rem;
+            }
+
+            .post-header {
+                height: 70vh;
+            }
+
+            .post-header h1 {
+                font-size: 5rem;
+                max-width: 1200px;
+                letter-spacing: 2px;
+            }
+
+            .post-container {
+                max-width: 1100px;
+                margin: -80px auto 4rem;
+                padding: 5rem;
+                border-radius: 40px;
+            }
+
+            .meta {
+                font-size: 1rem;
+                margin-bottom: 2.5rem;
+                padding-bottom: 1.5rem;
+            }
+
+            .category-tag {
+                font-size: 0.9rem;
+                padding: 5px 16px;
+            }
+
+            .content p {
+                font-size: 1.25rem;
+                margin-bottom: 2rem;
+                line-height: 1.9;
+            }
+
+            .content h2 {
+                font-size: 2.5rem;
+                margin: 3rem 0 2rem;
+            }
+
+            .content h3 {
+                font-size: 2rem;
+                margin: 2.5rem 0 1.5rem;
+            }
+
+            .content li {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+            }
+
+            .content img {
+                border-radius: 20px;
+                margin: 2.5rem 0;
+                box-shadow: 0 20px 40px rgba(44, 24, 16, 0.2);
+            }
+
+            .back-link {
+                font-size: 1.2rem;
+                margin-top: 4rem;
+                border-bottom-width: 3px;
+            }
+
+            .scroll-top {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+                bottom: 40px;
+                right: 40px;
+            }
         }
 
+        /* Desktop (1440px - 1919px) */
+        @media screen and (min-width: 1440px) and (max-width: 1919px) {
+            .post-header h1 {
+                font-size: 4.5rem;
+                max-width: 1000px;
+            }
+
+            .post-container {
+                max-width: 1000px;
+                padding: 4rem;
+            }
+
+            .content p {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Laptop (1280px - 1439px) */
+        @media screen and (min-width: 1280px) and (max-width: 1439px) {
+            .post-header h1 {
+                font-size: 4rem;
+            }
+
+            .post-container {
+                max-width: 950px;
+                padding: 3.5rem;
+            }
+        }
+
+        /* Tablet and below */
+        @media (max-width: 1024px) {
+            .post-header h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .post-container { 
+                padding: 2rem; 
+                margin-top: -30px;
+            }
+            
+            .content p { 
+                font-size: 1rem; 
+            }
+
+            .post-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .post-header h1 {
+                font-size: 2rem;
+            }
+
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+
+            .post-container {
+                padding: 1.5rem;
+                margin-top: -20px;
+            }
+
+            .meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Landscape orientation on phones */
         @media (max-width: 896px) and (orientation: landscape) {
-            .post-header { height: 80vh; }
+            .post-header {
+                height: 80vh;
+            }
+
+            .post-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* High resolution displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .content img {
+                image-rendering: -webkit-optimize-contrast;
+            }
         }
     </style>
 
@@ -224,7 +416,6 @@
         gtag('js', new Date());
         gtag('config', 'G-90Z65E4SVZ');
     </script>
-    
 </head>
 <body>
     <nav>
@@ -240,8 +431,15 @@
     <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
 
 <script>
-    const BASE_URL = 'https://garage-cafe.onrender.com';
+    // Determine BASE_URL
+    const BASE_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+        ? "http://localhost:3000"
+        : "https://garage-cafe.onrender.com";
+    
     const API = `${BASE_URL}/api/blogs`;
+
+    console.log('Blog Single - BASE_URL:', BASE_URL);
+    console.log('Blog Single - API:', API);
 
     // Scroll to top
     const scrollTopBtn = document.getElementById('scrollTop');
@@ -250,13 +448,29 @@
     });
     scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // ✅ FIXED: Cloudinary URLs are already full HTTPS URLs — no transformation needed
+    // Helper function to construct image URLs
     function getFullImageUrl(imageUrl) {
         if (!imageUrl) return 'GRG/BLOG/blog_header.jpg';
-        if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) return imageUrl;
-        if (imageUrl.startsWith('GRG/')) return imageUrl;
-        // Legacy local path
-        const cleanPath = imageUrl.replace(/^[./]+/, '');
+        
+        console.log('Processing image URL:', imageUrl);
+        
+        // If it's already a full URL, return as is
+        if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+            return imageUrl;
+        }
+        
+        // If it's a local GRG file
+        if (imageUrl.startsWith('GRG/')) {
+            return imageUrl;
+        }
+        
+        // If it starts with /uploads, construct full URL to backend
+        if (imageUrl.startsWith('/uploads/')) {
+            return `${BASE_URL}${imageUrl}`;
+        }
+        
+        // Clean the path and construct URL
+        const cleanPath = imageUrl.replace(/^\.\/|^\.\.\/|^\/+/, '');
         return `${BASE_URL}/${cleanPath}`;
     }
 
@@ -266,26 +480,43 @@
 
     async function loadBlog() {
         if (!blogId) {
-            showError('Invalid blog link.');
+            container.innerHTML = `
+                <div class="post-header" style="background-image: url('GRG/BLOG/blog_header.jpg')">
+                    <h1>Blog Not Found</h1>
+                </div>
+                <article class="post-container">
+                    <p>Invalid blog link.</p>
+                    <a href="blog.html" class="back-link">← BACK TO ALL STORIES</a>
+                </article>
+            `;
             return;
         }
 
         try {
+            console.log('Fetching blog with ID:', blogId);
             const res = await fetch(API);
-            if (!res.ok) throw new Error('Failed to fetch blogs');
+            
+            if (!res.ok) {
+                throw new Error(`HTTP error! status: ${res.status}`);
+            }
+            
             const blogs = await res.json();
             const blog = blogs.find(b => b._id === blogId);
 
-            if (!blog) throw new Error('Blog not found');
+            if (!blog) {
+                throw new Error('Blog not found');
+            }
 
+            console.log('Blog found:', blog.title);
             document.getElementById('pageTitle').innerText = `${blog.title} | Garage Café`;
 
             const headerImageUrl = getFullImageUrl(blog.imageUrl);
+            console.log('Header image URL:', headerImageUrl);
 
             container.innerHTML = `
-                <header class="post-header" style="--hero-bg-url: url('${headerImageUrl}')">
+                <div class="post-header" style="background-image: url('${headerImageUrl}')">
                     <h1>${blog.title}</h1>
-                </header>
+                </div>
                 <article class="post-container">
                     <div class="meta">
                         <span>By ${blog.author}</span>
@@ -298,35 +529,38 @@
                 </article>
             `;
 
-            // Fix any inline images in the content that may be relative paths
+            // Fix any inline images in the content
             setTimeout(() => {
                 document.querySelectorAll('.content img').forEach(img => {
                     const src = img.getAttribute('src');
                     if (src && !src.startsWith('http') && !src.startsWith('data:') && !src.startsWith('GRG/')) {
-                        img.src = getFullImageUrl(src);
+                        const fixedSrc = getFullImageUrl(src);
+                        console.log('Fixing content image:', src, '→', fixedSrc);
+                        img.src = fixedSrc;
                     }
-                    img.onerror = function() { this.style.display = 'none'; };
+                    
+                    img.onerror = function() {
+                        console.warn('Content image failed to load:', this.src);
+                        this.style.display = 'none';
+                    };
                 });
             }, 100);
 
         } catch (err) {
             console.error('Error loading blog:', err);
-            showError('Unable to load this blog.');
+            container.innerHTML = `
+                <div class="post-header" style="background-image: url('GRG/BLOG/blog_header.jpg')">
+                    <h1>Error Loading Blog</h1>
+                </div>
+                <article class="post-container">
+                    <p>Unable to load this blog. ${err.message}</p>
+                    <a href="blog.html" class="back-link">← BACK TO ALL STORIES</a>
+                </article>
+            `;
         }
     }
 
-    function showError(message) {
-        container.innerHTML = `
-            <header class="post-header" style="--hero-bg-url: url('GRG/BLOG/blog_header.jpg')">
-                <h1>Oops!</h1>
-            </header>
-            <article class="post-container">
-                <p>${message}</p>
-                <a href="blog.html" class="back-link">← BACK TO ALL STORIES</a>
-            </article>
-        `;
-    }
-
+    // Start loading
     loadBlog();
 </script>
 </body>

@@ -69,6 +69,7 @@
             gap: 0.8rem;
             transition: transform 0.3s ease;
             z-index: 1001;
+            text-decoration: none;
         }
 
         .logo:hover {
@@ -89,9 +90,11 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        /* Hamburger Menu */
+        /* ===========================
+        HAMBURGER MENU RESPONSIVE - EXACTLY matching about.html
+        =========================== */
         .hamburger {
-            display: none;
+            display: none; /* default hidden for desktop >1024px */
             flex-direction: column;
             cursor: pointer;
             z-index: 1001;
@@ -533,9 +536,9 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
-        /* RESPONSIVE DESIGN - Matching blog.html */
-        
-        /* Large Desktop Full HD (1920px and above) */
+        /* ============================================
+           LARGE DESKTOP FULL HD (1920px and above)
+           ============================================ */
         @media screen and (min-width: 1920px) {
             nav .container {
                 max-width: 1800px;
@@ -748,11 +751,11 @@
                 padding: 4rem 2.5rem 2rem;
             }
         }
-
+        
         /* ============================================
-        TABLET LANDSCAPE & PORTRAIT (768px - 1024px)
-        ============================================ */
-        @media screen and (min-width: 768px) and (max-width: 1024px) {
+           TABLET VIEWPORT (481px to 1024px) - EXACTLY matching about.html
+           ============================================ */
+        @media screen and (max-width: 1024px) {
             .hamburger {
                 display: flex;
             }
@@ -761,7 +764,7 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 300px;
+                width: 280px;
                 height: 100vh;
                 background: rgba(44, 24, 16, 0.98);
                 flex-direction: column;
@@ -794,49 +797,34 @@
             }
 
             .page-header {
-                padding: 12rem 2rem 5rem;
+                padding: 10rem 2rem 4rem;
             }
-
+            
             .page-header h1 {
-                font-size: 4rem;
+                font-size: 3rem;
                 letter-spacing: 3px;
             }
-
+            
             .page-header p {
-                font-size: 1.2rem;
-            }
-
-            .section-header h2 {
-                font-size: 2.8rem;
-            }
-
-            .section-header p {
                 font-size: 1.1rem;
             }
 
-            .category-title {
-                font-size: 2rem;
-            }
-
+            /* Set menu grid to 2 columns on tablets */
             .menu-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 2rem;
             }
 
-            .menu-section {
-                padding: 5rem 2rem;
-            }
-
             .menu-item {
-                padding: 1.8rem;
+                padding: 1.5rem;
             }
 
             .item-image {
-                max-width: 220px;
+                max-width: 200px;
             }
 
             .item-name {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
             }
 
             .item-price {
@@ -845,19 +833,14 @@
 
             .item-description {
                 font-size: 0.95rem;
-                line-height: 1.7;
-            }
-
-            .tag {
-                font-size: 0.75rem;
-                padding: 0.4rem 0.8rem;
+                line-height: 1.6;
             }
         }
 
         /* ============================================
-        SMALL TABLETS & LARGE PHONES (600px - 767px)
-        ============================================ */
-        @media screen and (min-width: 600px) and (max-width: 767px) {
+           TABLET & MOBILE - EXACTLY matching about.html
+           ============================================ */
+        @media screen and (max-width: 768px) {
             .hamburger {
                 display: flex;
             }
@@ -888,47 +871,49 @@
             }
 
             nav a {
-                font-size: 1.2rem;
+                font-size: 1.3rem;
                 display: block;
                 padding: 0.8rem 0;
             }
 
             .logo-text {
-                font-size: 1.4rem;
+                font-size: 1.5rem;
             }
-
+            
             .page-header {
-                padding: 10rem 1.5rem 4rem;
+                padding: 8rem 1.5rem 3rem;
             }
-
+            
             .page-header h1 {
-                font-size: 3rem;
+                font-size: 2.5rem;
                 letter-spacing: 2px;
             }
-
+            
             .page-header p {
-                font-size: 1.1rem;
-            }
-
-            .section-header h2 {
-                font-size: 2.2rem;
-            }
-
-            .section-header p {
                 font-size: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .section-header p {
+                font-size: 0.95rem;
             }
 
             .category-title {
-                font-size: 1.6rem;
+                font-size: 1.8rem;
+                margin: 2rem 0 1.5rem;
             }
-
+            
+            /* Keep 2 columns on mobile */
             .menu-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1.5rem;
             }
-
+            
             .menu-section {
-                padding: 4rem 1.5rem;
+                padding: 3rem 1.5rem;
             }
 
             .menu-item {
@@ -943,13 +928,9 @@
                 font-size: 1.4rem;
             }
 
-            .item-price {
-                font-size: 1rem;
-            }
-
             .item-description {
                 font-size: 0.9rem;
-                line-height: 1.6;
+                line-height: 1.5;
             }
 
             .tag {
@@ -958,14 +939,7 @@
             }
         }
 
-        /* ============================================
-        MOBILE VIEWPORT (max-width: 480px)
-        ============================================ */
         @media screen and (max-width: 480px) {
-            .hamburger {
-                display: flex;
-            }
-
             nav ul {
                 width: 260px;
                 padding-left: 1.5rem;
@@ -973,72 +947,197 @@
             }
 
             nav a {
-                font-size: 1.1rem;
+                font-size: 1.2rem;
             }
 
-            .logo-text {
-                font-size: 1.3rem;
+            .page-header {
+                padding: 7rem 1rem 2.5rem;
             }
 
             .page-header h1 {
-                font-size: 2.3rem;
+                font-size: 2rem;
             }
 
-            /* ✅ KEEP MENU IN GRID (2 columns) */
+            .page-header p {
+                font-size: 0.9rem;
+            }
+
+            .section-header {
+                margin-bottom: 2rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+
+            .section-header h2::after {
+                width: 60px;
+                height: 2px;
+                bottom: -8px;
+            }
+
+            .section-header p {
+                font-size: 0.85rem;
+                margin-top: 1rem;
+            }
+
+            .category-title {
+                font-size: 1.5rem;
+                margin: 1.5rem 0 1rem;
+            }
+
+            .category-title::after {
+                width: 40px;
+                height: 2px;
+                bottom: -6px;
+            }
+
+            /* Keep 2 columns on small mobile */
             .menu-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
             }
 
-            /* ✅ MAKE MENU ITEMS SMALLER */
             .menu-item {
                 padding: 1rem;
                 border-radius: 18px;
             }
 
+            .menu-item::before {
+                height: 3px;
+            }
+
             .item-image {
-                max-width: 140px;
-                margin-bottom: 1rem;
+                max-width: 120px;
+                margin-bottom: 0.8rem;
+                border-radius: 10px;
             }
 
             .item-name {
                 font-size: 1.1rem;
+                margin-bottom: 0.3rem;
             }
 
             .item-price {
                 font-size: 0.9rem;
+                margin-bottom: 0.3rem;
             }
 
             .item-description {
-                font-size: 0.8rem;
-                line-height: 1.5;
+                font-size: 0.75rem;
+                line-height: 1.4;
+                margin-bottom: 0.5rem;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .item-tags {
+                gap: 0.3rem;
             }
 
             .tag {
-                font-size: 0.65rem;
-                padding: 0.3rem 0.6rem;
+                padding: 0.2rem 0.5rem;
+                font-size: 0.6rem;
+                border-radius: 15px;
             }
 
             .scroll-top {
                 bottom: 20px;
                 right: 20px;
-                width: 42px;
-                height: 42px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .footer-grid {
+                gap: 2rem;
+                padding: 0 1rem;
+            }
+
+            footer {
+                padding: 3rem 1rem 1.5rem;
+            }
+
+            .footer-section h3 {
+                font-size: 1.3rem;
+                margin-bottom: 1rem;
+            }
+
+            .footer-section p,
+            .footer-section a {
+                font-size: 0.9rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .social-links a {
+                width: 35px;
+                height: 35px;
+                padding: 7px;
+            }
+        }
+
+        /* Very small devices */
+        @media screen and (max-width: 360px) {
+            nav ul {
+                width: 240px;
+                padding-left: 1.2rem;
+            }
+
+            nav a {
+                font-size: 1.1rem;
+            }
+
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+
+            .menu-item {
+                padding: 0.8rem;
+            }
+
+            .item-image {
+                max-width: 100px;
+            }
+
+            .item-name {
+                font-size: 1rem;
+            }
+
+            .item-price {
+                font-size: 0.8rem;
+            }
+
+            .item-description {
+                font-size: 0.7rem;
+                -webkit-line-clamp: 2;
+            }
+
+            .tag {
+                padding: 0.15rem 0.4rem;
+                font-size: 0.55rem;
             }
         }
     </style>
 
-    
-        <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-90Z65E4SVZ"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-90Z65E4SVZ');
     </script>
-    
 </head>
 <body>
     <nav id="navbar">
@@ -1047,7 +1146,6 @@
                 <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo" onerror="this.style.display='none'">
             </a>
 
-            
             <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
@@ -1350,83 +1448,83 @@
     </section>
 
    <!-- Food -->
-<section class="menu-section">
-    <div class="section-header">
-        <h2>Food</h2>
-        <p>Delicious snacks and comfort food</p>
-    </div>
-    <div class="menu-grid">
-        <div class="menu-item">
-            <img src="GRG/MENU/pizza.png" alt="Pizza" class="item-image" onerror="this.style.display='none'">
-            <div class="item-header">
-                <h3 class="item-name">Pizza</h3>
-                <span class="item-price">₱90 - ₱135</span>
-            </div>
-            <p class="item-description">Ham & Cheese ₱90 | Mushroom Truffle ₱120 | Pepperoni ₱135</p>
+    <section class="menu-section">
+        <div class="section-header">
+            <h2>Food</h2>
+            <p>Delicious snacks and comfort food</p>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item">
+                <img src="GRG/MENU/pizza.png" alt="Pizza" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Pizza</h3>
+                    <span class="item-price">₱90 - ₱135</span>
+                </div>
+                <p class="item-description">Ham & Cheese ₱90 | Mushroom Truffle ₱120 | Pepperoni ₱135</p>
                 <div class="item-tags"><span class="tag">Savory</span></div>
-        </div>
-
-        <div class="menu-item">
-            <img src="GRG/MENU/nachos.png" alt="Nachos" class="item-image" onerror="this.style.display='none'">
-            <div class="item-header">
-                <h3 class="item-name">Nachos</h3>
-                <span class="item-price">₱75</span>
             </div>
-            <p class="item-description">Crispy nachos with toppings.</p>
+
+            <div class="menu-item">
+                <img src="GRG/MENU/nachos.png" alt="Nachos" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Nachos</h3>
+                    <span class="item-price">₱75</span>
+                </div>
+                <p class="item-description">Crispy nachos with toppings.</p>
                 <div class="item-tags"><span class="tag">Crunchy</span></div>
-        </div>
-
-        <div class="menu-item">
-            <img src="GRG/MENU/empanada.png" alt="Empanada" class="item-image" onerror="this.style.display='none'">
-            <div class="item-header">
-                <h3 class="item-name">Empanada</h3>
-                <span class="item-price">₱50 - ₱60</span>
             </div>
-            <p class="item-description">Ham & Cheese ₱50 | Chicken Truffle ₱60</p>
+
+            <div class="menu-item">
+                <img src="GRG/MENU/empanada.png" alt="Empanada" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Empanada</h3>
+                    <span class="item-price">₱50 - ₱60</span>
+                </div>
+                <p class="item-description">Ham & Cheese ₱50 | Chicken Truffle ₱60</p>
                 <div class="item-tags"><span class="tag">Flaky</span></div>
-        </div>
-
-        <div class="menu-item">
-            <img src="GRG/MENU/fries.png" alt="Fries" class="item-image" onerror="this.style.display='none'">
-            <div class="item-header">
-                <h3 class="item-name">Fries</h3>
-                <span class="item-price">₱50</span>
             </div>
-            <p class="item-description">Choose from Sour Cream, BBQ, Cheese, or Plain.</p>
-            <div class="item-tags"><span class="tag">Popular</span></div>
-        </div>
 
-        <div class="menu-item">
-            <img src="GRG/MENU/buffalo_fries.png" alt="Buffalo Fries" class="item-image" onerror="this.style.display='none'">
-            <div class="item-header">
-                <h3 class="item-name">Buffalo Fries</h3>
-                <span class="item-price">₱120</span>
+            <div class="menu-item">
+                <img src="GRG/MENU/fries.png" alt="Fries" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Fries</h3>
+                    <span class="item-price">₱50</span>
+                </div>
+                <p class="item-description">Choose from Sour Cream, BBQ, Cheese, or Plain.</p>
+                <div class="item-tags"><span class="tag">Popular</span></div>
             </div>
-            <p class="item-description">Spicy buffalo-flavored fries.</p>
-            <div class="item-tags"><span class="tag">Spicy</span></div>
-        </div>
 
-        <div class="menu-item">
-            <img src="GRG/MENU/corndog.png" alt="Corndog" class="item-image" onerror="this.style.display='none'">
-            <div class="item-header">
-                <h3 class="item-name">Corndog</h3>
-                <span class="item-price">₱50</span>
+            <div class="menu-item">
+                <img src="GRG/MENU/buffalo_fries.png" alt="Buffalo Fries" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Buffalo Fries</h3>
+                    <span class="item-price">₱120</span>
+                </div>
+                <p class="item-description">Spicy buffalo-flavored fries.</p>
+                <div class="item-tags"><span class="tag">Spicy</span></div>
             </div>
-            <p class="item-description">Classic corndog on a stick.</p>
+
+            <div class="menu-item">
+                <img src="GRG/MENU/corndog.png" alt="Corndog" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Corndog</h3>
+                    <span class="item-price">₱50</span>
+                </div>
+                <p class="item-description">Classic corndog on a stick.</p>
                 <div class="item-tags"><span class="tag">Crispy</span></div>
-        </div>
-
-        <div class="menu-item">
-            <img src="GRG/MENU/waffle.png" alt="Waffle" class="item-image" onerror="this.style.display='none'">
-            <div class="item-header">
-                <h3 class="item-name">Waffles</h3>
-                <span class="item-price">₱60 - ₱80</span>
             </div>
-            <p class="item-description">Original ₱60 | Chocolate, Strawberry, Nutella ₱80</p>
-            <div class="item-tags"><span class="tag">Sweet</span></div>
+
+            <div class="menu-item">
+                <img src="GRG/MENU/waffle.png" alt="Waffle" class="item-image" onerror="this.style.display='none'">
+                <div class="item-header">
+                    <h3 class="item-name">Waffles</h3>
+                    <span class="item-price">₱60 - ₱80</span>
+                </div>
+                <p class="item-description">Original ₱60 | Chocolate, Strawberry, Nutella ₱80</p>
+                <div class="item-tags"><span class="tag">Sweet</span></div>
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
     <!-- Footer -->
     <footer>
@@ -1476,36 +1574,39 @@
     <div class="scroll-top" id="scrollTop">↑</div>
 
     <script>
-        // Hamburger Menu Toggle
+        // Hamburger menu toggle
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
-
-        hamburger.addEventListener('click', () => {
+        
+        hamburger.addEventListener('click', function() {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
         });
 
-        // Close menu when clicking a link
-        const navLinks = document.querySelectorAll('nav a');
+        // Close menu when clicking on a link
+        const navLinks = document.querySelectorAll('nav ul li a');
         navLinks.forEach(link => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', function() {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
             });
         });
 
         // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+        document.addEventListener('click', function(event) {
+            const isClickInsideNav = navMenu.contains(event.target);
+            const isClickOnHamburger = hamburger.contains(event.target);
+            
+            if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
             }
         });
 
         // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
@@ -1513,17 +1614,17 @@
         });
 
         // Scroll to top button
-        const scrollTopBtn = document.getElementById('scrollTop');
+        const scrollTop = document.getElementById('scrollTop');
         
-        window.addEventListener('scroll', () => {
+        window.addEventListener('scroll', function() {
             if (window.scrollY > 300) {
-                scrollTopBtn.classList.add('visible');
+                scrollTop.classList.add('visible');
             } else {
-                scrollTopBtn.classList.remove('visible');
+                scrollTop.classList.remove('visible');
             }
         });
 
-        scrollTopBtn.addEventListener('click', () => {
+        scrollTop.addEventListener('click', function() {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
@@ -1544,6 +1645,5 @@
             });
         });
     </script>
-
 </body>
 </html>

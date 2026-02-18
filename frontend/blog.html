@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Blog - Garage Café | Coffee Tips & Local Stories</title>
     <meta name="description" content="Read the latest from Garage Café Mabalacat - coffee tips, local stories, and updates from your neighborhood café near Metro Clark Homes.">
+    <meta name="keywords" content="local café Mawaque, coffee shop Mabalacat City, Garage Café Pampanga, community café, support local business, study café near me">
     <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="GRG/Icons/Garage Cafe logo ICON.png" type="image/png">
     <style>
@@ -18,8 +19,15 @@
             --accent-gold: #D4AF37;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: 'Roboto', Arial, sans-serif;
@@ -65,7 +73,9 @@
             text-decoration: none;
         }
 
-        .logo:hover { transform: scale(1.05); }
+        .logo:hover {
+            transform: scale(1.05);
+        }
 
         .logo img {
             height: 50px;
@@ -73,6 +83,7 @@
             filter: brightness(0) invert(1);
         }
 
+        /* Hamburger Menu */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -90,9 +101,17 @@
             border-radius: 3px;
         }
 
-        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(9px, 9px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(9px, -9px); }
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(9px, 9px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(9px, -9px);
+        }
 
         nav ul {
             display: flex;
@@ -113,14 +132,23 @@
         nav a::after {
             content: '';
             position: absolute;
-            bottom: 0; left: 0;
-            width: 0; height: 2px;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
             background: var(--accent-gold);
             transition: width 0.3s ease;
         }
 
-        nav a:hover::after, nav a.active::after { width: 100%; }
-        nav a:hover, nav a.active { color: var(--off-white); }
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
+        }
+
+        nav a:hover,
+        nav a.active {
+            color: var(--off-white);
+        }
 
         /* Page Header */
         .page-header {
@@ -131,6 +159,23 @@
             color: var(--off-white);
             position: relative;
             overflow: hidden;
+            animation: fadeIn 1s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, transparent 0%, rgba(44, 24, 16, 0.4) 100%);
+            z-index: 1;
         }
 
         .page-header h1 {
@@ -142,6 +187,18 @@
             position: relative;
             z-index: 2;
             text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+            animation: slideUp 1s ease-out 0.3s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .page-header p {
@@ -150,6 +207,7 @@
             position: relative;
             z-index: 2;
             font-weight: 300;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
         }
 
         /* Blog Grid */
@@ -171,6 +229,18 @@
             padding: 4rem 2rem;
             font-size: 1.2rem;
             color: var(--medium-brown);
+            grid-column: 1 / -1;
+        }
+
+        .no-blogs button {
+            padding: 0.5rem 1rem;
+            margin-top: 1rem;
+            background: linear-gradient(135deg, var(--light-brown), var(--accent-gold));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
         }
 
         /* Blog Card */
@@ -185,8 +255,14 @@
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .blog-card:nth-child(1) { animation-delay: 0.1s; }
@@ -215,9 +291,13 @@
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .blog-card:hover .blog-image { transform: scale(1.15); }
+        .blog-card:hover .blog-image {
+            transform: scale(1.15);
+        }
 
-        .blog-content { padding: 2rem; }
+        .blog-content {
+            padding: 2rem;
+        }
 
         .blog-meta {
             display: flex;
@@ -238,6 +318,7 @@
             border-radius: 20px;
             font-weight: 700;
             font-size: 0.7rem;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
         }
 
         .blog-card h3 {
@@ -273,11 +354,21 @@
             font-weight: 700;
             font-size: 0.95rem;
             transition: all 0.3s ease;
+            letter-spacing: 0.5px;
         }
 
-        .read-more::after { content: '→'; transition: transform 0.3s ease; }
-        .blog-card:hover .read-more { color: var(--accent-gold); }
-        .blog-card:hover .read-more::after { transform: translateX(5px); }
+        .read-more::after {
+            content: '→';
+            transition: transform 0.3s ease;
+        }
+
+        .blog-card:hover .read-more {
+            color: var(--accent-gold);
+        }
+
+        .blog-card:hover .read-more::after {
+            transform: translateX(5px);
+        }
 
         /* Footer */
         footer {
@@ -289,7 +380,7 @@
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 3rem;
             max-width: 1400px;
             margin: 0 auto 3rem;
@@ -307,12 +398,15 @@
         .footer-section h3::after {
             content: '';
             position: absolute;
-            bottom: -8px; left: 0;
-            width: 50px; height: 2px;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 2px;
             background: var(--accent-gold);
         }
 
-        .footer-section p, .footer-section a {
+        .footer-section p,
+        .footer-section a {
             color: var(--lighter-brown);
             text-decoration: none;
             display: block;
@@ -320,30 +414,47 @@
             transition: all 0.3s ease;
         }
 
-        .footer-section a:hover { color: var(--off-white); padding-left: 5px; }
-        .footer-links { list-style: none; }
-        .footer-links li { margin-bottom: 0.8rem; }
+        .footer-section a:hover {
+            color: var(--off-white);
+            padding-left: 5px;
+        }
 
-        .social-links { display: flex; gap: 1rem; margin-top: 1rem; }
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
 
         .social-links a {
-            width: 45px; height: 45px;
+            width: 45px;
+            height: 45px;
             background: linear-gradient(135deg, var(--medium-brown), var(--light-brown));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.4s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
             padding: 10px;
         }
 
         .social-links a:hover {
             background: linear-gradient(135deg, var(--accent-gold), var(--light-brown));
             transform: translateY(-5px) rotate(5deg);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
         }
 
         .social-links img {
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
             object-fit: contain;
             filter: brightness(0) invert(1);
         }
@@ -355,10 +466,13 @@
             font-size: 0.9rem;
         }
 
+        /* Scroll to top button */
         .scroll-top {
             position: fixed;
-            bottom: 30px; right: 30px;
-            width: 50px; height: 50px;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
             background: linear-gradient(135deg, var(--light-brown), var(--accent-gold));
             color: white;
             border-radius: 50%;
@@ -367,36 +481,221 @@
             justify-content: center;
             font-size: 1.5rem;
             cursor: pointer;
-            opacity: 0; visibility: hidden;
+            opacity: 0;
+            visibility: hidden;
             transition: all 0.3s ease;
             z-index: 999;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             border: none;
         }
 
-        .scroll-top.visible { opacity: 1; visibility: visible; }
-        .scroll-top:hover { transform: translateY(-5px); }
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
 
-        /* RESPONSIVE */
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+        }
+
+        /* ============================================
+           LARGE DESKTOP FULL HD (1920px and above)
+           ============================================ */
         @media screen and (min-width: 1920px) {
-            .blog-grid { max-width: 1800px; grid-template-columns: repeat(4, 1fr); gap: 3.5rem; }
+            nav .container {
+                max-width: 1800px;
+                padding: 0 4rem;
+            }
+
+            nav ul {
+                gap: 3.5rem;
+            }
+
+            nav a {
+                font-size: 1.1rem;
+            }
+
+            .logo img {
+                height: 60px;
+            }
+
+            .page-header {
+                padding: 15rem 4rem 8rem;
+                min-height: 60vh;
+            }
+
+            .page-header h1 {
+                font-size: 6rem;
+                letter-spacing: 8px;
+                margin-bottom: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1.6rem;
+            }
+
+            .blog-section {
+                padding: 8rem 4rem;
+            }
+
+            .blog-grid {
+                max-width: 1800px;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 3.5rem;
+            }
+
+            .blog-image-container {
+                height: 280px;
+            }
+
+            .blog-content {
+                padding: 2.5rem;
+            }
+
+            .blog-card h3 {
+                font-size: 2rem;
+                min-height: 2.8em;
+                margin-bottom: 1.2rem;
+            }
+
+            .blog-meta {
+                font-size: 0.95rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .blog-category {
+                font-size: 0.8rem;
+                padding: 6px 16px;
+            }
+
+            .blog-excerpt {
+                font-size: 1.1rem;
+                line-height: 1.9;
+                min-height: 6.3em;
+                margin-bottom: 1.8rem;
+            }
+
+            .read-more {
+                font-size: 1.1rem;
+            }
+
+            .footer-grid {
+                max-width: 1800px;
+                gap: 4rem;
+                padding: 0 4rem;
+            }
+
+            footer {
+                padding: 5rem 4rem 2rem;
+            }
+
+            .footer-section h3 {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .footer-section p,
+            .footer-section a {
+                font-size: 1.1rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .social-links a {
+                width: 55px;
+                height: 55px;
+            }
+
+            .copyright {
+                font-size: 1rem;
+                padding-top: 2.5rem;
+            }
+
+            .scroll-top {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+                bottom: 40px;
+                right: 40px;
+            }
         }
 
+        /* Desktop (1440px - 1919px) */
         @media screen and (min-width: 1440px) and (max-width: 1919px) {
-            .blog-grid { max-width: 1600px; grid-template-columns: repeat(4, 1fr); gap: 3rem; }
+            nav .container {
+                max-width: 1600px;
+                padding: 0 3.5rem;
+            }
+
+            .blog-grid {
+                max-width: 1600px;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 3rem;
+            }
+
+            .footer-grid {
+                max-width: 1600px;
+            }
         }
 
+        /* Laptop (1280px - 1439px) */
         @media screen and (min-width: 1280px) and (max-width: 1439px) {
-            .blog-grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+            nav .container {
+                max-width: 1400px;
+                padding: 0 3rem;
+            }
+
+            .blog-grid {
+                max-width: 1400px;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+
+            .footer-grid {
+                max-width: 1400px;
+            }
         }
 
+        /* Laptop smaller (1024px - 1279px) */
+        @media screen and (min-width: 1024px) and (max-width: 1279px) {
+            nav .container {
+                max-width: 1200px;
+                padding: 0 2.5rem;
+            }
+
+            .blog-section {
+                padding: 6rem 2.5rem;
+            }
+
+            .blog-grid {
+                max-width: 1200px;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+
+            .footer-grid {
+                max-width: 1200px;
+            }
+
+            footer {
+                padding: 4rem 2.5rem 2rem;
+            }
+        }
+
+        /* ============================================
+           TABLET AND MOBILE (1024px and below)
+           ============================================ */
         @media screen and (max-width: 1024px) {
-            .hamburger { display: flex; }
+            .hamburger {
+                display: flex;
+            }
 
             nav ul {
                 position: fixed;
-                top: 0; right: -100%;
-                width: 280px; height: 100vh;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
                 background: rgba(44, 24, 16, 0.98);
                 flex-direction: column;
                 justify-content: flex-start;
@@ -405,27 +704,94 @@
                 padding-left: 2rem;
                 gap: 2.5rem;
                 transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.3);
                 z-index: 999;
             }
 
-            nav ul.active { right: 0; }
+            nav ul.active {
+                right: 0;
+            }
 
-            .page-header { padding: 10rem 2rem 4rem; }
-            .page-header h1 { font-size: 3rem; letter-spacing: 3px; }
-            .blog-grid { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 2.5rem; }
-            .blog-section { padding: 4rem 1.5rem; }
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                font-size: 1.3rem;
+                display: block;
+                padding: 0.8rem 0;
+            }
+
+            .page-header {
+                padding: 10rem 2rem 4rem;
+            }
+            
+            .page-header h1 {
+                font-size: 3rem;
+                letter-spacing: 3px;
+            }
+            
+            .blog-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+                gap: 2.5rem;
+            }
+            
+            .blog-section {
+                padding: 4rem 1.5rem;
+            }
         }
 
         @media screen and (max-width: 768px) {
-            .page-header h1 { font-size: 2.5rem; }
-            .blog-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .page-header h1 {
+                font-size: 2.5rem;
+                letter-spacing: 2px;
+            }
+            
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .blog-card h3 {
+                font-size: 1.6rem;
+                min-height: auto;
+            }
         }
 
         @media screen and (max-width: 480px) {
-            .page-header h1 { font-size: 2rem; }
-            .blog-card h3 { font-size: 1.4rem; min-height: auto; }
-            .blog-content { padding: 1.5rem; }
-            .scroll-top { bottom: 20px; right: 20px; width: 45px; height: 45px; }
+            nav ul {
+                width: 260px;
+                padding-left: 1.5rem;
+                gap: 2rem;
+            }
+
+            nav a {
+                font-size: 1.2rem;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+            }
+            
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+                font-size: 1.3rem;
+            }
+
+            .blog-card h3 {
+                font-size: 1.4rem;
+            }
+
+            .blog-content {
+                padding: 1.5rem;
+            }
         }
     </style>
 
@@ -437,7 +803,6 @@
         gtag('js', new Date());
         gtag('config', 'G-90Z65E4SVZ');
     </script>
-    
 </head>
 <body>
     <nav id="navbar">
@@ -445,9 +810,13 @@
             <a href="index.html" class="logo">
                 <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo" onerror="this.style.display='none'">
             </a>
+            
             <div class="hamburger" id="hamburger">
-                <span></span><span></span><span></span>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
+            
             <ul id="navMenu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -487,6 +856,7 @@
                     </a>
                 </div>
             </div>
+            
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
@@ -497,6 +867,7 @@
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
+            
             <div class="footer-section">
                 <h3>Services</h3>
                 <ul class="footer-links">
@@ -507,28 +878,43 @@
                 </ul>
             </div>
         </div>
+        
         <div class="copyright">
             <p>&copy; 2025 Garage Café. | www.visitgaragecafe.com</p>
         </div>
     </footer>
 
 <script>
-    const BASE_URL = 'https://garage-cafe.onrender.com';
+    // Determine BASE_URL
+    const BASE_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
+        ? "http://localhost:3000"
+        : "https://garage-cafe.onrender.com";
+    
     const API = `${BASE_URL}/api/blogs`;
+
+    console.log('Blog Feed - BASE_URL:', BASE_URL);
+    console.log('Blog Feed - API:', API);
 
     // Hamburger Menu
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
-    hamburger.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
-    });
+    
+    if (hamburger) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+    }
+
+    // Close menu when clicking on a link
     document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
         });
     });
+
+    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
             hamburger.classList.remove('active');
@@ -538,7 +924,10 @@
 
     // Navbar scroll effect
     window.addEventListener('scroll', () => {
-        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 50);
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        }
     });
 
     // Scroll to top
@@ -546,26 +935,51 @@
     window.addEventListener('scroll', () => {
         scrollTop.classList.toggle('visible', window.scrollY > 300);
     });
-    scrollTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    
+    if (scrollTop) {
+        scrollTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    }
 
-    // ✅ FIXED: Cloudinary URLs are already full HTTPS URLs — no transformation needed
+    // Helper function to construct image URLs
     function getImageUrl(imageUrl) {
         if (!imageUrl) return 'GRG/BLOG/blog_header.jpg';
-        // Cloudinary and other full URLs
-        if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) return imageUrl;
-        // Local GRG assets
-        if (imageUrl.startsWith('GRG/')) return imageUrl;
-        // Legacy local uploads — construct backend URL
-        const cleanPath = imageUrl.replace(/^[./]+/, '');
+        
+        console.log('Processing image URL:', imageUrl);
+        
+        // If it's already a full URL, return as is
+        if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
+            return imageUrl;
+        }
+        
+        // If it's a local GRG file
+        if (imageUrl.startsWith('GRG/')) {
+            return imageUrl;
+        }
+        
+        // If it starts with /uploads, construct full URL to backend
+        if (imageUrl.startsWith('/uploads/')) {
+            return `${BASE_URL}${imageUrl}`;
+        }
+        
+        // Clean the path and construct URL
+        const cleanPath = imageUrl.replace(/^\.\/|^\.\.\/|^\/+/, '');
         return `${BASE_URL}/${cleanPath}`;
     }
 
     async function loadBlogs() {
         const blogGrid = document.getElementById('blogGrid');
+        if (!blogGrid) return;
+        
         try {
+            console.log('Fetching blogs from:', API);
             const res = await fetch(API);
-            if (!res.ok) throw new Error('Network response was not ok');
+            
+            if (!res.ok) {
+                throw new Error(`Network response was not ok: ${res.status}`);
+            }
+            
             const blogs = await res.json();
+            console.log('Blogs loaded:', blogs.length);
 
             if (!blogs.length) {
                 blogGrid.innerHTML = '<div class="no-blogs"><p>No blog posts yet.</p><p>Check back soon for coffee stories and local updates!</p></div>';
@@ -585,6 +999,7 @@
                 const cleanExcerpt = tempDiv.textContent || tempDiv.innerText || '';
 
                 const fullImageUrl = getImageUrl(blog.imageUrl);
+                console.log(`Blog ${index + 1} image URL:`, fullImageUrl);
 
                 blogCard.innerHTML = `
                     <div class="blog-image-container">
@@ -592,7 +1007,7 @@
                             src="${fullImageUrl}" 
                             alt="${blog.title}" 
                             class="blog-image" 
-                            onerror="this.src='GRG/BLOG/blog_header.jpg'"
+                            onerror="this.onerror=null; this.src='GRG/BLOG/blog_header.jpg';"
                         >
                     </div>
                     <div class="blog-content">
@@ -610,11 +1025,12 @@
 
         } catch (error) {
             console.error('Failed to load blogs:', error);
-            blogGrid.innerHTML = '<div class="no-blogs"><p>Unable to load blogs at this time.</p><p>Please try again later.</p></div>';
+            blogGrid.innerHTML = `<div class="no-blogs"><p>Unable to load blogs at this time.</p><p>Error: ${error.message}</p><p><button onclick="location.reload()">Retry</button></p></div>`;
         }
     }
 
-    loadBlogs();
+    // Load blogs when page loads
+    document.addEventListener('DOMContentLoaded', loadBlogs);
 </script>
 </body>
 </html>

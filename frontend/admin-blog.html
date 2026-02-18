@@ -148,7 +148,6 @@ input[type="file"]::file-selector-button {
     transition: all 0.3s ease;
 }
 
-/* Current image preview */
 .image-preview-wrap {
     margin-bottom: 1rem;
 }
@@ -167,6 +166,7 @@ input[type="file"]::file-selector-button {
     border-radius: 10px;
     border: 2px solid var(--lighter-brown);
     display: none;
+    margin-bottom: 1rem;
 }
 
 #editor {
@@ -244,7 +244,13 @@ td {
 tbody tr:hover { background: var(--off-white); }
 tbody tr:last-child td { border-bottom: none; }
 
-td button { width: auto; padding: 0.6rem 1.2rem; margin: 0.2rem; font-size: 0.9rem; display: inline-block; }
+td button { 
+    width: auto; 
+    padding: 0.6rem 1.2rem; 
+    margin: 0.2rem; 
+    font-size: 0.9rem; 
+    display: inline-block; 
+}
 td button:first-child { background: linear-gradient(135deg, var(--medium-brown), var(--light-brown)); }
 td button:last-child { background: linear-gradient(135deg, #c62828, #e53935); }
 td button:first-child:hover { background: linear-gradient(135deg, var(--light-brown), var(--accent-gold)); }
@@ -266,17 +272,14 @@ input[type="hidden"] { display: none; }
 }
 </style>
 
-
-        <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90Z65E4SVZ"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-90Z65E4SVZ');
-    </script>
-    
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-90Z65E4SVZ"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-90Z65E4SVZ');
+</script>
 
 </head>
 
@@ -326,7 +329,7 @@ input[type="hidden"] { display: none; }
     <table>
         <thead>
             <tr>
-                <th>Photo</th>
+                <!-- PHOTO COLUMN REMOVED -->
                 <th>Title</th>
                 <th>Author</th>
                 <th>Category</th>
@@ -339,37 +342,68 @@ input[type="hidden"] { display: none; }
 
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
 <script>
+// ============ LOGIN SCRIPT ============
 const ADMIN_USERNAME = 'admin';
 const ADMIN_PASSWORD = 'garage123';
 
-if (sessionStorage.getItem('adminLoggedIn') === 'true') {
-    document.getElementById('loginSection').classList.add('hidden');
-    document.getElementById('adminSection').classList.remove('hidden');
-}
+console.log('Admin page loaded');
+console.log('Current hostname:', window.location.hostname);
 
+// Check login state on page load
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM fully loaded');
+    
+    if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+        console.log('User already logged in, showing admin panel');
+        document.getElementById('loginSection').classList.add('hidden');
+        document.getElementById('adminSection').classList.remove('hidden');
+    }
+});
+
+// Login form handler
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
+    
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     const errorMsg = document.getElementById('loginError');
-
+    
+    console.log('Login attempt with username:', username);
+    
     if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+        console.log('Login successful');
         sessionStorage.setItem('adminLoggedIn', 'true');
         document.getElementById('loginSection').classList.add('hidden');
         document.getElementById('adminSection').classList.remove('hidden');
         errorMsg.classList.remove('show');
+        
+        // Trigger blog load
+        if (typeof loadBlogs === 'function') {
+            loadBlogs();
+        }
     } else {
+        console.log('Login failed');
         errorMsg.classList.add('show');
     }
 });
 
+// Logout handler
 document.getElementById('logoutBtn').addEventListener('click', function() {
+    console.log('Logging out');
     sessionStorage.removeItem('adminLoggedIn');
     document.getElementById('loginSection').classList.remove('hidden');
     document.getElementById('adminSection').classList.add('hidden');
     document.getElementById('username').value = '';
     document.getElementById('password').value = '';
 });
+
+// Global error handler for images
+window.addEventListener('error', function(e) {
+    if (e.target.tagName === 'IMG') {
+        console.log('Image failed to load:', e.target.src);
+        e.target.style.display = 'none';
+    }
+}, true);
 </script>
 <script src="admin-blog.js"></script>
 </body>

@@ -1,70 +1,89 @@
-require('dotenv').config({ path: __dirname + '/.env' }); // Always loads .env from backend folder
-const express = require('express');
+const express = require('express'); 
 const mongoose = require('mongoose');
 const multer = require('multer');
-const cors = require('cors');
 const path = require('path');
-const cloudinary = require('cloudinary').v2;
-const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const cors = require('cors');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ---------------- MIDDLEWARE ----------------
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ---------------- UPLOADS ----------------
+const UPLOAD_DIR = path.join(__dirname, 'uploads');
+
+// Ensure uploads folder exists with recursive option
+if (!fs.existsSync(UPLOAD_DIR)) {
+  fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+  console.log('Uploads directory created:', UPLOAD_DIR);
+}
+
+// Serve static files from uploads directory
+app.use('/uploads', express.static(UPLOAD_DIR));
+
 // ---------------- FRONTEND ----------------
 const FRONTEND_DIR = path.join(__dirname, '../frontend');
-app.use(express.static(FRONTEND_DIR));
-
-// ---------------- CLOUDINARY CONFIG ----------------
-// Set these environment variables on Render:
-//   CLOUDINARY_CLOUD_NAME
-//   CLOUDINARY_API_KEY
-//   CLOUDINARY_API_SECRET
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key:    process.env.CLOUDINARY_API_KEY,
-  api_secret: process.env.CLOUDINARY_API_SECRET,
-});
-
-// ---------------- MULTER → CLOUDINARY ----------------
-const storage = new CloudinaryStorage({
-  cloudinary,
-  params: {
-    folder: 'garage-cafe-blogs',
-    allowed_formats: ['jpg', 'jpeg', 'png', 'webp', 'gif'],
-    transformation: [{ width: 1200, quality: 'auto', fetch_format: 'auto' }],
-  },
-});
-
-const upload = multer({ storage });
+// Check if frontend directory exists
+if (fs.existsSync(FRONTEND_DIR)) {
+  app.use(express.static(FRONTEND_DIR));
+  console.log('Serving frontend from:', FRONTEND_DIR);
+} else {
+  console.log('Frontend directory not found, only API will be served');
+}
 
 // ---------------- MONGODB CONNECTION ----------------
-const MONGO_URI = process.env.MONGO_URI ||
-  "mongodb+srv://annenicholealimurung_db_user:G4r%40geCaFE@cluster0.ic7yr6s.mongodb.net/garageCafe?retryWrites=true&w=majority";
+const MONGO_URI = process.env.MONGO_URI || 
+  "mongodb+srv://annenicholealimurung_db_user:G4r%40geCAFE@cluster0.ic7yr6s.mongodb.net/garageCafe?retryWrites=true&w=majority";
+
+console.log("Connecting to MongoDB...");
 
 mongoose.connect(MONGO_URI)
-  .then(() => console.log('MongoDB Connected'))
+  .then(() => console.log("✅ MongoDB Connected Successfully"))
   .catch(err => {
-    console.error('MongoDB connection error:', err.message);
+    console.error("❌ MongoDB connection error:", err.message);
     process.exit(1);
   });
 
 // ---------------- BLOG SCHEMA ----------------
 const blogSchema = new mongoose.Schema({
-  title:    { type: String, required: true },
-  author:   { type: String, required: true },
+  title: { type: String, required: true },
+  author: { type: String, required: true },
   category: { type: String },
-  excerpt:  { type: String },
-  content:  { type: String },
-  imageUrl: { type: String },   // Cloudinary HTTPS URL
-  imagePublicId: { type: String }, // Cloudinary public_id for deletion
+  excerpt: { type: String },
+  content: { type: String },
+  imageUrl: { type: String }
 }, { timestamps: true });
 
-const Blog = mongoose.model('Blog', blogSchema);
+const Blog = mongoose.model("Blog", blogSchema);
+
+// ---------------- MULTER ----------------
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    console.log('Saving file to:', UPLOAD_DIR);
+    cb(null, UPLOAD_DIR);
+  },
+  filename: (req, file, cb) => {
+    const uniqueName = Date.now() + '-' + file.originalname.replace(/[^a-zA-Z0-9.]/g, '_');
+    console.log('Generated filename:', uniqueName);
+    cb(null, uniqueName);
+  }
+});
+
+const upload = multer({ 
+  storage,
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  fileFilter: (req, file, cb) => {
+    if (file.mimetype.startsWith('image/')) {
+      cb(null, true);
+    } else {
+      cb(new Error('Only image files are allowed'));
+    }
+  }
+});
 
 // ---------------- API ROUTES ----------------
 
@@ -72,8 +91,24 @@ const Blog = mongoose.model('Blog', blogSchema);
 app.get('/api/blogs', async (req, res) => {
   try {
     const blogs = await Blog.find().sort({ createdAt: -1 });
+    console.log(`Found ${blogs.length} blogs`);
     res.json(blogs);
   } catch (err) {
+    console.error('Error fetching blogs:', err);
+    res.status(500).json({ message: err.message });
+  }
+});
+
+// GET single blog by ID
+app.get('/api/blogs/:id', async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+    res.json(blog);
+  } catch (err) {
+    console.error('Error fetching blog:', err);
     res.status(500).json({ message: err.message });
   }
 });
@@ -81,19 +116,31 @@ app.get('/api/blogs', async (req, res) => {
 // POST create a blog
 app.post('/api/blogs', upload.single('image'), async (req, res) => {
   try {
-    const blog = new Blog({
-      title:    req.body.title,
-      author:   req.body.author,
-      category: req.body.category,
-      excerpt:  req.body.excerpt,
-      content:  req.body.content,
-      imageUrl: req.file ? req.file.path : '',           // Cloudinary full HTTPS URL
-      imagePublicId: req.file ? req.file.filename : '',  // Cloudinary public_id
-    });
+    console.log('Creating new blog post');
+    console.log('Request body:', req.body);
+    console.log('Uploaded file:', req.file);
 
+    const blogData = {
+      title: req.body.title,
+      author: req.body.author,
+      category: req.body.category,
+      excerpt: req.body.excerpt,
+      content: req.body.content,
+    };
+
+    if (req.file) {
+      blogData.imageUrl = `/uploads/${req.file.filename}`;
+      console.log('Image URL set to:', blogData.imageUrl);
+    }
+
+    const blog = new Blog(blogData);
     await blog.save();
+    
+    console.log('Blog created successfully with ID:', blog._id);
     res.status(201).json(blog);
+
   } catch (err) {
+    console.error('Error creating blog:', err);
     res.status(400).json({ message: err.message });
   }
 });
@@ -101,33 +148,36 @@ app.post('/api/blogs', upload.single('image'), async (req, res) => {
 // PUT update a blog
 app.put('/api/blogs/:id', upload.single('image'), async (req, res) => {
   try {
+    console.log('Updating blog:', req.params.id);
+    
     const updateData = {
-      title:    req.body.title,
-      author:   req.body.author,
+      title: req.body.title,
+      author: req.body.author,
       category: req.body.category,
-      excerpt:  req.body.excerpt,
-      content:  req.body.content,
+      excerpt: req.body.excerpt,
+      content: req.body.content
     };
 
     if (req.file) {
-      // Delete old image from Cloudinary if it exists
-      const existing = await Blog.findById(req.params.id);
-      if (existing && existing.imagePublicId) {
-        await cloudinary.uploader.destroy(existing.imagePublicId).catch(() => {});
-      }
-      updateData.imageUrl = req.file.path;
-      updateData.imagePublicId = req.file.filename;
+      updateData.imageUrl = `/uploads/${req.file.filename}`;
+      console.log('New image URL:', updateData.imageUrl);
     }
 
     const updatedBlog = await Blog.findByIdAndUpdate(
       req.params.id,
       updateData,
-      { returnDocument: 'after' }
+      { new: true, runValidators: true }
     );
 
-    if (!updatedBlog) return res.status(404).json({ message: 'Blog not found' });
+    if (!updatedBlog) {
+      return res.status(404).json({ message: "Blog not found" });
+    }
+
+    console.log('Blog updated successfully');
     res.json(updatedBlog);
+
   } catch (err) {
+    console.error('Error updating blog:', err);
     res.status(400).json({ message: err.message });
   }
 });
@@ -135,21 +185,36 @@ app.put('/api/blogs/:id', upload.single('image'), async (req, res) => {
 // DELETE a blog
 app.delete('/api/blogs/:id', async (req, res) => {
   try {
+    console.log('Deleting blog:', req.params.id);
+    
     const deleted = await Blog.findByIdAndDelete(req.params.id);
-    if (!deleted) return res.status(404).json({ message: 'Blog not found' });
-
-    // Delete image from Cloudinary
-    if (deleted.imagePublicId) {
-      await cloudinary.uploader.destroy(deleted.imagePublicId).catch(() => {});
+    if (!deleted) {
+      return res.status(404).json({ message: "Blog not found" });
     }
-
-    res.sendStatus(204);
+    
+    console.log('Blog deleted successfully');
+    res.status(204).send();
   } catch (err) {
+    console.error('Error deleting blog:', err);
     res.status(500).json({ message: err.message });
   }
 });
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.json({ 
+    status: 'ok', 
+    timestamp: new Date(),
+    uploadsDir: UPLOAD_DIR,
+    frontendDir: FRONTEND_DIR
+  });
+});
+
 // ---------------- START SERVER ----------------
-app.listen(PORT, () => {
-  console.log(`Garage Cafe API & Frontend running on port ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+  console.log(`=================================`);
+  console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(`📁 Uploads directory: ${UPLOAD_DIR}`);
+  console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`=================================`);
 });
