@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>Menu - Garage Café</title>
     <meta name="description" content="Explore Garage Café's menu featuring affordable coffee, comfort food, and drinks. Budget-friendly options for students and professionals in Mabalacat City.">
     <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -55,9 +55,9 @@
         }
 
         nav .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -219,9 +219,9 @@
 
         /* Menu Section */
         .menu-section {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 6rem 2rem;
+            padding: 6rem 3rem;
             position: relative;
         }
 
@@ -409,14 +409,15 @@
         footer {
             background: linear-gradient(to bottom, var(--dark-brown), #0f0805);
             color: var(--lighter-brown);
-            padding: 4rem 2rem 2rem;
+            padding: 4rem 3rem 2rem;
+            margin-top: 4rem;
         }
 
         .footer-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 3rem;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto 3rem;
         }
 
@@ -532,27 +533,79 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
+        /* RESPONSIVE DESIGN - Matching blog.html */
+        
         /* Large Desktop Full HD (1920px and above) */
         @media screen and (min-width: 1920px) {
-            .menu-grid {
-                grid-template-columns: repeat(4, 1fr); /* 4 items per row */
-                gap: 3.5rem; /* slightly bigger gap for large screens */
+            nav .container {
+                max-width: 1800px;
+                padding: 0 4rem;
             }
 
-            .menu-section {
-                padding: 8rem 4rem; /* more spacing for large screens */
+            nav ul {
+                gap: 3.5rem;
+            }
+
+            nav a {
+                font-size: 1.1rem;
+            }
+
+            .logo img {
+                height: 60px;
+            }
+
+            .page-header {
+                padding: 15rem 4rem 8rem;
             }
 
             .page-header h1 {
                 font-size: 6rem;
+                letter-spacing: 8px;
+                margin-bottom: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1.6rem;
+            }
+
+            .menu-section {
+                max-width: 1800px;
+                padding: 8rem 4rem;
+            }
+
+            .section-header {
+                margin-bottom: 5rem;
             }
 
             .section-header h2 {
-                font-size: 3.5rem;
+                font-size: 4rem;
+            }
+
+            .section-header h2::after {
+                width: 120px;
+                height: 4px;
+                bottom: -15px;
+            }
+
+            .section-header p {
+                font-size: 1.4rem;
+                margin-top: 2rem;
             }
 
             .category-title {
-                font-size: 2.5rem;
+                font-size: 2.8rem;
+                margin: 4rem 0 2.5rem;
+            }
+
+            .category-title::after {
+                width: 80px;
+                height: 3px;
+                bottom: -12px;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 3.5rem;
             }
 
             .menu-item {
@@ -560,113 +613,358 @@
                 border-radius: 30px;
             }
 
+            .item-image {
+                max-width: 320px;
+                margin-bottom: 2rem;
+            }
+
             .item-name {
-                font-size: 2rem;
+                font-size: 2.2rem;
+                margin-bottom: 0.8rem;
             }
 
             .item-price {
-                font-size: 1.3rem;
+                font-size: 1.4rem;
+                margin-bottom: 0.8rem;
             }
 
             .item-description {
                 font-size: 1.1rem;
+                line-height: 1.9;
+                margin-bottom: 1.2rem;
             }
 
-            .item-image {
-                max-width: 320px;
+            .tag {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+
+            .footer-grid {
+                max-width: 1800px;
+                gap: 4rem;
+                padding: 0 4rem;
+            }
+
+            footer {
+                padding: 5rem 4rem 2rem;
+            }
+
+            .footer-section h3 {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .footer-section p,
+            .footer-section a {
+                font-size: 1.1rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .social-links a {
+                width: 55px;
+                height: 55px;
+            }
+
+            .copyright {
+                font-size: 1rem;
+                padding-top: 2.5rem;
+            }
+
+            .scroll-top {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+                bottom: 40px;
+                right: 40px;
+            }
+        }
+
+        /* Desktop (1440px - 1919px) */
+        @media screen and (min-width: 1440px) and (max-width: 1919px) {
+            nav .container {
+                max-width: 1600px;
+                padding: 0 3.5rem;
+            }
+
+            .menu-section {
+                max-width: 1600px;
+                padding: 7rem 3.5rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 3rem;
+            }
+
+            .footer-grid {
+                max-width: 1600px;
+            }
+        }
+
+        /* Laptop (1280px - 1439px) */
+        @media screen and (min-width: 1280px) and (max-width: 1439px) {
+            nav .container {
+                max-width: 1400px;
+                padding: 0 3rem;
+            }
+
+            .menu-section {
+                max-width: 1400px;
+                padding: 6rem 3rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+
+            .footer-grid {
+                max-width: 1400px;
+            }
+        }
+
+        /* Laptop smaller (1024px - 1279px) */
+        @media screen and (min-width: 1024px) and (max-width: 1279px) {
+            nav .container {
+                max-width: 1200px;
+                padding: 0 2.5rem;
+            }
+
+            .menu-section {
+                max-width: 1200px;
+                padding: 6rem 2.5rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+
+            .footer-grid {
+                max-width: 1200px;
+            }
+
+            footer {
+                padding: 4rem 2.5rem 2rem;
             }
         }
 
         /* ============================================
-        TABLET & MOBILE - HAMBURGER MENU
+        TABLET LANDSCAPE & PORTRAIT (768px - 1024px)
         ============================================ */
-        @media screen and (max-width: 768px) {
-        .hamburger {
-            display: flex;
+        @media screen and (min-width: 768px) and (max-width: 1024px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 300px;
+                height: 100vh;
+                background: rgba(44, 24, 16, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding-top: 100px;
+                padding-left: 2rem;
+                gap: 2.5rem;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+                z-index: 999;
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                font-size: 1.3rem;
+                display: block;
+                padding: 0.8rem 0;
+            }
+
+            .logo-text {
+                font-size: 1.5rem;
+            }
+
+            .page-header {
+                padding: 12rem 2rem 5rem;
+            }
+
+            .page-header h1 {
+                font-size: 4rem;
+                letter-spacing: 3px;
+            }
+
+            .page-header p {
+                font-size: 1.2rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.8rem;
+            }
+
+            .section-header p {
+                font-size: 1.1rem;
+            }
+
+            .category-title {
+                font-size: 2rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 2rem;
+            }
+
+            .menu-section {
+                padding: 5rem 2rem;
+            }
+
+            .menu-item {
+                padding: 1.8rem;
+            }
+
+            .item-image {
+                max-width: 220px;
+            }
+
+            .item-name {
+                font-size: 1.6rem;
+            }
+
+            .item-price {
+                font-size: 1.1rem;
+            }
+
+            .item-description {
+                font-size: 0.95rem;
+                line-height: 1.7;
+            }
+
+            .tag {
+                font-size: 0.75rem;
+                padding: 0.4rem 0.8rem;
+            }
         }
-        
-        nav ul {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 280px;
-            height: 100vh;
-            background: rgba(44, 24, 16, 0.98);
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: flex-start;
-            padding-top: 100px;
-            padding-left: 2rem;
-            gap: 2.5rem;
-            transition: right 0.3s ease;
-            box-shadow: -5px 0 20px rgba(0,0,0,0.3);
-        }
-        
-        nav ul.active {
-            right: 0;
-        }
-        
-        nav li {
-            width: 100%;
-        }
-        
-        nav a {
-            font-size: 1.3rem;
-            display: block;
-            padding: 0.8rem 0;
-        }
-        
-        .logo-text {
-            font-size: 1.5rem;
-        }
-        
-        .page-header {
-            padding: 10rem 2rem 4rem;
-        }
-        
-        .page-header h1 {
-            font-size: 3rem;
-            letter-spacing: 2px;
-        }
-        
-        .section-header h2 {
-            font-size: 2.5rem;
-        }
-        
-        .category-title {
-            font-size: 1.8rem;
-        }
-        
-        .menu-grid {
-            grid-template-columns: repeat(2, 1fr);
-            gap: 1.5rem;
-        }
-        
-        .menu-section {
-            padding: 4rem 1.5rem;
-        }
-        
-        .menu-item {
-            padding: 1.5rem;
-        }
-        
-        .item-name {
-            font-size: 1.4rem;
-        }
-        
-        .item-price {
-            font-size: 1rem;
-        }
-        
-        .item-description {
-            font-size: 0.9rem;
-        }
+
+        /* ============================================
+        SMALL TABLETS & LARGE PHONES (600px - 767px)
+        ============================================ */
+        @media screen and (min-width: 600px) and (max-width: 767px) {
+            .hamburger {
+                display: flex;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(44, 24, 16, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding-top: 100px;
+                padding-left: 2rem;
+                gap: 2.5rem;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            nav li {
+                width: 100%;
+            }
+
+            nav a {
+                font-size: 1.2rem;
+                display: block;
+                padding: 0.8rem 0;
+            }
+
+            .logo-text {
+                font-size: 1.4rem;
+            }
+
+            .page-header {
+                padding: 10rem 1.5rem 4rem;
+            }
+
+            .page-header h1 {
+                font-size: 3rem;
+                letter-spacing: 2px;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+            }
+
+            .section-header h2 {
+                font-size: 2.2rem;
+            }
+
+            .section-header p {
+                font-size: 1rem;
+            }
+
+            .category-title {
+                font-size: 1.6rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+
+            .menu-section {
+                padding: 4rem 1.5rem;
+            }
+
+            .menu-item {
+                padding: 1.5rem;
+            }
+
+            .item-image {
+                max-width: 180px;
+            }
+
+            .item-name {
+                font-size: 1.4rem;
+            }
+
+            .item-price {
+                font-size: 1rem;
+            }
+
+            .item-description {
+                font-size: 0.9rem;
+                line-height: 1.6;
+            }
+
+            .tag {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.7rem;
+            }
         }
 
         /* ============================================
         MOBILE VIEWPORT (max-width: 480px)
         ============================================ */
         @media screen and (max-width: 480px) {
+            .hamburger {
+                display: flex;
+            }
 
             nav ul {
                 width: 260px;
@@ -676,6 +974,10 @@
 
             nav a {
                 font-size: 1.1rem;
+            }
+
+            .logo-text {
+                font-size: 1.3rem;
             }
 
             .page-header h1 {
@@ -724,9 +1026,6 @@
                 height: 42px;
             }
         }
-
-
-
     </style>
 </head>
 <body>
@@ -1052,6 +1351,7 @@
                 <span class="item-price">₱90 - ₱135</span>
             </div>
             <p class="item-description">Ham & Cheese ₱90 | Mushroom Truffle ₱120 | Pepperoni ₱135</p>
+                <div class="item-tags"><span class="tag">Savory</span></div>
         </div>
 
         <div class="menu-item">
@@ -1061,6 +1361,7 @@
                 <span class="item-price">₱75</span>
             </div>
             <p class="item-description">Crispy nachos with toppings.</p>
+                <div class="item-tags"><span class="tag">Crunchy</span></div>
         </div>
 
         <div class="menu-item">
@@ -1070,6 +1371,7 @@
                 <span class="item-price">₱50 - ₱60</span>
             </div>
             <p class="item-description">Ham & Cheese ₱50 | Chicken Truffle ₱60</p>
+                <div class="item-tags"><span class="tag">Flaky</span></div>
         </div>
 
         <div class="menu-item">
@@ -1099,6 +1401,7 @@
                 <span class="item-price">₱50</span>
             </div>
             <p class="item-description">Classic corndog on a stick.</p>
+                <div class="item-tags"><span class="tag">Crispy</span></div>
         </div>
 
         <div class="menu-item">
@@ -1229,5 +1532,16 @@
             });
         });
     </script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-90Z65E4SVZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-90Z65E4SVZ');
+</script>
+
 </body>
-</html
+</html>

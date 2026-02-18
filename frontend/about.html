@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title>About Garage Café</title>
     <meta name="description" content="Garage Café in Mawaque, Mabalacat City, Pampanga. Affordable coffee shop near Metro Clark Homes offering comfort food, study hub, and event coffee setups.">
     <meta name="keywords" content="Garage Café, GRG Café, Coffee shop Mabalacat Pampanga, Café near Metro Clark Homes, Local café Pampanga">
@@ -56,9 +56,9 @@
         }
 
         nav .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
-            padding: 0 2rem;
+            padding: 0 3rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -221,8 +221,8 @@
         
         /* Content Sections */
         .content-section {
-            padding: 6rem 2rem;
-            max-width: 1200px;
+            padding: 6rem 3rem;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
@@ -293,7 +293,7 @@
         /* Values Grid */
         .values-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 3rem;
             margin-top: 4rem;
         }
@@ -345,7 +345,7 @@
 
         /* Vision Section */
         .vision-section {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 0 auto;
             text-align: center;
         }
@@ -394,14 +394,14 @@
         footer {
             background: linear-gradient(to bottom, var(--dark-brown), #0f0805);
             color: var(--lighter-brown);
-            padding: 4rem 2rem 2rem;
+            padding: 4rem 3rem 2rem;
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 3rem;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto 3rem;
         }
 
@@ -484,6 +484,216 @@
             border-top: 1px solid rgba(141, 110, 99, 0.3);
             font-size: 0.9rem;
         }
+
+        /* RESPONSIVE DESIGN - Matching all pages */
+        
+        /* Large Desktop Full HD (1920px and above) */
+        @media screen and (min-width: 1920px) {
+            nav .container {
+                max-width: 1800px;
+                padding: 0 4rem;
+            }
+
+            nav ul {
+                gap: 3.5rem;
+            }
+
+            nav a {
+                font-size: 1.1rem;
+            }
+
+            .logo img {
+                height: 60px;
+            }
+
+            .page-header {
+                padding: 15rem 4rem 8rem;
+                min-height: 60vh;
+            }
+
+            .page-header h1 {
+                font-size: 6rem;
+                letter-spacing: 8px;
+                margin-bottom: 2rem;
+            }
+
+            .page-header p {
+                font-size: 1.6rem;
+            }
+
+            .content-section {
+                padding: 8rem 4rem;
+                max-width: 1800px;
+            }
+
+            .section-title {
+                font-size: 4rem;
+            }
+
+            .section-title::after {
+                width: 120px;
+                height: 4px;
+                bottom: -15px;
+            }
+
+            .section-label {
+                font-size: 1rem;
+                letter-spacing: 4px;
+                margin-bottom: 1.2rem;
+            }
+
+            .two-column {
+                gap: 8rem;
+                margin-top: 4rem;
+            }
+
+            .text-content p {
+                font-size: 1.2rem;
+                line-height: 2.1;
+                margin-bottom: 2rem;
+            }
+
+            .video-container video {
+                border-radius: 15px;
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 3.5rem;
+                margin-top: 5rem;
+            }
+
+            .value-card {
+                padding: 4rem 3.5rem;
+                border-radius: 30px;
+            }
+
+            .value-card h3 {
+                font-size: 2rem;
+                margin-bottom: 1.8rem;
+            }
+
+            .value-card p {
+                font-size: 1.1rem;
+                line-height: 2;
+            }
+
+            .vision-section {
+                max-width: 1200px;
+            }
+
+            .vision-section p {
+                font-size: 1.2rem;
+                line-height: 2.1;
+            }
+
+            .footer-grid {
+                max-width: 1800px;
+                gap: 4rem;
+                padding: 0 4rem;
+            }
+
+            footer {
+                padding: 5rem 4rem 2rem;
+            }
+
+            .footer-section h3 {
+                font-size: 1.8rem;
+                margin-bottom: 2rem;
+            }
+
+            .footer-section p,
+            .footer-section a {
+                font-size: 1.1rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .social-links a {
+                width: 55px;
+                height: 55px;
+            }
+
+            .copyright {
+                font-size: 1rem;
+                padding-top: 2.5rem;
+            }
+
+            .scroll-top {
+                width: 60px;
+                height: 60px;
+                font-size: 1.8rem;
+                bottom: 40px;
+                right: 40px;
+            }
+        }
+
+        /* Desktop (1440px - 1919px) */
+        @media screen and (min-width: 1440px) and (max-width: 1919px) {
+            nav .container {
+                max-width: 1600px;
+                padding: 0 3.5rem;
+            }
+
+            .content-section {
+                max-width: 1600px;
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 3rem;
+            }
+
+            .footer-grid {
+                max-width: 1600px;
+            }
+        }
+
+        /* Laptop (1280px - 1439px) */
+        @media screen and (min-width: 1280px) and (max-width: 1439px) {
+            nav .container {
+                max-width: 1400px;
+                padding: 0 3rem;
+            }
+
+            .content-section {
+                max-width: 1400px;
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+
+            .footer-grid {
+                max-width: 1400px;
+            }
+        }
+
+        /* Laptop smaller (1024px - 1279px) */
+        @media screen and (min-width: 1024px) and (max-width: 1279px) {
+            nav .container {
+                max-width: 1200px;
+                padding: 0 2.5rem;
+            }
+
+            .content-section {
+                max-width: 1200px;
+                padding: 6rem 2.5rem;
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 2.5rem;
+            }
+
+            .footer-grid {
+                max-width: 1200px;
+            }
+
+            footer {
+                padding: 4rem 2.5rem 2rem;
+            }
+        }
         
         /* ============================================
            TABLET VIEWPORT (481px to 1024px)
@@ -531,10 +741,14 @@
             }
 
             .two-column {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
+                display: flex;
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
 
@@ -629,6 +843,10 @@
             .vision-section .section-title::after {
                 left: 50%;
                 transform: translateX(-50%);
+            }
+
+            .values-grid {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -816,6 +1034,16 @@
                 behavior: 'smooth'
             });
         });
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90Z65E4SVZ"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-90Z65E4SVZ');
     </script>
 </body>
 </html>

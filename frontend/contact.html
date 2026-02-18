@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
 <title>Contact Us - Garage Café</title>
 <meta name="description" content="Get in touch with Garage Café in Mabalacat City, Pampanga. Visit us, call us, or send us a message.">
 <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@ body { font-family:'Roboto', Arial, sans-serif; background: var(--cream); color:
 /* Navigation */
 nav { position:fixed; top:0; width:100%; background: rgba(44,24,16,0.95); backdrop-filter:blur(10px); z-index:1000; padding:1.5rem 0; box-shadow:0 4px 20px rgba(0,0,0,0.15); transition:all 0.3s ease; }
 nav.scrolled { padding:1rem 0; background: rgba(44,24,16,0.98); }
-nav .container { max-width:1200px; margin:0 auto; padding:0 2rem; display:flex; justify-content:space-between; align-items:center; }
+nav .container { max-width:1400px; margin:0 auto; padding:0 3rem; display:flex; justify-content:space-between; align-items:center; }
 .logo { display:flex; align-items:center; gap:0.8rem; transition: transform 0.3s ease; z-index:1001; }
 .logo:hover { transform: scale(1.05); }
 .logo img { height:50px; width:auto; filter: brightness(0) invert(1); }
@@ -71,13 +71,13 @@ nav a:hover, nav a.active { color: var(--off-white); }
 /* Hero Section */
 .page-hero { min-height:50vh; background: linear-gradient(135deg, rgba(93,64,55,0.85), rgba(44,24,16,0.9)), url('GRG/CONTACT/contact_header.jpg') center/cover no-repeat fixed; display:flex; align-items:center; justify-content:center; text-align:center; padding:12rem 2rem 4rem; position:relative; animation: fadeIn 1s ease-in; }
 .page-hero::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background: radial-gradient(circle at center, transparent 0%, rgba(44,24,16,0.4) 100%); }
-.page-hero-content { max-width:800px; position:relative; z-index:2; }
+.page-hero-content { max-width:900px; position:relative; z-index:2; }
 .page-hero h1 { font-family:'Yeseva One', serif; font-size:4rem; color:var(--off-white); margin-bottom:1rem; letter-spacing:4px; text-shadow:3px 3px 10px rgba(0,0,0,0.5); animation:slideUp 1s ease-out; }
 .page-hero p { font-size:1.3rem; color: var(--lighter-brown); font-weight:300; text-shadow:2px 2px 6px rgba(0,0,0,0.4); animation:slideUp 1.2s ease-out; }
 
 /* Contact Section */
-.contact-section { padding:6rem 2rem; background: linear-gradient(135deg, var(--off-white), var(--cream)); }
-.container { max-width:1200px; margin:0 auto; }
+.contact-section { padding:6rem 3rem; background: linear-gradient(135deg, var(--off-white), var(--cream)); }
+.container { max-width:1400px; margin:0 auto; }
 .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; margin-top:3rem; }
 .contact-info { background:white; padding:3rem; border-radius:25px; box-shadow:0 10px 30px rgba(44,24,16,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .contact-info:hover { transform: translateY(-10px); box-shadow:0 20px 50px rgba(44,24,16,0.15); }
@@ -98,7 +98,7 @@ nav a:hover, nav a.active { color: var(--off-white); }
 .image-card h3 { font-family:'Yeseva One', serif; font-size:1.3rem; color:var(--dark-brown); text-align:center; }
 
 /* Hours Section */
-.hours-section { background: linear-gradient(135deg, var(--dark-brown), #1a0e08); color:var(--off-white); padding:6rem 2rem; text-align:center; }
+.hours-section { background: linear-gradient(135deg, var(--dark-brown), #1a0e08); color:var(--off-white); padding:6rem 3rem; text-align:center; }
 .hours-section h2 { font-family:'Yeseva One', serif; font-size:3rem; margin-bottom:3rem; position:relative; display:inline-block; }
 .hours-section h2::after { content:''; position:absolute; bottom:-10px; left:50%; transform:translateX(-50%); width:80px; height:3px; background:linear-gradient(90deg,var(--light-brown),var(--accent-gold),var(--light-brown)); }
 .hours-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; max-width:800px; margin:0 auto; }
@@ -108,17 +108,17 @@ nav a:hover, nav a.active { color: var(--off-white); }
 .hours-card p { color: var(--lighter-brown); font-size:1.1rem; line-height:2; }
 
 /* Map Section */
-.map-section { padding:6rem 2rem; background: var(--off-white); }
+.map-section { padding:6rem 3rem; background: var(--off-white); }
 .map-section h2 { font-family:'Yeseva One', serif; font-size:3rem; color:var(--dark-brown); margin-bottom:3rem; text-align:center; position:relative; display:inline-block; }
 .map-section h2::after { content:''; position:absolute; bottom:-10px; left:50%; transform:translateX(-50%); width:80px; height:3px; background:linear-gradient(90deg,var(--light-brown),var(--accent-gold),var(--light-brown)); }
 .map-section .container { text-align:center; }
-.map-container { max-width:1200px; margin:0 auto; background:white; padding:2rem; border-radius:25px; box-shadow:0 10px 30px rgba(44,24,16,0.08); }
+.map-container { max-width:1400px; margin:0 auto; background:white; padding:2rem; border-radius:25px; box-shadow:0 10px 30px rgba(44,24,16,0.08); }
 .map-placeholder { width:100%; height:450px; border-radius:15px; overflow:hidden; }
 .map-placeholder iframe { width:100%; height:100%; border:none; border-radius:15px; }
 
 /* Footer */
-footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color: var(--lighter-brown); padding:4rem 2rem 2rem; }
-.footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:3rem; max-width:1200px; margin:0 auto 3rem; }
+footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color: var(--lighter-brown); padding:4rem 3rem 2rem; }
+.footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:3rem; max-width:1400px; margin:0 auto 3rem; }
 .footer-section h3 { font-family:'Yeseva One', serif; font-size:1.5rem; color: var(--off-white); margin-bottom:1.5rem; position:relative; display:inline-block; }
 .footer-section h3::after { content:''; position:absolute; bottom:-8px; left:0; width:50px; height:2px; background: var(--accent-gold); }
 .footer-section p, .footer-section a { color: var(--lighter-brown); text-decoration:none; display:block; margin-bottom:0.5rem; transition:all 0.3s ease; }
@@ -139,6 +139,273 @@ footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color
 /* Animations */
 @keyframes fadeIn {0%{opacity:0;}100%{opacity:1;}}
 @keyframes slideUp {0%{opacity:0; transform:translateY(20px);}100%{opacity:1; transform:translateY(0);}}
+
+/* RESPONSIVE DESIGN - Matching blog.html, menu.html, and index.html */
+
+/* Large Desktop Full HD (1920px and above) */
+@media screen and (min-width: 1920px) {
+    nav .container {
+        max-width: 1800px;
+        padding: 0 4rem;
+    }
+
+    nav ul {
+        gap: 3.5rem;
+    }
+
+    nav a {
+        font-size: 1.1rem;
+    }
+
+    .logo img {
+        height: 60px;
+    }
+
+    .page-hero {
+        padding: 15rem 4rem 6rem;
+        min-height: 60vh;
+    }
+
+    .page-hero-content {
+        max-width: 1200px;
+    }
+
+    .page-hero h1 {
+        font-size: 5rem;
+        letter-spacing: 8px;
+        margin-bottom: 1.5rem;
+    }
+
+    .page-hero p {
+        font-size: 1.6rem;
+    }
+
+    .contact-section {
+        padding: 8rem 4rem;
+    }
+
+    .container {
+        max-width: 1800px;
+    }
+
+    .contact-grid {
+        gap: 5rem;
+        margin-top: 4rem;
+    }
+
+    .contact-info {
+        padding: 4rem;
+        border-radius: 30px;
+    }
+
+    .contact-info h2 {
+        font-size: 3rem;
+    }
+
+    .contact-info h2::after {
+        width: 100px;
+        height: 4px;
+        bottom: -12px;
+    }
+
+    .info-item {
+        margin-bottom: 2.5rem;
+        padding-left: 2.5rem;
+    }
+
+    .info-item h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .info-item p {
+        font-size: 1.2rem;
+        line-height: 2;
+    }
+
+    .contact-images {
+        gap: 2.5rem;
+    }
+
+    .image-card {
+        padding: 2rem;
+        border-radius: 30px;
+    }
+
+    .image-placeholder {
+        height: 300px;
+        border-radius: 20px;
+        margin-bottom: 1.5rem;
+    }
+
+    .image-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .hours-section {
+        padding: 8rem 4rem;
+    }
+
+    .hours-section h2 {
+        font-size: 3.5rem;
+        margin-bottom: 4rem;
+    }
+
+    .hours-section h2::after {
+        width: 120px;
+        height: 4px;
+        bottom: -15px;
+    }
+
+    .hours-grid {
+        max-width: 1000px;
+        gap: 3rem;
+    }
+
+    .hours-card {
+        padding: 2.5rem;
+        border-radius: 25px;
+    }
+
+    .hours-card h3 {
+        font-size: 2rem;
+        margin-bottom: 1.2rem;
+    }
+
+    .hours-card p {
+        font-size: 1.2rem;
+        line-height: 2.2;
+    }
+
+    .map-section {
+        padding: 8rem 4rem;
+    }
+
+    .map-section h2 {
+        font-size: 3.5rem;
+        margin-bottom: 4rem;
+    }
+
+    .map-section h2::after {
+        width: 120px;
+        height: 4px;
+        bottom: -15px;
+    }
+
+    .map-container {
+        max-width: 1600px;
+        padding: 2.5rem;
+        border-radius: 30px;
+    }
+
+    .map-placeholder {
+        height: 500px;
+        border-radius: 20px;
+    }
+
+    .footer-grid {
+        max-width: 1800px;
+        gap: 4rem;
+        padding: 0 4rem;
+    }
+
+    footer {
+        padding: 5rem 4rem 2rem;
+    }
+
+    .footer-section h3 {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+    }
+
+    .footer-section p,
+    .footer-section a {
+        font-size: 1.1rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .social-links a {
+        width: 55px;
+        height: 55px;
+    }
+
+    .copyright {
+        font-size: 1rem;
+        padding-top: 2.5rem;
+    }
+
+    .scroll-top {
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+        bottom: 40px;
+        right: 40px;
+    }
+}
+
+/* Desktop (1440px - 1919px) */
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+    nav .container {
+        max-width: 1600px;
+        padding: 0 3.5rem;
+    }
+
+    .container {
+        max-width: 1600px;
+    }
+
+    .footer-grid {
+        max-width: 1600px;
+    }
+}
+
+/* Laptop (1280px - 1439px) */
+@media screen and (min-width: 1280px) and (max-width: 1439px) {
+    nav .container {
+        max-width: 1400px;
+        padding: 0 3rem;
+    }
+
+    .container {
+        max-width: 1400px;
+    }
+
+    .footer-grid {
+        max-width: 1400px;
+    }
+}
+
+/* Laptop smaller (1024px - 1279px) */
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+    nav .container {
+        max-width: 1200px;
+        padding: 0 2.5rem;
+    }
+
+    .container {
+        max-width: 1200px;
+    }
+
+    .contact-section {
+        padding: 6rem 2.5rem;
+    }
+
+    .hours-section {
+        padding: 6rem 2.5rem;
+    }
+
+    .map-section {
+        padding: 6rem 2.5rem;
+    }
+
+    .footer-grid {
+        max-width: 1200px;
+    }
+
+    footer {
+        padding: 4rem 2.5rem 2rem;
+    }
+}
 
 /* ============================================
    TABLET & MOBILE RESPONSIVENESS
@@ -430,6 +697,16 @@ window.addEventListener('scroll', function(){
     scrollTop.classList.toggle('visible', window.scrollY>300);
 });
 scrollTop.addEventListener('click',()=>window.scrollTo({top:0, behavior:'smooth'}));
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-90Z65E4SVZ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-90Z65E4SVZ');
 </script>
 </body>
 </html>

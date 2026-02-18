@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
     <title id="pageTitle">Blog | Garage Café</title>
     <meta name="description" content="Read the latest from Garage Café Mabalacat - coffee tips, local stories, and updates from your neighborhood café near Metro Clark Homes.">
     <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -17,26 +17,17 @@
             --off-white: #F5F5DC;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Roboto', sans-serif;
             background: var(--cream);
-            margin: 0;
             line-height: 1.8;
             color: var(--dark-brown);
             overflow-x: hidden;
         }
 
-        /* Simple Navigation */
         nav {
             background: var(--dark-brown);
             padding: clamp(0.75rem, 2vw, 1.2rem) 1rem;
@@ -58,14 +49,15 @@
             display: inline-block;
         }
 
-        nav a:hover {
-            color: var(--accent-gold);
-        }
+        nav a:hover { color: var(--accent-gold); }
 
-        /* Post Header */
+        /* Post Header — background set dynamically via CSS variable */
         .post-header {
             height: clamp(50vh, 60vh, 70vh);
-            background: linear-gradient(rgba(44, 24, 16, 0.6), rgba(44, 24, 16, 0.8)), var(--hero-bg-url) center/cover;
+            background-image: linear-gradient(rgba(44, 24, 16, 0.6), rgba(44, 24, 16, 0.8)), var(--hero-bg-url, url('GRG/BLOG/blog_header.jpg'));
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -85,7 +77,6 @@
             word-wrap: break-word;
         }
 
-        /* Post Container */
         .post-container {
             max-width: 850px;
             margin: clamp(-40px, -8vw, -100px) auto clamp(3rem, 5vw, 5rem);
@@ -96,7 +87,6 @@
             width: calc(100% - 2rem);
         }
 
-        /* Meta Information */
         .meta {
             color: var(--light-brown);
             text-transform: uppercase;
@@ -122,11 +112,7 @@
             white-space: nowrap;
         }
 
-        /* Content Styling */
-        .content {
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-        }
+        .content { word-wrap: break-word; overflow-wrap: break-word; }
 
         .content p {
             margin-bottom: clamp(1.2rem, 2.5vw, 1.8rem);
@@ -151,10 +137,7 @@
             line-height: 1.3;
         }
 
-        .content strong {
-            font-weight: 600;
-            color: var(--dark-brown);
-        }
+        .content strong { font-weight: 600; color: var(--dark-brown); }
 
         .content ul, .content ol {
             margin: clamp(1rem, 2vw, 1.5rem) 0;
@@ -167,9 +150,7 @@
             color: #4a3728;
         }
 
-        /* Image optimization */
-        .content img,
-        .content-image {
+        .content img {
             width: 100%;
             max-width: 100%;
             height: auto;
@@ -179,7 +160,8 @@
             display: block;
         }
 
-        /* Back Link */
+        .content * { max-width: 100%; }
+
         .back-link {
             display: inline-block;
             margin-top: clamp(2.5rem, 4vw, 4rem);
@@ -192,9 +174,7 @@
             transition: 0.3s;
         }
 
-        .back-link:hover {
-            color: var(--accent-gold);
-        }
+        .back-link:hover { color: var(--accent-gold); }
 
         .loading {
             text-align: center;
@@ -203,7 +183,6 @@
             color: var(--light-brown);
         }
 
-        /* Scroll to top button */
         .scroll-top {
             position: fixed;
             bottom: clamp(20px, 3vw, 30px);
@@ -218,132 +197,33 @@
             justify-content: center;
             font-size: clamp(1.3rem, 2.5vw, 1.5rem);
             cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
+            opacity: 0; visibility: hidden;
             transition: all 0.3s ease;
             z-index: 999;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             border: none;
         }
 
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
+        .scroll-top.visible { opacity: 1; visibility: visible; }
+        .scroll-top:hover { transform: translateY(-3px); }
 
-        .scroll-top:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-        }
-
-        /* Responsive adjustments for specific breakpoints */
-        
-        /* Small phones (< 375px) */
         @media (max-width: 374px) {
-            nav {
-                padding: 0.75rem 0.5rem;
-            }
-            
-            nav a {
-                margin: 0 0.3rem;
-                font-size: 0.7rem;
-                letter-spacing: 0.5px;
-            }
-
-            .post-container {
-                width: calc(100% - 1rem);
-                margin-left: 0.5rem;
-                margin-right: 0.5rem;
-            }
+            nav a { margin: 0 0.3rem; font-size: 0.7rem; }
         }
 
-        /* Phones (375px - 767px) */
-        @media (min-width: 375px) and (max-width: 767px) {
-            .post-container {
-                width: calc(100% - 1.5rem);
-            }
-        }
-
-        /* Tablets (768px - 1024px) */
-        @media (min-width: 768px) and (max-width: 1024px) {
-            .post-container {
-                width: calc(100% - 3rem);
-                max-width: 750px;
-            }
-
-            .post-header h1 {
-                max-width: 700px;
-            }
-        }
-
-        /* Large tablets and small laptops (1025px - 1280px) */
-        @media (min-width: 1025px) and (max-width: 1280px) {
-            .post-container {
-                width: calc(100% - 4rem);
-                max-width: 850px;
-            }
-        }
-
-        /* Desktop (> 1280px) */
-        @media (min-width: 1281px) {
-            .post-container {
-                width: 90%;
-            }
-        }
-
-        /* Touch device improvements */
-        @media (hover: none) and (pointer: coarse) {
-            nav a {
-                padding: 0.5rem 0.3rem;
-                min-height: 44px;
-                display: inline-flex;
-                align-items: center;
-            }
-
-            .scroll-top {
-                min-width: 44px;
-                min-height: 44px;
-            }
-
-            .back-link {
-                padding: 0.5rem 0;
-                min-height: 44px;
-                display: inline-flex;
-                align-items: center;
-            }
-        }
-
-        /* Landscape orientation on phones */
         @media (max-width: 896px) and (orientation: landscape) {
-            .post-header {
-                height: 80vh;
-            }
-
-            .post-header h1 {
-                font-size: clamp(1.5rem, 4vw, 2.5rem);
-            }
-        }
-
-        /* High resolution displays */
-        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-            .content img,
-            .content-image {
-                image-rendering: -webkit-optimize-contrast;
-            }
-        }
-
-        /* Prevent text overflow */
-        .content * {
-            max-width: 100%;
-        }
-
-        /* Better table responsiveness if content has tables */
-        .content table {
-            width: 100%;
-            overflow-x: auto;
-            display: block;
+            .post-header { height: 80vh; }
         }
     </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90Z65E4SVZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-90Z65E4SVZ');
+    </script>
 </head>
 <body>
     <nav>
@@ -358,82 +238,95 @@
 
     <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
 
-    <script>
-        // Scroll to top
-        const scrollTop = document.getElementById('scrollTop');
+<script>
+    const BASE_URL = 'https://garage-cafe.onrender.com';
+    const API = `${BASE_URL}/api/blogs`;
 
-        window.addEventListener('scroll', () => {
-            scrollTop.classList.toggle('visible', window.scrollY > 300);
-        });
+    // Scroll to top
+    const scrollTopBtn = document.getElementById('scrollTop');
+    window.addEventListener('scroll', () => {
+        scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
+    });
+    scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-        scrollTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+    // ✅ FIXED: Cloudinary URLs are already full HTTPS URLs — no transformation needed
+    function getFullImageUrl(imageUrl) {
+        if (!imageUrl) return 'GRG/BLOG/blog_header.jpg';
+        if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) return imageUrl;
+        if (imageUrl.startsWith('GRG/')) return imageUrl;
+        // Legacy local path
+        const cleanPath = imageUrl.replace(/^[./]+/, '');
+        return `${BASE_URL}/${cleanPath}`;
+    }
 
-        // Load blog
-        const params = new URLSearchParams(window.location.search);
-        const blogId = params.get('id');
-        const container = document.getElementById('blogContainer');
+    const params = new URLSearchParams(window.location.search);
+    const blogId = params.get('id');
+    const container = document.getElementById('blogContainer');
 
-        async function loadBlog() {
-            if (!blogId) {
-                container.innerHTML = `
-                    <header class="post-header" style="--hero-bg-url: url('GRG/BLOG/blog_header.jpg')">
-                        <h1>Blog Not Found</h1>
-                    </header>
-                    <article class="post-container">
-                        <p>Invalid blog link.</p>
-                        <a href="blog.html" class="back-link">← BACK TO ALL STORIES</a>
-                    </article>
-                `;
-                return;
-            }
-
-            try {
-                const res = await fetch('/api/blogs');
-                const blogs = await res.json();
-                const blog = blogs.find(b => b._id === blogId);
-
-                if (!blog) throw new Error('Blog not found');
-
-                document.getElementById('pageTitle').innerText =
-                    `${blog.title} | Garage Café`;
-
-                container.innerHTML = `
-                    <header class="post-header"
-                        style="--hero-bg-url: url('${blog.imageUrl || 'GRG/BLOG/blog_header.jpg'}')">
-                        <h1>${blog.title}</h1>
-                    </header>
-
-                    <article class="post-container">
-                        <div class="meta">
-                            <span>By ${blog.author}</span>
-                            <span class="category-tag">${blog.category}</span>
-                        </div>
-
-                        <div class="content">
-                            ${blog.content || '<p>No content available.</p>'}
-                        </div>
-
-                        <a href="blog.html" class="back-link">← BACK TO ALL STORIES</a>
-                    </article>
-                `;
-            } catch (err) {
-                console.error(err);
-                container.innerHTML = `
-                    <header class="post-header" style="--hero-bg-url: url('GRG/BLOG/blog_header.jpg')">
-                        <h1>Error Loading Blog</h1>
-                    </header>
-                    <article class="post-container">
-                        <p>Unable to load this blog.</p>
-                        <a href="blog.html" class="back-link">← BACK TO ALL STORIES</a>
-                    </article>
-                `;
-            }
+    async function loadBlog() {
+        if (!blogId) {
+            showError('Invalid blog link.');
+            return;
         }
 
-        loadBlog();
-    </script>
+        try {
+            const res = await fetch(API);
+            if (!res.ok) throw new Error('Failed to fetch blogs');
+            const blogs = await res.json();
+            const blog = blogs.find(b => b._id === blogId);
 
+            if (!blog) throw new Error('Blog not found');
+
+            document.getElementById('pageTitle').innerText = `${blog.title} | Garage Café`;
+
+            const headerImageUrl = getFullImageUrl(blog.imageUrl);
+
+            container.innerHTML = `
+                <header class="post-header" style="--hero-bg-url: url('${headerImageUrl}')">
+                    <h1>${blog.title}</h1>
+                </header>
+                <article class="post-container">
+                    <div class="meta">
+                        <span>By ${blog.author}</span>
+                        <span class="category-tag">${blog.category}</span>
+                    </div>
+                    <div class="content">
+                        ${blog.content || '<p>No content available.</p>'}
+                    </div>
+                    <a href="blog.html" class="back-link">← BACK TO ALL STORIES</a>
+                </article>
+            `;
+
+            // Fix any inline images in the content that may be relative paths
+            setTimeout(() => {
+                document.querySelectorAll('.content img').forEach(img => {
+                    const src = img.getAttribute('src');
+                    if (src && !src.startsWith('http') && !src.startsWith('data:') && !src.startsWith('GRG/')) {
+                        img.src = getFullImageUrl(src);
+                    }
+                    img.onerror = function() { this.style.display = 'none'; };
+                });
+            }, 100);
+
+        } catch (err) {
+            console.error('Error loading blog:', err);
+            showError('Unable to load this blog.');
+        }
+    }
+
+    function showError(message) {
+        container.innerHTML = `
+            <header class="post-header" style="--hero-bg-url: url('GRG/BLOG/blog_header.jpg')">
+                <h1>Oops!</h1>
+            </header>
+            <article class="post-container">
+                <p>${message}</p>
+                <a href="blog.html" class="back-link">← BACK TO ALL STORIES</a>
+            </article>
+        `;
+    }
+
+    loadBlog();
+</script>
 </body>
 </html>
