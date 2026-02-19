@@ -29,7 +29,6 @@
             overflow-x: hidden;
         }
 
-        /* Simple Navigation */
         nav {
             background: var(--dark-brown);
             padding: clamp(0.75rem, 2vw, 1.2rem) 1rem;
@@ -53,7 +52,6 @@
 
         nav a:hover { color: var(--accent-gold); }
 
-        /* Post Header */
         .post-header {
             height: clamp(50vh, 60vh, 70vh);
             background-size: cover;
@@ -72,10 +70,7 @@
         .post-header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: linear-gradient(rgba(44, 24, 16, 0.6), rgba(44, 24, 16, 0.8));
             z-index: 1;
         }
@@ -94,7 +89,6 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
-        /* Post Container */
         .post-container {
             max-width: 850px;
             margin: -50px auto 3rem;
@@ -107,7 +101,6 @@
             z-index: 3;
         }
 
-        /* Meta Information */
         .meta {
             color: var(--light-brown);
             text-transform: uppercase;
@@ -133,7 +126,6 @@
             white-space: nowrap;
         }
 
-        /* Content Styling */
         .content { word-wrap: break-word; overflow-wrap: break-word; }
 
         .content p {
@@ -159,10 +151,7 @@
 
         .content strong { font-weight: 600; color: var(--dark-brown); }
 
-        .content ul, .content ol {
-            margin: 1.5rem 0;
-            padding-left: 2rem;
-        }
+        .content ul, .content ol { margin: 1.5rem 0; padding-left: 2rem; }
 
         .content li {
             margin-bottom: 0.75rem;
@@ -182,7 +171,6 @@
 
         .content * { max-width: 100%; }
 
-        /* Back Link */
         .back-link {
             display: inline-block;
             margin-top: 3rem;
@@ -204,7 +192,6 @@
             color: var(--light-brown);
         }
 
-        /* Scroll to top button */
         .scroll-top {
             position: fixed;
             bottom: 30px;
@@ -230,185 +217,61 @@
         .scroll-top.visible { opacity: 1; visibility: visible; }
         .scroll-top:hover { transform: translateY(-3px); }
 
-        /* ============================================
-           LARGE DESKTOP FULL HD (1920px and above)
-           ============================================ */
         @media screen and (min-width: 1920px) {
-            nav {
-                padding: 1.5rem 0;
-            }
-
-            nav a {
-                font-size: 1.1rem;
-                margin: 0 1.5rem;
-            }
-
-            .post-header {
-                height: 70vh;
-            }
-
-            .post-header h1 {
-                font-size: 5rem;
-                max-width: 1200px;
-                letter-spacing: 2px;
-            }
-
-            .post-container {
-                max-width: 1100px;
-                margin: -80px auto 4rem;
-                padding: 5rem;
-                border-radius: 40px;
-            }
-
-            .meta {
-                font-size: 1rem;
-                margin-bottom: 2.5rem;
-                padding-bottom: 1.5rem;
-            }
-
-            .category-tag {
-                font-size: 0.9rem;
-                padding: 5px 16px;
-            }
-
-            .content p {
-                font-size: 1.25rem;
-                margin-bottom: 2rem;
-                line-height: 1.9;
-            }
-
-            .content h2 {
-                font-size: 2.5rem;
-                margin: 3rem 0 2rem;
-            }
-
-            .content h3 {
-                font-size: 2rem;
-                margin: 2.5rem 0 1.5rem;
-            }
-
-            .content li {
-                font-size: 1.2rem;
-                margin-bottom: 1rem;
-            }
-
-            .content img {
-                border-radius: 20px;
-                margin: 2.5rem 0;
-                box-shadow: 0 20px 40px rgba(44, 24, 16, 0.2);
-            }
-
-            .back-link {
-                font-size: 1.2rem;
-                margin-top: 4rem;
-                border-bottom-width: 3px;
-            }
-
-            .scroll-top {
-                width: 60px;
-                height: 60px;
-                font-size: 1.8rem;
-                bottom: 40px;
-                right: 40px;
-            }
+            nav { padding: 1.5rem 0; }
+            nav a { font-size: 1.1rem; margin: 0 1.5rem; }
+            .post-header { height: 70vh; }
+            .post-header h1 { font-size: 5rem; max-width: 1200px; letter-spacing: 2px; }
+            .post-container { max-width: 1100px; margin: -80px auto 4rem; padding: 5rem; border-radius: 40px; }
+            .meta { font-size: 1rem; margin-bottom: 2.5rem; padding-bottom: 1.5rem; }
+            .category-tag { font-size: 0.9rem; padding: 5px 16px; }
+            .content p { font-size: 1.25rem; margin-bottom: 2rem; line-height: 1.9; }
+            .content h2 { font-size: 2.5rem; margin: 3rem 0 2rem; }
+            .content h3 { font-size: 2rem; margin: 2.5rem 0 1.5rem; }
+            .content li { font-size: 1.2rem; margin-bottom: 1rem; }
+            .content img { border-radius: 20px; margin: 2.5rem 0; box-shadow: 0 20px 40px rgba(44, 24, 16, 0.2); }
+            .back-link { font-size: 1.2rem; margin-top: 4rem; border-bottom-width: 3px; }
+            .scroll-top { width: 60px; height: 60px; font-size: 1.8rem; bottom: 40px; right: 40px; }
         }
 
-        /* Desktop (1440px - 1919px) */
         @media screen and (min-width: 1440px) and (max-width: 1919px) {
-            .post-header h1 {
-                font-size: 4.5rem;
-                max-width: 1000px;
-            }
-
-            .post-container {
-                max-width: 1000px;
-                padding: 4rem;
-            }
-
-            .content p {
-                font-size: 1.2rem;
-            }
+            .post-header h1 { font-size: 4.5rem; max-width: 1000px; }
+            .post-container { max-width: 1000px; padding: 4rem; }
+            .content p { font-size: 1.2rem; }
         }
 
-        /* Laptop (1280px - 1439px) */
         @media screen and (min-width: 1280px) and (max-width: 1439px) {
-            .post-header h1 {
-                font-size: 4rem;
-            }
-
-            .post-container {
-                max-width: 950px;
-                padding: 3.5rem;
-            }
+            .post-header h1 { font-size: 4rem; }
+            .post-container { max-width: 950px; padding: 3.5rem; }
         }
 
-        /* Tablet and below */
         @media (max-width: 1024px) {
-            .post-header h1 {
-                font-size: 3rem;
-            }
+            .post-header h1 { font-size: 3rem; }
         }
 
         @media (max-width: 768px) {
-            .post-container { 
-                padding: 2rem; 
-                margin-top: -30px;
-            }
-            
-            .content p { 
-                font-size: 1rem; 
-            }
-
-            .post-header h1 {
-                font-size: 2.5rem;
-            }
+            .post-container { padding: 2rem; margin-top: -30px; }
+            .content p { font-size: 1rem; }
+            .post-header h1 { font-size: 2.5rem; }
         }
 
         @media (max-width: 480px) {
-            .post-header h1 {
-                font-size: 2rem;
-            }
-
-            .scroll-top {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 1.3rem;
-            }
-
-            .post-container {
-                padding: 1.5rem;
-                margin-top: -20px;
-            }
-
-            .meta {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.5rem;
-            }
+            .post-header h1 { font-size: 2rem; }
+            .scroll-top { bottom: 20px; right: 20px; width: 45px; height: 45px; font-size: 1.3rem; }
+            .post-container { padding: 1.5rem; margin-top: -20px; }
+            .meta { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
         }
 
-        /* Landscape orientation on phones */
         @media (max-width: 896px) and (orientation: landscape) {
-            .post-header {
-                height: 80vh;
-            }
-
-            .post-header h1 {
-                font-size: 2.5rem;
-            }
+            .post-header { height: 80vh; }
+            .post-header h1 { font-size: 2.5rem; }
         }
 
-        /* High resolution displays */
         @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-            .content img {
-                image-rendering: -webkit-optimize-contrast;
-            }
+            .content img { image-rendering: -webkit-optimize-contrast; }
         }
     </style>
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-90Z65E4SVZ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -431,45 +294,23 @@
     <button class="scroll-top" id="scrollTop" aria-label="Scroll to top">↑</button>
 
 <script>
-    // Determine BASE_URL
     const BASE_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
         ? "http://localhost:3000"
         : "https://garage-cafe.onrender.com";
     
     const API = `${BASE_URL}/api/blogs`;
 
-    console.log('Blog Single - BASE_URL:', BASE_URL);
-    console.log('Blog Single - API:', API);
-
-    // Scroll to top
     const scrollTopBtn = document.getElementById('scrollTop');
     window.addEventListener('scroll', () => {
         scrollTopBtn.classList.toggle('visible', window.scrollY > 300);
     });
     scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Helper function to construct image URLs
     function getFullImageUrl(imageUrl) {
         if (!imageUrl) return 'GRG/BLOG/blog_header.jpg';
-        
-        console.log('Processing image URL:', imageUrl);
-        
-        // If it's already a full URL, return as is
-        if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-            return imageUrl;
-        }
-        
-        // If it's a local GRG file
-        if (imageUrl.startsWith('GRG/')) {
-            return imageUrl;
-        }
-        
-        // If it starts with /uploads, construct full URL to backend
-        if (imageUrl.startsWith('/uploads/')) {
-            return `${BASE_URL}${imageUrl}`;
-        }
-        
-        // Clean the path and construct URL
+        if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) return imageUrl;
+        if (imageUrl.startsWith('GRG/')) return imageUrl;
+        if (imageUrl.startsWith('/uploads/')) return `${BASE_URL}${imageUrl}`;
         const cleanPath = imageUrl.replace(/^\.\/|^\.\.\/|^\/+/, '');
         return `${BASE_URL}/${cleanPath}`;
     }
@@ -493,25 +334,17 @@
         }
 
         try {
-            console.log('Fetching blog with ID:', blogId);
             const res = await fetch(API);
-            
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
+            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
             
             const blogs = await res.json();
             const blog = blogs.find(b => b._id === blogId);
 
-            if (!blog) {
-                throw new Error('Blog not found');
-            }
+            if (!blog) throw new Error('Blog not found');
 
-            console.log('Blog found:', blog.title);
             document.getElementById('pageTitle').innerText = `${blog.title} | Garage Café`;
 
             const headerImageUrl = getFullImageUrl(blog.imageUrl);
-            console.log('Header image URL:', headerImageUrl);
 
             container.innerHTML = `
                 <div class="post-header" style="background-image: url('${headerImageUrl}')">
@@ -529,18 +362,13 @@
                 </article>
             `;
 
-            // Fix any inline images in the content
             setTimeout(() => {
                 document.querySelectorAll('.content img').forEach(img => {
                     const src = img.getAttribute('src');
                     if (src && !src.startsWith('http') && !src.startsWith('data:') && !src.startsWith('GRG/')) {
-                        const fixedSrc = getFullImageUrl(src);
-                        console.log('Fixing content image:', src, '→', fixedSrc);
-                        img.src = fixedSrc;
+                        img.src = getFullImageUrl(src);
                     }
-                    
                     img.onerror = function() {
-                        console.warn('Content image failed to load:', this.src);
                         this.style.display = 'none';
                     };
                 });
@@ -560,7 +388,6 @@
         }
     }
 
-    // Start loading
     loadBlog();
 </script>
 </body>

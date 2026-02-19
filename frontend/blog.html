@@ -19,15 +19,8 @@
             --accent-gold: #D4AF37;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Roboto', Arial, sans-serif;
@@ -73,9 +66,7 @@
             text-decoration: none;
         }
 
-        .logo:hover {
-            transform: scale(1.05);
-        }
+        .logo:hover { transform: scale(1.05); }
 
         .logo img {
             height: 50px;
@@ -83,7 +74,6 @@
             filter: brightness(0) invert(1);
         }
 
-        /* Hamburger Menu */
         .hamburger {
             display: none;
             flex-direction: column;
@@ -101,17 +91,9 @@
             border-radius: 3px;
         }
 
-        .hamburger.active span:nth-child(1) {
-            transform: rotate(45deg) translate(9px, 9px);
-        }
-
-        .hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(9px, -9px);
-        }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(9px, 9px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(9px, -9px); }
 
         nav ul {
             display: flex;
@@ -132,23 +114,15 @@
         nav a::after {
             content: '';
             position: absolute;
-            bottom: 0;
-            left: 0;
+            bottom: 0; left: 0;
             width: 0;
             height: 2px;
             background: var(--accent-gold);
             transition: width 0.3s ease;
         }
 
-        nav a:hover::after,
-        nav a.active::after {
-            width: 100%;
-        }
-
-        nav a:hover,
-        nav a.active {
-            color: var(--off-white);
-        }
+        nav a:hover::after, nav a.active::after { width: 100%; }
+        nav a:hover, nav a.active { color: var(--off-white); }
 
         /* Page Header */
         .page-header {
@@ -162,18 +136,12 @@
             animation: fadeIn 1s ease-in;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .page-header::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            top: 0; left: 0; right: 0; bottom: 0;
             background: radial-gradient(circle at center, transparent 0%, rgba(44, 24, 16, 0.4) 100%);
             z-index: 1;
         }
@@ -191,14 +159,8 @@
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .page-header p {
@@ -255,14 +217,8 @@
         }
 
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .blog-card:nth-child(1) { animation-delay: 0.1s; }
@@ -291,13 +247,9 @@
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .blog-card:hover .blog-image {
-            transform: scale(1.15);
-        }
+        .blog-card:hover .blog-image { transform: scale(1.15); }
 
-        .blog-content {
-            padding: 2rem;
-        }
+        .blog-content { padding: 2rem; }
 
         .blog-meta {
             display: flex;
@@ -357,17 +309,86 @@
             letter-spacing: 0.5px;
         }
 
-        .read-more::after {
-            content: '→';
-            transition: transform 0.3s ease;
+        .read-more::after { content: '→'; transition: transform 0.3s ease; }
+        .blog-card:hover .read-more { color: var(--accent-gold); }
+        .blog-card:hover .read-more::after { transform: translateX(5px); }
+
+        /* =====================
+           PAGINATION
+        ===================== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.6rem;
+            margin-top: 4rem;
+            flex-wrap: wrap;
         }
 
-        .blog-card:hover .read-more {
-            color: var(--accent-gold);
+        .pagination button {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--lighter-brown);
+            background: white;
+            color: var(--medium-brown);
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Roboto', sans-serif;
         }
 
-        .blog-card:hover .read-more::after {
-            transform: translateX(5px);
+        .pagination button:hover {
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.4);
+        }
+
+        .pagination button.active {
+            background: linear-gradient(135deg, var(--medium-brown), var(--dark-brown));
+            border-color: var(--dark-brown);
+            color: white;
+            box-shadow: 0 6px 18px rgba(44, 24, 16, 0.35);
+            transform: scale(1.1);
+        }
+
+        .pagination button.prev-next {
+            width: auto;
+            min-width: 90px;
+            padding: 0 1.2rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: white;
+            border: 2px solid var(--medium-brown);
+            color: var(--dark-brown);
+        }
+
+        .pagination button.prev-next:hover {
+            background: var(--dark-brown);
+            border-color: var(--dark-brown);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(44, 24, 16, 0.3);
+        }
+
+        .pagination button.boundary {
+            opacity: 0.4;
+            cursor: default;
+            pointer-events: none;
+        }
+
+        .page-info {
+            text-align: center;
+            margin-top: 1.2rem;
+            color: var(--light-brown);
+            font-size: 0.9rem;
+            font-weight: 500;
+            letter-spacing: 0.3px;
         }
 
         /* Footer */
@@ -398,15 +419,13 @@
         .footer-section h3::after {
             content: '';
             position: absolute;
-            bottom: -8px;
-            left: 0;
+            bottom: -8px; left: 0;
             width: 50px;
             height: 2px;
             background: var(--accent-gold);
         }
 
-        .footer-section p,
-        .footer-section a {
+        .footer-section p, .footer-section a {
             color: var(--lighter-brown);
             text-decoration: none;
             display: block;
@@ -414,24 +433,11 @@
             transition: all 0.3s ease;
         }
 
-        .footer-section a:hover {
-            color: var(--off-white);
-            padding-left: 5px;
-        }
+        .footer-section a:hover { color: var(--off-white); padding-left: 5px; }
+        .footer-links { list-style: none; }
+        .footer-links li { margin-bottom: 0.8rem; }
 
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
+        .social-links { display: flex; gap: 1rem; margin-top: 1rem; }
 
         .social-links a {
             width: 45px;
@@ -466,7 +472,6 @@
             font-size: 0.9rem;
         }
 
-        /* Scroll to top button */
         .scroll-top {
             position: fixed;
             bottom: 30px;
@@ -489,211 +494,66 @@
             border: none;
         }
 
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .scroll-top:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
-        }
+        .scroll-top.visible { opacity: 1; visibility: visible; }
+        .scroll-top:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.4); }
 
         /* ============================================
-           LARGE DESKTOP FULL HD (1920px and above)
+           RESPONSIVE
            ============================================ */
         @media screen and (min-width: 1920px) {
-            nav .container {
-                max-width: 1800px;
-                padding: 0 4rem;
-            }
-
-            nav ul {
-                gap: 3.5rem;
-            }
-
-            nav a {
-                font-size: 1.1rem;
-            }
-
-            .logo img {
-                height: 60px;
-            }
-
-            .page-header {
-                padding: 15rem 4rem 8rem;
-                min-height: 60vh;
-            }
-
-            .page-header h1 {
-                font-size: 6rem;
-                letter-spacing: 8px;
-                margin-bottom: 2rem;
-            }
-
-            .page-header p {
-                font-size: 1.6rem;
-            }
-
-            .blog-section {
-                padding: 8rem 4rem;
-            }
-
-            .blog-grid {
-                max-width: 1800px;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 3.5rem;
-            }
-
-            .blog-image-container {
-                height: 280px;
-            }
-
-            .blog-content {
-                padding: 2.5rem;
-            }
-
-            .blog-card h3 {
-                font-size: 2rem;
-                min-height: 2.8em;
-                margin-bottom: 1.2rem;
-            }
-
-            .blog-meta {
-                font-size: 0.95rem;
-                margin-bottom: 1.2rem;
-            }
-
-            .blog-category {
-                font-size: 0.8rem;
-                padding: 6px 16px;
-            }
-
-            .blog-excerpt {
-                font-size: 1.1rem;
-                line-height: 1.9;
-                min-height: 6.3em;
-                margin-bottom: 1.8rem;
-            }
-
-            .read-more {
-                font-size: 1.1rem;
-            }
-
-            .footer-grid {
-                max-width: 1800px;
-                gap: 4rem;
-                padding: 0 4rem;
-            }
-
-            footer {
-                padding: 5rem 4rem 2rem;
-            }
-
-            .footer-section h3 {
-                font-size: 1.8rem;
-                margin-bottom: 2rem;
-            }
-
-            .footer-section p,
-            .footer-section a {
-                font-size: 1.1rem;
-                margin-bottom: 0.8rem;
-            }
-
-            .social-links a {
-                width: 55px;
-                height: 55px;
-            }
-
-            .copyright {
-                font-size: 1rem;
-                padding-top: 2.5rem;
-            }
-
-            .scroll-top {
-                width: 60px;
-                height: 60px;
-                font-size: 1.8rem;
-                bottom: 40px;
-                right: 40px;
-            }
+            nav .container { max-width: 1800px; padding: 0 4rem; }
+            nav ul { gap: 3.5rem; }
+            nav a { font-size: 1.1rem; }
+            .logo img { height: 60px; }
+            .page-header { padding: 11rem 4rem 8rem; min-height: 60vh; }
+            .page-header h1 { font-size: 6rem; letter-spacing: 8px; margin-bottom: 2rem; }
+            .page-header p { font-size: 1.6rem; }
+            .blog-section { padding: 8rem 4rem; }
+            .blog-grid { max-width: 1800px; grid-template-columns: repeat(4, 1fr); gap: 3.5rem; }
+            .blog-image-container { height: 280px; }
+            .blog-content { padding: 2.5rem; }
+            .blog-card h3 { font-size: 2rem; min-height: 2.8em; margin-bottom: 1.2rem; }
+            .blog-meta { font-size: 0.95rem; margin-bottom: 1.2rem; }
+            .blog-category { font-size: 0.8rem; padding: 6px 16px; }
+            .blog-excerpt { font-size: 1.1rem; line-height: 1.9; min-height: 6.3em; margin-bottom: 1.8rem; }
+            .read-more { font-size: 1.1rem; }
+            .footer-grid { max-width: 1800px; gap: 4rem; padding: 0 4rem; }
+            footer { padding: 5rem 4rem 2rem; }
+            .footer-section h3 { font-size: 1.8rem; margin-bottom: 2rem; }
+            .footer-section p, .footer-section a { font-size: 1.1rem; margin-bottom: 0.8rem; }
+            .social-links a { width: 55px; height: 55px; }
+            .copyright { font-size: 1rem; padding-top: 2.5rem; }
+            .scroll-top { width: 60px; height: 60px; font-size: 1.8rem; bottom: 40px; right: 40px; }
+            .pagination button { width: 55px; height: 55px; font-size: 1.1rem; }
+            .pagination button.prev-next { width: auto; padding: 0 1.5rem; }
         }
 
-        /* Desktop (1440px - 1919px) */
         @media screen and (min-width: 1440px) and (max-width: 1919px) {
-            nav .container {
-                max-width: 1600px;
-                padding: 0 3.5rem;
-            }
-
-            .blog-grid {
-                max-width: 1600px;
-                grid-template-columns: repeat(4, 1fr);
-                gap: 3rem;
-            }
-
-            .footer-grid {
-                max-width: 1600px;
-            }
+            nav .container { max-width: 1600px; padding: 0 3.5rem; }
+            .blog-grid { max-width: 1600px; grid-template-columns: repeat(4, 1fr); gap: 3rem; }
+            .footer-grid { max-width: 1600px; }
         }
 
-        /* Laptop (1280px - 1439px) */
         @media screen and (min-width: 1280px) and (max-width: 1439px) {
-            nav .container {
-                max-width: 1400px;
-                padding: 0 3rem;
-            }
-
-            .blog-grid {
-                max-width: 1400px;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 2.5rem;
-            }
-
-            .footer-grid {
-                max-width: 1400px;
-            }
+            nav .container { max-width: 1400px; padding: 0 3rem; }
+            .blog-grid { max-width: 1400px; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+            .footer-grid { max-width: 1400px; }
         }
 
-        /* Laptop smaller (1024px - 1279px) */
         @media screen and (min-width: 1024px) and (max-width: 1279px) {
-            nav .container {
-                max-width: 1200px;
-                padding: 0 2.5rem;
-            }
-
-            .blog-section {
-                padding: 6rem 2.5rem;
-            }
-
-            .blog-grid {
-                max-width: 1200px;
-                grid-template-columns: repeat(3, 1fr);
-                gap: 2.5rem;
-            }
-
-            .footer-grid {
-                max-width: 1200px;
-            }
-
-            footer {
-                padding: 4rem 2.5rem 2rem;
-            }
+            nav .container { max-width: 1200px; padding: 0 2.5rem; }
+            .blog-section { padding: 6rem 2.5rem; }
+            .blog-grid { max-width: 1200px; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+            .footer-grid { max-width: 1200px; }
+            footer { padding: 4rem 2.5rem 2rem; }
         }
 
-        /* ============================================
-           TABLET AND MOBILE (1024px and below)
-           ============================================ */
-        @media screen and (max-width: 1024px) {
-            .hamburger {
-                display: flex;
-            }
-
+        /* Tablet: 769px – 1024px → fixed 2-column grid */
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+            .hamburger { display: flex; }
             nav ul {
                 position: fixed;
-                top: 0;
-                right: -100%;
+                top: 0; right: -100%;
                 width: 280px;
                 height: 100vh;
                 background: rgba(44, 24, 16, 0.98);
@@ -707,95 +567,73 @@
                 box-shadow: -5px 0 20px rgba(0,0,0,0.3);
                 z-index: 999;
             }
-
-            nav ul.active {
-                right: 0;
-            }
-
-            nav li {
-                width: 100%;
-            }
-
-            nav a {
-                font-size: 1.3rem;
-                display: block;
-                padding: 0.8rem 0;
-            }
-
-            .page-header {
-                padding: 10rem 2rem 4rem;
-            }
-            
-            .page-header h1 {
-                font-size: 3rem;
-                letter-spacing: 3px;
-            }
-            
-            .blog-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-                gap: 2.5rem;
-            }
-            
-            .blog-section {
-                padding: 4rem 1.5rem;
-            }
+            nav ul.active { right: 0; }
+            nav li { width: 100%; }
+            nav a { font-size: 1.3rem; display: block; padding: 0.8rem 0; }
+            .page-header { padding: 10rem 2rem 4rem; }
+            .page-header h1 { font-size: 3rem; letter-spacing: 3px; }
+            .blog-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+            .blog-section { padding: 4rem 1.5rem; }
+            .blog-card h3 { font-size: 1.5rem; min-height: auto; }
+            .blog-image-container { height: 200px; }
+            .blog-content { padding: 1.5rem; }
+            .pagination { gap: 0.6rem; margin-top: 3rem; }
+            .pagination button { width: 42px; height: 42px; font-size: 0.95rem; }
+            .pagination button.prev-next { min-width: 85px; padding: 0 1rem; height: 42px; font-size: 0.88rem; }
+            .page-info { font-size: 0.85rem; }
         }
 
+        /* Mobile: ≤ 768px → 1 column */
         @media screen and (max-width: 768px) {
-            .page-header h1 {
-                font-size: 2.5rem;
-                letter-spacing: 2px;
+            .hamburger { display: flex; }
+            nav ul {
+                position: fixed;
+                top: 0; right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: rgba(44, 24, 16, 0.98);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+                padding-top: 100px;
+                padding-left: 2rem;
+                gap: 2.5rem;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 20px rgba(0,0,0,0.3);
+                z-index: 999;
             }
-            
-            .blog-grid {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .blog-card h3 {
-                font-size: 1.6rem;
-                min-height: auto;
-            }
+            nav ul.active { right: 0; }
+            nav li { width: 100%; }
+            nav a { font-size: 1.3rem; display: block; padding: 0.8rem 0; }
+            /* ↓ Increased top padding from 8rem → 11rem for more breathing room above the title */
+            .page-header { padding: 11rem 2rem 4rem; }
+            .page-header h1 { font-size: 2.5rem; letter-spacing: 2px; }
+            .blog-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .blog-section { padding: 4rem 1.5rem; }
+            .blog-card h3 { font-size: 1.6rem; min-height: auto; }
+            .pagination { gap: 0.5rem; margin-top: 3rem; }
+            .pagination button { width: 40px; height: 40px; font-size: 0.9rem; }
+            .pagination button.prev-next { min-width: 75px; padding: 0 0.9rem; height: 40px; font-size: 0.85rem; }
+            .page-info { font-size: 0.82rem; margin-top: 1rem; }
         }
 
         @media screen and (max-width: 480px) {
-            nav ul {
-                width: 260px;
-                padding-left: 1.5rem;
-                gap: 2rem;
-            }
-
-            nav a {
-                font-size: 1.2rem;
-            }
-
-            .page-header h1 {
-                font-size: 2rem;
-            }
-
-            .page-header p {
-                font-size: 1.1rem;
-            }
-            
-            .scroll-top {
-                bottom: 20px;
-                right: 20px;
-                width: 45px;
-                height: 45px;
-                font-size: 1.3rem;
-            }
-
-            .blog-card h3 {
-                font-size: 1.4rem;
-            }
-
-            .blog-content {
-                padding: 1.5rem;
-            }
+            nav ul { width: 260px; padding-left: 1.5rem; gap: 2rem; }
+            nav a { font-size: 1.2rem; }
+            /* ↓ Also increased top padding for small phones from default → 11rem */
+            .page-header { padding: 11rem 1.5rem 4rem; }
+            .page-header h1 { font-size: 2rem; }
+            .page-header p { font-size: 1.1rem; }
+            .scroll-top { bottom: 20px; right: 20px; width: 45px; height: 45px; font-size: 1.3rem; }
+            .blog-card h3 { font-size: 1.4rem; }
+            .blog-content { padding: 1.5rem; }
+            .pagination { gap: 0.4rem; margin-top: 2.5rem; }
+            .pagination button { width: 36px; height: 36px; font-size: 0.82rem; border-width: 1.5px; }
+            .pagination button.prev-next { min-width: 60px; padding: 0 0.7rem; height: 36px; font-size: 0.78rem; }
+            .page-info { font-size: 0.78rem; margin-top: 0.8rem; }
         }
     </style>
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-90Z65E4SVZ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -810,13 +648,11 @@
             <a href="index.html" class="logo">
                 <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo" onerror="this.style.display='none'">
             </a>
-            
             <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            
             <ul id="navMenu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About</a></li>
@@ -836,6 +672,8 @@
         <div class="blog-grid" id="blogGrid">
             <p class="loading">Loading blogs...</p>
         </div>
+        <div class="pagination" id="pagination" style="display:none;"></div>
+        <p class="page-info" id="pageInfo"></p>
     </section>
 
     <button class="scroll-top" id="scrollTop">↑</button>
@@ -856,7 +694,6 @@
                     </a>
                 </div>
             </div>
-            
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
@@ -867,7 +704,6 @@
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
-            
             <div class="footer-section">
                 <h3>Services</h3>
                 <ul class="footer-links">
@@ -878,27 +714,28 @@
                 </ul>
             </div>
         </div>
-        
         <div class="copyright">
             <p>&copy; 2025 Garage Café. | www.visitgaragecafe.com</p>
         </div>
     </footer>
 
 <script>
-    // Determine BASE_URL
+    let allBlogs = [];
+    let currentPage = 1;
+
     const BASE_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
         ? "http://localhost:3000"
         : "https://garage-cafe.onrender.com";
-    
+
     const API = `${BASE_URL}/api/blogs`;
 
-    console.log('Blog Feed - BASE_URL:', BASE_URL);
-    console.log('Blog Feed - API:', API);
+    function getBlogsPerPage() {
+        return window.innerWidth <= 1024 ? 3 : 6;
+    }
 
-    // Hamburger Menu
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
-    
+
     if (hamburger) {
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');
@@ -906,7 +743,6 @@
         });
     }
 
-    // Close menu when clicking on a link
     document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', () => {
             hamburger.classList.remove('active');
@@ -914,7 +750,6 @@
         });
     });
 
-    // Close menu when clicking outside
     document.addEventListener('click', (e) => {
         if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
             hamburger.classList.remove('active');
@@ -922,106 +757,131 @@
         }
     });
 
-    // Navbar scroll effect
     window.addEventListener('scroll', () => {
         const navbar = document.getElementById('navbar');
-        if (navbar) {
-            navbar.classList.toggle('scrolled', window.scrollY > 50);
-        }
+        if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 50);
     });
 
-    // Scroll to top
     const scrollTop = document.getElementById('scrollTop');
-    window.addEventListener('scroll', () => {
-        scrollTop.classList.toggle('visible', window.scrollY > 300);
-    });
-    
-    if (scrollTop) {
-        scrollTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    }
+    window.addEventListener('scroll', () => scrollTop.classList.toggle('visible', window.scrollY > 300));
+    if (scrollTop) scrollTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Helper function to construct image URLs
     function getImageUrl(imageUrl) {
         if (!imageUrl) return 'GRG/BLOG/blog_header.jpg';
-        
-        console.log('Processing image URL:', imageUrl);
-        
-        // If it's already a full URL, return as is
-        if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-            return imageUrl;
-        }
-        
-        // If it's a local GRG file
-        if (imageUrl.startsWith('GRG/')) {
-            return imageUrl;
-        }
-        
-        // If it starts with /uploads, construct full URL to backend
-        if (imageUrl.startsWith('/uploads/')) {
-            return `${BASE_URL}${imageUrl}`;
-        }
-        
-        // Clean the path and construct URL
+        if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) return imageUrl;
+        if (imageUrl.startsWith('GRG/')) return imageUrl;
+        if (imageUrl.startsWith('/uploads/')) return `${BASE_URL}${imageUrl}`;
         const cleanPath = imageUrl.replace(/^\.\/|^\.\.\/|^\/+/, '');
         return `${BASE_URL}/${cleanPath}`;
+    }
+
+    function renderPage(page) {
+        currentPage = page;
+        const blogsPerPage = getBlogsPerPage();
+        const blogGrid = document.getElementById('blogGrid');
+        const totalPages = Math.ceil(allBlogs.length / blogsPerPage);
+        const start = (page - 1) * blogsPerPage;
+        const end = start + blogsPerPage;
+        const pageBlogs = allBlogs.slice(start, end);
+
+        blogGrid.innerHTML = '';
+
+        pageBlogs.forEach((blog) => {
+            const blogCard = document.createElement('article');
+            blogCard.className = 'blog-card';
+            blogCard.onclick = () => window.location.href = `blog-single.html?id=${blog._id}`;
+
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = blog.excerpt || '';
+            const cleanExcerpt = tempDiv.textContent || tempDiv.innerText || '';
+
+            const fullImageUrl = getImageUrl(blog.imageUrl);
+
+            blogCard.innerHTML = `
+                <div class="blog-image-container">
+                    <img
+                        src="${fullImageUrl}"
+                        alt="${blog.title}"
+                        class="blog-image"
+                        onerror="this.onerror=null; this.src='GRG/BLOG/blog_header.jpg';"
+                    >
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-author">By ${blog.author}</span>
+                        <span class="blog-category">${blog.category}</span>
+                    </div>
+                    <h3>${blog.title}</h3>
+                    <div class="blog-excerpt">${cleanExcerpt}</div>
+                    <a href="blog-single.html?id=${blog._id}" class="read-more">Read More</a>
+                </div>
+            `;
+            blogGrid.appendChild(blogCard);
+        });
+
+        renderPagination(totalPages);
+
+        const pageInfo = document.getElementById('pageInfo');
+        if (totalPages > 1) {
+            pageInfo.textContent = `Page ${page} of ${totalPages} · Showing ${start + 1}–${Math.min(end, allBlogs.length)} of ${allBlogs.length} posts`;
+        } else {
+            pageInfo.textContent = '';
+        }
+
+        document.querySelector('.blog-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function renderPagination(totalPages) {
+        const pagination = document.getElementById('pagination');
+
+        if (totalPages <= 1) {
+            pagination.style.display = 'none';
+            pagination.innerHTML = '';
+            return;
+        }
+
+        pagination.style.display = 'flex';
+        pagination.innerHTML = '';
+
+        const prevBtn = document.createElement('button');
+        prevBtn.textContent = '← Prev';
+        prevBtn.className = 'prev-next';
+        if (currentPage === 1) prevBtn.classList.add('boundary');
+        prevBtn.addEventListener('click', () => { if (currentPage > 1) renderPage(currentPage - 1); });
+        pagination.appendChild(prevBtn);
+
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement('button');
+            btn.textContent = i;
+            if (i === currentPage) btn.classList.add('active');
+            btn.addEventListener('click', () => renderPage(i));
+            pagination.appendChild(btn);
+        }
+
+        const nextBtn = document.createElement('button');
+        nextBtn.textContent = 'Next →';
+        nextBtn.className = 'prev-next';
+        if (currentPage === totalPages) nextBtn.classList.add('boundary');
+        nextBtn.addEventListener('click', () => { if (currentPage < totalPages) renderPage(currentPage + 1); });
+        pagination.appendChild(nextBtn);
     }
 
     async function loadBlogs() {
         const blogGrid = document.getElementById('blogGrid');
         if (!blogGrid) return;
-        
-        try {
-            console.log('Fetching blogs from:', API);
-            const res = await fetch(API);
-            
-            if (!res.ok) {
-                throw new Error(`Network response was not ok: ${res.status}`);
-            }
-            
-            const blogs = await res.json();
-            console.log('Blogs loaded:', blogs.length);
 
-            if (!blogs.length) {
+        try {
+            const res = await fetch(API);
+            if (!res.ok) throw new Error(`Network response was not ok: ${res.status}`);
+
+            allBlogs = await res.json();
+
+            if (!allBlogs.length) {
                 blogGrid.innerHTML = '<div class="no-blogs"><p>No blog posts yet.</p><p>Check back soon for coffee stories and local updates!</p></div>';
                 return;
             }
 
-            blogGrid.innerHTML = '';
-
-            blogs.forEach((blog, index) => {
-                const blogCard = document.createElement('article');
-                blogCard.className = 'blog-card';
-                blogCard.onclick = () => window.location.href = `blog-single.html?id=${blog._id}`;
-
-                // Strip HTML from excerpt for clean text display
-                const tempDiv = document.createElement('div');
-                tempDiv.innerHTML = blog.excerpt || '';
-                const cleanExcerpt = tempDiv.textContent || tempDiv.innerText || '';
-
-                const fullImageUrl = getImageUrl(blog.imageUrl);
-                console.log(`Blog ${index + 1} image URL:`, fullImageUrl);
-
-                blogCard.innerHTML = `
-                    <div class="blog-image-container">
-                        <img 
-                            src="${fullImageUrl}" 
-                            alt="${blog.title}" 
-                            class="blog-image" 
-                            onerror="this.onerror=null; this.src='GRG/BLOG/blog_header.jpg';"
-                        >
-                    </div>
-                    <div class="blog-content">
-                        <div class="blog-meta">
-                            <span class="blog-author">By ${blog.author}</span>
-                            <span class="blog-category">${blog.category}</span>
-                        </div>
-                        <h3>${blog.title}</h3>
-                        <div class="blog-excerpt">${cleanExcerpt}</div>
-                        <a href="blog-single.html?id=${blog._id}" class="read-more">Read More</a>
-                    </div>
-                `;
-                blogGrid.appendChild(blogCard);
-            });
+            renderPage(1);
 
         } catch (error) {
             console.error('Failed to load blogs:', error);
@@ -1029,7 +889,14 @@
         }
     }
 
-    // Load blogs when page loads
+    let resizeTimer;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+            if (allBlogs.length) renderPage(1);
+        }, 300);
+    });
+
     document.addEventListener('DOMContentLoaded', loadBlogs);
 </script>
 </body>
