@@ -1,3 +1,5 @@
+require('dotenv').config(); // loads .env variables
+
 const express = require('express'); 
 const mongoose = require('mongoose');
 const multer = require('multer');
@@ -16,18 +18,15 @@ app.use(express.urlencoded({ extended: true }));
 // ---------------- UPLOADS ----------------
 const UPLOAD_DIR = path.join(__dirname, 'uploads');
 
-// Ensure uploads folder exists with recursive option
 if (!fs.existsSync(UPLOAD_DIR)) {
   fs.mkdirSync(UPLOAD_DIR, { recursive: true });
   console.log('Uploads directory created:', UPLOAD_DIR);
 }
 
-// Serve static files from uploads directory
 app.use('/uploads', express.static(UPLOAD_DIR));
 
 // ---------------- FRONTEND ----------------
 const FRONTEND_DIR = path.join(__dirname, '../frontend');
-// Check if frontend directory exists
 if (fs.existsSync(FRONTEND_DIR)) {
   app.use(express.static(FRONTEND_DIR));
   console.log('Serving frontend from:', FRONTEND_DIR);
@@ -37,14 +36,14 @@ if (fs.existsSync(FRONTEND_DIR)) {
 
 // ---------------- MONGODB CONNECTION ----------------
 const MONGO_URI = process.env.MONGO_URI || 
-  "mongodb+srv://annenicholealimurung_db_user:G4r%40geCAFE@cluster0.ic7yr6s.mongodb.net/garageCafe?retryWrites=true&w=majority";
+  "mongodb+srv://annenicholealimurung_db_user:G4r%40geCaFE@cluster0.ic7yr6s.mongodb.net/garageCafe?retryWrites=true&w=majority"; // ✅ FIXED: password case now matches .env
 
 console.log("Connecting to MongoDB...");
 
 mongoose.connect(MONGO_URI)
-  .then(() => console.log("✅ MongoDB Connected Successfully"))
+  .then(() => console.log("MongoDB Connected Successfully"))
   .catch(err => {
-    console.error("❌ MongoDB connection error:", err.message);
+    console.error("MongoDB connection error:", err.message);
     process.exit(1);
   });
 
@@ -75,7 +74,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ 
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+  limits: { fileSize: 5 * 1024 * 1024 },
   fileFilter: (req, file, cb) => {
     if (file.mimetype.startsWith('image/')) {
       cb(null, true);
@@ -200,7 +199,7 @@ app.delete('/api/blogs/:id', async (req, res) => {
   }
 });
 
-// Health check endpoint
+// Health check
 app.get('/health', (req, res) => {
   res.json({ 
     status: 'ok', 
@@ -213,8 +212,8 @@ app.get('/health', (req, res) => {
 // ---------------- START SERVER ----------------
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`=================================`);
-  console.log(`🚀 Server is running on port ${PORT}`);
-  console.log(`📁 Uploads directory: ${UPLOAD_DIR}`);
-  console.log(`🌍 Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.log(`Server is running on port ${PORT}`);
+  console.log(`Uploads directory: ${UPLOAD_DIR}`);
+  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`=================================`);
 });
