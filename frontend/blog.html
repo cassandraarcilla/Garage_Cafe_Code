@@ -186,7 +186,142 @@
             gap: 3rem;
         }
 
-        .loading, .no-blogs {
+        /* =====================
+           SKELETON LOADING
+        ===================== */
+        @keyframes shimmer {
+            0% { background-position: -800px 0; }
+            100% { background-position: 800px 0; }
+        }
+
+        .skeleton-card {
+            background: white;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(44, 24, 16, 0.06);
+            animation: fadeInUp 0.5s ease-out both;
+        }
+
+        .skeleton-card:nth-child(1) { animation-delay: 0.05s; }
+        .skeleton-card:nth-child(2) { animation-delay: 0.1s; }
+        .skeleton-card:nth-child(3) { animation-delay: 0.15s; }
+        .skeleton-card:nth-child(4) { animation-delay: 0.2s; }
+        .skeleton-card:nth-child(5) { animation-delay: 0.25s; }
+        .skeleton-card:nth-child(6) { animation-delay: 0.3s; }
+
+        .skeleton-shimmer {
+            background: linear-gradient(
+                90deg,
+                #f0e8d8 0%,
+                #faf4e8 40%,
+                #ede0c8 60%,
+                #f0e8d8 100%
+            );
+            background-size: 800px 100%;
+            animation: shimmer 1.6s infinite linear;
+        }
+
+        .skeleton-image {
+            height: 250px;
+            width: 100%;
+        }
+
+        .skeleton-body {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.85rem;
+        }
+
+        .skeleton-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.3rem;
+        }
+
+        .skeleton-author {
+            height: 12px;
+            width: 100px;
+            border-radius: 6px;
+        }
+
+        .skeleton-tag {
+            height: 24px;
+            width: 80px;
+            border-radius: 20px;
+        }
+
+        .skeleton-title-1 {
+            height: 22px;
+            width: 90%;
+            border-radius: 6px;
+        }
+
+        .skeleton-title-2 {
+            height: 22px;
+            width: 65%;
+            border-radius: 6px;
+        }
+
+        .skeleton-line {
+            height: 13px;
+            border-radius: 6px;
+        }
+
+        .skeleton-line-full { width: 100%; }
+        .skeleton-line-long  { width: 88%; }
+        .skeleton-line-mid   { width: 72%; }
+
+        .skeleton-btn {
+            height: 14px;
+            width: 90px;
+            border-radius: 6px;
+            margin-top: 0.5rem;
+        }
+
+        /* Loading dots indicator */
+        .loading-indicator {
+            grid-column: 1 / -1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem 0 2rem;
+        }
+
+        .loading-dots {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .loading-dots span {
+            width: 10px;
+            height: 10px;
+            background: var(--accent-gold);
+            border-radius: 50%;
+            animation: bounceDot 1.2s infinite ease-in-out;
+        }
+
+        .loading-dots span:nth-child(1) { animation-delay: 0s; }
+        .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounceDot {
+            0%, 80%, 100% { transform: scale(0.7); opacity: 0.5; }
+            40% { transform: scale(1.2); opacity: 1; }
+        }
+
+        .loading-text {
+            font-size: 0.9rem;
+            color: var(--light-brown);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .no-blogs {
             text-align: center;
             padding: 4rem 2rem;
             font-size: 1.2rem;
@@ -511,6 +646,7 @@
             .blog-section { padding: 8rem 4rem; }
             .blog-grid { max-width: 1800px; grid-template-columns: repeat(4, 1fr); gap: 3.5rem; }
             .blog-image-container { height: 280px; }
+            .skeleton-image { height: 280px; }
             .blog-content { padding: 2.5rem; }
             .blog-card h3 { font-size: 2rem; min-height: 2.8em; margin-bottom: 1.2rem; }
             .blog-meta { font-size: 0.95rem; margin-bottom: 1.2rem; }
@@ -548,7 +684,6 @@
             footer { padding: 4rem 2.5rem 2rem; }
         }
 
-        /* Tablet: 769px – 1024px → fixed 2-column grid */
         @media screen and (min-width: 769px) and (max-width: 1024px) {
             .hamburger { display: flex; }
             nav ul {
@@ -576,14 +711,15 @@
             .blog-section { padding: 4rem 1.5rem; }
             .blog-card h3 { font-size: 1.5rem; min-height: auto; }
             .blog-image-container { height: 200px; }
+            .skeleton-image { height: 200px; }
             .blog-content { padding: 1.5rem; }
+            .skeleton-body { padding: 1.5rem; }
             .pagination { gap: 0.6rem; margin-top: 3rem; }
             .pagination button { width: 42px; height: 42px; font-size: 0.95rem; }
             .pagination button.prev-next { min-width: 85px; padding: 0 1rem; height: 42px; font-size: 0.88rem; }
             .page-info { font-size: 0.85rem; }
         }
 
-        /* Mobile: ≤ 768px → 1 column */
         @media screen and (max-width: 768px) {
             .hamburger { display: flex; }
             nav ul {
@@ -605,7 +741,6 @@
             nav ul.active { right: 0; }
             nav li { width: 100%; }
             nav a { font-size: 1.3rem; display: block; padding: 0.8rem 0; }
-            /* ↓ Increased top padding from 8rem → 11rem for more breathing room above the title */
             .page-header { padding: 11rem 2rem 4rem; }
             .page-header h1 { font-size: 2.5rem; letter-spacing: 2px; }
             .blog-grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -620,13 +755,13 @@
         @media screen and (max-width: 480px) {
             nav ul { width: 260px; padding-left: 1.5rem; gap: 2rem; }
             nav a { font-size: 1.2rem; }
-            /* ↓ Also increased top padding for small phones from default → 11rem */
             .page-header { padding: 11rem 1.5rem 4rem; }
             .page-header h1 { font-size: 2rem; }
             .page-header p { font-size: 1.1rem; }
             .scroll-top { bottom: 20px; right: 20px; width: 45px; height: 45px; font-size: 1.3rem; }
             .blog-card h3 { font-size: 1.4rem; }
             .blog-content { padding: 1.5rem; }
+            .skeleton-body { padding: 1.5rem; }
             .pagination { gap: 0.4rem; margin-top: 2.5rem; }
             .pagination button { width: 36px; height: 36px; font-size: 0.82rem; border-width: 1.5px; }
             .pagination button.prev-next { min-width: 60px; padding: 0 0.7rem; height: 36px; font-size: 0.78rem; }
@@ -670,7 +805,7 @@
 
     <section class="blog-section">
         <div class="blog-grid" id="blogGrid">
-            <p class="loading">Loading blogs...</p>
+            <!-- Skeleton cards injected by JS -->
         </div>
         <div class="pagination" id="pagination" style="display:none;"></div>
         <p class="page-info" id="pageInfo"></p>
@@ -733,6 +868,7 @@
         return window.innerWidth <= 1024 ? 3 : 6;
     }
 
+    // ── Hamburger ──────────────────────────────────────
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
 
@@ -766,6 +902,45 @@
     window.addEventListener('scroll', () => scrollTop.classList.toggle('visible', window.scrollY > 300));
     if (scrollTop) scrollTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
+    // ── Skeleton helpers ───────────────────────────────
+    function buildSkeletonCard() {
+        return `
+            <div class="skeleton-card">
+                <div class="skeleton-image skeleton-shimmer"></div>
+                <div class="skeleton-body">
+                    <div class="skeleton-meta">
+                        <div class="skeleton-author skeleton-shimmer"></div>
+                        <div class="skeleton-tag skeleton-shimmer"></div>
+                    </div>
+                    <div class="skeleton-title-1 skeleton-shimmer"></div>
+                    <div class="skeleton-title-2 skeleton-shimmer"></div>
+                    <div class="skeleton-line skeleton-line-full skeleton-shimmer"></div>
+                    <div class="skeleton-line skeleton-line-long skeleton-shimmer"></div>
+                    <div class="skeleton-line skeleton-line-mid skeleton-shimmer"></div>
+                    <div class="skeleton-btn skeleton-shimmer"></div>
+                </div>
+            </div>
+        `;
+    }
+
+    function showSkeletons() {
+        const blogGrid = document.getElementById('blogGrid');
+        const count = getBlogsPerPage();
+        let html = '';
+        for (let i = 0; i < count; i++) html += buildSkeletonCard();
+        // Add loading dots below skeletons
+        html += `
+            <div class="loading-indicator">
+                <div class="loading-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <p class="loading-text">Brewing your stories…</p>
+            </div>
+        `;
+        blogGrid.innerHTML = html;
+    }
+
+    // ── Image URL helper ──────────────────────────────
     function getImageUrl(imageUrl) {
         if (!imageUrl) return 'GRG/BLOG/blog_header.jpg';
         if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) return imageUrl;
@@ -775,6 +950,7 @@
         return `${BASE_URL}/${cleanPath}`;
     }
 
+    // ── Render page ───────────────────────────────────
     function renderPage(page) {
         currentPage = page;
         const blogsPerPage = getBlogsPerPage();
@@ -866,9 +1042,12 @@
         pagination.appendChild(nextBtn);
     }
 
+    // ── Load blogs ────────────────────────────────────
     async function loadBlogs() {
         const blogGrid = document.getElementById('blogGrid');
         if (!blogGrid) return;
+
+        showSkeletons(); // ← show skeletons immediately
 
         try {
             const res = await fetch(API);
