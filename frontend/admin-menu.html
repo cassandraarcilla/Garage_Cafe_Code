@@ -56,7 +56,6 @@
         .badge-blended { background:#efebe9; color:#4e342e; margin-left:0.3rem; }
         .category-pill { display:inline-block; padding:0.2rem 0.7rem; border-radius:20px; font-size:0.72rem; background:#fdf3d0; color:#7a5c00; }
         .actions { display:flex; gap:0.4rem; flex-wrap:nowrap; }
-        /* Modal */
         .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:200; align-items:center; justify-content:center; padding:1rem; }
         .modal-overlay.open { display:flex; }
         .modal { background:white; border-radius:20px; width:100%; max-width:620px; max-height:92vh; overflow-y:auto; box-shadow:0 20px 60px rgba(0,0,0,0.3); }
@@ -86,13 +85,11 @@
         .check-item input[type="checkbox"] { width:16px; height:16px; accent-color:var(--accent-gold); cursor:pointer; flex-shrink:0; }
         .check-item span { font-size:0.88rem; color:var(--medium-brown); }
         .modal-foot { padding:1.2rem 1.8rem; border-top:1px solid #f0e8df; display:flex; justify-content:flex-end; gap:0.8rem; }
-        /* Toast */
         #toast { position:fixed; bottom:2rem; right:2rem; padding:0.9rem 1.5rem; border-radius:12px; color:white; font-weight:500; font-size:0.9rem; z-index:9999; opacity:0; transform:translateY(10px); transition:all 0.3s; pointer-events:none; max-width:350px; }
         #toast.show { opacity:1; transform:translateY(0); }
         #toast.success { background:var(--success); }
         #toast.error { background:var(--danger); }
         .loading { text-align:center; padding:3rem; color:var(--light-brown); font-size:1rem; }
-        /* Delete confirm */
         .confirm-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:300; align-items:center; justify-content:center; padding:1rem; }
         .confirm-overlay.open { display:flex; }
         .confirm-box { background:white; border-radius:16px; padding:2rem; max-width:380px; width:100%; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.3); }
@@ -109,77 +106,30 @@
         }
     </style>
 
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-90Z65E4SVZ"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-90Z65E4SVZ');
-</script>
-
-    <!--schema org-->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Garage Café",
-      "image": "https://visitgaragecafe.com/GRG/Icons/Garage%20Cafe%20logo%20ICON.png",
-      "@id": "https://www.visitgaragecafe.com/#coffeeshop",
-      "url": "https://www.visitgaragecafe.com/",
-      "telephone": "+63XXXXXXXXX",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Mawaque",
-        "addressLocality": "Mabalacat City",
-        "addressRegion": "Pampanga",
-        "postalCode": "2010",
-        "addressCountry": "PH"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 15.2215,
-        "longitude": 120.5744
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "opens": "08:00",
-        "closes": "22:00"
-      },
-      "sameAs": [
-        "https://www.facebook.com/garagecafe",
-        "https://www.instagram.com/garagecafe"
-      ]
-    }
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90Z65E4SVZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-90Z65E4SVZ');
     </script>
 </head>
 <body>
 
-<!-- Sidebar -->
 <aside class="sidebar">
     <div class="sidebar-logo">
-        <div class="icon"></div>
+        <div class="icon">☕</div>
         <h2>Garage Café</h2>
         <p>Admin Panel</p>
     </div>
     <nav>
-        <a href="admin-menu.html" class="active">&nbsp;Menu Items</a>
-        <a href="admin-blog.html">&nbsp;Blog Posts</a>
-        <a href="menu.html" target="_blank">&nbsp;View Menu</a>
-        <a href="index.html" target="_blank">&nbsp;View Site</a>
+        <a href="admin-menu.html" class="active">🍽️ &nbsp;Menu Items</a>
+        <a href="admin-blog.html">📝 &nbsp;Blog Posts</a>
+        <a href="menu.html" target="_blank">👁️ &nbsp;View Menu</a>
+        <a href="index.html" target="_blank">🏠 &nbsp;View Site</a>
     </nav>
 </aside>
 
-<!-- Main -->
 <div class="main">
     <div class="topbar">
         <h1>Menu Items</h1>
@@ -187,7 +137,6 @@ gtag('config', 'G-90Z65E4SVZ');
     </div>
 
     <div class="content">
-        <!-- Stats -->
         <div class="stats-row">
             <div class="stat-card"><div class="number" id="statTotal">—</div><div class="label">Total Items</div></div>
             <div class="stat-card"><div class="number" id="statActive">—</div><div class="label">Active</div></div>
@@ -195,12 +144,11 @@ gtag('config', 'G-90Z65E4SVZ');
             <div class="stat-card"><div class="number" id="statCats">—</div><div class="label">Categories</div></div>
         </div>
 
-        <!-- Table -->
         <div class="table-card">
             <div class="table-header">
                 <h3>All Menu Items</h3>
                 <div class="filter-row">
-                    <input type="text" class="search-input" id="searchInput" placeholder="Search..." oninput="renderTable()">
+                    <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search..." oninput="renderTable()">
                     <select class="filter-select" id="filterCat" onchange="renderTable()">
                         <option value="">All Categories</option>
                         <option>Coffee Based</option>
@@ -231,12 +179,10 @@ gtag('config', 'G-90Z65E4SVZ');
         </div>
         <div class="modal-body">
             <div class="form-grid">
-
                 <div class="form-group full">
                     <label>Item Name *</label>
                     <input type="text" id="fName" placeholder="e.g. Caramel Macchiato">
                 </div>
-
                 <div class="form-group">
                     <label>Category *</label>
                     <select id="fCategory" onchange="toggleSubcategory()">
@@ -249,7 +195,6 @@ gtag('config', 'G-90Z65E4SVZ');
                         <option>Food</option>
                     </select>
                 </div>
-
                 <div class="form-group" id="subcatRow" style="display:none;">
                     <label>Subcategory (Frappe only)</label>
                     <select id="fSubcategory">
@@ -258,50 +203,44 @@ gtag('config', 'G-90Z65E4SVZ');
                         <option>Non-Coffee</option>
                     </select>
                 </div>
-
                 <div class="form-group full">
                     <label>Price *</label>
                     <input type="text" id="fPrice" placeholder="e.g. Hot ₱130 / Cold ₱120">
                 </div>
-
                 <div class="form-group full">
                     <label>Description</label>
                     <textarea id="fDescription" placeholder="Short description of the item…"></textarea>
                 </div>
-
                 <div class="form-group full">
                     <label>Tags <small style="text-transform:none;font-weight:400">(comma-separated, e.g. Hot, Cold)</small></label>
                     <input type="text" id="fTags" placeholder="Hot, Cold, Popular">
                 </div>
-
                 <div class="form-group full">
                     <label>Options</label>
                     <div class="check-row">
                         <label class="check-item">
                             <input type="checkbox" id="fIsNew">
-                            <span>Mark as NEW</span>
+                            <span>🔴 Mark as NEW</span>
                         </label>
                         <label class="check-item">
                             <input type="checkbox" id="fIsBlended">
-                            <span>Blended</span>
+                            <span>🥤 Blended</span>
                         </label>
                         <label class="check-item">
                             <input type="checkbox" id="fActive" checked>
-                            <span>Active (visible on menu)</span>
+                            <span>✅ Active (visible on menu)</span>
                         </label>
                     </div>
                 </div>
-
                 <div class="form-group">
                     <label>Sort Order <small style="text-transform:none;font-weight:400">(lower = first)</small></label>
                     <input type="number" id="fSortOrder" value="0" min="0">
                 </div>
-
                 <div class="form-group full">
                     <label>Photo</label>
                     <div class="image-upload-area" id="uploadArea">
                         <input type="file" id="fImage" accept="image/*" onchange="previewImage(event)">
-                        <span class="upload-icon"></span>
+                        <span class="upload-icon">📷</span>
                         <p>Click to upload photo</p>
                         <small>JPG, PNG, WEBP – max 5MB</small>
                     </div>
@@ -310,7 +249,6 @@ gtag('config', 'G-90Z65E4SVZ');
                         <p id="currentImgNote"></p>
                     </div>
                 </div>
-
             </div>
         </div>
         <div class="modal-foot">
@@ -323,7 +261,7 @@ gtag('config', 'G-90Z65E4SVZ');
 <!-- Delete Confirm -->
 <div class="confirm-overlay" id="confirmOverlay">
     <div class="confirm-box">
-        <div class="icon"></div>
+        <div class="icon">🗑️</div>
         <h4>Delete Item?</h4>
         <p id="confirmMsg">This will permanently remove the item.</p>
         <div class="btns">
@@ -336,33 +274,51 @@ gtag('config', 'G-90Z65E4SVZ');
 <div id="toast"></div>
 
 <script>
-    // ── Use relative path — works on any host/port ──────────────────
-    const API = '/api';
+    // ── API CONFIG ─────────────────────────────────────────────────────
+    const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+    const BACKEND_URL = IS_LOCAL ? '' : 'https://garage-cafe-code.onrender.com';
+    const API = BACKEND_URL + '/api';
+
+    // Resolve image URLs — handles both old relative paths and new absolute URLs
+    function resolveImg(url) {
+        if (!url) return '';
+        if (url.startsWith('http')) return url;
+        return BACKEND_URL + (url.startsWith('/') ? url : '/' + url);
+    }
 
     let allItems = [];
     let editingId = null;
 
-    // ── Init ────────────────────────────────────────────────────────
     document.addEventListener('DOMContentLoaded', loadItems);
 
     async function loadItems() {
-        try {
-            const res = await fetch(API + '/admin/menuitems');
-            if (!res.ok) {
-                const text = await res.text();
-                throw new Error('Server returned: ' + res.status);
-            }
-            allItems = await res.json();
-            updateStats();
-            renderTable();
-        } catch (err) {
-            showToast('Cannot load items: ' + err.message, 'error');
+        const MAX_RETRIES = 5;
+        const RETRY_DELAY = 6000;
+
+        for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+            const isLastAttempt = attempt === MAX_RETRIES;
             document.getElementById('tableBody').innerHTML =
-                '<div class="loading" style="color:#c62828;">' + err.message + '</div>';
+                `<div class="loading">${attempt === 1 ? 'Loading menu items…' : `Still loading… (${attempt}/${MAX_RETRIES}) — waking up server…`}</div>`;
+            try {
+                const res = await fetch(API + '/admin/menuitems', { signal: AbortSignal.timeout(10000) });
+                if (!res.ok) throw new Error('Server returned: ' + res.status);
+                allItems = await res.json();
+                updateStats();
+                renderTable();
+                return;
+            } catch (err) {
+                console.warn(`Attempt ${attempt} failed:`, err.message);
+                if (isLastAttempt) {
+                    showToast('Cannot load items: ' + err.message, 'error');
+                    document.getElementById('tableBody').innerHTML =
+                        '<div class="loading" style="color:#c62828;">⚠️ ' + err.message + '<br><button onclick="loadItems()" style="margin-top:1rem;padding:0.5rem 1.2rem;background:var(--accent-gold);color:var(--dark-brown);border:none;border-radius:8px;cursor:pointer;font-weight:600;">Retry</button></div>';
+                } else {
+                    await new Promise(r => setTimeout(r, RETRY_DELAY));
+                }
+            }
         }
     }
 
-    // ── Stats ────────────────────────────────────────────────────────
     function updateStats() {
         document.getElementById('statTotal').textContent  = allItems.length;
         document.getElementById('statActive').textContent = allItems.filter(i => i.active).length;
@@ -370,7 +326,6 @@ gtag('config', 'G-90Z65E4SVZ');
         document.getElementById('statCats').textContent   = new Set(allItems.map(i => i.category)).size;
     }
 
-    // ── Render Table ──────────────────────────────────────────────────
     function renderTable() {
         const search = document.getElementById('searchInput').value.toLowerCase();
         const cat    = document.getElementById('filterCat').value;
@@ -396,7 +351,7 @@ gtag('config', 'G-90Z65E4SVZ');
             <tr>
                 <td>
                     ${item.imageUrl
-                        ? `<img src="${item.imageUrl}" class="item-thumb" onerror="this.style.display='none'">`
+                        ? `<img src="${resolveImg(item.imageUrl)}" class="item-thumb" onerror="this.style.display='none'">`
                         : '<div class="no-img">🍵</div>'}
                 </td>
                 <td>
@@ -445,22 +400,16 @@ gtag('config', 'G-90Z65E4SVZ');
             </div>`;
     }
 
-    // ── Escape HTML helper ─────────────────────────────────────────
     function escHtml(str) {
         return String(str)
-            .replace(/&/g,'&amp;')
-            .replace(/</g,'&lt;')
-            .replace(/>/g,'&gt;')
-            .replace(/"/g,'&quot;');
+            .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+            .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
-    // ── Open Modal ────────────────────────────────────────────────────
     function openModal(item = null) {
         editingId = item ? item._id : null;
-
-        document.getElementById('modalTitle').textContent  = item ? 'Edit Menu Item' : 'Add Menu Item';
-        document.getElementById('saveBtn').textContent     = item ? 'Update Item'    : 'Save Item';
-
+        document.getElementById('modalTitle').textContent = item ? 'Edit Menu Item' : 'Add Menu Item';
+        document.getElementById('saveBtn').textContent    = item ? 'Update Item'    : 'Save Item';
         document.getElementById('fName').value            = item ? item.name            : '';
         document.getElementById('fCategory').value        = item ? item.category        : '';
         document.getElementById('fSubcategory').value     = item ? (item.subcategory || '') : '';
@@ -471,19 +420,15 @@ gtag('config', 'G-90Z65E4SVZ');
         document.getElementById('fIsBlended').checked     = item ? !!item.isBlended     : false;
         document.getElementById('fActive').checked        = item ? !!item.active        : true;
         document.getElementById('fSortOrder').value       = item ? (item.sortOrder || 0): 0;
-
-        // Reset image
         document.getElementById('fImage').value   = '';
         document.getElementById('previewWrap').style.display = 'none';
         document.getElementById('previewImg').src = '';
         document.getElementById('currentImgNote').textContent = '';
-
         if (item && item.imageUrl) {
             document.getElementById('previewWrap').style.display = 'block';
-            document.getElementById('previewImg').src = item.imageUrl;
+            document.getElementById('previewImg').src = resolveImg(item.imageUrl);
             document.getElementById('currentImgNote').textContent = 'Current photo — upload new to replace';
         }
-
         toggleSubcategory();
         document.getElementById('modalOverlay').classList.add('open');
         document.getElementById('fName').focus();
@@ -511,21 +456,17 @@ gtag('config', 'G-90Z65E4SVZ');
         reader.readAsDataURL(file);
     }
 
-    // ── Save (Create or Update) ───────────────────────────────────────
     async function saveItem() {
         const name     = document.getElementById('fName').value.trim();
         const category = document.getElementById('fCategory').value;
         const price    = document.getElementById('fPrice').value.trim();
-
         if (!name || !category || !price) {
             showToast('Please fill in Name, Category, and Price.', 'error');
             return;
         }
-
         const btn = document.getElementById('saveBtn');
         btn.disabled = true;
         btn.textContent = 'Saving…';
-
         const fd = new FormData();
         fd.append('name',        name);
         fd.append('category',    category);
@@ -537,22 +478,17 @@ gtag('config', 'G-90Z65E4SVZ');
         fd.append('isBlended',   document.getElementById('fIsBlended').checked);
         fd.append('active',      document.getElementById('fActive').checked);
         fd.append('sortOrder',   document.getElementById('fSortOrder').value);
-
         const imageFile = document.getElementById('fImage').files[0];
         if (imageFile) fd.append('image', imageFile);
-
         try {
             const url    = editingId ? `${API}/menuitems/${editingId}` : `${API}/menuitems`;
             const method = editingId ? 'PUT' : 'POST';
-
             const res = await fetch(url, { method, body: fd });
-
             if (!res.ok) {
                 const errData = await res.json().catch(() => ({ message: 'Unknown error' }));
                 throw new Error(errData.message || 'Save failed');
             }
-
-            showToast(editingId ? 'Item updated!' : 'Item added!', 'success');
+            showToast(editingId ? '✅ Item updated!' : '✅ Item added!', 'success');
             closeModal();
             await loadItems();
         } catch (err) {
@@ -563,13 +499,11 @@ gtag('config', 'G-90Z65E4SVZ');
         }
     }
 
-    // ── Edit ──────────────────────────────────────────────────────────
     function editItem(id) {
         const item = allItems.find(i => i._id === id);
         if (item) openModal(item);
     }
 
-    // ── Toggle Active ─────────────────────────────────────────────────
     async function toggleItem(id) {
         try {
             const res = await fetch(`${API}/menuitems/${id}/toggle`, { method: 'PATCH' });
@@ -581,7 +515,6 @@ gtag('config', 'G-90Z65E4SVZ');
         }
     }
 
-    // ── Delete ────────────────────────────────────────────────────────
     let deleteTargetId = null;
 
     function askDelete(id, name) {
@@ -608,7 +541,6 @@ gtag('config', 'G-90Z65E4SVZ');
         }
     });
 
-    // ── Toast ──────────────────────────────────────────────────────────
     function showToast(msg, type = 'success') {
         const t = document.getElementById('toast');
         t.textContent = msg;
@@ -616,7 +548,6 @@ gtag('config', 'G-90Z65E4SVZ');
         setTimeout(() => { t.className = ''; }, 3500);
     }
 
-    // ── Close on overlay click ─────────────────────────────────────────
     document.getElementById('modalOverlay').addEventListener('click', e => {
         if (e.target === document.getElementById('modalOverlay')) closeModal();
     });

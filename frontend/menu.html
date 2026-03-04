@@ -878,35 +878,51 @@
         };
 
         // ── LOAD MENU FROM BACKEND ────────────────────────────────────────
+        // Render free tier sleeps after inactivity — retry up to 5x with delay
         async function loadMenu() {
             const container = document.getElementById('menuContent');
-            container.innerHTML = `
-                <div class="menu-loading">
-                    <div class="spinner"></div>
-                    <p>Loading menu…</p>
-                </div>`;
 
-            try {
-                const res = await fetch(API);
-                if (!res.ok) {
-                    throw new Error(`Server responded with ${res.status}`);
-                }
-                const items = await res.json();
-                renderMenu(items);
-            } catch (err) {
-                console.error('Menu load error:', err);
+            const MAX_RETRIES = 5;
+            const RETRY_DELAY = 6000; // 6 seconds between retries (up to ~30s total)
+
+            for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+                const isLastAttempt = attempt === MAX_RETRIES;
+
                 container.innerHTML = `
-                    <div class="menu-loading" style="color:#c62828;">
-                        <p>⚠️ Could not load menu.<br>${err.message}</p>
-                        <button onclick="loadMenu()" style="
-                            margin-top:1.5rem; padding:0.9rem 2rem;
-                            background:var(--accent-gold); color:#2C1810;
-                            border:none; border-radius:12px; font-weight:600;
-                            cursor:pointer; font-size:1.1rem;
-                        ">
-                            Try Again
-                        </button>
+                    <div class="menu-loading">
+                        <div class="spinner"></div>
+                        <p>${attempt === 1
+                            ? 'Loading menu…'
+                            : `Still loading… (${attempt}/${MAX_RETRIES})`
+                        }</p>
+                        ${attempt > 1 ? '<p style="font-size:0.9rem;margin-top:0.5rem;color:var(--light-brown)">Waking up the server, please wait…</p>' : ''}
                     </div>`;
+
+                try {
+                    const res = await fetch(API, { signal: AbortSignal.timeout(10000) });
+                    if (!res.ok) throw new Error(`Server responded with ${res.status}`);
+                    const items = await res.json();
+                    renderMenu(items);
+                    return; // success — stop retrying
+                } catch (err) {
+                    console.warn(`Attempt ${attempt} failed:`, err.message);
+                    if (isLastAttempt) {
+                        container.innerHTML = `
+                            <div class="menu-loading" style="color:#c62828;">
+                                <p>⚠️ Could not load menu.<br>${err.message}</p>
+                                <button onclick="loadMenu()" style="
+                                    margin-top:1.5rem; padding:0.9rem 2rem;
+                                    background:var(--accent-gold); color:#2C1810;
+                                    border:none; border-radius:12px; font-weight:600;
+                                    cursor:pointer; font-size:1.1rem;
+                                ">
+                                    Try Again
+                                </button>
+                            </div>`;
+                    } else {
+                        await new Promise(r => setTimeout(r, RETRY_DELAY));
+                    }
+                }
             }
         }
 
