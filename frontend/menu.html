@@ -1,12 +1,15 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Menu - Garage Café</title>
-    <meta name="description" content="Explore Garage Café's menu featuring affordable coffee, comfort food, and drinks. Budget-friendly options for students and professionals in Mabalacat City.">
+    <title>Menu - Garage Café | Affordable Coffee & Comfort Food</title>
+    <meta name="description" content="Explore Garage Café's menu — budget-friendly coffee, frappes, non-coffee drinks, yogurt, and comfort food in Mabalacat City near Metro Clark Homes.">
     <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="GRG/Icons/Garage Cafe logo ICON.png" type="image/png">
+
     <style>
         :root {
             --dark-brown: #2C1810;
@@ -1145,301 +1148,223 @@
             }
         }
     </style>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90Z65E4SVZ"></script>
-    <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-90Z65E4SVZ');
-    </script>
-
-
-    <!--schema org-->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Garage Café",
-      "image": "https://visitgaragecafe.com/GRG/Icons/Garage%20Cafe%20logo%20ICON.png",
-      "@id": "https://www.visitgaragecafe.com/#coffeeshop",
-      "url": "https://www.visitgaragecafe.com/",
-      "telephone": "+63XXXXXXXXX",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Mawaque",
-        "addressLocality": "Mabalacat City",
-        "addressRegion": "Pampanga",
-        "postalCode": "2010",
-        "addressCountry": "PH"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 15.2215,
-        "longitude": 120.5744
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "opens": "08:00",
-        "closes": "22:00"
-      },
-      "sameAs": [
-        "https://www.facebook.com/garagecafe",
-        "https://www.instagram.com/garagecafe"
-      ]
-    }
-    </script>
 </head>
 <body>
-    <nav id="navbar">
-        <div class="container">
-            <a href="index.html" class="logo">
-                <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo" onerror="this.style.display='none'">
-            </a>
 
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-
-            <ul id="navMenu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="menu.html" class="active">Menu</a></li>
-                <li><a href="blog.html">Blog</a></li>
-                <li><a href="contact.html">Contact</a></li>
-            </ul>
+<nav id="navbar">
+    <div class="container">
+        <a href="index.html" class="logo">
+            <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café">
+        </a>
+        <div class="hamburger" id="hamburger">
+            <span></span><span></span><span></span>
         </div>
-    </nav>
+        <ul id="navMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="menu.html" class="active">Menu</a></li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </div>
+</nav>
 
-    <section class="page-header">
-        <h1>Our Menu</h1>
-        <p>Affordable coffee & comfort food for everyone</p>
-    </section>
+<section class="page-header">
+    <h1>Our Menu</h1>
+    <p>Affordable coffee • frappes • comfort food</p>
+</section>
 
-    <!-- ── Dynamic menu content loads here from MongoDB ── -->
+<section class="menu-section">
     <div id="menuContent">
-        <div class="menu-loading">
-            <div class="spinner"></div>
-            <p>Loading menu…</p>
+        <div class="loading-indicator">
+            <div class="loading-dots">
+                <span></span><span></span><span></span>
+            </div>
+            <p style="margin-top:1.2rem;">Loading menu…</p>
         </div>
     </div>
+</section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-grid">
-            <div class="footer-section">
-                <h3>GARAGE CAFÉ</h3>
-                <p>Mawaque, Mabalacat City, Pampanga</p>
-                <p>Near Metro Clark Homes, Sapang Biabas</p>
-                <p>visitgaragecafe.com</p>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/p/Garage-Caf%C3%A9-61567205202489/" aria-label="Facebook">
-                        <img src="GRG/Icons/facebook.png" alt="Facebook" onerror="this.style.display='none'">
-                    </a>
-                    <a href="https://www.instagram.com/garagecafe.1110/" aria-label="Instagram">
-                        <img src="GRG/Icons/instagram.png" alt="Instagram" onerror="this.style.display='none'">
-                    </a>
+<footer>
+    <div class="footer-grid">
+        <div class="footer-section">
+            <h3>GARAGE CAFÉ</h3>
+            <p>Mawaque, Mabalacat City, Pampanga</p>
+            <p>Near Metro Clark Homes, Sapang Biabas</p>
+            <p>visitgaragecafe.com</p>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <p><a href="index.html">Home</a></p>
+            <p><a href="about.html">About</a></p>
+            <p><a href="menu.html">Menu</a></p>
+            <p><a href="blog.html">Blog</a></p>
+            <p><a href="contact.html">Contact</a></p>
+        </div>
+    </div>
+    <div class="copyright">
+        © 2025 Garage Café • www.visitgaragecafe.com
+    </div>
+</footer>
+
+<button class="scroll-top" id="scrollTop">↑</button>
+
+<script>
+    // ── Use RELATIVE path – works everywhere (localhost, Render, phone) ──
+    const API = '/api/menuitems';
+
+    console.log("Fetching menu from:", API);
+
+    const CATEGORY_ORDER = [
+        'Coffee Based', 'Specials', 'Non-Coffee',
+        'Frappe', 'Yogurt', 'Food'
+    ];
+
+    function getImageUrl(url) {
+        if (!url) return '';
+        if (url.startsWith('http')) return url;
+        if (url.startsWith('/')) return url; // already absolute
+        return `/uploads/${url}`;
+    }
+
+    function buildMenuCard(item) {
+        const tags = [];
+        if (item.isNew)     tags.push('<span class="tag new">NEW</span>');
+        if (item.isBlended) tags.push('<span class="tag blended">BLENDED</span>');
+        (item.tags || []).forEach(t => tags.push(`<span class="tag other">${t}</span>`));
+
+        return `
+            <div class="menu-card">
+                <div class="menu-image-container">
+                    <img src="${getImageUrl(item.imageUrl)}" 
+                         alt="${item.name}" 
+                         class="menu-image"
+                         loading="lazy"
+                         onerror="this.src='https://via.placeholder.com/340x240/eee/aaa?text=No+Image';">
                 </div>
-            </div>
-
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul class="footer-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="menu.html">Menu</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h3>Services</h3>
-                <ul class="footer-links">
-                    <li><a href="#">Dine In</a></li>
-                    <li><a href="#">Meal Pre-Orders</a></li>
-                    <li><a href="#">Event Coffee Setups</a></li>
-                    <li><a href="#">Study Space</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="copyright">
-            <p>&copy; 2025 Garage Café | www.visitgaragecafe.com</p>
-        </div>
-    </footer>
-
-    <div class="scroll-top" id="scrollTop">↑</div>
-
-    <script>
-        // ── API CONFIG ────────────────────────────────────────────────────
-        // Local development:
-        const API_BASE = 'http://localhost:3000';
-        // When deployed to production, change to your live server URL:
-        // const API_BASE = 'https://your-server.com';
-
-        // ── CATEGORY ORDER & SUBTITLES ────────────────────────────────────
-        const CATEGORY_ORDER = ['Coffee Based', 'Specials', 'Non-Coffee', 'Frappe', 'Yogurt', 'Food'];
-        const CATEGORY_SUBTITLES = {
-            'Coffee Based': 'Espresso drinks and favorites',
-            'Specials':     'Signature creations and new favorites',
-            'Non-Coffee':   'Delicious drinks without the caffeine',
-            'Frappe':       'Blended and refreshing',
-            'Yogurt':       'Fresh and healthy yogurt drinks',
-            'Food':         'Delicious snacks and comfort food'
-        };
-
-        // ── LOAD MENU FROM MONGODB ────────────────────────────────────────
-        async function loadMenu() {
-            try {
-                const res = await fetch(API_BASE + '/api/menuitems');
-                if (!res.ok) throw new Error('Server error');
-                const items = await res.json();
-                renderMenu(items);
-            } catch (err) {
-                document.getElementById('menuContent').innerHTML =
-                    '<div class="menu-loading"><p style="color:var(--medium-brown);">⚠️ Could not load menu. Please try again later.</p></div>';
-            }
-        }
-
-        // ── RENDER ALL CATEGORIES ─────────────────────────────────────────
-        function renderMenu(items) {
-            if (!items.length) {
-                document.getElementById('menuContent').innerHTML =
-                    '<div class="menu-loading"><p>No menu items available yet.</p></div>';
-                return;
-            }
-
-            // Group items by category
-            const grouped = {};
-            items.forEach(item => {
-                if (!grouped[item.category]) grouped[item.category] = [];
-                grouped[item.category].push(item);
-            });
-
-            let html = '';
-
-            CATEGORY_ORDER.forEach(cat => {
-                if (!grouped[cat] || !grouped[cat].length) return;
-                const catItems = grouped[cat];
-
-                html += `<section class="menu-section">
-                    <div class="section-header">
-                        <h2>${cat}</h2>
-                        <p>${CATEGORY_SUBTITLES[cat] || ''}</p>
-                    </div>`;
-
-                if (cat === 'Frappe') {
-                    // Frappe has Coffee Based + Non-Coffee subcategories
-                    const subCoffee    = catItems.filter(i => i.subcategory === 'Coffee Based');
-                    const subNonCoffee = catItems.filter(i => i.subcategory === 'Non-Coffee');
-                    const noSub        = catItems.filter(i => !i.subcategory);
-
-                    if (noSub.length)        html += buildGrid(noSub);
-                    if (subCoffee.length) {
-                        html += '<h3 class="category-title">Coffee Based</h3>';
-                        html += buildGrid(subCoffee);
-                    }
-                    if (subNonCoffee.length) {
-                        html += '<h3 class="category-title">Non-Coffee</h3>';
-                        html += buildGrid(subNonCoffee);
-                    }
-                } else {
-                    html += buildGrid(catItems);
-                }
-
-                html += `</section>`;
-            });
-
-            document.getElementById('menuContent').innerHTML = html;
-        }
-
-        // ── BUILD GRID OF CARDS ───────────────────────────────────────────
-        function buildGrid(items) {
-            const cards = items.map(item => {
-                const newTag     = item.isNew     ? '<span class="tag new">NEW</span>'         : '';
-                const blendedTag = item.isBlended ? '<span class="tag blended">Blended</span>' : '';
-                const otherTags  = (item.tags || []).map(tag => `<span class="tag">${tag}</span>`).join('');
-
-                const imgHTML = item.imageUrl
-                    ? `<img src="${API_BASE}${item.imageUrl}" alt="${item.name}" class="item-image" onerror="this.style.display='none'">`
-                    : '';
-
-                return `<div class="menu-item">
-                    ${imgHTML}
-                    <div class="item-header">
-                        <h3 class="item-name">${item.name}</h3>
-                        <span class="item-price">${item.price}</span>
+                <div class="menu-content">
+                    <div class="menu-header">
+                        <h3 class="menu-name">${item.name}</h3>
+                        <div class="menu-price">${item.price}</div>
                     </div>
-                    <p class="item-description">${item.description || ''}</p>
-                    <div class="item-tags">${newTag}${blendedTag}${otherTags}</div>
-                </div>`;
-            }).join('');
+                    ${item.description ? `<p class="menu-description">${item.description}</p>` : ''}
+                    ${tags.length ? `<div class="menu-tags">${tags.join('')}</div>` : ''}
+                </div>
+            </div>`;
+    }
 
-            return `<div class="menu-grid">${cards}</div>`;
+    function renderMenu(items) {
+        const container = document.getElementById('menuContent');
+        container.innerHTML = '';
+
+        if (!items?.length) {
+            container.innerHTML = '<p style="text-align:center; font-size:1.3rem; padding:6rem 1rem; color:#555;">No menu items available yet.<br>Check back soon! ☕</p>';
+            return;
         }
 
-        // Start loading the menu
-        loadMenu();
-
-        // ── NAV: Hamburger toggle ─────────────────────────────────────────
-        const hamburger = document.getElementById('hamburger');
-        const navMenu   = document.getElementById('navMenu');
-
-        hamburger.addEventListener('click', function () {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
+        const grouped = {};
+        items.forEach(i => {
+            if (!grouped[i.category]) grouped[i.category] = [];
+            grouped[i.category].push(i);
         });
 
-        document.querySelectorAll('nav ul li a').forEach(link => {
-            link.addEventListener('click', function () {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            });
-        });
+        CATEGORY_ORDER.forEach(cat => {
+            if (!grouped[cat]?.length) return;
 
-        document.addEventListener('click', function (event) {
-            const isClickInsideNav    = navMenu.contains(event.target);
-            const isClickOnHamburger  = hamburger.contains(event.target);
-            if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
-                hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
-            }
-        });
+            let html = `
+                <div class="section-header">
+                    <h2>${cat}</h2>
+                </div>`;
 
-        // ── NAV: Scroll effect ────────────────────────────────────────────
-        window.addEventListener('scroll', function () {
-            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 100);
-            document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 300);
-        });
+            if (cat === 'Frappe') {
+                const subCoffee = grouped[cat].filter(i => i.subcategory === 'Coffee Based');
+                const subNon    = grouped[cat].filter(i => i.subcategory === 'Non-Coffee');
+                const others    = grouped[cat].filter(i => !i.subcategory);
 
-        // ── Scroll to top button ──────────────────────────────────────────
-        document.getElementById('scrollTop').addEventListener('click', function () {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-
-        // ── Smooth scroll for anchor links ────────────────────────────────
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                if (others.length) {
+                    html += '<div class="menu-grid">' + others.map(buildMenuCard).join('') + '</div>';
                 }
-            });
+                if (subCoffee.length) {
+                    html += '<h3 class="category-title">Coffee Based</h3><div class="menu-grid">' + subCoffee.map(buildMenuCard).join('') + '</div>';
+                }
+                if (subNon.length) {
+                    html += '<h3 class="category-title">Non-Coffee</h3><div class="menu-grid">' + subNon.map(buildMenuCard).join('') + '</div>';
+                }
+            } else {
+                html += '<div class="menu-grid">' + grouped[cat].map(buildMenuCard).join('') + '</div>';
+            }
+
+            container.insertAdjacentHTML('beforeend', html);
         });
-    </script>
+    }
+
+    async function loadMenu() {
+        const container = document.getElementById('menuContent');
+        container.innerHTML = `
+            <div class="loading-indicator">
+                <div class="loading-dots"><span></span><span></span><span></span></div>
+                <p>Loading menu…</p>
+            </div>`;
+
+        try {
+            const res = await fetch(API);
+            console.log("Fetch status:", res.status);
+
+            if (!res.ok) {
+                throw new Error(`Server responded with ${res.status}`);
+            }
+
+            const data = await res.json();
+            console.log("Received items:", data.length);
+
+            const activeItems = data.filter(i => i.active !== false);
+            activeItems.sort((a,b) => (a.sortOrder || 0) - (b.sortOrder || 0));
+
+            renderMenu(activeItems);
+        } catch (err) {
+            console.error("Menu load error:", err);
+            container.innerHTML = `
+                <div style="text-align:center; padding:6rem 1rem; color:#c62828;">
+                    <p>Could not load menu.<br>${err.message}</p>
+                    <button onclick="loadMenu()" style="
+                        margin-top:1.5rem; padding:0.9rem 2rem;
+                        background:var(--accent-gold); color:#2C1810;
+                        border:none; border-radius:12px; font-weight:600;
+                        cursor:pointer; font-size:1.1rem;
+                    ">
+                        Try Again
+                    </button>
+                </div>`;
+        }
+    }
+
+    // Navigation & scroll
+    document.getElementById('hamburger').onclick = () => {
+        document.getElementById('hamburger').classList.toggle('active');
+        document.getElementById('navMenu').classList.toggle('active');
+    };
+
+    window.onclick = e => {
+        const menu = document.getElementById('navMenu');
+        const ham = document.getElementById('hamburger');
+        if (!menu.contains(e.target) && !ham.contains(e.target) && menu.classList.contains('active')) {
+            ham.classList.remove('active');
+            menu.classList.remove('active');
+        }
+    };
+
+    window.onscroll = () => {
+        document.getElementById('navbar').classList.toggle('scrolled', scrollY > 80);
+        document.getElementById('scrollTop').classList.toggle('visible', scrollY > 400);
+    };
+
+    document.getElementById('scrollTop').onclick = () => scrollTo({top:0, behavior:'smooth'});
+
+    // Start
+    document.addEventListener('DOMContentLoaded', () => {
+        console.log("Page ready → starting menu load");
+        loadMenu();
+    });
+</script>
 </body>
 </html>
