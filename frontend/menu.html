@@ -1,12 +1,10 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-    <title>Menu - Garage Café | Affordable Coffee & Comfort Food</title>
-    <meta name="description" content="Explore Garage Café's menu — budget-friendly coffee, frappes, non-coffee drinks, yogurt, and comfort food in Mabalacat City near Metro Clark Homes.">
+    <title>Menu - Garage Café</title>
+    <meta name="description" content="Explore Garage Café's menu featuring affordable coffee, comfort food, and drinks. Budget-friendly options for students and professionals in Mabalacat City.">
     <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="GRG/Icons/Garage Cafe logo ICON.png" type="image/png">
 
@@ -21,15 +19,8 @@
             --accent-gold: #D4AF37;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             font-family: 'Roboto', Arial, sans-serif;
@@ -83,14 +74,6 @@
             height: 50px;
             width: auto;
             filter: brightness(0) invert(1);
-        }
-
-        .logo-text {
-            font-family: 'Yeseva One', serif;
-            font-size: 1.8rem;
-            color: var(--off-white);
-            letter-spacing: 2px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
         .hamburger {
@@ -483,37 +466,42 @@
             padding-left: 5px;
         }
 
+        /* Footer links list — strip bullets */
         .footer-links {
             list-style: none;
+            padding: 0;
+            margin: 0;
         }
 
-        .footer-links li {
-            margin-bottom: 0.8rem;
+        .footer-links li a {
+            display: block;
         }
 
+        /* Social icons row */
         .social-links {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem;
             margin-top: 1rem;
+            align-items: center;
         }
 
         .social-links a {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, var(--medium-brown), var(--light-brown));
-            border-radius: 50%;
-            display: flex;
+            display: inline-flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.4s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            padding: 10px;
+            width: 40px;
+            height: 40px;
+            background: rgba(188, 170, 164, 0.15);
+            border-radius: 50%;
+            padding: 8px;
+            transition: background 0.3s ease, transform 0.3s ease;
+            margin-bottom: 0;
         }
 
         .social-links a:hover {
-            background: linear-gradient(135deg, var(--accent-gold), var(--light-brown));
-            transform: translateY(-5px) rotate(5deg);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            background: rgba(212, 175, 55, 0.25);
+            transform: translateY(-3px);
+            padding-left: 8px;
         }
 
         .social-links img {
@@ -521,6 +509,7 @@
             height: 100%;
             object-fit: contain;
             filter: brightness(0) invert(1);
+            display: block;
         }
 
         .copyright {
@@ -566,224 +555,64 @@
            LARGE DESKTOP FULL HD (1920px and above)
            ============================================ */
         @media screen and (min-width: 1920px) {
-            nav .container {
-                max-width: 1800px;
-                padding: 0 4rem;
-            }
-
-            nav ul {
-                gap: 3.5rem;
-            }
-
-            nav a {
-                font-size: 1.1rem;
-            }
-
-            .logo img {
-                height: 60px;
-            }
-
-            .page-header {
-                padding: 15rem 4rem 8rem;
-            }
-
-            .page-header h1 {
-                font-size: 6rem;
-                letter-spacing: 8px;
-                margin-bottom: 2rem;
-            }
-
-            .page-header p {
-                font-size: 1.6rem;
-            }
-
-            .menu-section {
-                max-width: 1800px;
-                padding: 8rem 4rem;
-            }
-
-            .section-header {
-                margin-bottom: 5rem;
-            }
-
-            .section-header h2 {
-                font-size: 4rem;
-            }
-
-            .section-header h2::after {
-                width: 120px;
-                height: 4px;
-                bottom: -15px;
-            }
-
-            .section-header p {
-                font-size: 1.4rem;
-                margin-top: 2rem;
-            }
-
-            .category-title {
-                font-size: 2.8rem;
-                margin: 4rem 0 2.5rem;
-            }
-
-            .category-title::after {
-                width: 80px;
-                height: 3px;
-                bottom: -12px;
-            }
-
-            .menu-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 3.5rem;
-            }
-
-            .menu-item {
-                padding: 2.5rem;
-                border-radius: 30px;
-            }
-
-            .item-image {
-                max-width: 320px;
-                margin-bottom: 2rem;
-            }
-
-            .item-name {
-                font-size: 2.2rem;
-                margin-bottom: 0.8rem;
-            }
-
-            .item-price {
-                font-size: 1.4rem;
-                margin-bottom: 0.8rem;
-            }
-
-            .item-description {
-                font-size: 1.1rem;
-                line-height: 1.9;
-                margin-bottom: 1.2rem;
-            }
-
-            .tag {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .footer-grid {
-                max-width: 1800px;
-                gap: 4rem;
-                padding: 0 4rem;
-            }
-
-            footer {
-                padding: 5rem 4rem 2rem;
-            }
-
-            .footer-section h3 {
-                font-size: 1.8rem;
-                margin-bottom: 2rem;
-            }
-
-            .footer-section p,
-            .footer-section a {
-                font-size: 1.1rem;
-                margin-bottom: 0.8rem;
-            }
-
-            .social-links a {
-                width: 55px;
-                height: 55px;
-            }
-
-            .copyright {
-                font-size: 1rem;
-                padding-top: 2.5rem;
-            }
-
-            .scroll-top {
-                width: 60px;
-                height: 60px;
-                font-size: 1.8rem;
-                bottom: 40px;
-                right: 40px;
-            }
+            nav .container { max-width: 1800px; padding: 0 4rem; }
+            nav ul { gap: 3.5rem; }
+            nav a { font-size: 1.1rem; }
+            .logo img { height: 60px; }
+            .page-header { padding: 15rem 4rem 8rem; }
+            .page-header h1 { font-size: 6rem; letter-spacing: 8px; margin-bottom: 2rem; }
+            .page-header p { font-size: 1.6rem; }
+            .menu-section { max-width: 1800px; padding: 8rem 4rem; }
+            .section-header { margin-bottom: 5rem; }
+            .section-header h2 { font-size: 4rem; }
+            .section-header h2::after { width: 120px; height: 4px; bottom: -15px; }
+            .section-header p { font-size: 1.4rem; margin-top: 2rem; }
+            .category-title { font-size: 2.8rem; margin: 4rem 0 2.5rem; }
+            .category-title::after { width: 80px; height: 3px; bottom: -12px; }
+            .menu-grid { grid-template-columns: repeat(4, 1fr); gap: 3.5rem; }
+            .menu-item { padding: 2.5rem; border-radius: 30px; }
+            .item-image { max-width: 320px; margin-bottom: 2rem; }
+            .item-name { font-size: 2.2rem; margin-bottom: 0.8rem; }
+            .item-price { font-size: 1.4rem; margin-bottom: 0.8rem; }
+            .item-description { font-size: 1.1rem; line-height: 1.9; margin-bottom: 1.2rem; }
+            .tag { padding: 0.5rem 1rem; font-size: 0.9rem; }
+            .footer-grid { max-width: 1800px; gap: 4rem; padding: 0 4rem; }
+            footer { padding: 5rem 4rem 2rem; }
+            .footer-section h3 { font-size: 1.8rem; margin-bottom: 2rem; }
+            .footer-section p, .footer-section a { font-size: 1.1rem; margin-bottom: 0.8rem; }
+            .social-links a { width: 55px; height: 55px; }
+            .copyright { font-size: 1rem; padding-top: 2.5rem; }
+            .scroll-top { width: 60px; height: 60px; font-size: 1.8rem; bottom: 40px; right: 40px; }
         }
 
         /* Desktop (1440px - 1919px) */
         @media screen and (min-width: 1440px) and (max-width: 1919px) {
-            nav .container {
-                max-width: 1600px;
-                padding: 0 3.5rem;
-            }
-
-            .menu-section {
-                max-width: 1600px;
-                padding: 7rem 3.5rem;
-            }
-
-            .menu-grid {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 3rem;
-            }
-
-            .footer-grid {
-                max-width: 1600px;
-            }
+            nav .container { max-width: 1600px; padding: 0 3.5rem; }
+            .menu-section { max-width: 1600px; padding: 7rem 3.5rem; }
+            .menu-grid { grid-template-columns: repeat(4, 1fr); gap: 3rem; }
+            .footer-grid { max-width: 1600px; }
         }
 
         /* Laptop (1280px - 1439px) */
         @media screen and (min-width: 1280px) and (max-width: 1439px) {
-            nav .container {
-                max-width: 1400px;
-                padding: 0 3rem;
-            }
-
-            .menu-section {
-                max-width: 1400px;
-                padding: 6rem 3rem;
-            }
-
-            .menu-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 2.5rem;
-            }
-
-            .footer-grid {
-                max-width: 1400px;
-            }
+            nav .container { max-width: 1400px; padding: 0 3rem; }
+            .menu-section { max-width: 1400px; padding: 6rem 3rem; }
+            .menu-grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+            .footer-grid { max-width: 1400px; }
         }
 
         /* Laptop smaller (1024px - 1279px) */
         @media screen and (min-width: 1024px) and (max-width: 1279px) {
-            nav .container {
-                max-width: 1200px;
-                padding: 0 2.5rem;
-            }
-
-            .menu-section {
-                max-width: 1200px;
-                padding: 6rem 2.5rem;
-            }
-
-            .menu-grid {
-                grid-template-columns: repeat(3, 1fr);
-                gap: 2.5rem;
-            }
-
-            .footer-grid {
-                max-width: 1200px;
-            }
-
-            footer {
-                padding: 4rem 2.5rem 2rem;
-            }
+            nav .container { max-width: 1200px; padding: 0 2.5rem; }
+            .menu-section { max-width: 1200px; padding: 6rem 2.5rem; }
+            .menu-grid { grid-template-columns: repeat(3, 1fr); gap: 2.5rem; }
+            .footer-grid { max-width: 1200px; }
+            footer { padding: 4rem 2.5rem 2rem; }
         }
 
         /* TABLET VIEWPORT (481px to 1024px) */
         @media screen and (max-width: 1024px) {
-            .hamburger {
-                display: flex;
-            }
-
+            .hamburger { display: flex; }
             nav ul {
                 position: fixed;
                 top: 0;
@@ -801,71 +630,24 @@
                 box-shadow: -5px 0 20px rgba(0,0,0,0.3);
                 z-index: 999;
             }
-
-            nav ul.active {
-                right: 0;
-            }
-
-            nav li {
-                width: 100%;
-            }
-
-            nav a {
-                font-size: 1.3rem;
-                display: block;
-                padding: 0.8rem 0;
-            }
-
-            .logo-text {
-                font-size: 1.5rem;
-            }
-
-            .page-header {
-                padding: 10rem 2rem 4rem;
-            }
-
-            .page-header h1 {
-                font-size: 3rem;
-                letter-spacing: 3px;
-            }
-
-            .page-header p {
-                font-size: 1.1rem;
-            }
-
-            .menu-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
-            }
-
-            .menu-item {
-                padding: 1.5rem;
-            }
-
-            .item-image {
-                max-width: 200px;
-            }
-
-            .item-name {
-                font-size: 1.5rem;
-            }
-
-            .item-price {
-                font-size: 1.1rem;
-            }
-
-            .item-description {
-                font-size: 0.95rem;
-                line-height: 1.6;
-            }
+            nav ul.active { right: 0; }
+            nav li { width: 100%; }
+            nav a { font-size: 1.3rem; display: block; padding: 0.8rem 0; }
+            .logo-text { font-size: 1.5rem; }
+            .page-header { padding: 10rem 2rem 4rem; }
+            .page-header h1 { font-size: 3rem; letter-spacing: 3px; }
+            .page-header p { font-size: 1.1rem; }
+            .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+            .menu-item { padding: 1.5rem; }
+            .item-image { max-width: 200px; }
+            .item-name { font-size: 1.5rem; }
+            .item-price { font-size: 1.1rem; }
+            .item-description { font-size: 0.95rem; line-height: 1.6; }
         }
 
         /* TABLET & MOBILE */
         @media screen and (max-width: 768px) {
-            .hamburger {
-                display: flex;
-            }
-
+            .hamburger { display: flex; }
             nav ul {
                 position: fixed;
                 top: 0;
@@ -882,489 +664,383 @@
                 transition: right 0.3s ease;
                 box-shadow: -5px 0 20px rgba(0,0,0,0.3);
             }
-
-            nav ul.active {
-                right: 0;
-            }
-
-            nav li {
-                width: 100%;
-            }
-
-            nav a {
-                font-size: 1.3rem;
-                display: block;
-                padding: 0.8rem 0;
-            }
-
-            .logo-text {
-                font-size: 1.5rem;
-            }
-
-            .page-header {
-                padding: 8rem 1.5rem 3rem;
-            }
-
-            .page-header h1 {
-                font-size: 2.5rem;
-                letter-spacing: 2px;
-            }
-
-            .page-header p {
-                font-size: 1rem;
-            }
-
-            .section-header h2 {
-                font-size: 2rem;
-            }
-
-            .section-header p {
-                font-size: 0.95rem;
-            }
-
-            .category-title {
-                font-size: 1.8rem;
-                margin: 2rem 0 1.5rem;
-            }
-
-            .menu-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1.5rem;
-            }
-
-            .menu-section {
-                padding: 3rem 1.5rem;
-            }
-
-            .menu-item {
-                padding: 1.5rem;
-            }
-
-            .item-image {
-                max-width: 180px;
-            }
-
-            .item-name {
-                font-size: 1.4rem;
-            }
-
-            .item-description {
-                font-size: 0.9rem;
-                line-height: 1.5;
-            }
-
-            .tag {
-                font-size: 0.7rem;
-                padding: 0.3rem 0.7rem;
-            }
+            nav ul.active { right: 0; }
+            nav li { width: 100%; }
+            nav a { font-size: 1.3rem; display: block; padding: 0.8rem 0; }
+            .logo-text { font-size: 1.5rem; }
+            .page-header { padding: 8rem 1.5rem 3rem; }
+            .page-header h1 { font-size: 2.5rem; letter-spacing: 2px; }
+            .page-header p { font-size: 1rem; }
+            .section-header h2 { font-size: 2rem; }
+            .section-header p { font-size: 0.95rem; }
+            .category-title { font-size: 1.8rem; margin: 2rem 0 1.5rem; }
+            .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+            .menu-section { padding: 3rem 1.5rem; }
+            .menu-item { padding: 1.5rem; }
+            .item-image { max-width: 180px; }
+            .item-name { font-size: 1.4rem; }
+            .item-description { font-size: 0.9rem; line-height: 1.5; }
+            .tag { font-size: 0.7rem; padding: 0.3rem 0.7rem; }
         }
 
         @media screen and (max-width: 480px) {
-            nav ul {
-                width: 260px;
-                padding-left: 1.5rem;
-                gap: 2rem;
-            }
-
-            nav a {
-                font-size: 1.2rem;
-            }
-
-            .page-header {
-                padding: 7rem 1rem 2.5rem;
-            }
-
-            .page-header h1 {
-                font-size: 2rem;
-            }
-
-            .page-header p {
-                font-size: 0.9rem;
-            }
-
-            .section-header {
-                margin-bottom: 2rem;
-            }
-
-            .section-header h2 {
-                font-size: 1.8rem;
-            }
-
-            .section-header h2::after {
-                width: 60px;
-                height: 2px;
-                bottom: -8px;
-            }
-
-            .section-header p {
-                font-size: 0.85rem;
-                margin-top: 1rem;
-            }
-
-            .category-title {
-                font-size: 1.5rem;
-                margin: 1.5rem 0 1rem;
-            }
-
-            .category-title::after {
-                width: 40px;
-                height: 2px;
-                bottom: -6px;
-            }
-
-            .menu-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 1rem;
-            }
-
-            .menu-item {
-                padding: 1rem;
-                border-radius: 18px;
-            }
-
-            .menu-item::before {
-                height: 3px;
-            }
-
-            .item-image {
-                max-width: 120px;
-                margin-bottom: 0.8rem;
-                border-radius: 10px;
-            }
-
-            .item-name {
-                font-size: 1.1rem;
-                margin-bottom: 0.3rem;
-            }
-
-            .item-price {
-                font-size: 0.9rem;
-                margin-bottom: 0.3rem;
-            }
-
-            .item-description {
-                font-size: 0.75rem;
-                line-height: 1.4;
-                margin-bottom: 0.5rem;
-                display: -webkit-box;
-                -webkit-line-clamp: 2;
-                -webkit-box-orient: vertical;
-                overflow: hidden;
-            }
-
-            .item-tags {
-                gap: 0.3rem;
-            }
-
-            .tag {
-                padding: 0.2rem 0.5rem;
-                font-size: 0.6rem;
-                border-radius: 15px;
-            }
-
-            .scroll-top {
-                bottom: 20px;
-                right: 20px;
-                width: 40px;
-                height: 40px;
-                font-size: 1.2rem;
-            }
-
-            .footer-grid {
-                gap: 2rem;
-                padding: 0 1rem;
-            }
-
-            footer {
-                padding: 3rem 1rem 1.5rem;
-            }
-
-            .footer-section h3 {
-                font-size: 1.3rem;
-                margin-bottom: 1rem;
-            }
-
-            .footer-section p,
-            .footer-section a {
-                font-size: 0.9rem;
-                margin-bottom: 0.4rem;
-            }
-
-            .social-links a {
-                width: 35px;
-                height: 35px;
-                padding: 7px;
-            }
+            nav ul { width: 260px; padding-left: 1.5rem; gap: 2rem; }
+            nav a { font-size: 1.2rem; }
+            .page-header { padding: 7rem 1rem 2.5rem; }
+            .page-header h1 { font-size: 2rem; }
+            .page-header p { font-size: 0.9rem; }
+            .section-header { margin-bottom: 2rem; }
+            .section-header h2 { font-size: 1.8rem; }
+            .section-header h2::after { width: 60px; height: 2px; bottom: -8px; }
+            .section-header p { font-size: 0.85rem; margin-top: 1rem; }
+            .category-title { font-size: 1.5rem; margin: 1.5rem 0 1rem; }
+            .category-title::after { width: 40px; height: 2px; bottom: -6px; }
+            .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+            .menu-item { padding: 1rem; border-radius: 18px; }
+            .menu-item::before { height: 3px; }
+            .item-image { max-width: 120px; margin-bottom: 0.8rem; border-radius: 10px; }
+            .item-name { font-size: 1.1rem; margin-bottom: 0.3rem; }
+            .item-price { font-size: 0.9rem; margin-bottom: 0.3rem; }
+            .item-description { font-size: 0.75rem; line-height: 1.4; margin-bottom: 0.5rem; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+            .item-tags { gap: 0.3rem; }
+            .tag { padding: 0.2rem 0.5rem; font-size: 0.6rem; border-radius: 15px; }
+            .scroll-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 1.2rem; }
+            .footer-grid { gap: 2rem; padding: 0 1rem; }
+            footer { padding: 3rem 1rem 1.5rem; }
+            .footer-section h3 { font-size: 1.3rem; margin-bottom: 1rem; }
+            .footer-section p, .footer-section a { font-size: 0.9rem; margin-bottom: 0.4rem; }
+            .social-links a { width: 35px; height: 35px; padding: 7px; }
         }
 
         /* Very small devices */
         @media screen and (max-width: 360px) {
-            nav ul {
-                width: 240px;
-                padding-left: 1.2rem;
-            }
-
-            nav a {
-                font-size: 1.1rem;
-            }
-
-            .page-header h1 {
-                font-size: 1.8rem;
-            }
-
-            .section-header h2 {
-                font-size: 1.5rem;
-            }
-
-            .menu-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 0.8rem;
-            }
-
-            .menu-item {
-                padding: 0.8rem;
-            }
-
-            .item-image {
-                max-width: 100px;
-            }
-
-            .item-name {
-                font-size: 1rem;
-            }
-
-            .item-price {
-                font-size: 0.8rem;
-            }
-
-            .item-description {
-                font-size: 0.7rem;
-                -webkit-line-clamp: 2;
-            }
-
-            .tag {
-                padding: 0.15rem 0.4rem;
-                font-size: 0.55rem;
-            }
+            nav ul { width: 240px; padding-left: 1.2rem; }
+            nav a { font-size: 1.1rem; }
+            .page-header h1 { font-size: 1.8rem; }
+            .section-header h2 { font-size: 1.5rem; }
+            .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+            .menu-item { padding: 0.8rem; }
+            .item-image { max-width: 100px; }
+            .item-name { font-size: 1rem; }
+            .item-price { font-size: 0.8rem; }
+            .item-description { font-size: 0.7rem; -webkit-line-clamp: 2; }
+            .tag { padding: 0.15rem 0.4rem; font-size: 0.55rem; }
         }
     </style>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-90Z65E4SVZ"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-90Z65E4SVZ');
+    </script>
+
+    <!-- schema org -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Garage Café",
+      "image": "https://visitgaragecafe.com/GRG/Icons/Garage%20Cafe%20logo%20ICON.png",
+      "@id": "https://www.visitgaragecafe.com/#coffeeshop",
+      "url": "https://www.visitgaragecafe.com/",
+      "telephone": "+63XXXXXXXXX",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Mawaque",
+        "addressLocality": "Mabalacat City",
+        "addressRegion": "Pampanga",
+        "postalCode": "2010",
+        "addressCountry": "PH"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 15.2215,
+        "longitude": 120.5744
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "22:00"
+      },
+      "sameAs": [
+        "https://www.facebook.com/garagecafe",
+        "https://www.instagram.com/garagecafe"
+      ]
+    }
+    </script>
 </head>
 <body>
 
-<nav id="navbar">
-    <div class="container">
-        <a href="index.html" class="logo">
-            <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café">
-        </a>
-        <div class="hamburger" id="hamburger">
-            <span></span><span></span><span></span>
-        </div>
-        <ul id="navMenu">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About</a></li>
-            <li><a href="menu.html" class="active">Menu</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </div>
-</nav>
+    <nav id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo" onerror="this.style.display='none'">
+            </a>
 
-<section class="page-header">
-    <h1>Our Menu</h1>
-    <p>Affordable coffee • frappes • comfort food</p>
-</section>
-
-<section class="menu-section">
-    <div id="menuContent">
-        <div class="loading-indicator">
-            <div class="loading-dots">
-                <span></span><span></span><span></span>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
-            <p style="margin-top:1.2rem;">Loading menu…</p>
+
+            <ul id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="menu.html" class="active">Menu</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <h1>Our Menu</h1>
+        <p>Affordable coffee & comfort food for everyone</p>
+    </section>
+
+    <!-- Dynamic menu content loads here from MongoDB -->
+    <div id="menuContent">
+        <div class="menu-loading">
+            <div class="spinner"></div>
+            <p>Loading menu…</p>
         </div>
     </div>
-</section>
 
-<footer>
-    <div class="footer-grid">
-        <div class="footer-section">
-            <h3>GARAGE CAFÉ</h3>
-            <p>Mawaque, Mabalacat City, Pampanga</p>
-            <p>Near Metro Clark Homes, Sapang Biabas</p>
-            <p>visitgaragecafe.com</p>
-        </div>
-        <div class="footer-section">
-            <h3>Quick Links</h3>
-            <p><a href="index.html">Home</a></p>
-            <p><a href="about.html">About</a></p>
-            <p><a href="menu.html">Menu</a></p>
-            <p><a href="blog.html">Blog</a></p>
-            <p><a href="contact.html">Contact</a></p>
-        </div>
-    </div>
-    <div class="copyright">
-        © 2025 Garage Café • www.visitgaragecafe.com
-    </div>
-</footer>
-
-<button class="scroll-top" id="scrollTop">↑</button>
-
-<script>
-    // ── Use RELATIVE path – works everywhere (localhost, Render, phone) ──
-    const API = '/api/menuitems';
-
-    console.log("Fetching menu from:", API);
-
-    const CATEGORY_ORDER = [
-        'Coffee Based', 'Specials', 'Non-Coffee',
-        'Frappe', 'Yogurt', 'Food'
-    ];
-
-    function getImageUrl(url) {
-        if (!url) return '';
-        if (url.startsWith('http')) return url;
-        if (url.startsWith('/')) return url; // already absolute
-        return `/uploads/${url}`;
-    }
-
-    function buildMenuCard(item) {
-        const tags = [];
-        if (item.isNew)     tags.push('<span class="tag new">NEW</span>');
-        if (item.isBlended) tags.push('<span class="tag blended">BLENDED</span>');
-        (item.tags || []).forEach(t => tags.push(`<span class="tag other">${t}</span>`));
-
-        return `
-            <div class="menu-card">
-                <div class="menu-image-container">
-                    <img src="${getImageUrl(item.imageUrl)}" 
-                         alt="${item.name}" 
-                         class="menu-image"
-                         loading="lazy"
-                         onerror="this.src='https://via.placeholder.com/340x240/eee/aaa?text=No+Image';">
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h3>GARAGE CAFÉ</h3>
+                <p>Mawaque, Mabalacat City, Pampanga</p>
+                <p>Near Metro Clark Homes, Sapang Biabas</p>
+                <p>visitgaragecafe.com</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/p/Garage-Caf%C3%A9-61567205202489/" aria-label="Facebook">
+                        <img src="GRG/Icons/facebook.png" alt="Facebook" onerror="this.style.display='none'">
+                    </a>
+                    <a href="https://www.instagram.com/garagecafe.1110/" aria-label="Instagram">
+                        <img src="GRG/Icons/instagram.png" alt="Instagram" onerror="this.style.display='none'">
+                    </a>
                 </div>
-                <div class="menu-content">
-                    <div class="menu-header">
-                        <h3 class="menu-name">${item.name}</h3>
-                        <div class="menu-price">${item.price}</div>
-                    </div>
-                    ${item.description ? `<p class="menu-description">${item.description}</p>` : ''}
-                    ${tags.length ? `<div class="menu-tags">${tags.join('')}</div>` : ''}
-                </div>
-            </div>`;
-    }
+            </div>
 
-    function renderMenu(items) {
-        const container = document.getElementById('menuContent');
-        container.innerHTML = '';
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="menu.html">Menu</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
 
-        if (!items?.length) {
-            container.innerHTML = '<p style="text-align:center; font-size:1.3rem; padding:6rem 1rem; color:#555;">No menu items available yet.<br>Check back soon! ☕</p>';
-            return;
-        }
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Dine In</a></li>
+                    <li><a href="#">Meal Pre-Orders</a></li>
+                    <li><a href="#">Event Coffee Setups</a></li>
+                    <li><a href="#">Study Space</a></li>
+                </ul>
+            </div>
+        </div>
 
-        const grouped = {};
-        items.forEach(i => {
-            if (!grouped[i.category]) grouped[i.category] = [];
-            grouped[i.category].push(i);
-        });
+        <div class="copyright">
+            <p>© 2025 Garage Café | www.visitgaragecafe.com</p>
+        </div>
+    </footer>
 
-        CATEGORY_ORDER.forEach(cat => {
-            if (!grouped[cat]?.length) return;
+    <div class="scroll-top" id="scrollTop">↑</div>
 
-            let html = `
-                <div class="section-header">
-                    <h2>${cat}</h2>
-                </div>`;
+    <script>
+        // ── API CONFIG ────────────────────────────────────────────────────
+        // Auto-detect: use full backend URL on production, relative path on localhost
+        const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const BACKEND_URL = IS_LOCAL ? '' : 'https://garagecafe-backend.onrender.com';
+        // ↑↑↑ IMPORTANT: Replace 'https://garagecafe-backend.onrender.com' with your
+        //     actual backend/server URL (e.g. your Render, Railway, VPS URL, etc.)
+        const API = BACKEND_URL + '/api/menuitems';
 
-            if (cat === 'Frappe') {
-                const subCoffee = grouped[cat].filter(i => i.subcategory === 'Coffee Based');
-                const subNon    = grouped[cat].filter(i => i.subcategory === 'Non-Coffee');
-                const others    = grouped[cat].filter(i => !i.subcategory);
+        // ── CATEGORY ORDER & SUBTITLES ────────────────────────────────────
+        const CATEGORY_ORDER = ['Coffee Based', 'Specials', 'Non-Coffee', 'Frappe', 'Yogurt', 'Food'];
+        const CATEGORY_SUBTITLES = {
+            'Coffee Based': 'Espresso drinks and favorites',
+            'Specials':     'Signature creations and new favorites',
+            'Non-Coffee':   'Delicious drinks without the caffeine',
+            'Frappe':       'Blended and refreshing',
+            'Yogurt':       'Fresh and healthy yogurt drinks',
+            'Food':         'Delicious snacks and comfort food'
+        };
 
-                if (others.length) {
-                    html += '<div class="menu-grid">' + others.map(buildMenuCard).join('') + '</div>';
-                }
-                if (subCoffee.length) {
-                    html += '<h3 class="category-title">Coffee Based</h3><div class="menu-grid">' + subCoffee.map(buildMenuCard).join('') + '</div>';
-                }
-                if (subNon.length) {
-                    html += '<h3 class="category-title">Non-Coffee</h3><div class="menu-grid">' + subNon.map(buildMenuCard).join('') + '</div>';
-                }
-            } else {
-                html += '<div class="menu-grid">' + grouped[cat].map(buildMenuCard).join('') + '</div>';
-            }
-
-            container.insertAdjacentHTML('beforeend', html);
-        });
-    }
-
-    async function loadMenu() {
-        const container = document.getElementById('menuContent');
-        container.innerHTML = `
-            <div class="loading-indicator">
-                <div class="loading-dots"><span></span><span></span><span></span></div>
-                <p>Loading menu…</p>
-            </div>`;
-
-        try {
-            const res = await fetch(API);
-            console.log("Fetch status:", res.status);
-
-            if (!res.ok) {
-                throw new Error(`Server responded with ${res.status}`);
-            }
-
-            const data = await res.json();
-            console.log("Received items:", data.length);
-
-            const activeItems = data.filter(i => i.active !== false);
-            activeItems.sort((a,b) => (a.sortOrder || 0) - (b.sortOrder || 0));
-
-            renderMenu(activeItems);
-        } catch (err) {
-            console.error("Menu load error:", err);
+        // ── LOAD MENU FROM BACKEND ────────────────────────────────────────
+        async function loadMenu() {
+            const container = document.getElementById('menuContent');
             container.innerHTML = `
-                <div style="text-align:center; padding:6rem 1rem; color:#c62828;">
-                    <p>Could not load menu.<br>${err.message}</p>
-                    <button onclick="loadMenu()" style="
-                        margin-top:1.5rem; padding:0.9rem 2rem;
-                        background:var(--accent-gold); color:#2C1810;
-                        border:none; border-radius:12px; font-weight:600;
-                        cursor:pointer; font-size:1.1rem;
-                    ">
-                        Try Again
-                    </button>
+                <div class="menu-loading">
+                    <div class="spinner"></div>
+                    <p>Loading menu…</p>
                 </div>`;
+
+            try {
+                const res = await fetch(API);
+                if (!res.ok) {
+                    throw new Error(`Server responded with ${res.status}`);
+                }
+                const items = await res.json();
+                renderMenu(items);
+            } catch (err) {
+                console.error('Menu load error:', err);
+                container.innerHTML = `
+                    <div class="menu-loading" style="color:#c62828;">
+                        <p>⚠️ Could not load menu.<br>${err.message}</p>
+                        <button onclick="loadMenu()" style="
+                            margin-top:1.5rem; padding:0.9rem 2rem;
+                            background:var(--accent-gold); color:#2C1810;
+                            border:none; border-radius:12px; font-weight:600;
+                            cursor:pointer; font-size:1.1rem;
+                        ">
+                            Try Again
+                        </button>
+                    </div>`;
+            }
         }
-    }
 
-    // Navigation & scroll
-    document.getElementById('hamburger').onclick = () => {
-        document.getElementById('hamburger').classList.toggle('active');
-        document.getElementById('navMenu').classList.toggle('active');
-    };
+        // ── RENDER MENU ───────────────────────────────────────────────────
+        function renderMenu(items) {
+            const container = document.getElementById('menuContent');
+            container.innerHTML = '';
 
-    window.onclick = e => {
-        const menu = document.getElementById('navMenu');
-        const ham = document.getElementById('hamburger');
-        if (!menu.contains(e.target) && !ham.contains(e.target) && menu.classList.contains('active')) {
-            ham.classList.remove('active');
-            menu.classList.remove('active');
+            if (!items || !items.length) {
+                container.innerHTML = '<div class="menu-loading"><p>No menu items available yet. Check back soon! ☕</p></div>';
+                return;
+            }
+
+            // Group by category
+            const grouped = {};
+            items.forEach(item => {
+                if (!grouped[item.category]) grouped[item.category] = [];
+                grouped[item.category].push(item);
+            });
+
+            let html = '';
+
+            CATEGORY_ORDER.forEach(cat => {
+                if (!grouped[cat] || !grouped[cat].length) return;
+                const catItems = grouped[cat];
+
+                html += `<section class="menu-section">
+                    <div class="section-header">
+                        <h2>${cat}</h2>
+                        <p>${CATEGORY_SUBTITLES[cat] || ''}</p>
+                    </div>`;
+
+                if (cat === 'Frappe') {
+                    // Subcategories for Frappe
+                    const subCoffee    = catItems.filter(i => i.subcategory === 'Coffee Based');
+                    const subNonCoffee = catItems.filter(i => i.subcategory === 'Non-Coffee');
+                    const noSub        = catItems.filter(i => !i.subcategory);
+
+                    if (noSub.length)        html += buildGrid(noSub);
+                    if (subCoffee.length) {
+                        html += '<h3 class="category-title">Coffee Based</h3>';
+                        html += buildGrid(subCoffee);
+                    }
+                    if (subNonCoffee.length) {
+                        html += '<h3 class="category-title">Non-Coffee</h3>';
+                        html += buildGrid(subNonCoffee);
+                    }
+                } else {
+                    html += buildGrid(catItems);
+                }
+
+                html += `</section>`;
+            });
+
+            container.innerHTML = html;
         }
-    };
 
-    window.onscroll = () => {
-        document.getElementById('navbar').classList.toggle('scrolled', scrollY > 80);
-        document.getElementById('scrollTop').classList.toggle('visible', scrollY > 400);
-    };
+        // ── BUILD GRID ────────────────────────────────────────────────────
+        function buildGrid(items) {
+            const cards = items.map(item => {
+                const newTag     = item.isNew     ? '<span class="tag new">NEW</span>'         : '';
+                const blendedTag = item.isBlended ? '<span class="tag blended">Blended</span>' : '';
+                const otherTags  = (item.tags || []).map(tag => `<span class="tag">${tag}</span>`).join('');
 
-    document.getElementById('scrollTop').onclick = () => scrollTo({top:0, behavior:'smooth'});
+                // Build image URL: handle absolute URLs, relative /uploads paths,
+                // and production vs local environments
+                let imgHTML = '';
+                if (item.imageUrl) {
+                    let src;
+                    if (item.imageUrl.startsWith('http')) {
+                        // Already an absolute URL — use as-is
+                        src = item.imageUrl;
+                    } else {
+                        // Relative path like /uploads/filename.jpg
+                        // On production the frontend is separate from the backend,
+                        // so prepend the backend origin
+                        const uploadPath = item.imageUrl.startsWith('/') ? item.imageUrl : '/' + item.imageUrl;
+                        src = BACKEND_URL + uploadPath;
+                    }
+                    imgHTML = `<img src="${src}" alt="${item.name}" class="item-image" onerror="this.style.display='none'">`;
+                }
 
-    // Start
-    document.addEventListener('DOMContentLoaded', () => {
-        console.log("Page ready → starting menu load");
+                return `<div class="menu-item">
+                    ${imgHTML}
+                    <div class="item-header">
+                        <h3 class="item-name">${item.name}</h3>
+                        <span class="item-price">${item.price}</span>
+                    </div>
+                    <p class="item-description">${item.description || ''}</p>
+                    <div class="item-tags">${newTag}${blendedTag}${otherTags}</div>
+                </div>`;
+            }).join('');
+
+            return `<div class="menu-grid">${cards}</div>`;
+        }
+
+        // ── NAVIGATION & SCROLL ───────────────────────────────────────────
+        const hamburger = document.getElementById('hamburger');
+        const navMenu   = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', function () {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        document.querySelectorAll('nav ul li a').forEach(link => {
+            link.addEventListener('click', function () {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        document.addEventListener('click', function (event) {
+            const isClickInsideNav    = navMenu.contains(event.target);
+            const isClickOnHamburger  = hamburger.contains(event.target);
+            if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
+
+        window.addEventListener('scroll', function () {
+            document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 100);
+            document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 300);
+        });
+
+        document.getElementById('scrollTop').addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Start loading
         loadMenu();
-    });
-</script>
+    </script>
 </body>
 </html>
