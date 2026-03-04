@@ -6,6 +6,7 @@
     <title>About Garage Café</title>
     <meta name="description" content="Garage Café in Mawaque, Mabalacat City, Pampanga. Affordable coffee shop near Metro Clark Homes offering comfort food, study hub, and event coffee setups.">
     <meta name="keywords" content="Garage Café, GRG Café, Coffee shop Mabalacat Pampanga, Café near Metro Clark Homes, Local café Pampanga">
+    <meta name="google-site-verification" content="V0YQPBmwBNB9DKfbnGSBiypyLKOI9rSlFgJZc8A22uc" />
     <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" href="GRG/Icons/Garage Cafe logo ICON.png" type="image/png">
     <style>
@@ -36,7 +37,7 @@
             line-height: 1.6;
             overflow-x: hidden;
         }
-        
+
         /* Navigation */
         nav {
             position: fixed;
@@ -90,11 +91,9 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
         }
 
-        /* ===========================
-        HAMBURGER MENU RESPONSIVE
-        =========================== */
+        /* Hamburger Menu */
         .hamburger {
-            display: none; /* default hidden for desktop >1024px */
+            display: none;
             flex-direction: column;
             cursor: pointer;
             z-index: 1001;
@@ -158,7 +157,7 @@
         nav a.active {
             color: var(--off-white);
         }
-        
+
         /* Page Header */
         .page-header {
             background: linear-gradient(135deg, rgba(93, 64, 55, 0.85) 0%, rgba(44, 24, 16, 0.9) 100%),
@@ -218,7 +217,7 @@
             font-weight: 300;
             text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
         }
-        
+
         /* Content Sections */
         .content-section {
             padding: 6rem 3rem;
@@ -260,7 +259,7 @@
             background: linear-gradient(90deg, var(--light-brown), var(--accent-gold), var(--light-brown));
             border-radius: 2px;
         }
-        
+
         /* Two Column Layout */
         .two-column {
             display: grid;
@@ -289,7 +288,7 @@
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
-        
+
         /* Values Grid */
         .values-grid {
             display: grid;
@@ -357,7 +356,7 @@
             margin-bottom: 1.5rem;
             font-weight: 300;
         }
-        
+
         /* Scroll to top button */
         .scroll-top {
             position: fixed;
@@ -469,6 +468,7 @@
             background: linear-gradient(135deg, var(--accent-gold), var(--light-brown));
             transform: translateY(-5px) rotate(5deg);
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            padding: 10px;
         }
 
         .social-links img {
@@ -485,8 +485,8 @@
             font-size: 0.9rem;
         }
 
-        /* RESPONSIVE DESIGN - Matching all pages */
-        
+        /* RESPONSIVE DESIGN - Matching index.html exactly */
+
         /* Large Desktop Full HD (1920px and above) */
         @media screen and (min-width: 1920px) {
             nav .container {
@@ -551,10 +551,6 @@
                 font-size: 1.2rem;
                 line-height: 2.1;
                 margin-bottom: 2rem;
-            }
-
-            .video-container video {
-                border-radius: 15px;
             }
 
             .values-grid {
@@ -694,11 +690,8 @@
                 padding: 4rem 2.5rem 2rem;
             }
         }
-        
-        /* ============================================
-           TABLET VIEWPORT (481px to 1024px)
-           ============================================ */
-        /* HAMBURGER MENU FOR 1024px AND BELOW */
+
+        /* Tablet (481px - 1024px) */
         @media screen and (max-width: 1024px) {
             .hamburger {
                 display: flex;
@@ -708,7 +701,7 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 280px;
+                width: 300px;
                 height: 100vh;
                 background: rgba(44, 24, 16, 0.98);
                 flex-direction: column;
@@ -719,7 +712,7 @@
                 gap: 2.5rem;
                 transition: right 0.3s ease;
                 box-shadow: -5px 0 20px rgba(0,0,0,0.3);
-                z-index: 999;
+                z-index: 1000;
             }
 
             nav ul.active {
@@ -748,71 +741,96 @@
 
             .values-grid {
                 grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-
-
-        /* ============================================
-           TABLET & MOBILE - HAMBURGER MENU
-           ============================================ */
-        @media screen and (max-width: 768px) {
-            .hamburger {
-                display: flex;
+                gap: 1.5rem;
             }
 
-            nav ul {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 280px;
-                height: 100vh;
-                background: rgba(44, 24, 16, 0.98);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-                padding-top: 100px;
-                padding-left: 2rem;
-                gap: 2.5rem;
-                transition: right 0.3s ease;
-                box-shadow: -5px 0 20px rgba(0,0,0,0.3);
-            }
-
-            nav ul.active {
-                right: 0;
-            }
-
-            nav li {
-                width: 100%;
-            }
-
-            nav a {
-                font-size: 1.3rem;
-                display: block;
-                padding: 0.8rem 0;
-            }
-
-            .logo-text {
-                font-size: 1.5rem;
-            }
-            
+            /* Tablet font & layout fixes */
             .page-header {
                 padding: 10rem 2rem 4rem;
             }
-            
+
+            .page-header h1 {
+                font-size: 3rem;
+                letter-spacing: 3px;
+                margin-bottom: 1rem;
+            }
+
+            .page-header p {
+                font-size: 1.1rem;
+            }
+
+            .content-section {
+                padding: 5rem 2rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .section-label {
+                font-size: 0.8rem;
+                letter-spacing: 2px;
+            }
+
+            .text-content p {
+                font-size: 1rem;
+                line-height: 1.9;
+                margin-bottom: 1.2rem;
+            }
+
+            .value-card {
+                padding: 2.5rem 2rem;
+                border-radius: 20px;
+            }
+
+            .value-card h3 {
+                font-size: 1.4rem;
+                margin-bottom: 1rem;
+            }
+
+            .value-card p {
+                font-size: 0.95rem;
+                line-height: 1.8;
+            }
+
+            .vision-section p {
+                font-size: 1rem;
+                line-height: 1.9;
+            }
+
+            .footer-section h3 {
+                font-size: 1.3rem;
+            }
+
+            .footer-section p,
+            .footer-section a {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            nav ul {
+                width: 280px;
+            }
+
+            .page-header {
+                padding: 10rem 2rem 4rem;
+            }
+
             .page-header h1 {
                 font-size: 2.5rem;
                 letter-spacing: 2px;
             }
-            
+
             .section-title {
                 font-size: 2.5rem;
             }
-            
+
             .values-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .content-section {
                 padding: 4rem 1.5rem;
             }
@@ -832,7 +850,7 @@
             .page-header h1 {
                 font-size: 2rem;
             }
-            
+
             .scroll-top {
                 bottom: 20px;
                 right: 20px;
@@ -851,7 +869,7 @@
         }
     </style>
 
-        <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-90Z65E4SVZ"></script>
     <script>
     window.dataLayer = window.dataLayer || [];
@@ -860,7 +878,51 @@
 
     gtag('config', 'G-90Z65E4SVZ');
     </script>
-    
+
+
+    <!--schema org-->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Garage Café",
+      "image": "https://visitgaragecafe.com/GRG/Icons/Garage%20Cafe%20logo%20ICON.png",
+      "@id": "https://www.visitgaragecafe.com/#coffeeshop",
+      "url": "https://www.visitgaragecafe.com/",
+      "telephone": "+63XXXXXXXXX",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Mawaque",
+        "addressLocality": "Mabalacat City",
+        "addressRegion": "Pampanga",
+        "postalCode": "2010",
+        "addressCountry": "PH"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 15.2215,
+        "longitude": 120.5744
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "22:00"
+      },
+      "sameAs": [
+        "https://www.facebook.com/garagecafe",
+        "https://www.instagram.com/garagecafe"
+      ]
+    }
+    </script>
 </head>
 <body>
     <nav id="navbar">
@@ -868,13 +930,13 @@
             <a href="index.html" class="logo">
                 <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo" onerror="this.style.display='none'">
             </a>
-            
+
             <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
-            
+
             <ul id="navMenu">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html" class="active">About</a></li>
@@ -958,7 +1020,7 @@
                     </a>
                 </div>
             </div>
-            
+
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul class="footer-links">
@@ -969,7 +1031,7 @@
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
-            
+
             <div class="footer-section">
                 <h3>Services</h3>
                 <ul class="footer-links">
@@ -980,7 +1042,7 @@
                 </ul>
             </div>
         </div>
-        
+
         <div class="copyright">
             <p>&copy; 2025 Garage Café | www.visitgaragecafe.com</p>
         </div>
@@ -992,7 +1054,7 @@
         // Hamburger menu toggle
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
-        
+
         hamburger.addEventListener('click', function() {
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
@@ -1011,7 +1073,7 @@
         document.addEventListener('click', function(event) {
             const isClickInsideNav = navMenu.contains(event.target);
             const isClickOnHamburger = hamburger.contains(event.target);
-            
+
             if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
@@ -1030,7 +1092,7 @@
 
         // Scroll to top button
         const scrollTop = document.getElementById('scrollTop');
-        
+
         window.addEventListener('scroll', function() {
             if (window.scrollY > 300) {
                 scrollTop.classList.add('visible');

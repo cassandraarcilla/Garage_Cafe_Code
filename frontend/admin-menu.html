@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin – Garage Café Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root { --dark-brown:#2C1810; --medium-brown:#5D4037; --light-brown:#8D6E63; --lighter-brown:#BCAAA4; --off-white:#F5F5DC; --cream:#FFF8E7; --accent-gold:#D4AF37; --success:#2e7d32; --danger:#c62828; --warning:#e65100; }
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:'Roboto',sans-serif; background:#f5efe8; color:var(--dark-brown); display:flex; min-height:100vh; }
+        .sidebar { width:260px; background:#1e0f09; color:var(--off-white); display:flex; flex-direction:column; padding:2rem 0; position:fixed; height:100vh; z-index:100; overflow-y:auto; }
+        .sidebar-logo { text-align:center; padding:0 1.5rem 2rem; border-bottom:1px solid rgba(188,170,164,0.2); }
+        .sidebar-logo .icon { font-size:2.5rem; margin-bottom:0.5rem; }
+        .sidebar-logo h2 { font-family:'Yeseva One',serif; font-size:1.4rem; color:var(--accent-gold); }
+        .sidebar-logo p { font-size:0.75rem; color:var(--lighter-brown); margin-top:0.2rem; }
+        .sidebar nav { flex:1; padding:1.5rem 0; }
+        .sidebar nav a { display:flex; align-items:center; gap:0.8rem; padding:0.85rem 1.5rem; color:var(--lighter-brown); text-decoration:none; font-size:0.95rem; transition:all 0.2s; border-left:3px solid transparent; }
+        .sidebar nav a:hover, .sidebar nav a.active { background:rgba(212,175,55,0.1); color:var(--off-white); border-left-color:var(--accent-gold); }
+        .main { margin-left:260px; flex:1; display:flex; flex-direction:column; min-width:0; }
+        .topbar { background:white; padding:1rem 2rem; border-bottom:1px solid #e0d5c8; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:50; }
+        .topbar h1 { font-family:'Yeseva One',serif; font-size:1.5rem; color:var(--dark-brown); }
+        .btn { padding:0.6rem 1.4rem; border:none; border-radius:8px; font-family:'Roboto',sans-serif; font-size:0.9rem; font-weight:500; cursor:pointer; transition:all 0.2s; }
+        .btn-primary { background:var(--accent-gold); color:var(--dark-brown); }
+        .btn-primary:hover { background:#c9a227; }
+        .btn-primary:disabled { opacity:0.6; cursor:not-allowed; }
+        .btn-danger { background:var(--danger); color:white; }
+        .btn-danger:hover { background:#b71c1c; }
+        .btn-warning { background:var(--warning); color:white; }
+        .btn-sm { padding:0.4rem 0.9rem; font-size:0.82rem; }
+        .btn-cancel { background:#f0e8df; color:var(--medium-brown); }
+        .btn-cancel:hover { background:#e0d5c8; }
+        .content { padding:2rem; flex:1; }
+        .stats-row { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:1rem; margin-bottom:2rem; }
+        .stat-card { background:white; border-radius:12px; padding:1.2rem 1.5rem; box-shadow:0 2px 8px rgba(44,24,16,0.07); border-left:4px solid var(--accent-gold); }
+        .stat-card .number { font-size:2rem; font-weight:700; color:var(--dark-brown); }
+        .stat-card .label { font-size:0.8rem; color:var(--light-brown); text-transform:uppercase; letter-spacing:0.5px; margin-top:0.2rem; }
+        .table-card { background:white; border-radius:16px; box-shadow:0 2px 12px rgba(44,24,16,0.07); overflow:hidden; }
+        .table-header { padding:1.2rem 1.5rem; border-bottom:1px solid #f0e8df; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.8rem; }
+        .table-header h3 { font-family:'Yeseva One',serif; font-size:1.2rem; color:var(--dark-brown); }
+        .filter-row { display:flex; gap:0.8rem; flex-wrap:wrap; align-items:center; }
+        select.filter-select, input.search-input { padding:0.5rem 0.9rem; border:1px solid #e0d5c8; border-radius:8px; font-family:'Roboto',sans-serif; font-size:0.85rem; background:#faf7f3; color:var(--dark-brown); }
+        .table-wrap { overflow-x:auto; }
+        table { width:100%; border-collapse:collapse; min-width:700px; }
+        thead tr { background:#faf3e8; }
+        th { padding:0.9rem 1rem; text-align:left; font-size:0.78rem; font-weight:600; text-transform:uppercase; letter-spacing:0.5px; color:var(--medium-brown); white-space:nowrap; }
+        td { padding:0.9rem 1rem; border-bottom:1px solid #f5efe8; font-size:0.88rem; vertical-align:middle; }
+        tr:last-child td { border-bottom:none; }
+        tr:hover td { background:#fffdf7; }
+        .item-thumb { width:52px; height:52px; border-radius:10px; object-fit:cover; display:block; }
+        .no-img { width:52px; height:52px; border-radius:10px; background:#f0e8df; display:flex; align-items:center; justify-content:center; font-size:1.4rem; }
+        .badge { display:inline-block; padding:0.25rem 0.7rem; border-radius:20px; font-size:0.72rem; font-weight:600; text-transform:uppercase; }
+        .badge-active { background:#e8f5e9; color:#2e7d32; }
+        .badge-inactive { background:#fce4ec; color:#c62828; }
+        .badge-new { background:#ffebee; color:#c62828; margin-left:0.4rem; }
+        .badge-blended { background:#efebe9; color:#4e342e; margin-left:0.3rem; }
+        .category-pill { display:inline-block; padding:0.2rem 0.7rem; border-radius:20px; font-size:0.72rem; background:#fdf3d0; color:#7a5c00; }
+        .actions { display:flex; gap:0.4rem; flex-wrap:nowrap; }
+        /* Modal */
+        .modal-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.55); z-index:200; align-items:center; justify-content:center; padding:1rem; }
+        .modal-overlay.open { display:flex; }
+        .modal { background:white; border-radius:20px; width:100%; max-width:620px; max-height:92vh; overflow-y:auto; box-shadow:0 20px 60px rgba(0,0,0,0.3); }
+        .modal-head { padding:1.4rem 1.8rem; border-bottom:1px solid #f0e8df; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; background:white; z-index:1; border-radius:20px 20px 0 0; }
+        .modal-head h3 { font-family:'Yeseva One',serif; font-size:1.3rem; color:var(--dark-brown); }
+        .modal-close { background:none; border:none; font-size:1.6rem; cursor:pointer; color:var(--light-brown); line-height:1; padding:0; }
+        .modal-close:hover { color:var(--danger); }
+        .modal-body { padding:1.8rem; }
+        .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; }
+        .form-group { display:flex; flex-direction:column; gap:0.4rem; }
+        .form-group.full { grid-column:1/-1; }
+        .form-group label { font-size:0.82rem; font-weight:600; color:var(--medium-brown); text-transform:uppercase; letter-spacing:0.3px; }
+        input[type="text"], input[type="number"], select, textarea { padding:0.7rem 0.9rem; border:1.5px solid #e0d5c8; border-radius:8px; font-family:'Roboto',sans-serif; font-size:0.9rem; color:var(--dark-brown); background:#faf7f3; width:100%; transition:border-color 0.2s; }
+        input:focus, select:focus, textarea:focus { outline:none; border-color:var(--accent-gold); background:white; }
+        textarea { resize:vertical; min-height:80px; }
+        .image-upload-area { border:2px dashed #e0d5c8; border-radius:12px; padding:1.5rem; text-align:center; cursor:pointer; position:relative; overflow:hidden; transition:all 0.2s; background:#faf7f3; }
+        .image-upload-area:hover { border-color:var(--accent-gold); background:#fffdf5; }
+        .image-upload-area input[type="file"] { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; }
+        .image-upload-area .upload-icon { font-size:2rem; margin-bottom:0.5rem; display:block; }
+        .image-upload-area p { font-size:0.85rem; color:var(--light-brown); margin:0; }
+        .image-upload-area small { font-size:0.75rem; color:var(--lighter-brown); }
+        .image-preview-wrap { margin-top:1rem; display:none; text-align:center; }
+        .image-preview-wrap img { max-width:100%; max-height:200px; border-radius:10px; object-fit:cover; border:2px solid #e0d5c8; }
+        .image-preview-wrap p { font-size:0.8rem; color:var(--light-brown); margin-top:0.4rem; }
+        .check-row { display:flex; gap:1.5rem; flex-wrap:wrap; }
+        .check-item { display:flex; align-items:center; gap:0.5rem; cursor:pointer; }
+        .check-item input[type="checkbox"] { width:16px; height:16px; accent-color:var(--accent-gold); cursor:pointer; flex-shrink:0; }
+        .check-item span { font-size:0.88rem; color:var(--medium-brown); }
+        .modal-foot { padding:1.2rem 1.8rem; border-top:1px solid #f0e8df; display:flex; justify-content:flex-end; gap:0.8rem; }
+        /* Toast */
+        #toast { position:fixed; bottom:2rem; right:2rem; padding:0.9rem 1.5rem; border-radius:12px; color:white; font-weight:500; font-size:0.9rem; z-index:9999; opacity:0; transform:translateY(10px); transition:all 0.3s; pointer-events:none; max-width:350px; }
+        #toast.show { opacity:1; transform:translateY(0); }
+        #toast.success { background:var(--success); }
+        #toast.error { background:var(--danger); }
+        .loading { text-align:center; padding:3rem; color:var(--light-brown); font-size:1rem; }
+        /* Delete confirm */
+        .confirm-overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:300; align-items:center; justify-content:center; padding:1rem; }
+        .confirm-overlay.open { display:flex; }
+        .confirm-box { background:white; border-radius:16px; padding:2rem; max-width:380px; width:100%; text-align:center; box-shadow:0 20px 60px rgba(0,0,0,0.3); }
+        .confirm-box .icon { font-size:3rem; margin-bottom:0.8rem; }
+        .confirm-box h4 { font-size:1.2rem; color:var(--dark-brown); margin-bottom:0.5rem; }
+        .confirm-box p { color:var(--medium-brown); font-size:0.9rem; margin-bottom:1.5rem; }
+        .confirm-box .btns { display:flex; gap:0.8rem; justify-content:center; }
+        @media (max-width:768px) {
+            .sidebar { transform:translateX(-100%); transition:transform 0.3s; }
+            .sidebar.open { transform:translateX(0); }
+            .main { margin-left:0; }
+            .form-grid { grid-template-columns:1fr; }
+            .form-group.full { grid-column:1; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+    <div class="sidebar-logo">
+        <div class="icon">☕</div>
+        <h2>Garage Café</h2>
+        <p>Admin Panel</p>
+    </div>
+    <nav>
+        <a href="admin-menu.html" class="active">🍽️ &nbsp;Menu Items</a>
+        <a href="admin-blog.html">📝 &nbsp;Blog Posts</a>
+        <a href="menu.html" target="_blank">👁️ &nbsp;View Menu</a>
+        <a href="index.html" target="_blank">🏠 &nbsp;View Site</a>
+    </nav>
+</aside>
+
+<!-- Main -->
+<div class="main">
+    <div class="topbar">
+        <h1>Menu Items</h1>
+        <button class="btn btn-primary" onclick="openModal()">+ Add Menu Item</button>
+    </div>
+
+    <div class="content">
+        <!-- Stats -->
+        <div class="stats-row">
+            <div class="stat-card"><div class="number" id="statTotal">—</div><div class="label">Total Items</div></div>
+            <div class="stat-card"><div class="number" id="statActive">—</div><div class="label">Active</div></div>
+            <div class="stat-card"><div class="number" id="statNew">—</div><div class="label">New Items</div></div>
+            <div class="stat-card"><div class="number" id="statCats">—</div><div class="label">Categories</div></div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-card">
+            <div class="table-header">
+                <h3>All Menu Items</h3>
+                <div class="filter-row">
+                    <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search..." oninput="renderTable()">
+                    <select class="filter-select" id="filterCat" onchange="renderTable()">
+                        <option value="">All Categories</option>
+                        <option>Coffee Based</option>
+                        <option>Specials</option>
+                        <option>Non-Coffee</option>
+                        <option>Frappe</option>
+                        <option>Yogurt</option>
+                        <option>Food</option>
+                    </select>
+                    <select class="filter-select" id="filterStatus" onchange="renderTable()">
+                        <option value="">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Hidden</option>
+                    </select>
+                </div>
+            </div>
+            <div id="tableBody"><div class="loading">Loading menu items…</div></div>
+        </div>
+    </div>
+</div>
+
+<!-- Add / Edit Modal -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+        <div class="modal-head">
+            <h3 id="modalTitle">Add Menu Item</h3>
+            <button class="modal-close" onclick="closeModal()">✕</button>
+        </div>
+        <div class="modal-body">
+            <div class="form-grid">
+
+                <div class="form-group full">
+                    <label>Item Name *</label>
+                    <input type="text" id="fName" placeholder="e.g. Caramel Macchiato">
+                </div>
+
+                <div class="form-group">
+                    <label>Category *</label>
+                    <select id="fCategory" onchange="toggleSubcategory()">
+                        <option value="">-- Select Category --</option>
+                        <option>Coffee Based</option>
+                        <option>Specials</option>
+                        <option>Non-Coffee</option>
+                        <option>Frappe</option>
+                        <option>Yogurt</option>
+                        <option>Food</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="subcatRow" style="display:none;">
+                    <label>Subcategory (Frappe only)</label>
+                    <select id="fSubcategory">
+                        <option value="">-- None --</option>
+                        <option>Coffee Based</option>
+                        <option>Non-Coffee</option>
+                    </select>
+                </div>
+
+                <div class="form-group full">
+                    <label>Price *</label>
+                    <input type="text" id="fPrice" placeholder="e.g. Hot ₱130 / Cold ₱120">
+                </div>
+
+                <div class="form-group full">
+                    <label>Description</label>
+                    <textarea id="fDescription" placeholder="Short description of the item…"></textarea>
+                </div>
+
+                <div class="form-group full">
+                    <label>Tags <small style="text-transform:none;font-weight:400">(comma-separated, e.g. Hot, Cold)</small></label>
+                    <input type="text" id="fTags" placeholder="Hot, Cold, Popular">
+                </div>
+
+                <div class="form-group full">
+                    <label>Options</label>
+                    <div class="check-row">
+                        <label class="check-item">
+                            <input type="checkbox" id="fIsNew">
+                            <span>🔴 Mark as NEW</span>
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" id="fIsBlended">
+                            <span>🥤 Blended</span>
+                        </label>
+                        <label class="check-item">
+                            <input type="checkbox" id="fActive" checked>
+                            <span>✅ Active (visible on menu)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Sort Order <small style="text-transform:none;font-weight:400">(lower = first)</small></label>
+                    <input type="number" id="fSortOrder" value="0" min="0">
+                </div>
+
+                <div class="form-group full">
+                    <label>Photo</label>
+                    <div class="image-upload-area" id="uploadArea">
+                        <input type="file" id="fImage" accept="image/*" onchange="previewImage(event)">
+                        <span class="upload-icon">📷</span>
+                        <p>Click to upload photo</p>
+                        <small>JPG, PNG, WEBP – max 5MB</small>
+                    </div>
+                    <div class="image-preview-wrap" id="previewWrap">
+                        <img id="previewImg" src="" alt="Preview">
+                        <p id="currentImgNote"></p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-foot">
+            <button class="btn btn-cancel" onclick="closeModal()">Cancel</button>
+            <button class="btn btn-primary" id="saveBtn" onclick="saveItem()">Save Item</button>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirm -->
+<div class="confirm-overlay" id="confirmOverlay">
+    <div class="confirm-box">
+        <div class="icon">🗑️</div>
+        <h4>Delete Item?</h4>
+        <p id="confirmMsg">This will permanently remove the item.</p>
+        <div class="btns">
+            <button class="btn btn-cancel" onclick="closeConfirm()">Cancel</button>
+            <button class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
+        </div>
+    </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+    // ── Use relative path — works on any host/port ──────────────────
+    const API = '/api';
+
+    let allItems = [];
+    let editingId = null;
+
+    // ── Init ────────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', loadItems);
+
+    async function loadItems() {
+        try {
+            const res = await fetch(API + '/admin/menuitems');
+            if (!res.ok) {
+                const text = await res.text();
+                throw new Error('Server returned: ' + res.status);
+            }
+            allItems = await res.json();
+            updateStats();
+            renderTable();
+        } catch (err) {
+            showToast('Cannot load items: ' + err.message, 'error');
+            document.getElementById('tableBody').innerHTML =
+                '<div class="loading" style="color:#c62828;">⚠️ ' + err.message + '</div>';
+        }
+    }
+
+    // ── Stats ────────────────────────────────────────────────────────
+    function updateStats() {
+        document.getElementById('statTotal').textContent  = allItems.length;
+        document.getElementById('statActive').textContent = allItems.filter(i => i.active).length;
+        document.getElementById('statNew').textContent    = allItems.filter(i => i.isNew).length;
+        document.getElementById('statCats').textContent   = new Set(allItems.map(i => i.category)).size;
+    }
+
+    // ── Render Table ──────────────────────────────────────────────────
+    function renderTable() {
+        const search = document.getElementById('searchInput').value.toLowerCase();
+        const cat    = document.getElementById('filterCat').value;
+        const status = document.getElementById('filterStatus').value;
+
+        const filtered = allItems.filter(item => {
+            const matchSearch = item.name.toLowerCase().includes(search) ||
+                                (item.description || '').toLowerCase().includes(search);
+            const matchCat    = !cat || item.category === cat;
+            const matchStatus = !status ||
+                (status === 'active'   && item.active) ||
+                (status === 'inactive' && !item.active);
+            return matchSearch && matchCat && matchStatus;
+        });
+
+        if (!filtered.length) {
+            document.getElementById('tableBody').innerHTML =
+                '<div class="loading">No items found.</div>';
+            return;
+        }
+
+        const rows = filtered.map(item => `
+            <tr>
+                <td>
+                    ${item.imageUrl
+                        ? `<img src="${item.imageUrl}" class="item-thumb" onerror="this.style.display='none'">`
+                        : '<div class="no-img">🍵</div>'}
+                </td>
+                <td>
+                    <strong>${escHtml(item.name)}</strong>
+                    ${item.isNew     ? '<span class="badge badge-new">NEW</span>'         : ''}
+                    ${item.isBlended ? '<span class="badge badge-blended">Blended</span>' : ''}
+                </td>
+                <td>
+                    <span class="category-pill">${escHtml(item.category)}</span>
+                    ${item.subcategory ? `<br><small style="color:var(--light-brown)">${escHtml(item.subcategory)}</small>` : ''}
+                </td>
+                <td style="font-weight:600;color:var(--accent-gold)">${escHtml(item.price)}</td>
+                <td>${item.tags && item.tags.length ? item.tags.map(escHtml).join(', ') : '—'}</td>
+                <td>
+                    <span class="badge ${item.active ? 'badge-active' : 'badge-inactive'}">
+                        ${item.active ? 'Active' : 'Hidden'}
+                    </span>
+                </td>
+                <td>
+                    <div class="actions">
+                        <button class="btn btn-sm btn-primary" onclick="editItem('${item._id}')">Edit</button>
+                        <button class="btn btn-sm btn-warning" onclick="toggleItem('${item._id}')">
+                            ${item.active ? 'Hide' : 'Show'}
+                        </button>
+                        <button class="btn btn-sm btn-danger" onclick="askDelete('${item._id}', '${escHtml(item.name).replace(/'/g,"\\'")}')">Del</button>
+                    </div>
+                </td>
+            </tr>`).join('');
+
+        document.getElementById('tableBody').innerHTML = `
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Price</th>
+                            <th>Tags</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>${rows}</tbody>
+                </table>
+            </div>`;
+    }
+
+    // ── Escape HTML helper ─────────────────────────────────────────
+    function escHtml(str) {
+        return String(str)
+            .replace(/&/g,'&amp;')
+            .replace(/</g,'&lt;')
+            .replace(/>/g,'&gt;')
+            .replace(/"/g,'&quot;');
+    }
+
+    // ── Open Modal ────────────────────────────────────────────────────
+    function openModal(item = null) {
+        editingId = item ? item._id : null;
+
+        document.getElementById('modalTitle').textContent  = item ? 'Edit Menu Item' : 'Add Menu Item';
+        document.getElementById('saveBtn').textContent     = item ? 'Update Item'    : 'Save Item';
+
+        document.getElementById('fName').value            = item ? item.name            : '';
+        document.getElementById('fCategory').value        = item ? item.category        : '';
+        document.getElementById('fSubcategory').value     = item ? (item.subcategory || '') : '';
+        document.getElementById('fPrice').value           = item ? item.price           : '';
+        document.getElementById('fDescription').value     = item ? (item.description || '') : '';
+        document.getElementById('fTags').value            = item ? (item.tags || []).join(', ') : '';
+        document.getElementById('fIsNew').checked         = item ? !!item.isNew         : false;
+        document.getElementById('fIsBlended').checked     = item ? !!item.isBlended     : false;
+        document.getElementById('fActive').checked        = item ? !!item.active        : true;
+        document.getElementById('fSortOrder').value       = item ? (item.sortOrder || 0): 0;
+
+        // Reset image
+        document.getElementById('fImage').value   = '';
+        document.getElementById('previewWrap').style.display = 'none';
+        document.getElementById('previewImg').src = '';
+        document.getElementById('currentImgNote').textContent = '';
+
+        if (item && item.imageUrl) {
+            document.getElementById('previewWrap').style.display = 'block';
+            document.getElementById('previewImg').src = item.imageUrl;
+            document.getElementById('currentImgNote').textContent = 'Current photo — upload new to replace';
+        }
+
+        toggleSubcategory();
+        document.getElementById('modalOverlay').classList.add('open');
+        document.getElementById('fName').focus();
+    }
+
+    function closeModal() {
+        document.getElementById('modalOverlay').classList.remove('open');
+        editingId = null;
+    }
+
+    function toggleSubcategory() {
+        const val = document.getElementById('fCategory').value;
+        document.getElementById('subcatRow').style.display = val === 'Frappe' ? 'flex' : 'none';
+    }
+
+    function previewImage(e) {
+        const file = e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = ev => {
+            document.getElementById('previewImg').src = ev.target.result;
+            document.getElementById('currentImgNote').textContent = file.name;
+            document.getElementById('previewWrap').style.display = 'block';
+        };
+        reader.readAsDataURL(file);
+    }
+
+    // ── Save (Create or Update) ───────────────────────────────────────
+    async function saveItem() {
+        const name     = document.getElementById('fName').value.trim();
+        const category = document.getElementById('fCategory').value;
+        const price    = document.getElementById('fPrice').value.trim();
+
+        if (!name || !category || !price) {
+            showToast('Please fill in Name, Category, and Price.', 'error');
+            return;
+        }
+
+        const btn = document.getElementById('saveBtn');
+        btn.disabled = true;
+        btn.textContent = 'Saving…';
+
+        const fd = new FormData();
+        fd.append('name',        name);
+        fd.append('category',    category);
+        fd.append('subcategory', document.getElementById('fSubcategory').value);
+        fd.append('price',       price);
+        fd.append('description', document.getElementById('fDescription').value.trim());
+        fd.append('tags',        document.getElementById('fTags').value.trim());
+        fd.append('isNew',       document.getElementById('fIsNew').checked);
+        fd.append('isBlended',   document.getElementById('fIsBlended').checked);
+        fd.append('active',      document.getElementById('fActive').checked);
+        fd.append('sortOrder',   document.getElementById('fSortOrder').value);
+
+        const imageFile = document.getElementById('fImage').files[0];
+        if (imageFile) fd.append('image', imageFile);
+
+        try {
+            const url    = editingId ? `${API}/menuitems/${editingId}` : `${API}/menuitems`;
+            const method = editingId ? 'PUT' : 'POST';
+
+            const res = await fetch(url, { method, body: fd });
+
+            if (!res.ok) {
+                const errData = await res.json().catch(() => ({ message: 'Unknown error' }));
+                throw new Error(errData.message || 'Save failed');
+            }
+
+            showToast(editingId ? '✅ Item updated!' : '✅ Item added!', 'success');
+            closeModal();
+            await loadItems();
+        } catch (err) {
+            showToast('Error: ' + err.message, 'error');
+        } finally {
+            btn.disabled = false;
+            btn.textContent = editingId ? 'Update Item' : 'Save Item';
+        }
+    }
+
+    // ── Edit ──────────────────────────────────────────────────────────
+    function editItem(id) {
+        const item = allItems.find(i => i._id === id);
+        if (item) openModal(item);
+    }
+
+    // ── Toggle Active ─────────────────────────────────────────────────
+    async function toggleItem(id) {
+        try {
+            const res = await fetch(`${API}/menuitems/${id}/toggle`, { method: 'PATCH' });
+            if (!res.ok) throw new Error('Toggle failed');
+            await loadItems();
+            showToast('Visibility updated.', 'success');
+        } catch (err) {
+            showToast('Error: ' + err.message, 'error');
+        }
+    }
+
+    // ── Delete ────────────────────────────────────────────────────────
+    let deleteTargetId = null;
+
+    function askDelete(id, name) {
+        deleteTargetId = id;
+        document.getElementById('confirmMsg').textContent = `Delete "${name}" permanently? This cannot be undone.`;
+        document.getElementById('confirmOverlay').classList.add('open');
+    }
+
+    function closeConfirm() {
+        document.getElementById('confirmOverlay').classList.remove('open');
+        deleteTargetId = null;
+    }
+
+    document.getElementById('confirmDeleteBtn').addEventListener('click', async () => {
+        if (!deleteTargetId) return;
+        try {
+            const res = await fetch(`${API}/menuitems/${deleteTargetId}`, { method: 'DELETE' });
+            if (!res.ok) throw new Error('Delete failed');
+            showToast('🗑️ Item deleted.', 'success');
+            closeConfirm();
+            await loadItems();
+        } catch (err) {
+            showToast('Error: ' + err.message, 'error');
+        }
+    });
+
+    // ── Toast ──────────────────────────────────────────────────────────
+    function showToast(msg, type = 'success') {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.className   = `show ${type}`;
+        setTimeout(() => { t.className = ''; }, 3500);
+    }
+
+    // ── Close on overlay click ─────────────────────────────────────────
+    document.getElementById('modalOverlay').addEventListener('click', e => {
+        if (e.target === document.getElementById('modalOverlay')) closeModal();
+    });
+    document.getElementById('confirmOverlay').addEventListener('click', e => {
+        if (e.target === document.getElementById('confirmOverlay')) closeConfirm();
+    });
+</script>
+</body>
+</html>

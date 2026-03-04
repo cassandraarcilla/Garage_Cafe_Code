@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,8 @@
     <title>Blog - Garage Café | Coffee Tips & Local Stories</title>
     <meta name="description" content="Read the latest from Garage Café Mabalacat - coffee tips, local stories, and updates from your neighborhood café near Metro Clark Homes.">
     <meta name="keywords" content="local café Mawaque, coffee shop Mabalacat City, Garage Café Pampanga, community café, support local business, study café near me">
-    <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <meta name="google-site-verification" content="V0YQPBmwBNB9DKfbnGSBiypyLKOI9rSlFgJZc8A22uc" />
+    <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
     <link rel="icon" href="GRG/Icons/Garage Cafe logo ICON.png" type="image/png">
     <style>
         :root {
@@ -23,11 +25,12 @@
         html { scroll-behavior: smooth; }
 
         body {
-            font-family: 'Roboto', Arial, sans-serif;
+            font-family: 'Lato', Arial, sans-serif;
             background: var(--cream);
             color: var(--dark-brown);
             line-height: 1.6;
             overflow-x: hidden;
+            min-width: 320px;
         }
 
         /* Navigation */
@@ -156,6 +159,8 @@
             z-index: 2;
             text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
             animation: slideUp 1s ease-out 0.3s both;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         @keyframes slideUp {
@@ -196,10 +201,11 @@
 
         .skeleton-card {
             background: white;
-            border-radius: 25px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(44, 24, 16, 0.06);
+            box-shadow: 0 4px 20px rgba(44, 24, 16, 0.07);
             animation: fadeInUp 0.5s ease-out both;
+            border: 1px solid rgba(188,170,164,0.15);
         }
 
         .skeleton-card:nth-child(1) { animation-delay: 0.05s; }
@@ -221,64 +227,23 @@
             animation: shimmer 1.6s infinite linear;
         }
 
-        .skeleton-image {
-            height: 250px;
-            width: 100%;
-        }
+        .skeleton-image { height: 230px; width: 100%; }
 
         .skeleton-body {
-            padding: 2rem;
+            padding: 1.4rem;
             display: flex;
             flex-direction: column;
-            gap: 0.85rem;
+            gap: 0.8rem;
         }
 
-        .skeleton-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.3rem;
-        }
-
-        .skeleton-author {
-            height: 12px;
-            width: 100px;
-            border-radius: 6px;
-        }
-
-        .skeleton-tag {
-            height: 24px;
-            width: 80px;
-            border-radius: 20px;
-        }
-
-        .skeleton-title-1 {
-            height: 22px;
-            width: 90%;
-            border-radius: 6px;
-        }
-
-        .skeleton-title-2 {
-            height: 22px;
-            width: 65%;
-            border-radius: 6px;
-        }
-
-        .skeleton-line {
-            height: 13px;
-            border-radius: 6px;
-        }
-
+        .skeleton-author { height: 11px; width: 90px; border-radius: 6px; }
+        .skeleton-title-1 { height: 20px; width: 92%; border-radius: 6px; }
+        .skeleton-title-2 { height: 20px; width: 66%; border-radius: 6px; }
+        .skeleton-line { height: 12px; border-radius: 6px; }
         .skeleton-line-full { width: 100%; }
         .skeleton-line-long  { width: 88%; }
         .skeleton-line-mid   { width: 72%; }
-
-        .skeleton-btn {
-            height: 14px;
-            width: 90px;
-            border-radius: 6px;
-            margin-top: 0.5rem;
-        }
+        .skeleton-btn { height: 13px; width: 80px; border-radius: 6px; margin-top: 0.3rem; }
 
         /* Loading dots indicator */
         .loading-indicator {
@@ -290,11 +255,7 @@
             padding: 1rem 0 2rem;
         }
 
-        .loading-dots {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
+        .loading-dots { display: flex; gap: 8px; align-items: center; }
 
         .loading-dots span {
             width: 10px;
@@ -340,20 +301,29 @@
             font-size: 1rem;
         }
 
-        /* Blog Card */
+        /* =====================
+           BLOG CARD — redesigned
+        ===================== */
         .blog-card {
-            background: white;
-            border-radius: 25px;
+            background: #FFFDF6;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(44, 24, 16, 0.08);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            box-shadow:
+                0 1px 4px rgba(44,24,16,0.06),
+                0 8px 24px rgba(44,24,16,0.09);
+            border: 1px solid rgba(188,170,164,0.18);
+            transition:
+                transform 0.30s cubic-bezier(.4,0,.2,1),
+                box-shadow 0.30s cubic-bezier(.4,0,.2,1);
             cursor: pointer;
             animation: fadeInUp 0.6s ease-out both;
         }
 
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(28px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
         .blog-card:nth-child(1) { animation-delay: 0.1s; }
@@ -364,89 +334,143 @@
         .blog-card:nth-child(6) { animation-delay: 0.6s; }
 
         .blog-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 25px 60px rgba(44, 24, 16, 0.18);
+            transform: translateY(-8px);
+            box-shadow:
+                0 2px 8px rgba(44,24,16,0.08),
+                0 20px 50px rgba(44,24,16,0.16);
         }
 
+        /* ── Image wrapper ── */
         .blog-image-container {
-            overflow: hidden;
             position: relative;
-            height: 250px;
+            height: 230px;
+            overflow: hidden;
             background: var(--lighter-brown);
+            flex-shrink: 0;
         }
 
         .blog-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%; height: 100%;
+            object-fit: cover; display: block;
+            transition: transform 0.50s cubic-bezier(.4,0,.2,1);
         }
 
-        .blog-card:hover .blog-image { transform: scale(1.15); }
+        .blog-card:hover .blog-image { transform: scale(1.07); }
 
-        .blog-content { padding: 2rem; }
+        /* No scrim on desktop — not needed */
+        .blog-image-container::after { display: none; }
 
+        /* ── Category on image: MOBILE ONLY — hidden on desktop ── */
+        .blog-category-img {
+            display: none; /* hidden by default, shown in mobile breakpoint */
+        }
+
+        /* ── Card body ── */
+        .blog-content {
+            padding: 1.4rem 1.5rem 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        /* ── Meta row: name (left) · category pill (right) ── */
         .blog-meta {
             display: flex;
+            flex-direction: row;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 1rem;
-            font-size: 0.85rem;
-            color: var(--light-brown);
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-            font-weight: 600;
+            gap: 0.5rem;
+            margin-bottom: 0.9rem;
+            min-width: 0;
         }
 
+        .blog-meta .blog-author {
+            font-family: 'Lato', sans-serif;
+            font-size: 0.74rem;
+            font-weight: 700;
+            color: var(--light-brown);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            /* shrinks first; truncates only if truly necessary */
+            flex: 1 1 auto;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 1.4;
+        }
+
+        /* ── Category pill ── */
         .blog-category {
             background: linear-gradient(135deg, var(--accent-gold), #f0c929);
             color: var(--dark-brown);
-            padding: 5px 14px;
+            padding: 3px 10px;
             border-radius: 20px;
+            font-family: 'Lato', sans-serif;
             font-weight: 700;
-            font-size: 0.7rem;
+            font-size: 0.63rem;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
             box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
+            /* shrinks text if card is very narrow, but never wraps */
+            flex: 0 1 auto;
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: inline-block;
+            line-height: 1.6;
+            max-width: 55%;
         }
 
         .blog-card h3 {
             font-family: 'Yeseva One', serif;
-            font-size: 1.75rem;
+            font-size: clamp(1.15rem, 2.5vw, 1.6rem);
             color: var(--dark-brown);
-            margin-bottom: 1rem;
-            line-height: 1.3;
-            min-height: 2.6em;
+            line-height: 1.28;
+            margin-bottom: 0.75rem;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            word-wrap: break-word;
         }
 
         .blog-excerpt {
+            font-size: clamp(0.84rem, 1.9vw, 0.93rem);
             color: var(--medium-brown);
-            line-height: 1.8;
-            margin-bottom: 1.5rem;
+            line-height: 1.75;
+            margin-bottom: 1.1rem;
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
-            min-height: 5.4em;
+            flex: 1;
         }
 
+        /* Read more: separated by a hairline, full width */
         .read-more {
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 6px;
+            font-family: 'Lato', sans-serif;
+            font-size: clamp(0.74rem, 1.6vw, 0.82rem);
+            font-weight: 700;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
             color: var(--dark-brown);
             text-decoration: none;
-            font-weight: 700;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            letter-spacing: 0.5px;
+            border-top: 1px solid rgba(188,170,164,0.30);
+            padding-top: 0.95rem;
+            width: 100%;
+            min-height: 44px;
+            touch-action: manipulation;
+            transition: color 0.22s ease, gap 0.22s ease;
         }
 
-        .read-more::after { content: '→'; transition: transform 0.3s ease; }
-        .blog-card:hover .read-more { color: var(--accent-gold); }
-        .blog-card:hover .read-more::after { transform: translateX(5px); }
+        .read-more-arrow { display: inline-block; transition: transform 0.22s ease; }
+        .blog-card:hover .read-more { color: var(--accent-gold); gap: 10px; }
+        .blog-card:hover .read-more-arrow { transform: translateX(4px); }
 
         /* =====================
            PAGINATION
@@ -471,7 +495,8 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Lato', sans-serif;
+            touch-action: manipulation;
         }
 
         .pagination button:hover {
@@ -531,6 +556,7 @@
             background: linear-gradient(to bottom, var(--dark-brown), #0f0805);
             color: var(--lighter-brown);
             padding: 4rem 3rem 2rem;
+            padding-bottom: calc(2rem + env(safe-area-inset-bottom));
             margin-top: 4rem;
         }
 
@@ -609,10 +635,10 @@
 
         .scroll-top {
             position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
+            bottom: calc(30px + env(safe-area-inset-bottom));
+            right: max(30px, env(safe-area-inset-right));
+            width: clamp(44px, 10vw, 50px);
+            height: clamp(44px, 10vw, 50px);
             background: linear-gradient(135deg, var(--light-brown), var(--accent-gold));
             color: white;
             border-radius: 50%;
@@ -627,6 +653,7 @@
             z-index: 999;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             border: none;
+            touch-action: manipulation;
         }
 
         .scroll-top.visible { opacity: 1; visibility: visible; }
@@ -634,7 +661,7 @@
 
         /* ============================================
            RESPONSIVE
-           ============================================ */
+        ============================================ */
         @media screen and (min-width: 1920px) {
             nav .container { max-width: 1800px; padding: 0 4rem; }
             nav ul { gap: 3.5rem; }
@@ -647,19 +674,18 @@
             .blog-grid { max-width: 1800px; grid-template-columns: repeat(4, 1fr); gap: 3.5rem; }
             .blog-image-container { height: 280px; }
             .skeleton-image { height: 280px; }
-            .blog-content { padding: 2.5rem; }
-            .blog-card h3 { font-size: 2rem; min-height: 2.8em; margin-bottom: 1.2rem; }
-            .blog-meta { font-size: 0.95rem; margin-bottom: 1.2rem; }
-            .blog-category { font-size: 0.8rem; padding: 6px 16px; }
-            .blog-excerpt { font-size: 1.1rem; line-height: 1.9; min-height: 6.3em; margin-bottom: 1.8rem; }
-            .read-more { font-size: 1.1rem; }
+            .blog-content { padding: 2rem 2.2rem 2.2rem; }
+            .blog-card h3 { font-size: 2rem; }
+            .blog-category { font-size: 0.75rem; padding: 5px 14px; }
+            .blog-excerpt { font-size: 1.05rem; }
+            .read-more { font-size: 0.95rem; }
             .footer-grid { max-width: 1800px; gap: 4rem; padding: 0 4rem; }
             footer { padding: 5rem 4rem 2rem; }
             .footer-section h3 { font-size: 1.8rem; margin-bottom: 2rem; }
             .footer-section p, .footer-section a { font-size: 1.1rem; margin-bottom: 0.8rem; }
             .social-links a { width: 55px; height: 55px; }
             .copyright { font-size: 1rem; padding-top: 2.5rem; }
-            .scroll-top { width: 60px; height: 60px; font-size: 1.8rem; bottom: 40px; right: 40px; }
+            .scroll-top { width: 60px; height: 60px; font-size: 1.8rem; }
             .pagination button { width: 55px; height: 55px; font-size: 1.1rem; }
             .pagination button.prev-next { width: auto; padding: 0 1.5rem; }
         }
@@ -684,12 +710,13 @@
             footer { padding: 4rem 2.5rem 2rem; }
         }
 
-        @media screen and (min-width: 769px) and (max-width: 1024px) {
+        /* ── Hamburger nav: single breakpoint matching about.html ── */
+        @media screen and (max-width: 1024px) {
             .hamburger { display: flex; }
             nav ul {
                 position: fixed;
                 top: 0; right: -100%;
-                width: 280px;
+                width: 300px;
                 height: 100vh;
                 background: rgba(44, 24, 16, 0.98);
                 flex-direction: column;
@@ -700,20 +727,22 @@
                 gap: 2.5rem;
                 transition: right 0.3s ease;
                 box-shadow: -5px 0 20px rgba(0,0,0,0.3);
-                z-index: 999;
+                z-index: 1000;
             }
             nav ul.active { right: 0; }
             nav li { width: 100%; }
             nav a { font-size: 1.3rem; display: block; padding: 0.8rem 0; }
+        }
+
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
             .page-header { padding: 10rem 2rem 4rem; }
             .page-header h1 { font-size: 3rem; letter-spacing: 3px; }
             .blog-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
             .blog-section { padding: 4rem 1.5rem; }
-            .blog-card h3 { font-size: 1.5rem; min-height: auto; }
             .blog-image-container { height: 200px; }
             .skeleton-image { height: 200px; }
-            .blog-content { padding: 1.5rem; }
-            .skeleton-body { padding: 1.5rem; }
+            .blog-content { padding: 1.25rem 1.4rem 1.4rem; }
+            .skeleton-body { padding: 1.25rem; }
             .pagination { gap: 0.6rem; margin-top: 3rem; }
             .pagination button { width: 42px; height: 42px; font-size: 0.95rem; }
             .pagination button.prev-next { min-width: 85px; padding: 0 1rem; height: 42px; font-size: 0.88rem; }
@@ -721,51 +750,37 @@
         }
 
         @media screen and (max-width: 768px) {
-            .hamburger { display: flex; }
-            nav ul {
-                position: fixed;
-                top: 0; right: -100%;
-                width: 280px;
-                height: 100vh;
-                background: rgba(44, 24, 16, 0.98);
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-                padding-top: 100px;
-                padding-left: 2rem;
-                gap: 2.5rem;
-                transition: right 0.3s ease;
-                box-shadow: -5px 0 20px rgba(0,0,0,0.3);
-                z-index: 999;
-            }
-            nav ul.active { right: 0; }
-            nav li { width: 100%; }
-            nav a { font-size: 1.3rem; display: block; padding: 0.8rem 0; }
             .page-header { padding: 11rem 2rem 4rem; }
             .page-header h1 { font-size: 2.5rem; letter-spacing: 2px; }
             .blog-grid { grid-template-columns: 1fr; gap: 2rem; }
             .blog-section { padding: 4rem 1.5rem; }
-            .blog-card h3 { font-size: 1.6rem; min-height: auto; }
             .pagination { gap: 0.5rem; margin-top: 3rem; }
             .pagination button { width: 40px; height: 40px; font-size: 0.9rem; }
             .pagination button.prev-next { min-width: 75px; padding: 0 0.9rem; height: 40px; font-size: 0.85rem; }
             .page-info { font-size: 0.82rem; margin-top: 1rem; }
+            .blog-meta { margin-bottom: 0.65rem; }
         }
 
         @media screen and (max-width: 480px) {
             nav ul { width: 260px; padding-left: 1.5rem; gap: 2rem; }
             nav a { font-size: 1.2rem; }
-            .page-header { padding: 11rem 1.5rem 4rem; }
+            .page-header { padding: 10rem 1.5rem 3.5rem; }
             .page-header h1 { font-size: 2rem; }
-            .page-header p { font-size: 1.1rem; }
-            .scroll-top { bottom: 20px; right: 20px; width: 45px; height: 45px; font-size: 1.3rem; }
-            .blog-card h3 { font-size: 1.4rem; }
-            .blog-content { padding: 1.5rem; }
-            .skeleton-body { padding: 1.5rem; }
+            .page-header p { font-size: 1rem; }
+            .blog-section { padding: 3rem 1rem; }
+            .blog-grid { gap: 1.5rem; }
+            .blog-content { padding: 1.1rem 1.2rem 1.2rem; }
+            .skeleton-body { padding: 1.1rem; }
+            .scroll-top { bottom: 20px; right: 20px; width: 45px; height: 45px; }
             .pagination { gap: 0.4rem; margin-top: 2.5rem; }
             .pagination button { width: 36px; height: 36px; font-size: 0.82rem; border-width: 1.5px; }
             .pagination button.prev-next { min-width: 60px; padding: 0 0.7rem; height: 36px; font-size: 0.78rem; }
             .page-info { font-size: 0.78rem; margin-top: 0.8rem; }
+        }
+
+        @media screen and (max-width: 360px) {
+            .page-header h1 { font-size: 1.7rem; letter-spacing: 1px; }
+            .blog-section { padding: 2.5rem 0.75rem; }
         }
     </style>
 
@@ -775,6 +790,40 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
         gtag('config', 'G-90Z65E4SVZ');
+    </script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://www.visitgaragecafe.com/#localbusiness",
+          "name": "Garage Café",
+          "url": "https://www.visitgaragecafe.com/",
+          "image": "https://visitgaragecafe.com/GRG/Icons/Garage%20Cafe%20logo%20ICON.png",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Mawaque",
+            "addressLocality": "Mabalacat City",
+            "addressRegion": "Pampanga",
+            "addressCountry": "PH"
+          }
+        },
+        {
+          "@type": "BlogPosting",
+          "headline": "Latest News from Garage Café",
+          "image": "https://visitgaragecafe.com/GRG/Icons/Garage%20Cafe%20logo%20ICON.png",
+          "datePublished": "2026-02-23",
+          "author": { "@type": "Organization", "name": "Garage Café" },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Garage Café",
+            "logo": { "@type": "ImageObject", "url": "https://visitgaragecafe.com/GRG/Icons/Garage%20Cafe%20logo%20ICON.png" }
+          }
+        }
+      ]
+    }
     </script>
 </head>
 <body>
@@ -868,50 +917,50 @@
         return window.innerWidth <= 1024 ? 3 : 6;
     }
 
-    // ── Hamburger ──────────────────────────────────────
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');
 
-    if (hamburger) {
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
-        });
-    }
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
 
-    document.querySelectorAll('nav a').forEach(link => {
-        link.addEventListener('click', () => {
+    const navLinks = document.querySelectorAll('nav ul li a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
         });
     });
 
-    document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+    document.addEventListener('click', function(event) {
+        const isClickInsideNav = navMenu.contains(event.target);
+        const isClickOnHamburger = hamburger.contains(event.target);
+        if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
             hamburger.classList.remove('active');
             navMenu.classList.remove('active');
         }
     });
 
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', function() {
         const navbar = document.getElementById('navbar');
-        if (navbar) navbar.classList.toggle('scrolled', window.scrollY > 50);
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
     });
 
     const scrollTop = document.getElementById('scrollTop');
     window.addEventListener('scroll', () => scrollTop.classList.toggle('visible', window.scrollY > 300));
     if (scrollTop) scrollTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // ── Skeleton helpers ───────────────────────────────
     function buildSkeletonCard() {
         return `
             <div class="skeleton-card">
                 <div class="skeleton-image skeleton-shimmer"></div>
                 <div class="skeleton-body">
-                    <div class="skeleton-meta">
-                        <div class="skeleton-author skeleton-shimmer"></div>
-                        <div class="skeleton-tag skeleton-shimmer"></div>
-                    </div>
+                    <div class="skeleton-author skeleton-shimmer"></div>
                     <div class="skeleton-title-1 skeleton-shimmer"></div>
                     <div class="skeleton-title-2 skeleton-shimmer"></div>
                     <div class="skeleton-line skeleton-line-full skeleton-shimmer"></div>
@@ -928,7 +977,6 @@
         const count = getBlogsPerPage();
         let html = '';
         for (let i = 0; i < count; i++) html += buildSkeletonCard();
-        // Add loading dots below skeletons
         html += `
             <div class="loading-indicator">
                 <div class="loading-dots">
@@ -940,7 +988,6 @@
         blogGrid.innerHTML = html;
     }
 
-    // ── Image URL helper ──────────────────────────────
     function getImageUrl(imageUrl) {
         if (!imageUrl) return 'GRG/BLOG/blog_header.jpg';
         if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) return imageUrl;
@@ -950,7 +997,6 @@
         return `${BASE_URL}/${cleanPath}`;
     }
 
-    // ── Render page ───────────────────────────────────
     function renderPage(page) {
         currentPage = page;
         const blogsPerPage = getBlogsPerPage();
@@ -962,9 +1008,10 @@
 
         blogGrid.innerHTML = '';
 
-        pageBlogs.forEach((blog) => {
+        pageBlogs.forEach((blog, i) => {
             const blogCard = document.createElement('article');
             blogCard.className = 'blog-card';
+            blogCard.style.animationDelay = `${(i + 1) * 0.1}s`;
             blogCard.onclick = () => window.location.href = `blog-single.html?id=${blog._id}`;
 
             const tempDiv = document.createElement('div');
@@ -981,6 +1028,7 @@
                         class="blog-image"
                         onerror="this.onerror=null; this.src='GRG/BLOG/blog_header.jpg';"
                     >
+                    <span class="blog-category-img">${blog.category}</span>
                 </div>
                 <div class="blog-content">
                     <div class="blog-meta">
@@ -989,7 +1037,9 @@
                     </div>
                     <h3>${blog.title}</h3>
                     <div class="blog-excerpt">${cleanExcerpt}</div>
-                    <a href="blog-single.html?id=${blog._id}" class="read-more">Read More</a>
+                    <a href="blog-single.html?id=${blog._id}" class="read-more">
+                        Read More <span class="read-more-arrow">→</span>
+                    </a>
                 </div>
             `;
             blogGrid.appendChild(blogCard);
@@ -1009,12 +1059,7 @@
 
     function renderPagination(totalPages) {
         const pagination = document.getElementById('pagination');
-
-        if (totalPages <= 1) {
-            pagination.style.display = 'none';
-            pagination.innerHTML = '';
-            return;
-        }
+        if (totalPages <= 1) { pagination.style.display = 'none'; pagination.innerHTML = ''; return; }
 
         pagination.style.display = 'flex';
         pagination.innerHTML = '';
@@ -1042,17 +1087,14 @@
         pagination.appendChild(nextBtn);
     }
 
-    // ── Load blogs ────────────────────────────────────
     async function loadBlogs() {
         const blogGrid = document.getElementById('blogGrid');
         if (!blogGrid) return;
-
-        showSkeletons(); // ← show skeletons immediately
+        showSkeletons();
 
         try {
             const res = await fetch(API);
             if (!res.ok) throw new Error(`Network response was not ok: ${res.status}`);
-
             allBlogs = await res.json();
 
             if (!allBlogs.length) {
@@ -1061,7 +1103,6 @@
             }
 
             renderPage(1);
-
         } catch (error) {
             console.error('Failed to load blogs:', error);
             blogGrid.innerHTML = `<div class="no-blogs"><p>Unable to load blogs at this time.</p><p>Error: ${error.message}</p><p><button onclick="location.reload()">Retry</button></p></div>`;
@@ -1071,9 +1112,7 @@
     let resizeTimer;
     window.addEventListener('resize', () => {
         clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-            if (allBlogs.length) renderPage(1);
-        }, 300);
+        resizeTimer = setTimeout(() => { if (allBlogs.length) renderPage(1); }, 300);
     });
 
     document.addEventListener('DOMContentLoaded', loadBlogs);

@@ -6,6 +6,7 @@
 <title>Contact Us - Garage Café</title>
 <meta name="description" content="Get in touch with Garage Café in Mabalacat City, Pampanga. Visit us, call us, or send us a message.">
 <meta name="keywords" content="Garage Café contact, coffee shop Mabalacat, café near Metro Clark Homes, local café Pampanga, Garage Café location">
+<meta name="google-site-verification" content="V0YQPBmwBNB9DKfbnGSBiypyLKOI9rSlFgJZc8A22uc" />
 <link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="GRG/Icons/Garage Cafe logo ICON.png" type="image/png">
 
@@ -128,7 +129,7 @@ footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color
 .footer-links li { margin-bottom:0.8rem; }
 .social-links { display:flex; gap:1rem; margin-top:1rem; }
 .social-links a { width:45px; height:45px; background:linear-gradient(135deg,var(--medium-brown),var(--light-brown)); border-radius:50%; display:flex; align-items:center; justify-content:center; transition: all 0.4s ease; box-shadow:0 4px 10px rgba(0,0,0,0.2); padding:10px; }
-.social-links a:hover { background:linear-gradient(135deg,var(--accent-gold),var(--light-brown)); transform: translateY(-5px) rotate(5deg); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+.social-links a:hover { background:linear-gradient(135deg,var(--accent-gold),var(--light-brown)); transform: translateY(-5px) rotate(5deg); box-shadow:0 8px 20px rgba(0,0,0,0.3); padding:10px; }
 .social-links img { width:100%; height:100%; object-fit:contain; filter:brightness(0) invert(1); }
 .copyright { text-align:center; padding-top:2rem; border-top:1px solid rgba(141,110,99,0.3); font-size:0.9rem; }
 
@@ -141,9 +142,9 @@ footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color
 @keyframes fadeIn {0%{opacity:0;}100%{opacity:1;}}
 @keyframes slideUp {0%{opacity:0; transform:translateY(20px);}100%{opacity:1; transform:translateY(0);}}
 
-/* ============================================
-   LARGE DESKTOP FULL HD (1920px and above)
-   ============================================ */
+/* RESPONSIVE DESIGN - Matching index.html exactly */
+
+/* Large Desktop Full HD (1920px and above) */
 @media screen and (min-width: 1920px) {
     nav .container {
         max-width: 1800px;
@@ -316,38 +317,32 @@ footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color
     }
 
     .footer-section h3 {
-        font-size: 1.9rem;
+        font-size: 1.8rem;
         margin-bottom: 2rem;
-    }
-
-    .footer-section h3::after {
-        width: 60px;
-        height: 3px;
-        bottom: -10px;
     }
 
     .footer-section p,
     .footer-section a {
-        font-size: 1.15rem;
+        font-size: 1.1rem;
         margin-bottom: 0.8rem;
     }
 
     .social-links a {
-        width: 60px;
-        height: 60px;
+        width: 55px;
+        height: 55px;
     }
 
     .copyright {
-        font-size: 1.05rem;
+        font-size: 1rem;
         padding-top: 2.5rem;
     }
 
     .scroll-top {
-        width: 65px;
-        height: 65px;
-        font-size: 2rem;
-        bottom: 45px;
-        right: 45px;
+        width: 60px;
+        height: 60px;
+        font-size: 1.8rem;
+        bottom: 40px;
+        right: 40px;
     }
 }
 
@@ -440,19 +435,17 @@ footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color
     }
 }
 
-/* ============================================
-   TABLET & MOBILE RESPONSIVENESS
-   ============================================ */
+/* Tablet & Mobile - matching index.html exactly */
 @media screen and (max-width: 1024px) {
-    .hamburger { 
-        display: flex; 
+    .hamburger {
+        display: flex;
     }
 
     nav ul {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 280px;
+        width: 300px;
         height: 100vh;
         background: rgba(44, 24, 16, 0.98);
         flex-direction: column;
@@ -463,76 +456,81 @@ footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color
         gap: 2.5rem;
         transition: right 0.3s ease;
         box-shadow: -5px 0 20px rgba(0,0,0,0.3);
-        z-index: 999;
+        z-index: 1000;
     }
 
-    nav ul.active { 
-        right: 0; 
+    nav ul.active {
+        right: 0;
     }
-    
+
+    nav li {
+        width: 100%;
+    }
+
+    nav a {
+        font-size: 1.3rem;
+        display: block;
+        padding: 0.8rem 0;
+    }
+
+    .logo-text {
+        font-size: 1.5rem;
+    }
+
     .contact-grid {
         grid-template-columns: 1fr;
         gap: 2rem;
     }
 
-    .page-hero h1 { 
-        font-size: 3.2rem; 
+    .page-hero h1 {
+        font-size: 3.2rem;
     }
-    
-    .page-hero p { 
-        font-size: 1.2rem; 
+
+    .page-hero p {
+        font-size: 1.2rem;
     }
-    
-    .contact-info { 
-        padding: 2.5rem; 
+
+    .contact-info {
+        padding: 2.5rem;
     }
 }
 
 @media screen and (max-width: 768px) {
     nav ul {
-        width: 260px;
-        padding-left: 1.8rem;
+        width: 280px;
     }
 
-    nav a {
-        font-size: 1.2rem;
+    .page-hero {
+        padding: 10rem 1.5rem 3rem;
     }
 
-    .logo-text { 
-        font-size:1.5rem; 
-    }
-    
-    .page-hero { 
-        padding: 10rem 1.5rem 3rem; 
-    }
-    
-    .page-hero h1 { 
-        font-size: 2.8rem; 
+    .page-hero h1 {
+        font-size: 2.8rem;
         letter-spacing: 2px;
     }
-    
-    .page-hero p { 
-        font-size: 1.1rem; 
+
+    .page-hero p {
+        font-size: 1.1rem;
     }
-    
-    .contact-info { 
-        padding: 2rem; 
+
+    .contact-info {
+        padding: 2rem;
     }
-    
-    .contact-info h2 { 
-        font-size: 2.2rem; 
+
+    .contact-info h2 {
+        font-size: 2.2rem;
     }
-    
-    .hours-section h2, 
-    .map-section h2 { 
-        font-size: 2.5rem; 
+
+    .hours-section h2,
+    .map-section h2 {
+        font-size: 2.5rem;
     }
 
     .hours-grid {
         grid-template-columns: 1fr;
         max-width: 400px;
     }
-    
+
     .image-placeholder {
         height: 220px;
     }
@@ -540,21 +538,21 @@ footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color
 
 @media screen and (max-width: 480px) {
     nav ul {
-        width: 240px;
+        width: 260px;
         padding-left: 1.5rem;
         gap: 2rem;
     }
 
     nav a {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
     }
 
-    .page-hero h1 { 
-        font-size: 2.2rem; 
+    .page-hero h1 {
+        font-size: 2.2rem;
     }
 
-    .page-hero p { 
-        font-size: 1rem; 
+    .page-hero p {
+        font-size: 1rem;
     }
 
     .contact-section,
@@ -620,12 +618,12 @@ footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color
         height: 300px;
     }
 
-    .scroll-top { 
-        bottom: 20px; 
-        right: 20px; 
-        width: 45px; 
-        height: 45px; 
-        font-size: 1.3rem; 
+    .scroll-top {
+        bottom: 20px;
+        right: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.3rem;
     }
 }
 
@@ -681,6 +679,49 @@ gtag('js', new Date());
 gtag('config', 'G-90Z65E4SVZ');
 </script>
 
+    <!--schema org-->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Garage Café",
+      "image": "https://visitgaragecafe.com/GRG/Icons/Garage%20Cafe%20logo%20ICON.png",
+      "@id": "https://www.visitgaragecafe.com/#coffeeshop",
+      "url": "https://www.visitgaragecafe.com/",
+      "telephone": "+63XXXXXXXXX",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Mawaque",
+        "addressLocality": "Mabalacat City",
+        "addressRegion": "Pampanga",
+        "postalCode": "2010",
+        "addressCountry": "PH"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 15.2215,
+        "longitude": 120.5744
+      },
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday",
+          "Saturday",
+          "Sunday"
+        ],
+        "opens": "08:00",
+        "closes": "22:00"
+      },
+      "sameAs": [
+        "https://www.facebook.com/garagecafe",
+        "https://www.instagram.com/garagecafe"
+      ]
+    }
+    </script>
 </head>
 <body>
 
@@ -689,13 +730,13 @@ gtag('config', 'G-90Z65E4SVZ');
         <a href="index.html" class="logo">
             <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo" onerror="this.style.display='none'">
         </a>
-        
+
         <div class="hamburger" id="hamburger">
             <span></span>
             <span></span>
             <span></span>
         </div>
-        
+
         <ul id="navMenu">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
@@ -771,7 +812,7 @@ gtag('config', 'G-90Z65E4SVZ');
     <h2>Find Us Here</h2>
     <div class="map-container">
         <div class="map-placeholder">
-            <iframe 
+            <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3850.1081160191698!2d120.6075855737297!3d15.20724858535416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3396ed12da64fb2f%3A0x7460e8f6e70cd500!2zR1JHIENhZsOp!5e0!3m2!1sen!2sph!4v1771312619862!5m2!1sen!2sph">
             </iframe>
         </div>
@@ -821,46 +862,62 @@ gtag('config', 'G-90Z65E4SVZ');
 <div class="scroll-top" id="scrollTop">↑</div>
 
 <script>
-// Hamburger menu toggle
-const hamburger = document.getElementById('hamburger');
-const navMenu = document.getElementById('navMenu');
+    // Hamburger menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
 
-hamburger.addEventListener('click', function() {
-    hamburger.classList.toggle('active');
-    navMenu.classList.toggle('active');
-});
-
-// Close menu when clicking on a link
-const navLinks = document.querySelectorAll('nav ul li a');
-navLinks.forEach(link => {
-    link.addEventListener('click', function() {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
     });
-});
 
-// Close menu when clicking outside
-document.addEventListener('click', function(event) {
-    const isClickInsideNav = navMenu.contains(event.target);
-    const isClickOnHamburger = hamburger.contains(event.target);
-    
-    if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
-        hamburger.classList.remove('active');
-        navMenu.classList.remove('active');
-    }
-});
+    // Close menu when clicking on a link
+    const navLinks = document.querySelectorAll('nav ul li a');
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        });
+    });
 
-// Navbar scroll
-window.addEventListener('scroll', function(){
-    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY>100);
-});
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const isClickInsideNav = navMenu.contains(event.target);
+        const isClickOnHamburger = hamburger.contains(event.target);
 
-// Scroll top button
-const scrollTop = document.getElementById('scrollTop');
-window.addEventListener('scroll', function(){
-    scrollTop.classList.toggle('visible', window.scrollY>300);
-});
-scrollTop.addEventListener('click',()=>window.scrollTo({top:0, behavior:'smooth'}));
+        if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }
+    });
+
+    // Navbar scroll effect
+    window.addEventListener('scroll', function() {
+        const navbar = document.getElementById('navbar');
+        if (window.scrollY > 100) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    });
+
+    // Scroll to top button
+    const scrollTop = document.getElementById('scrollTop');
+
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 300) {
+            scrollTop.classList.add('visible');
+        } else {
+            scrollTop.classList.remove('visible');
+        }
+    });
+
+    scrollTop.addEventListener('click', function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    });
 </script>
 
 </body>
