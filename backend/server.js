@@ -43,6 +43,19 @@ if (!fs.existsSync(UPLOAD_DIR)) {
 }
 app.use('/uploads', express.static(UPLOAD_DIR));
 
+// ── FRONTEND (local dev only) ─────────────────────────────────────────
+// On Render, the RENDER env var is automatically set to "true"
+// Locally it is not set, so the frontend files are served from ../frontend
+const IS_RENDER = !!process.env.RENDER;
+const FRONTEND_DIR = path.join(__dirname, '../frontend');
+
+if (!IS_RENDER && fs.existsSync(FRONTEND_DIR)) {
+  console.log('Local mode: serving frontend from', FRONTEND_DIR);
+  app.use(express.static(FRONTEND_DIR));
+} else {
+  console.log('Production mode: API only (frontend on Hostinger)');
+}
+
 // ── MONGODB ───────────────────────────────────────────────────────────
 const MONGO_URI = process.env.MONGO_URI ||
   "mongodb+srv://annenicholealimurung_db_user:G4r%40geCaFE@cluster0.ic7yr6s.mongodb.net/garageCafe?retryWrites=true&w=majority";
@@ -103,6 +116,11 @@ const BASE_URL = 'https://garage-cafe-code.onrender.com';
 
 // ── ROOT & HEALTH ─────────────────────────────────────────────────────
 app.get('/', (req, res) => {
+  // Local: serve index.html if it exists
+  if (!IS_RENDER && fs.existsSync(path.join(FRONTEND_DIR, 'index.html'))) {
+    return res.sendFile(path.join(FRONTEND_DIR, 'index.html'));
+  }
+  // Render: return API info
   res.json({
     status: 'Garage Cafe API is running',
     endpoints: {
@@ -238,6 +256,22 @@ app.patch('/api/menuitems/:id/toggle', async (req, res) => {
     res.json(item);
   } catch (err) { res.status(500).json({ message: err.message }); }
 });
+
+// ── SPA CATCH-ALL (local only) ────────────────────────────────────────
+// Lets you navigate to localhost:3000/menu.html, /about.html etc directly
+if (!IS_RENDER) {
+  app.use((req, res) => {
+    const filePath = path.join(FRONTEND_DIR, req.path);
+    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+      return res.sendFile(filePath);
+    }
+    const indexPath = path.join(FRONTEND_DIR, 'index.html');
+    if (fs.existsSync(indexPath)) {
+      return res.sendFile(indexPath);
+    }
+    res.status(404).send('Not found');
+  });
+}
 
 // ── START ─────────────────────────────────────────────────────────────
 app.listen(PORT, '0.0.0.0', () => {

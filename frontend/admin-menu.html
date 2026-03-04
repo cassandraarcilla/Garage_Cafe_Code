@@ -167,15 +167,15 @@ gtag('config', 'G-90Z65E4SVZ');
 <!-- Sidebar -->
 <aside class="sidebar">
     <div class="sidebar-logo">
-        <div class="icon">☕</div>
+        <div class="icon"></div>
         <h2>Garage Café</h2>
         <p>Admin Panel</p>
     </div>
     <nav>
-        <a href="admin-menu.html" class="active">🍽️ &nbsp;Menu Items</a>
-        <a href="admin-blog.html">📝 &nbsp;Blog Posts</a>
-        <a href="menu.html" target="_blank">👁️ &nbsp;View Menu</a>
-        <a href="index.html" target="_blank">🏠 &nbsp;View Site</a>
+        <a href="admin-menu.html" class="active">&nbsp;Menu Items</a>
+        <a href="admin-blog.html">&nbsp;Blog Posts</a>
+        <a href="menu.html" target="_blank">&nbsp;View Menu</a>
+        <a href="index.html" target="_blank">&nbsp;View Site</a>
     </nav>
 </aside>
 
@@ -200,7 +200,7 @@ gtag('config', 'G-90Z65E4SVZ');
             <div class="table-header">
                 <h3>All Menu Items</h3>
                 <div class="filter-row">
-                    <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search..." oninput="renderTable()">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search..." oninput="renderTable()">
                     <select class="filter-select" id="filterCat" onchange="renderTable()">
                         <option value="">All Categories</option>
                         <option>Coffee Based</option>
@@ -279,15 +279,15 @@ gtag('config', 'G-90Z65E4SVZ');
                     <div class="check-row">
                         <label class="check-item">
                             <input type="checkbox" id="fIsNew">
-                            <span>🔴 Mark as NEW</span>
+                            <span>Mark as NEW</span>
                         </label>
                         <label class="check-item">
                             <input type="checkbox" id="fIsBlended">
-                            <span>🥤 Blended</span>
+                            <span>Blended</span>
                         </label>
                         <label class="check-item">
                             <input type="checkbox" id="fActive" checked>
-                            <span>✅ Active (visible on menu)</span>
+                            <span>Active (visible on menu)</span>
                         </label>
                     </div>
                 </div>
@@ -301,7 +301,7 @@ gtag('config', 'G-90Z65E4SVZ');
                     <label>Photo</label>
                     <div class="image-upload-area" id="uploadArea">
                         <input type="file" id="fImage" accept="image/*" onchange="previewImage(event)">
-                        <span class="upload-icon">📷</span>
+                        <span class="upload-icon"></span>
                         <p>Click to upload photo</p>
                         <small>JPG, PNG, WEBP – max 5MB</small>
                     </div>
@@ -323,7 +323,7 @@ gtag('config', 'G-90Z65E4SVZ');
 <!-- Delete Confirm -->
 <div class="confirm-overlay" id="confirmOverlay">
     <div class="confirm-box">
-        <div class="icon">🗑️</div>
+        <div class="icon"></div>
         <h4>Delete Item?</h4>
         <p id="confirmMsg">This will permanently remove the item.</p>
         <div class="btns">
@@ -358,7 +358,7 @@ gtag('config', 'G-90Z65E4SVZ');
         } catch (err) {
             showToast('Cannot load items: ' + err.message, 'error');
             document.getElementById('tableBody').innerHTML =
-                '<div class="loading" style="color:#c62828;">⚠️ ' + err.message + '</div>';
+                '<div class="loading" style="color:#c62828;">' + err.message + '</div>';
         }
     }
 
@@ -552,7 +552,7 @@ gtag('config', 'G-90Z65E4SVZ');
                 throw new Error(errData.message || 'Save failed');
             }
 
-            showToast(editingId ? '✅ Item updated!' : '✅ Item added!', 'success');
+            showToast(editingId ? 'Item updated!' : 'Item added!', 'success');
             closeModal();
             await loadItems();
         } catch (err) {
