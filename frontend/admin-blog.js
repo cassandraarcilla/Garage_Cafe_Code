@@ -20,7 +20,7 @@ const quill = new Quill('#editor', {
 // AUTO SWITCH: Local vs Render
 const BASE_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
     ? "http://localhost:3000"
-    : "https://garage-cafe.onrender.com";
+    : "https://garage-cafe-code.onrender.com";
 
 const API = `${BASE_URL}/api/blogs`;
 
