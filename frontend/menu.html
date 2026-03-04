@@ -863,9 +863,7 @@
         // ── API CONFIG ────────────────────────────────────────────────────
         // Auto-detect: use full backend URL on production, relative path on localhost
         const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        const BACKEND_URL = IS_LOCAL ? '' : 'https://garagecafe-backend.onrender.com';
-        // ↑↑↑ IMPORTANT: Replace 'https://garagecafe-backend.onrender.com' with your
-        //     actual backend/server URL (e.g. your Render, Railway, VPS URL, etc.)
+        const BACKEND_URL = IS_LOCAL ? '' : 'https://garage-cafe-code.onrender.com';
         const API = BACKEND_URL + '/api/menuitems';
 
         // ── CATEGORY ORDER & SUBTITLES ────────────────────────────────────
