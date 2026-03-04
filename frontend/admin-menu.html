@@ -485,13 +485,24 @@
             const method = editingId ? 'PUT' : 'POST';
             const res = await fetch(url, { method, body: fd });
             if (!res.ok) {
-                const errData = await res.json().catch(() => ({ message: 'Unknown error' }));
-                throw new Error(errData.message || 'Save failed');
+                // Try to parse JSON error from server, fall back to status text
+                let errMsg = `Server error ${res.status}`;
+                try {
+                    const ct = res.headers.get('content-type') || '';
+                    if (ct.includes('application/json')) {
+                        const errData = await res.json();
+                        errMsg = errData.message || errMsg;
+                    } else {
+                        errMsg = (await res.text()).substring(0, 120) || errMsg;
+                    }
+                } catch (_) {}
+                throw new Error(errMsg);
             }
             showToast(editingId ? '✅ Item updated!' : '✅ Item added!', 'success');
             closeModal();
             await loadItems();
         } catch (err) {
+            console.error('saveItem error:', err);
             showToast('Error: ' + err.message, 'error');
         } finally {
             btn.disabled = false;

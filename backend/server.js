@@ -1,4 +1,5 @@
-require('dotenv').config();
+// Load .env from the same directory as server.js (works regardless of where you run node from)
+require('dotenv').config({ path: require('path').join(__dirname, '.env') });
 
 const express        = require('express');
 const mongoose       = require('mongoose');
@@ -18,6 +19,27 @@ cloudinary.config({
   api_key:    process.env.CLOUDINARY_API_KEY,
   api_secret: process.env.CLOUDINARY_API_SECRET
 });
+
+const CLOUDINARY_READY = !!(
+  process.env.CLOUDINARY_CLOUD_NAME &&
+  process.env.CLOUDINARY_API_KEY &&
+  process.env.CLOUDINARY_API_SECRET
+);
+
+// multer-storage-cloudinary exposes the URL differently across versions
+function getCloudinaryUrl(file) {
+  if (!file) return null;
+  return file.secure_url
+      || file.path
+      || (file.public_id
+          ? `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/${file.public_id}`
+          : null);
+}
+
+function getCloudinaryPublicId(file) {
+  if (!file) return null;
+  return file.public_id || file.filename || null;
+}
 
 // ── CORS ──────────────────────────────────────────────────────────────
 const allowedOrigins = [
@@ -44,6 +66,11 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// ── UPLOADS DIR (local fallback) ──────────────────────────────────────
+const UPLOAD_DIR = path.join(__dirname, 'uploads');
+if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
+app.use('/uploads', express.static(UPLOAD_DIR));
+
 // ── FRONTEND (local dev only) ─────────────────────────────────────────
 const IS_RENDER    = !!process.env.RENDER;
 const FRONTEND_DIR = path.join(__dirname, '../frontend');
@@ -64,15 +91,15 @@ mongoose.connect(MONGO_URI)
   .then(() => console.log("MongoDB Connected Successfully"))
   .catch(err => { console.error("MongoDB error:", err.message); process.exit(1); });
 
-// ── SCHEMAS & MODELS ──────────────────────────────────────────────────
+// ── SCHEMAS ───────────────────────────────────────────────────────────
 const blogSchema = new mongoose.Schema({
-  title:    { type: String, required: true },
-  author:   { type: String, required: true },
-  category: { type: String },
-  excerpt:  { type: String },
-  content:  { type: String },
-  imageUrl:  { type: String },
-  imagePublicId: { type: String }   // stores Cloudinary public_id for deletion
+  title:         { type: String, required: true },
+  author:        { type: String, required: true },
+  category:      { type: String },
+  excerpt:       { type: String },
+  content:       { type: String },
+  imageUrl:      { type: String },
+  imagePublicId: { type: String }
 }, { timestamps: true });
 
 const Blog = mongoose.model('Blog', blogSchema);
@@ -84,7 +111,7 @@ const menuItemSchema = new mongoose.Schema({
   price:         { type: String,   required: true },
   description:   { type: String,   default: '' },
   imageUrl:      { type: String,   default: '' },
-  imagePublicId: { type: String,   default: '' }, // stores Cloudinary public_id for deletion
+  imagePublicId: { type: String,   default: '' },
   tags:          { type: [String], default: [] },
   isNew:         { type: Boolean,  default: false },
   isBlended:     { type: Boolean,  default: false },
@@ -94,44 +121,48 @@ const menuItemSchema = new mongoose.Schema({
 
 const MenuItem = mongoose.model('MenuItem', menuItemSchema, 'menuitems');
 
-// ── MULTER → CLOUDINARY STORAGE ───────────────────────────────────────
-// Blog images go into garage-cafe/blogs folder on Cloudinary
+// ── MULTER SETUP ──────────────────────────────────────────────────────
+// Cloudinary storage for both blog and menu images
 const blogStorage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder:         'garage-cafe/blogs',
+    folder:          'garage-cafe/blogs',
     allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-    transformation: [{ width: 1200, height: 630, crop: 'limit', quality: 'auto' }]
+    transformation:  [{ width: 1200, height: 630, crop: 'limit', quality: 'auto' }]
   }
 });
 
-// Menu item images go into garage-cafe/menu folder on Cloudinary
 const menuStorage = new CloudinaryStorage({
   cloudinary,
   params: {
-    folder:         'garage-cafe/menu',
+    folder:          'garage-cafe/menu',
     allowed_formats: ['jpg', 'jpeg', 'png', 'webp'],
-    transformation: [{ width: 800, height: 800, crop: 'limit', quality: 'auto' }]
+    transformation:  [{ width: 800, height: 800, crop: 'limit', quality: 'auto' }]
   }
 });
 
-const uploadBlog = multer({
-  storage: blogStorage,
-  limits: { fileSize: 5 * 1024 * 1024 },
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype.startsWith('image/')) cb(null, true);
-    else cb(new Error('Only image files are allowed'));
-  }
-});
+const fileFilter = (req, file, cb) => {
+  if (file.mimetype.startsWith('image/')) cb(null, true);
+  else cb(new Error('Only image files are allowed'));
+};
 
-const uploadMenu = multer({
-  storage: menuStorage,
-  limits: { fileSize: 5 * 1024 * 1024 },
-  fileFilter: (req, file, cb) => {
-    if (file.mimetype.startsWith('image/')) cb(null, true);
-    else cb(new Error('Only image files are allowed'));
-  }
-});
+const uploadBlog = multer({ storage: blogStorage, limits: { fileSize: 5 * 1024 * 1024 }, fileFilter });
+const uploadMenu = multer({ storage: menuStorage, limits: { fileSize: 5 * 1024 * 1024 }, fileFilter });
+
+// ── MULTER ERROR WRAPPER ──────────────────────────────────────────────
+// Wraps multer middleware so upload errors are caught and returned as JSON
+// instead of crashing Express with an unhandled error
+function handleUpload(uploadMiddleware) {
+  return (req, res, next) => {
+    uploadMiddleware(req, res, (err) => {
+      if (err) {
+        console.error('Upload error:', err);
+        return res.status(400).json({ message: err.message || 'Upload failed' });
+      }
+      next();
+    });
+  };
+}
 
 // ── HELPER: delete old Cloudinary image ──────────────────────────────
 async function deleteCloudinaryImage(publicId) {
@@ -151,6 +182,7 @@ app.get('/', (req, res) => {
   }
   res.json({
     status: 'Garage Cafe API is running ☕',
+    cloudinary: CLOUDINARY_READY ? 'connected' : 'not configured',
     endpoints: {
       menu:      'GET /api/menuitems',
       adminMenu: 'GET /api/admin/menuitems',
@@ -161,7 +193,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/health', (req, res) => {
-  res.json({ status: 'ok', timestamp: new Date() });
+  res.json({ status: 'ok', timestamp: new Date(), cloudinary: CLOUDINARY_READY ? 'connected' : 'not configured' });
 });
 
 // ── BLOG ROUTES ───────────────────────────────────────────────────────
@@ -180,54 +212,52 @@ app.get('/api/blogs/:id', async (req, res) => {
   } catch (err) { res.status(500).json({ message: err.message }); }
 });
 
-app.post('/api/blogs', uploadBlog.single('image'), async (req, res) => {
+app.post('/api/blogs', handleUpload(uploadBlog.single('image')), async (req, res) => {
   try {
     const blogData = {
-      title:    req.body.title,
-      author:   req.body.author,
-      category: req.body.category,
-      excerpt:  req.body.excerpt,
-      content:  req.body.content
+      title: req.body.title, author: req.body.author,
+      category: req.body.category, excerpt: req.body.excerpt, content: req.body.content
     };
     if (req.file) {
-      blogData.imageUrl      = req.file.path;        // Cloudinary HTTPS URL
-      blogData.imagePublicId = req.file.filename;    // Cloudinary public_id
+      blogData.imageUrl      = getCloudinaryUrl(req.file);
+      blogData.imagePublicId = getCloudinaryPublicId(req.file);
+      console.log('Blog image saved:', blogData.imageUrl);
     }
     const blog = new Blog(blogData);
     await blog.save();
     res.status(201).json(blog);
-  } catch (err) { res.status(400).json({ message: err.message }); }
+  } catch (err) {
+    console.error('POST /api/blogs error:', err);
+    res.status(400).json({ message: err.message || 'Failed to save blog' });
+  }
 });
 
-app.put('/api/blogs/:id', uploadBlog.single('image'), async (req, res) => {
+app.put('/api/blogs/:id', handleUpload(uploadBlog.single('image')), async (req, res) => {
   try {
     const updateData = {
-      title:    req.body.title,
-      author:   req.body.author,
-      category: req.body.category,
-      excerpt:  req.body.excerpt,
-      content:  req.body.content
+      title: req.body.title, author: req.body.author,
+      category: req.body.category, excerpt: req.body.excerpt, content: req.body.content
     };
     if (req.file) {
-      // Delete old image from Cloudinary before replacing
       const existing = await Blog.findById(req.params.id);
-      if (existing && existing.imagePublicId) {
-        await deleteCloudinaryImage(existing.imagePublicId);
-      }
-      updateData.imageUrl      = req.file.path;
-      updateData.imagePublicId = req.file.filename;
+      if (existing?.imagePublicId) await deleteCloudinaryImage(existing.imagePublicId);
+      updateData.imageUrl      = getCloudinaryUrl(req.file);
+      updateData.imagePublicId = getCloudinaryPublicId(req.file);
+      console.log('Blog image updated:', updateData.imageUrl);
     }
     const updated = await Blog.findByIdAndUpdate(req.params.id, updateData, { new: true });
     if (!updated) return res.status(404).json({ message: 'Blog not found' });
     res.json(updated);
-  } catch (err) { res.status(400).json({ message: err.message }); }
+  } catch (err) {
+    console.error('PUT /api/blogs error:', err);
+    res.status(400).json({ message: err.message || 'Failed to update blog' });
+  }
 });
 
 app.delete('/api/blogs/:id', async (req, res) => {
   try {
     const deleted = await Blog.findByIdAndDelete(req.params.id);
     if (!deleted) return res.status(404).json({ message: 'Blog not found' });
-    // Clean up Cloudinary image
     await deleteCloudinaryImage(deleted.imagePublicId);
     res.status(204).send();
   } catch (err) { res.status(500).json({ message: err.message }); }
@@ -248,70 +278,64 @@ app.get('/api/admin/menuitems', async (req, res) => {
   } catch (err) { res.status(500).json({ message: err.message }); }
 });
 
-app.post('/api/menuitems', uploadMenu.single('image'), async (req, res) => {
+app.post('/api/menuitems', handleUpload(uploadMenu.single('image')), async (req, res) => {
   try {
-    const tags = req.body.tags
-      ? req.body.tags.split(',').map(t => t.trim()).filter(Boolean)
-      : [];
+    const tags = req.body.tags ? req.body.tags.split(',').map(t => t.trim()).filter(Boolean) : [];
     const itemData = {
-      name:        req.body.name,
-      category:    req.body.category,
-      subcategory: req.body.subcategory || '',
-      price:       req.body.price,
-      description: req.body.description || '',
-      tags,
+      name: req.body.name, category: req.body.category,
+      subcategory: req.body.subcategory || '', price: req.body.price,
+      description: req.body.description || '', tags,
       isNew:     req.body.isNew     === 'true' || req.body.isNew     === true,
       isBlended: req.body.isBlended === 'true' || req.body.isBlended === true,
       sortOrder: parseInt(req.body.sortOrder) || 0,
       active:    req.body.active !== 'false'
     };
     if (req.file) {
-      itemData.imageUrl      = req.file.path;       // Cloudinary HTTPS URL
-      itemData.imagePublicId = req.file.filename;   // Cloudinary public_id
+      itemData.imageUrl      = getCloudinaryUrl(req.file);
+      itemData.imagePublicId = getCloudinaryPublicId(req.file);
+      console.log('Menu image saved:', itemData.imageUrl);
     }
     const newItem = new MenuItem(itemData);
     await newItem.save();
     res.status(201).json(newItem);
-  } catch (err) { res.status(400).json({ message: err.message }); }
+  } catch (err) {
+    console.error('POST /api/menuitems error:', err);
+    res.status(400).json({ message: err.message || 'Failed to save menu item' });
+  }
 });
 
-app.put('/api/menuitems/:id', uploadMenu.single('image'), async (req, res) => {
+app.put('/api/menuitems/:id', handleUpload(uploadMenu.single('image')), async (req, res) => {
   try {
-    const tags = req.body.tags
-      ? req.body.tags.split(',').map(t => t.trim()).filter(Boolean)
-      : [];
+    const tags = req.body.tags ? req.body.tags.split(',').map(t => t.trim()).filter(Boolean) : [];
     const updateData = {
-      name:        req.body.name,
-      category:    req.body.category,
-      subcategory: req.body.subcategory || '',
-      price:       req.body.price,
-      description: req.body.description || '',
-      tags,
+      name: req.body.name, category: req.body.category,
+      subcategory: req.body.subcategory || '', price: req.body.price,
+      description: req.body.description || '', tags,
       isNew:     req.body.isNew     === 'true' || req.body.isNew     === true,
       isBlended: req.body.isBlended === 'true' || req.body.isBlended === true,
       sortOrder: parseInt(req.body.sortOrder) || 0,
       active:    req.body.active !== 'false'
     };
     if (req.file) {
-      // Delete old image from Cloudinary before replacing
       const existing = await MenuItem.findById(req.params.id);
-      if (existing && existing.imagePublicId) {
-        await deleteCloudinaryImage(existing.imagePublicId);
-      }
-      updateData.imageUrl      = req.file.path;
-      updateData.imagePublicId = req.file.filename;
+      if (existing?.imagePublicId) await deleteCloudinaryImage(existing.imagePublicId);
+      updateData.imageUrl      = getCloudinaryUrl(req.file);
+      updateData.imagePublicId = getCloudinaryPublicId(req.file);
+      console.log('Menu image updated:', updateData.imageUrl);
     }
     const updated = await MenuItem.findByIdAndUpdate(req.params.id, updateData, { new: true });
     if (!updated) return res.status(404).json({ message: 'Menu item not found' });
     res.json(updated);
-  } catch (err) { res.status(400).json({ message: err.message }); }
+  } catch (err) {
+    console.error('PUT /api/menuitems error:', err);
+    res.status(400).json({ message: err.message || 'Failed to update menu item' });
+  }
 });
 
 app.delete('/api/menuitems/:id', async (req, res) => {
   try {
     const deleted = await MenuItem.findByIdAndDelete(req.params.id);
     if (!deleted) return res.status(404).json({ message: 'Menu item not found' });
-    // Clean up Cloudinary image
     await deleteCloudinaryImage(deleted.imagePublicId);
     res.status(204).send();
   } catch (err) { res.status(500).json({ message: err.message }); }
@@ -335,9 +359,7 @@ if (!IS_RENDER) {
       return res.sendFile(filePath);
     }
     const indexPath = path.join(FRONTEND_DIR, 'index.html');
-    if (fs.existsSync(indexPath)) {
-      return res.sendFile(indexPath);
-    }
+    if (fs.existsSync(indexPath)) return res.sendFile(indexPath);
     res.status(404).send('Not found');
   });
 }
@@ -345,6 +367,7 @@ if (!IS_RENDER) {
 // ── START ─────────────────────────────────────────────────────────────
 app.listen(PORT, '0.0.0.0', () => {
   console.log(`=================================`);
-  console.log(`Garage Cafe API running on port ${PORT}`);
+  console.log(`Garage Cafe API on port ${PORT}`);
+  console.log(`Cloudinary: ${CLOUDINARY_READY ? 'CONNECTED ✓' : 'NOT CONFIGURED ✗'}`);
   console.log(`=================================`);
 });
