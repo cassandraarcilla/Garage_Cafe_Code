@@ -1,4 +1,4 @@
-// Load .env from the same directory as server.js (works regardless of where you run node from)
+// dotenv — explicit path so it works regardless of where `node` is run from
 require('dotenv').config({ path: require('path').join(__dirname, '.env') });
 
 const express        = require('express');
@@ -26,14 +26,17 @@ const CLOUDINARY_READY = !!(
   process.env.CLOUDINARY_API_SECRET
 );
 
-// multer-storage-cloudinary exposes the URL differently across versions
+console.log('CLOUDINARY_CLOUD_NAME:', process.env.CLOUDINARY_CLOUD_NAME || 'NOT SET');
+console.log('Cloudinary ready:', CLOUDINARY_READY);
+
+// multer-storage-cloudinary exposes URL differently across versions — handle all
 function getCloudinaryUrl(file) {
   if (!file) return null;
-  return file.secure_url
-      || file.path
-      || (file.public_id
-          ? `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/${file.public_id}`
-          : null);
+  const url = file.secure_url || file.path || null;
+  if (!url && file.public_id) {
+    return `https://res.cloudinary.com/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload/${file.public_id}`;
+  }
+  return url;
 }
 
 function getCloudinaryPublicId(file) {
@@ -62,11 +65,10 @@ app.use(cors({
   credentials: true
 }));
 
-// ── MIDDLEWARE ────────────────────────────────────────────────────────
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// ── UPLOADS DIR (local fallback) ──────────────────────────────────────
+// ── UPLOADS DIR (kept for safety, not used when Cloudinary is active) ─
 const UPLOAD_DIR = path.join(__dirname, 'uploads');
 if (!fs.existsSync(UPLOAD_DIR)) fs.mkdirSync(UPLOAD_DIR, { recursive: true });
 app.use('/uploads', express.static(UPLOAD_DIR));
@@ -101,7 +103,6 @@ const blogSchema = new mongoose.Schema({
   imageUrl:      { type: String },
   imagePublicId: { type: String }
 }, { timestamps: true });
-
 const Blog = mongoose.model('Blog', blogSchema);
 
 const menuItemSchema = new mongoose.Schema({
@@ -118,11 +119,9 @@ const menuItemSchema = new mongoose.Schema({
   sortOrder:     { type: Number,   default: 0 },
   active:        { type: Boolean,  default: true }
 }, { timestamps: true, suppressReservedKeysWarning: true });
-
 const MenuItem = mongoose.model('MenuItem', menuItemSchema, 'menuitems');
 
-// ── MULTER SETUP ──────────────────────────────────────────────────────
-// Cloudinary storage for both blog and menu images
+// ── CLOUDINARY MULTER STORAGE ─────────────────────────────────────────
 const blogStorage = new CloudinaryStorage({
   cloudinary,
   params: {
@@ -149,9 +148,7 @@ const fileFilter = (req, file, cb) => {
 const uploadBlog = multer({ storage: blogStorage, limits: { fileSize: 5 * 1024 * 1024 }, fileFilter });
 const uploadMenu = multer({ storage: menuStorage, limits: { fileSize: 5 * 1024 * 1024 }, fileFilter });
 
-// ── MULTER ERROR WRAPPER ──────────────────────────────────────────────
-// Wraps multer middleware so upload errors are caught and returned as JSON
-// instead of crashing Express with an unhandled error
+// Wraps multer so upload errors return proper JSON instead of crashing
 function handleUpload(uploadMiddleware) {
   return (req, res, next) => {
     uploadMiddleware(req, res, (err) => {
@@ -164,7 +161,7 @@ function handleUpload(uploadMiddleware) {
   };
 }
 
-// ── HELPER: delete old Cloudinary image ──────────────────────────────
+// ── DELETE OLD CLOUDINARY IMAGE ───────────────────────────────────────
 async function deleteCloudinaryImage(publicId) {
   if (!publicId) return;
   try {
@@ -182,13 +179,8 @@ app.get('/', (req, res) => {
   }
   res.json({
     status: 'Garage Cafe API is running ☕',
-    cloudinary: CLOUDINARY_READY ? 'connected' : 'not configured',
-    endpoints: {
-      menu:      'GET /api/menuitems',
-      adminMenu: 'GET /api/admin/menuitems',
-      blogs:     'GET /api/blogs',
-      health:    'GET /health'
-    }
+    cloudinary: CLOUDINARY_READY ? 'connected' : 'NOT CONFIGURED — images will not save',
+    endpoints: { menu: 'GET /api/menuitems', adminMenu: 'GET /api/admin/menuitems', blogs: 'GET /api/blogs', health: 'GET /health' }
   });
 });
 
@@ -196,12 +188,24 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date(), cloudinary: CLOUDINARY_READY ? 'connected' : 'not configured' });
 });
 
+// ── DEBUG: test Cloudinary connection ─────────────────────────────────
+// Visit http://localhost:3000/api/cloudinary-test to verify connection
+app.get('/api/cloudinary-test', async (req, res) => {
+  if (!CLOUDINARY_READY) {
+    return res.status(500).json({ ok: false, message: 'Cloudinary env vars not set', cloud_name: process.env.CLOUDINARY_CLOUD_NAME });
+  }
+  try {
+    const result = await cloudinary.api.ping();
+    res.json({ ok: true, message: 'Cloudinary connected!', cloud_name: process.env.CLOUDINARY_CLOUD_NAME, result });
+  } catch (err) {
+    res.status(500).json({ ok: false, message: err.message, cloud_name: process.env.CLOUDINARY_CLOUD_NAME });
+  }
+});
+
 // ── BLOG ROUTES ───────────────────────────────────────────────────────
 app.get('/api/blogs', async (req, res) => {
-  try {
-    const blogs = await Blog.find().sort({ createdAt: -1 });
-    res.json(blogs);
-  } catch (err) { res.status(500).json({ message: err.message }); }
+  try { res.json(await Blog.find().sort({ createdAt: -1 })); }
+  catch (err) { res.status(500).json({ message: err.message }); }
 });
 
 app.get('/api/blogs/:id', async (req, res) => {
@@ -214,44 +218,30 @@ app.get('/api/blogs/:id', async (req, res) => {
 
 app.post('/api/blogs', handleUpload(uploadBlog.single('image')), async (req, res) => {
   try {
-    const blogData = {
-      title: req.body.title, author: req.body.author,
-      category: req.body.category, excerpt: req.body.excerpt, content: req.body.content
-    };
+    const blogData = { title: req.body.title, author: req.body.author, category: req.body.category, excerpt: req.body.excerpt, content: req.body.content };
     if (req.file) {
       blogData.imageUrl      = getCloudinaryUrl(req.file);
       blogData.imagePublicId = getCloudinaryPublicId(req.file);
-      console.log('Blog image saved:', blogData.imageUrl);
+      console.log('Blog image saved to Cloudinary:', blogData.imageUrl);
     }
-    const blog = new Blog(blogData);
-    await blog.save();
-    res.status(201).json(blog);
-  } catch (err) {
-    console.error('POST /api/blogs error:', err);
-    res.status(400).json({ message: err.message || 'Failed to save blog' });
-  }
+    res.status(201).json(await new Blog(blogData).save());
+  } catch (err) { console.error('POST /api/blogs:', err); res.status(400).json({ message: err.message || 'Failed to save blog' }); }
 });
 
 app.put('/api/blogs/:id', handleUpload(uploadBlog.single('image')), async (req, res) => {
   try {
-    const updateData = {
-      title: req.body.title, author: req.body.author,
-      category: req.body.category, excerpt: req.body.excerpt, content: req.body.content
-    };
+    const updateData = { title: req.body.title, author: req.body.author, category: req.body.category, excerpt: req.body.excerpt, content: req.body.content };
     if (req.file) {
       const existing = await Blog.findById(req.params.id);
       if (existing?.imagePublicId) await deleteCloudinaryImage(existing.imagePublicId);
       updateData.imageUrl      = getCloudinaryUrl(req.file);
       updateData.imagePublicId = getCloudinaryPublicId(req.file);
-      console.log('Blog image updated:', updateData.imageUrl);
+      console.log('Blog image updated on Cloudinary:', updateData.imageUrl);
     }
     const updated = await Blog.findByIdAndUpdate(req.params.id, updateData, { new: true });
     if (!updated) return res.status(404).json({ message: 'Blog not found' });
     res.json(updated);
-  } catch (err) {
-    console.error('PUT /api/blogs error:', err);
-    res.status(400).json({ message: err.message || 'Failed to update blog' });
-  }
+  } catch (err) { console.error('PUT /api/blogs:', err); res.status(400).json({ message: err.message || 'Failed to update blog' }); }
 });
 
 app.delete('/api/blogs/:id', async (req, res) => {
@@ -265,71 +255,55 @@ app.delete('/api/blogs/:id', async (req, res) => {
 
 // ── MENU ROUTES ───────────────────────────────────────────────────────
 app.get('/api/menuitems', async (req, res) => {
-  try {
-    const items = await MenuItem.find({ active: true }).sort({ sortOrder: 1, name: 1 });
-    res.json(items);
-  } catch (err) { res.status(500).json({ message: err.message }); }
+  try { res.json(await MenuItem.find({ active: true }).sort({ sortOrder: 1, name: 1 })); }
+  catch (err) { res.status(500).json({ message: err.message }); }
 });
 
 app.get('/api/admin/menuitems', async (req, res) => {
-  try {
-    const items = await MenuItem.find().sort({ sortOrder: 1, name: 1 });
-    res.json(items);
-  } catch (err) { res.status(500).json({ message: err.message }); }
+  try { res.json(await MenuItem.find().sort({ sortOrder: 1, name: 1 })); }
+  catch (err) { res.status(500).json({ message: err.message }); }
 });
 
 app.post('/api/menuitems', handleUpload(uploadMenu.single('image')), async (req, res) => {
   try {
     const tags = req.body.tags ? req.body.tags.split(',').map(t => t.trim()).filter(Boolean) : [];
     const itemData = {
-      name: req.body.name, category: req.body.category,
-      subcategory: req.body.subcategory || '', price: req.body.price,
-      description: req.body.description || '', tags,
-      isNew:     req.body.isNew     === 'true' || req.body.isNew     === true,
+      name: req.body.name, category: req.body.category, subcategory: req.body.subcategory || '',
+      price: req.body.price, description: req.body.description || '', tags,
+      isNew: req.body.isNew === 'true' || req.body.isNew === true,
       isBlended: req.body.isBlended === 'true' || req.body.isBlended === true,
-      sortOrder: parseInt(req.body.sortOrder) || 0,
-      active:    req.body.active !== 'false'
+      sortOrder: parseInt(req.body.sortOrder) || 0, active: req.body.active !== 'false'
     };
     if (req.file) {
       itemData.imageUrl      = getCloudinaryUrl(req.file);
       itemData.imagePublicId = getCloudinaryPublicId(req.file);
-      console.log('Menu image saved:', itemData.imageUrl);
+      console.log('Menu image saved to Cloudinary:', itemData.imageUrl);
     }
-    const newItem = new MenuItem(itemData);
-    await newItem.save();
-    res.status(201).json(newItem);
-  } catch (err) {
-    console.error('POST /api/menuitems error:', err);
-    res.status(400).json({ message: err.message || 'Failed to save menu item' });
-  }
+    res.status(201).json(await new MenuItem(itemData).save());
+  } catch (err) { console.error('POST /api/menuitems:', err); res.status(400).json({ message: err.message || 'Failed to save menu item' }); }
 });
 
 app.put('/api/menuitems/:id', handleUpload(uploadMenu.single('image')), async (req, res) => {
   try {
     const tags = req.body.tags ? req.body.tags.split(',').map(t => t.trim()).filter(Boolean) : [];
     const updateData = {
-      name: req.body.name, category: req.body.category,
-      subcategory: req.body.subcategory || '', price: req.body.price,
-      description: req.body.description || '', tags,
-      isNew:     req.body.isNew     === 'true' || req.body.isNew     === true,
+      name: req.body.name, category: req.body.category, subcategory: req.body.subcategory || '',
+      price: req.body.price, description: req.body.description || '', tags,
+      isNew: req.body.isNew === 'true' || req.body.isNew === true,
       isBlended: req.body.isBlended === 'true' || req.body.isBlended === true,
-      sortOrder: parseInt(req.body.sortOrder) || 0,
-      active:    req.body.active !== 'false'
+      sortOrder: parseInt(req.body.sortOrder) || 0, active: req.body.active !== 'false'
     };
     if (req.file) {
       const existing = await MenuItem.findById(req.params.id);
       if (existing?.imagePublicId) await deleteCloudinaryImage(existing.imagePublicId);
       updateData.imageUrl      = getCloudinaryUrl(req.file);
       updateData.imagePublicId = getCloudinaryPublicId(req.file);
-      console.log('Menu image updated:', updateData.imageUrl);
+      console.log('Menu image updated on Cloudinary:', updateData.imageUrl);
     }
     const updated = await MenuItem.findByIdAndUpdate(req.params.id, updateData, { new: true });
     if (!updated) return res.status(404).json({ message: 'Menu item not found' });
     res.json(updated);
-  } catch (err) {
-    console.error('PUT /api/menuitems error:', err);
-    res.status(400).json({ message: err.message || 'Failed to update menu item' });
-  }
+  } catch (err) { console.error('PUT /api/menuitems:', err); res.status(400).json({ message: err.message || 'Failed to update menu item' }); }
 });
 
 app.delete('/api/menuitems/:id', async (req, res) => {
@@ -355,9 +329,7 @@ app.patch('/api/menuitems/:id/toggle', async (req, res) => {
 if (!IS_RENDER) {
   app.use((req, res) => {
     const filePath = path.join(FRONTEND_DIR, req.path);
-    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
-      return res.sendFile(filePath);
-    }
+    if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) return res.sendFile(filePath);
     const indexPath = path.join(FRONTEND_DIR, 'index.html');
     if (fs.existsSync(indexPath)) return res.sendFile(indexPath);
     res.status(404).send('Not found');
