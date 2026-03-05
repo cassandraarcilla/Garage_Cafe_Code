@@ -29,88 +29,90 @@ body { font-family:'Roboto', Arial, sans-serif; background: var(--cream); color:
 nav { position:fixed; top:0; width:100%; background: rgba(44,24,16,0.95); backdrop-filter:blur(10px); z-index:1000; padding:1.5rem 0; box-shadow:0 4px 20px rgba(0,0,0,0.15); transition:all 0.3s ease; }
 nav.scrolled { padding:1rem 0; background: rgba(44,24,16,0.98); }
 nav .container { max-width:1400px; margin:0 auto; padding:0 3rem; display:flex; justify-content:space-between; align-items:center; }
-.logo { display:flex; align-items:center; gap:0.8rem; transition: transform 0.3s ease; z-index:1001; }
+.logo { display:flex; align-items:center; gap:0.8rem; transition: transform 0.3s ease; z-index:1001; text-decoration:none; }
 .logo:hover { transform: scale(1.05); }
 .logo img { height:50px; width:auto; filter: brightness(0) invert(1); }
-.logo-text { font-family:'Yeseva One', serif; font-size:1.8rem; color: var(--off-white); letter-spacing:2px; text-shadow:2px 2px 4px rgba(0,0,0,0.3); }
 
-/* Hamburger Menu */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-    z-index: 1001;
-    padding: 0.6rem;
-    gap: 5px;
-}
-
-.hamburger span {
-    width: 32px;
-    height: 3px;
-    background: var(--off-white);
-    transition: all 0.3s ease;
-    border-radius: 3px;
-}
-
-.hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(9px, 9px);
-}
-
-.hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(9px, -9px);
-}
+.hamburger { display:none; flex-direction:column; cursor:pointer; z-index:1001; padding:0.6rem; gap:5px; }
+.hamburger span { width:32px; height:3px; background:var(--off-white); transition:all 0.3s ease; border-radius:3px; }
+.hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(9px, 9px); }
+.hamburger.active span:nth-child(2) { opacity:0; }
+.hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(9px, -9px); }
 
 nav ul { display:flex; list-style:none; gap:2.5rem; }
-nav a { color: var(--lighter-brown); text-decoration:none; font-weight:500; letter-spacing:1px; position:relative; transition:color 0.3s ease; padding:0.5rem 0; }
-nav a::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background: var(--accent-gold); transition: width 0.3s ease; }
+nav a { color:var(--lighter-brown); text-decoration:none; font-weight:500; letter-spacing:1px; position:relative; transition:color 0.3s ease; padding:0.5rem 0; }
+nav a::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:var(--accent-gold); transition:width 0.3s ease; }
 nav a:hover::after, nav a.active::after { width:100%; }
-nav a:hover, nav a.active { color: var(--off-white); }
+nav a:hover, nav a.active { color:var(--off-white); }
 
-/* Hero Section */
-.page-hero { min-height:50vh; background: linear-gradient(135deg, rgba(93,64,55,0.85), rgba(44,24,16,0.9)), url('GRG/CONTACT/contact_header.jpg') center/cover no-repeat fixed; display:flex; align-items:center; justify-content:center; text-align:center; padding:12rem 2rem 4rem; position:relative; animation: fadeIn 1s ease-in; }
-.page-hero::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; background: radial-gradient(circle at center, transparent 0%, rgba(44,24,16,0.4) 100%); }
+/* Hero */
+.page-hero { min-height:50vh; background: linear-gradient(135deg, rgba(93,64,55,0.85), rgba(44,24,16,0.9)), url('GRG/CONTACT/contact_header.jpg') center/cover no-repeat fixed; display:flex; align-items:center; justify-content:center; text-align:center; padding:12rem 2rem 4rem; position:relative; animation:fadeIn 1s ease-in; }
+.page-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(circle at center, transparent 0%, rgba(44,24,16,0.4) 100%); }
 .page-hero-content { max-width:900px; position:relative; z-index:2; }
 .page-hero h1 { font-family:'Yeseva One', serif; font-size:4rem; color:var(--off-white); margin-bottom:1rem; letter-spacing:4px; text-shadow:3px 3px 10px rgba(0,0,0,0.5); animation:slideUp 1s ease-out; }
-.page-hero p { font-size:1.3rem; color: var(--lighter-brown); font-weight:300; text-shadow:2px 2px 6px rgba(0,0,0,0.4); animation:slideUp 1.2s ease-out; }
+.page-hero p { font-size:1.3rem; color:var(--lighter-brown); font-weight:300; text-shadow:2px 2px 6px rgba(0,0,0,0.4); animation:slideUp 1.2s ease-out; }
 
 /* Contact Section */
-.contact-section { padding:6rem 3rem; background: linear-gradient(135deg, var(--off-white), var(--cream)); }
+.contact-section { padding:6rem 3rem; background:linear-gradient(135deg, var(--off-white), var(--cream)); }
 .container { max-width:1400px; margin:0 auto; }
 .contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:4rem; margin-top:3rem; }
-.contact-info { background:white; padding:3rem; border-radius:25px; box-shadow:0 10px 30px rgba(44,24,16,0.08); transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.contact-info:hover { transform: translateY(-10px); box-shadow:0 20px 50px rgba(44,24,16,0.15); }
+
+/* Info card */
+.contact-info { background:white; padding:3rem; border-radius:25px; box-shadow:0 10px 30px rgba(44,24,16,0.08); transition:transform 0.3s ease, box-shadow 0.3s ease; }
+.contact-info:hover { transform:translateY(-10px); box-shadow:0 20px 50px rgba(44,24,16,0.15); }
 .contact-info h2 { font-family:'Yeseva One', serif; font-size:2.5rem; color:var(--dark-brown); margin-bottom:2rem; position:relative; display:inline-block; }
 .contact-info h2::after { content:''; position:absolute; bottom:-10px; left:0; width:80px; height:3px; background:linear-gradient(90deg,var(--light-brown),var(--accent-gold)); }
 .info-item { margin-bottom:2rem; padding-left:2rem; position:relative; }
-.info-item h3 { font-family:'Yeseva One', serif; font-size:1.3rem; color: var(--medium-brown); margin-bottom:0.5rem; }
-.info-item p { color: var(--light-brown); line-height:1.8; }
-.info-item a { color: var(--light-brown); text-decoration:none; transition:color 0.3s ease; }
-.info-item a:hover { color: var(--accent-gold); }
+.info-item h3 { font-family:'Yeseva One', serif; font-size:1.3rem; color:var(--medium-brown); margin-bottom:0.5rem; }
+.info-item p { color:var(--light-brown); line-height:1.8; }
+.info-item a { color:var(--light-brown); text-decoration:none; transition:color 0.3s ease; }
+.info-item a:hover { color:var(--accent-gold); }
 
 /* Image Gallery */
 .contact-images { display:grid; grid-template-columns:1fr; gap:2rem; }
 .image-card { background:white; padding:1.5rem; border-radius:25px; box-shadow:0 10px 30px rgba(44,24,16,0.08); transition:transform 0.3s ease, box-shadow 0.3s ease; }
-.image-card:hover { transform: translateY(-10px); box-shadow:0 20px 50px rgba(44,24,16,0.15); }
-.image-placeholder { width:100%; height:250px; border-radius:15px; overflow:hidden; margin-bottom:1rem; display:flex; align-items:center; justify-content:center; }
+.image-card:hover { transform:translateY(-10px); box-shadow:0 20px 50px rgba(44,24,16,0.15); }
+.image-placeholder { width:100%; height:250px; border-radius:15px; overflow:hidden; margin-bottom:1rem; }
 .image-placeholder img { width:100%; height:100%; object-fit:cover; display:block; }
 .image-card h3 { font-family:'Yeseva One', serif; font-size:1.3rem; color:var(--dark-brown); text-align:center; }
 
-/* Hours Section */
-.hours-section { background: linear-gradient(135deg, var(--dark-brown), #1a0e08); color:var(--off-white); padding:6rem 3rem; text-align:center; }
+/* Contact Form Section */
+.form-section { padding:6rem 3rem; background:var(--cream); }
+.form-section .section-title { font-family:'Yeseva One', serif; font-size:3rem; color:var(--dark-brown); text-align:center; margin-bottom:0.5rem; position:relative; display:inline-block; }
+.form-section .section-title::after { content:''; position:absolute; bottom:-10px; left:50%; transform:translateX(-50%); width:80px; height:3px; background:linear-gradient(90deg,var(--light-brown),var(--accent-gold),var(--light-brown)); border-radius:2px; }
+.form-section .section-subtitle { text-align:center; color:var(--medium-brown); font-size:1.1rem; font-weight:300; margin-top:1.5rem; margin-bottom:3rem; }
+.form-wrap { max-width:700px; margin:0 auto; background:white; border-radius:25px; padding:3rem; box-shadow:0 10px 30px rgba(44,24,16,0.08); }
+.form-row { display:grid; grid-template-columns:1fr 1fr; gap:1.5rem; margin-bottom:1.5rem; }
+.form-group { display:flex; flex-direction:column; gap:0.5rem; margin-bottom:1.5rem; }
+.form-group label { font-size:0.85rem; font-weight:600; color:var(--medium-brown); text-transform:uppercase; letter-spacing:0.5px; }
+.form-group input, .form-group select, .form-group textarea { padding:0.85rem 1.1rem; border:1.5px solid #e0d5c8; border-radius:10px; font-family:'Roboto', sans-serif; font-size:0.95rem; color:var(--dark-brown); background:#faf7f3; transition:border-color 0.2s, box-shadow 0.2s; width:100%; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline:none; border-color:var(--accent-gold); background:white; box-shadow:0 0 0 3px rgba(212,175,55,0.12); }
+.form-group textarea { resize:vertical; min-height:140px; }
+.form-submit { width:100%; padding:1rem; background:linear-gradient(135deg, var(--medium-brown), var(--dark-brown)); color:var(--off-white); border:none; border-radius:12px; font-family:'Yeseva One', serif; font-size:1.1rem; letter-spacing:1px; cursor:pointer; transition:all 0.3s ease; margin-top:0.5rem; }
+.form-submit:hover { background:linear-gradient(135deg, var(--accent-gold), var(--medium-brown)); transform:translateY(-2px); box-shadow:0 8px 20px rgba(44,24,16,0.2); }
+.form-submit:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+.form-toast { display:none; margin-top:1.2rem; padding:1rem 1.4rem; border-radius:10px; font-size:0.95rem; font-weight:500; text-align:center; }
+.form-toast.success { background:#e8f5e9; color:#2e7d32; border:1px solid #a5d6a7; display:block; }
+.form-toast.error { background:#fce4ec; color:#c62828; border:1px solid #ef9a9a; display:block; }
+
+/* Social links */
+.social-links { display:flex; gap:1rem; margin-top:1rem; }
+.social-links a { width:45px; height:45px; background:linear-gradient(135deg,var(--medium-brown),var(--light-brown)); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all 0.4s ease; box-shadow:0 4px 10px rgba(0,0,0,0.2); padding:10px; }
+.social-links a:hover { background:linear-gradient(135deg,var(--accent-gold),var(--light-brown)); transform:translateY(-5px) rotate(5deg); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+.social-links img { width:100%; height:100%; object-fit:contain; filter:brightness(0) invert(1); }
+
+/* Hours */
+.hours-section { background:linear-gradient(135deg, var(--dark-brown), #1a0e08); color:var(--off-white); padding:6rem 3rem; text-align:center; }
 .hours-section h2 { font-family:'Yeseva One', serif; font-size:3rem; margin-bottom:3rem; position:relative; display:inline-block; }
 .hours-section h2::after { content:''; position:absolute; bottom:-10px; left:50%; transform:translateX(-50%); width:80px; height:3px; background:linear-gradient(90deg,var(--light-brown),var(--accent-gold),var(--light-brown)); }
 .hours-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:2rem; max-width:800px; margin:0 auto; }
-.hours-card { background: rgba(255,255,255,0.05); padding:2rem; border-radius:20px; border:2px solid rgba(212,175,55,0.3); transition: all 0.3s ease; }
-.hours-card:hover { transform: translateY(-10px); background: rgba(255,255,255,0.08); border-color: var(--accent-gold); }
-.hours-card h3 { font-family:'Yeseva One', serif; font-size:1.8rem; color: var(--accent-gold); margin-bottom:1rem; }
-.hours-card p { color: var(--lighter-brown); font-size:1.1rem; line-height:2; }
+.hours-card { background:rgba(255,255,255,0.05); padding:2rem; border-radius:20px; border:2px solid rgba(212,175,55,0.3); transition:all 0.3s ease; }
+.hours-card:hover { transform:translateY(-10px); background:rgba(255,255,255,0.08); border-color:var(--accent-gold); }
+.hours-card h3 { font-family:'Yeseva One', serif; font-size:1.8rem; color:var(--accent-gold); margin-bottom:1rem; }
+.hours-card p { color:var(--lighter-brown); font-size:1.1rem; line-height:2; }
 
-/* Map Section */
-.map-section { padding:6rem 3rem; background: var(--off-white); }
+/* Map */
+.map-section { padding:6rem 3rem; background:var(--off-white); }
 .map-section h2 { font-family:'Yeseva One', serif; font-size:3rem; color:var(--dark-brown); margin-bottom:3rem; text-align:center; position:relative; display:inline-block; }
 .map-section h2::after { content:''; position:absolute; bottom:-10px; left:50%; transform:translateX(-50%); width:80px; height:3px; background:linear-gradient(90deg,var(--light-brown),var(--accent-gold),var(--light-brown)); }
 .map-section .container { text-align:center; }
@@ -118,559 +120,105 @@ nav a:hover, nav a.active { color: var(--off-white); }
 .map-placeholder { width:100%; height:450px; border-radius:15px; overflow:hidden; }
 .map-placeholder iframe { width:100%; height:100%; border:none; border-radius:15px; }
 
-/* Footer */
-footer { background: linear-gradient(to bottom,var(--dark-brown),#0f0805); color: var(--lighter-brown); padding:4rem 3rem 2rem; }
-.footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:3rem; max-width:1400px; margin:0 auto 3rem; }
-.footer-section h3 { font-family:'Yeseva One', serif; font-size:1.5rem; color: var(--off-white); margin-bottom:1.5rem; position:relative; display:inline-block; }
-.footer-section h3::after { content:''; position:absolute; bottom:-8px; left:0; width:50px; height:2px; background: var(--accent-gold); }
-.footer-section p, .footer-section a { color: var(--lighter-brown); text-decoration:none; display:block; margin-bottom:0.5rem; transition:all 0.3s ease; }
-.footer-section a:hover { color: var(--off-white); padding-left:5px; }
-.footer-links { list-style:none; }
+/* ===================== FOOTER FIX ===================== */
+footer { background:linear-gradient(to bottom,var(--dark-brown),#0f0805); color:var(--lighter-brown); padding:4rem 3rem 2rem; }
+.footer-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:3rem; max-width:1400px; margin:0 auto 3rem; justify-items: start; }
+.footer-section h3 { font-family:'Yeseva One', serif; font-size:1.5rem; color:var(--off-white); margin-bottom:1.5rem; position:relative; display:inline-block; }
+.footer-section h3::after { content:''; position:absolute; bottom:-8px; left:0; width:50px; height:2px; background:var(--accent-gold); }
+.footer-section p, .footer-section a { color:var(--lighter-brown); text-decoration:none; display:block; margin-bottom:0.5rem; transition:all 0.3s ease; }
+.footer-section a:hover { color:var(--off-white); padding-left:5px; }
+.footer-links { list-style:none; padding:0; margin:0; }
 .footer-links li { margin-bottom:0.8rem; }
-.social-links { display:flex; gap:1rem; margin-top:1rem; }
-.social-links a { width:45px; height:45px; background:linear-gradient(135deg,var(--medium-brown),var(--light-brown)); border-radius:50%; display:flex; align-items:center; justify-content:center; transition: all 0.4s ease; box-shadow:0 4px 10px rgba(0,0,0,0.2); padding:10px; }
-.social-links a:hover { background:linear-gradient(135deg,var(--accent-gold),var(--light-brown)); transform: translateY(-5px) rotate(5deg); box-shadow:0 8px 20px rgba(0,0,0,0.3); padding:10px; }
-.social-links img { width:100%; height:100%; object-fit:contain; filter:brightness(0) invert(1); }
-.copyright { text-align:center; padding-top:2rem; border-top:1px solid rgba(141,110,99,0.3); font-size:0.9rem; }
+.footer-social { display:flex; gap:0.8rem; margin-top:1rem; align-items:center; }
+.footer-social a { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; background:rgba(188,170,164,0.15); border-radius:50%; padding:8px; transition:background 0.3s ease, transform 0.3s ease; }
+.footer-social a:hover { background:rgba(212,175,55,0.25); transform:translateY(-3px); }
+.footer-social img { width:100%; height:100%; object-fit:contain; filter:brightness(0) invert(1); display:block; }
+
+/* Opening Hours — single column */
+.hours-list { margin-top: 1rem; display: flex; flex-direction: column; gap: 0; }
+.hours-item { padding: 0.65rem 0; border-bottom: 1px solid rgba(188,170,164,0.18); }
+.hours-item:last-child { border-bottom: none; }
+.hours-item .day { display:block; color:var(--lighter-brown); font-size:0.72rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; margin-bottom:0.2rem; }
+.hours-item .time { display:block; color:var(--accent-gold); font-size:0.9rem; font-weight:700; }
+.hours-item .time.closed { color:var(--lighter-brown); font-style:italic; font-weight:400; }
+
+.copyright { text-align:center; padding-top:2rem; border-top:1px solid rgba(141,110,99,0.3); font-size:0.9rem; max-width:1400px; margin:0 auto; }
 
 /* Scroll to top */
-.scroll-top { position:fixed; bottom:30px; right:30px; width:50px; height:50px; background:linear-gradient(135deg,var(--light-brown),var(--accent-gold)); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.5rem; cursor:pointer; opacity:0; visibility:hidden; transition: all 0.3s ease; z-index:999; box-shadow:0 5px 15px rgba(0,0,0,0.3); }
+.scroll-top { position:fixed; bottom:30px; right:30px; width:50px; height:50px; background:linear-gradient(135deg,var(--light-brown),var(--accent-gold)); color:white; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.5rem; cursor:pointer; opacity:0; visibility:hidden; transition:all 0.3s ease; z-index:999; box-shadow:0 5px 15px rgba(0,0,0,0.3); }
 .scroll-top.visible { opacity:1; visibility:visible; }
 .scroll-top:hover { transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,0,0,0.4); }
 
-/* Animations */
-@keyframes fadeIn {0%{opacity:0;}100%{opacity:1;}}
-@keyframes slideUp {0%{opacity:0; transform:translateY(20px);}100%{opacity:1; transform:translateY(0);}}
+@keyframes fadeIn { 0%{opacity:0;} 100%{opacity:1;} }
+@keyframes slideUp { 0%{opacity:0;transform:translateY(20px);} 100%{opacity:1;transform:translateY(0);} }
 
-/* RESPONSIVE DESIGN - Matching index.html exactly */
-
-/* Large Desktop Full HD (1920px and above) */
+/* RESPONSIVE */
 @media screen and (min-width: 1920px) {
-    nav .container {
-        max-width: 1800px;
-        padding: 0 4rem;
-    }
-
-    nav ul {
-        gap: 3.5rem;
-    }
-
-    nav a {
-        font-size: 1.1rem;
-    }
-
-    .logo img {
-        height: 60px;
-    }
-
-    .page-hero {
-        padding: 15rem 4rem 6rem;
-        min-height: 60vh;
-    }
-
-    .page-hero-content {
-        max-width: 1200px;
-    }
-
-    .page-hero h1 {
-        font-size: 5.5rem;
-        letter-spacing: 8px;
-        margin-bottom: 1.5rem;
-    }
-
-    .page-hero p {
-        font-size: 1.8rem;
-    }
-
-    .contact-section {
-        padding: 8rem 4rem;
-    }
-
-    .container {
-        max-width: 1800px;
-    }
-
-    .contact-grid {
-        gap: 5rem;
-        margin-top: 4rem;
-    }
-
-    .contact-info {
-        padding: 4rem;
-        border-radius: 30px;
-    }
-
-    .contact-info h2 {
-        font-size: 3.2rem;
-        margin-bottom: 2.5rem;
-    }
-
-    .contact-info h2::after {
-        width: 100px;
-        height: 4px;
-        bottom: -12px;
-    }
-
-    .info-item {
-        margin-bottom: 2.5rem;
-        padding-left: 2.5rem;
-    }
-
-    .info-item h3 {
-        font-size: 1.6rem;
-        margin-bottom: 0.8rem;
-    }
-
-    .info-item p {
-        font-size: 1.2rem;
-        line-height: 2;
-    }
-
-    .contact-images {
-        gap: 2.5rem;
-    }
-
-    .image-card {
-        padding: 2rem;
-        border-radius: 30px;
-    }
-
-    .image-placeholder {
-        height: 320px;
-        border-radius: 20px;
-        margin-bottom: 1.5rem;
-    }
-
-    .image-card h3 {
-        font-size: 1.6rem;
-    }
-
-    .hours-section {
-        padding: 8rem 4rem;
-    }
-
-    .hours-section h2 {
-        font-size: 3.8rem;
-        margin-bottom: 4rem;
-    }
-
-    .hours-section h2::after {
-        width: 120px;
-        height: 4px;
-        bottom: -15px;
-    }
-
-    .hours-grid {
-        max-width: 1000px;
-        gap: 3rem;
-    }
-
-    .hours-card {
-        padding: 2.5rem;
-        border-radius: 25px;
-    }
-
-    .hours-card h3 {
-        font-size: 2.2rem;
-        margin-bottom: 1.2rem;
-    }
-
-    .hours-card p {
-        font-size: 1.3rem;
-        line-height: 2.2;
-    }
-
-    .map-section {
-        padding: 8rem 4rem;
-    }
-
-    .map-section h2 {
-        font-size: 3.8rem;
-        margin-bottom: 4rem;
-    }
-
-    .map-section h2::after {
-        width: 120px;
-        height: 4px;
-        bottom: -15px;
-    }
-
-    .map-container {
-        max-width: 1600px;
-        padding: 2.5rem;
-        border-radius: 30px;
-    }
-
-    .map-placeholder {
-        height: 550px;
-        border-radius: 20px;
-    }
-
-    .footer-grid {
-        max-width: 1800px;
-        gap: 4rem;
-        padding: 0 4rem;
-    }
-
-    footer {
-        padding: 5rem 4rem 2rem;
-    }
-
-    .footer-section h3 {
-        font-size: 1.8rem;
-        margin-bottom: 2rem;
-    }
-
-    .footer-section p,
-    .footer-section a {
-        font-size: 1.1rem;
-        margin-bottom: 0.8rem;
-    }
-
-    .social-links a {
-        width: 55px;
-        height: 55px;
-    }
-
-    .copyright {
-        font-size: 1rem;
-        padding-top: 2.5rem;
-    }
-
-    .scroll-top {
-        width: 60px;
-        height: 60px;
-        font-size: 1.8rem;
-        bottom: 40px;
-        right: 40px;
-    }
+    nav .container { max-width:1800px; padding:0 4rem; }
+    nav ul { gap:3.5rem; }
+    .logo img { height:60px; }
+    .page-hero { padding:15rem 4rem 6rem; }
+    .page-hero h1 { font-size:5.5rem; }
+    .contact-section { padding:8rem 4rem; }
+    .container { max-width:1800px; }
+    .footer-grid { max-width:1800px; gap:4rem; padding:0 4rem; }
+    footer { padding:5rem 4rem 2rem; }
+    .copyright { max-width:1800px; }
 }
 
-/* Desktop (1440px - 1919px) */
 @media screen and (min-width: 1440px) and (max-width: 1919px) {
-    nav .container {
-        max-width: 1600px;
-        padding: 0 3.5rem;
-    }
-
-    .container {
-        max-width: 1600px;
-    }
-
-    .page-hero h1 {
-        font-size: 4.5rem;
-    }
-
-    .page-hero p {
-        font-size: 1.5rem;
-    }
-
-    .contact-info h2 {
-        font-size: 2.8rem;
-    }
-
-    .hours-section h2,
-    .map-section h2 {
-        font-size: 3.3rem;
-    }
-
-    .footer-grid {
-        max-width: 1600px;
-    }
+    nav .container { max-width:1600px; padding:0 3.5rem; }
+    .container { max-width:1600px; }
+    .footer-grid { max-width:1600px; }
+    .copyright { max-width:1600px; }
 }
 
-/* Laptop (1280px - 1439px) */
 @media screen and (min-width: 1280px) and (max-width: 1439px) {
-    nav .container {
-        max-width: 1400px;
-        padding: 0 3rem;
-    }
-
-    .container {
-        max-width: 1400px;
-    }
-
-    .page-hero h1 {
-        font-size: 4rem;
-    }
-
-    .page-hero p {
-        font-size: 1.4rem;
-    }
-
-    .footer-grid {
-        max-width: 1400px;
-    }
+    nav .container { max-width:1400px; padding:0 3rem; }
+    .container { max-width:1400px; }
+    .footer-grid { max-width:1400px; }
+    .copyright { max-width:1400px; }
 }
 
-/* Laptop smaller (1024px - 1279px) */
 @media screen and (min-width: 1024px) and (max-width: 1279px) {
-    nav .container {
-        max-width: 1200px;
-        padding: 0 2.5rem;
-    }
-
-    .container {
-        max-width: 1200px;
-    }
-
-    .contact-section {
-        padding: 6rem 2.5rem;
-    }
-
-    .hours-section {
-        padding: 6rem 2.5rem;
-    }
-
-    .map-section {
-        padding: 6rem 2.5rem;
-    }
-
-    .footer-grid {
-        max-width: 1200px;
-    }
-
-    footer {
-        padding: 4rem 2.5rem 2rem;
-    }
+    nav .container { max-width:1200px; padding:0 2.5rem; }
+    .container { max-width:1200px; }
+    .contact-section, .hours-section, .map-section, .form-section { padding:6rem 2.5rem; }
+    .footer-grid { max-width:1200px; }
+    footer { padding:4rem 2.5rem 2rem; }
+    .copyright { max-width:1200px; }
 }
 
-/* Tablet & Mobile - matching index.html exactly */
 @media screen and (max-width: 1024px) {
-    .hamburger {
-        display: flex;
-    }
-
-    nav ul {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 300px;
-        height: 100vh;
-        background: rgba(44, 24, 16, 0.98);
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: flex-start;
-        padding-top: 100px;
-        padding-left: 2rem;
-        gap: 2.5rem;
-        transition: right 0.3s ease;
-        box-shadow: -5px 0 20px rgba(0,0,0,0.3);
-        z-index: 1000;
-    }
-
-    nav ul.active {
-        right: 0;
-    }
-
-    nav li {
-        width: 100%;
-    }
-
-    nav a {
-        font-size: 1.3rem;
-        display: block;
-        padding: 0.8rem 0;
-    }
-
-    .logo-text {
-        font-size: 1.5rem;
-    }
-
-    .contact-grid {
-        grid-template-columns: 1fr;
-        gap: 2rem;
-    }
-
-    .page-hero h1 {
-        font-size: 3.2rem;
-    }
-
-    .page-hero p {
-        font-size: 1.2rem;
-    }
-
-    .contact-info {
-        padding: 2.5rem;
-    }
+    .hamburger { display:flex; }
+    nav ul { position:fixed; top:0; right:-100%; width:300px; height:100vh; background:rgba(44,24,16,0.98); flex-direction:column; justify-content:flex-start; align-items:flex-start; padding-top:100px; padding-left:2rem; gap:2.5rem; transition:right 0.3s ease; box-shadow:-5px 0 20px rgba(0,0,0,0.3); z-index:1000; }
+    nav ul.active { right:0; }
+    nav li { width:100%; }
+    nav a { font-size:1.3rem; display:block; padding:0.8rem 0; }
+    .contact-grid { grid-template-columns:1fr; gap:2rem; }
+    .page-hero h1 { font-size:3.2rem; }
+    .form-row { grid-template-columns:1fr; gap:0; }
 }
 
 @media screen and (max-width: 768px) {
-    nav ul {
-        width: 280px;
-    }
-
-    .page-hero {
-        padding: 10rem 1.5rem 3rem;
-    }
-
-    .page-hero h1 {
-        font-size: 2.8rem;
-        letter-spacing: 2px;
-    }
-
-    .page-hero p {
-        font-size: 1.1rem;
-    }
-
-    .contact-info {
-        padding: 2rem;
-    }
-
-    .contact-info h2 {
-        font-size: 2.2rem;
-    }
-
-    .hours-section h2,
-    .map-section h2 {
-        font-size: 2.5rem;
-    }
-
-    .hours-grid {
-        grid-template-columns: 1fr;
-        max-width: 400px;
-    }
-
-    .image-placeholder {
-        height: 220px;
-    }
+    nav ul { width:280px; }
+    .page-hero { padding:10rem 1.5rem 3rem; }
+    .page-hero h1 { font-size:2.8rem; }
+    .contact-info { padding:2rem; }
+    .form-section .section-title { font-size:2.5rem; }
+    .form-wrap { padding:2rem; }
+    footer { padding:3rem 1.5rem 1.5rem; }
 }
 
 @media screen and (max-width: 480px) {
-    nav ul {
-        width: 260px;
-        padding-left: 1.5rem;
-        gap: 2rem;
-    }
-
-    nav a {
-        font-size: 1.2rem;
-    }
-
-    .page-hero h1 {
-        font-size: 2.2rem;
-    }
-
-    .page-hero p {
-        font-size: 1rem;
-    }
-
-    .contact-section,
-    .hours-section,
-    .map-section {
-        padding: 4rem 1.5rem;
-    }
-
-    .contact-info {
-        padding: 1.5rem;
-    }
-
-    .contact-info h2 {
-        font-size: 2rem;
-    }
-
-    .info-item {
-        padding-left: 1.5rem;
-    }
-
-    .info-item h3 {
-        font-size: 1.2rem;
-    }
-
-    .info-item p {
-        font-size: 0.95rem;
-    }
-
-    .image-placeholder {
-        height: 180px;
-    }
-
-    .image-card {
-        padding: 1rem;
-    }
-
-    .image-card h3 {
-        font-size: 1.1rem;
-    }
-
-    .hours-section h2,
-    .map-section h2 {
-        font-size: 2rem;
-    }
-
-    .hours-card {
-        padding: 1.5rem;
-    }
-
-    .hours-card h3 {
-        font-size: 1.5rem;
-    }
-
-    .hours-card p {
-        font-size: 1rem;
-    }
-
-    .map-container {
-        padding: 1rem;
-    }
-
-    .map-placeholder {
-        height: 300px;
-    }
-
-    .scroll-top {
-        bottom: 20px;
-        right: 20px;
-        width: 45px;
-        height: 45px;
-        font-size: 1.3rem;
-    }
-}
-
-/* Small phones */
-@media screen and (max-width: 360px) {
-    .page-hero h1 {
-        font-size: 1.8rem;
-    }
-
-    .contact-info h2 {
-        font-size: 1.8rem;
-    }
-
-    .image-placeholder {
-        height: 150px;
-    }
-}
-
-/* Landscape orientation on phones */
-@media (max-width: 896px) and (orientation: landscape) {
-    .page-hero {
-        min-height: 80vh;
-        padding: 8rem 2rem 3rem;
-    }
-
-    .page-hero h1 {
-        font-size: 2.5rem;
-    }
-
-    .contact-grid {
-        gap: 1.5rem;
-    }
-
-    .image-placeholder {
-        height: 180px;
-    }
-}
-
-/* High resolution displays */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-    .image-placeholder img {
-        image-rendering: -webkit-optimize-contrast;
-    }
+    nav ul { width:260px; padding-left:1.5rem; gap:2rem; }
+    .page-hero h1 { font-size:2.2rem; }
+    .contact-section, .hours-section, .map-section, .form-section { padding:4rem 1.5rem; }
+    .scroll-top { bottom:20px; right:20px; width:45px; height:45px; }
+    footer { padding:3rem 1rem 1.5rem; }
 }
 </style>
 
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-90Z65E4SVZ"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -679,49 +227,35 @@ gtag('js', new Date());
 gtag('config', 'G-90Z65E4SVZ');
 </script>
 
-    <!--schema org-->
-    <script type="application/ld+json">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  "name": "Garage Café",
+  "image": "https://visitgaragecafe.com/GRG/Icons/Garage%20Cafe%20logo%20ICON.png",
+  "@id": "https://www.visitgaragecafe.com/#coffeeshop",
+  "url": "https://www.visitgaragecafe.com/",
+  "telephone": "+63XXXXXXXXX",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Mawaque",
+    "addressLocality": "Mabalacat City",
+    "addressRegion": "Pampanga",
+    "postalCode": "2010",
+    "addressCountry": "PH"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 15.2215, "longitude": 120.5744 },
+  "openingHoursSpecification": [
     {
-      "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "name": "Garage Café",
-      "image": "https://visitgaragecafe.com/GRG/Icons/Garage%20Cafe%20logo%20ICON.png",
-      "@id": "https://www.visitgaragecafe.com/#coffeeshop",
-      "url": "https://www.visitgaragecafe.com/",
-      "telephone": "+63XXXXXXXXX",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Mawaque",
-        "addressLocality": "Mabalacat City",
-        "addressRegion": "Pampanga",
-        "postalCode": "2010",
-        "addressCountry": "PH"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 15.2215,
-        "longitude": 120.5744
-      },
-      "openingHoursSpecification": {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday",
-          "Friday",
-          "Saturday",
-          "Sunday"
-        ],
-        "opens": "08:00",
-        "closes": "22:00"
-      },
-      "sameAs": [
-        "https://www.facebook.com/garagecafe",
-        "https://www.instagram.com/garagecafe"
-      ]
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "17:00",
+      "closes": "21:00"
     }
-    </script>
+  ],
+  "sameAs": ["https://www.facebook.com/garagecafe","https://www.instagram.com/garagecafe"]
+}
+</script>
 </head>
 <body>
 
@@ -730,13 +264,9 @@ gtag('config', 'G-90Z65E4SVZ');
         <a href="index.html" class="logo">
             <img src="GRG/Icons/Garage Cafe logo ICON.png" alt="Garage Café Logo" onerror="this.style.display='none'">
         </a>
-
         <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span></span><span></span><span></span>
         </div>
-
         <ul id="navMenu">
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
@@ -754,170 +284,241 @@ gtag('config', 'G-90Z65E4SVZ');
     </div>
 </section>
 
+<!-- Contact Info + Images -->
 <section class="contact-section">
-<div class="container">
-    <div class="contact-grid">
-        <div class="contact-info">
-            <h2>Get in Touch</h2>
-            <div class="info-item">
-                <h3>Visit Us</h3>
-                <p>Block 15 Lot 20&22 Cairo St.<br>Metro Clark Homes, Sapang Biabas, Mabalacat City<br>Pampanga, Philippines</p>
+    <div class="container">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h2>Get in Touch</h2>
+                <div class="info-item">
+                    <h3>Visit Us</h3>
+                    <p>Block 15 Lot 20&amp;22 Cairo St.<br>Inside Metro Clark Homes, Sapang Biabas, Mabalacat City<br>Pampanga, Philippines</p>
+                </div>
+                <div class="info-item">
+                    <h3>Call Us</h3>
+                    <p><a href="tel:09214828695">0921 482 8695</a></p>
+                    <p>Whether it's for inquiries, feedback, or just feel like having a chat!</p>
+                </div>
+                <div class="info-item">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/p/Garage-Caf%C3%A9-61567205202489/" aria-label="Facebook"><img src="GRG/Icons/facebook.png" alt="Facebook"></a>
+                        <a href="https://www.instagram.com/garagecafe.1110/" aria-label="Instagram"><img src="GRG/Icons/instagram.png" alt="Instagram"></a>
+                    </div>
+                </div>
             </div>
-            <div class="info-item">
-                <h3>Call Us</h3>
-                <p><a href="tel:09214828695">0921 482 8695</a></p>
-                <p>Whether it's for inquiries, feedback, or just feel like having a chat!</p>
-            </div>
-            <div class="info-item">
-                <h3>Follow Us</h3>
-                <div class="social-links">
-                    <a href="https://www.facebook.com/p/Garage-Caf%C3%A9-61567205202489/"><img src="GRG/Icons/facebook.png" alt="Facebook"></a>
-                    <a href="https://www.instagram.com/garagecafe.1110/"><img src="GRG/Icons/instagram.png" alt="Instagram"></a>
+
+            <div class="contact-images">
+                <div class="image-card">
+                    <div class="image-placeholder"><img src="GRG/CONTACT/cafe_interior.jpg" alt="Café Interior"></div>
+                    <h3>Cozy Atmosphere</h3>
+                </div>
+                <div class="image-card">
+                    <div class="image-placeholder"><img src="GRG/CONTACT/store_front.jpg" alt="Cafe Storefront"></div>
+                    <h3>Find Us Here</h3>
                 </div>
             </div>
         </div>
-
-        <div class="contact-images">
-            <div class="image-card">
-                <div class="image-placeholder"><img src="GRG/CONTACT/cafe_interior.jpg" alt="Café Interior"></div>
-                <h3>Cozy Atmosphere</h3>
-            </div>
-            <div class="image-card">
-                <div class="image-placeholder"><img src="GRG/CONTACT/store_front.jpg" alt="Cafe Storefront"></div>
-                <h3>Find Us Here</h3>
-            </div>
-        </div>
     </div>
-</div>
 </section>
 
+<!-- Send a Message Form -->
+<section class="form-section">
+    <div class="container" style="text-align:center;">
+        <h2 class="section-title">Send a Message</h2>
+        <p class="section-subtitle">Have a question or feedback? Drop us a message and we'll get back to you.</p>
+        <div class="form-wrap">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="fFirstName">First Name *</label>
+                    <input type="text" id="fFirstName" placeholder="John" required>
+                </div>
+                <div class="form-group">
+                    <label for="fLastName">Last Name *</label>
+                    <input type="text" id="fLastName" placeholder="Doe" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="fEmail">Email Address *</label>
+                <input type="email" id="fEmail" placeholder="you@example.com" required>
+            </div>
+            <div class="form-group">
+                <label for="fSubject">Subject</label>
+                <select id="fSubject">
+                    <option value="">-- Select a topic --</option>
+                    <option>General Inquiry</option>
+                    <option>Feedback</option>
+                    <option>Event / Coffee Setup</option>
+                    <option>Pre-Order</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="fMessage">Message *</label>
+                <textarea id="fMessage" placeholder="Write your message here…" required></textarea>
+            </div>
+            <button class="form-submit" id="formSubmitBtn" onclick="submitForm()">Send Message</button>
+            <div class="form-toast" id="formToast"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Brewing Hours -->
 <section class="hours-section">
-<div class="container">
-    <h2>Brewing Hours</h2>
-    <div class="hours-grid">
-        <div class="hours-card">
-            <h3>Open</h3>
-            <p>Wednesday - Saturday<br>5:00 PM - 9:00 PM</p>
-        </div>
-        <div class="hours-card">
-            <h3>Closed</h3>
-            <p>Sunday - Tuesday</p>
+    <div class="container">
+        <h2>Brewing Hours</h2>
+        <div class="hours-grid">
+            <div class="hours-card">
+                <h3>Open</h3>
+                <p>Wednesday - Saturday<br>5:00 PM – 9:00 PM</p>
+            </div>
+            <div class="hours-card">
+                <h3>Closed</h3>
+                <p>Sunday – Tuesday</p>
+            </div>
         </div>
     </div>
-</div>
 </section>
 
+<!-- Map -->
 <section class="map-section">
-<div class="container">
-    <h2>Find Us Here</h2>
-    <div class="map-container">
-        <div class="map-placeholder">
-            <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3850.1081160191698!2d120.6075855737297!3d15.20724858535416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3396ed12da64fb2f%3A0x7460e8f6e70cd500!2zR1JHIENhZsOp!5e0!3m2!1sen!2sph!4v1771312619862!5m2!1sen!2sph">
-            </iframe>
+    <div class="container">
+        <h2>Find Us Here</h2>
+        <div class="map-container">
+            <div class="map-placeholder">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3850.1081160191698!2d120.6075855737297!3d15.20724858535416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3396ed12da64fb2f%3A0x7460e8f6e70cd500!2zR1JHIENhZsOp!5e0!3m2!1sen!2sph!4v1771312619862!5m2!1sen!2sph" allowfullscreen loading="lazy"></iframe>
+            </div>
         </div>
     </div>
-</div>
 </section>
 
+<!-- Footer -->
 <footer>
-<div class="footer-grid">
-    <div class="footer-section">
-        <h3>GARAGE CAFÉ</h3>
-        <p>Mawaque, Mabalacat City, Pampanga</p>
-        <p>Near Metro Clark Homes, Sapang Biabas</p>
-        <p>visitgaragecafe.com</p>
-        <div class="social-links">
-            <a href="https://www.facebook.com/p/Garage-Caf%C3%A9-61567205202489/" aria-label="Facebook">
-                <img src="GRG/Icons/facebook.png" alt="Facebook" onerror="this.style.display='none'">
-            </a>
-            <a href="https://www.instagram.com/garagecafe.1110/" aria-label="Instagram">
-                <img src="GRG/Icons/instagram.png" alt="Instagram" onerror="this.style.display='none'">
-            </a>
+    <div class="footer-grid">
+        <div class="footer-section">
+            <h3>GARAGE CAFÉ</h3>
+            <p>Inside Metro Clark Homes, Sapang Biabas</p>
+            <p>Mabalacat City, Pampanga</p>
+            <p>visitgaragecafe.com</p>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/p/Garage-Caf%C3%A9-61567205202489/" aria-label="Facebook">
+                    <img src="GRG/Icons/facebook.png" alt="Facebook" onerror="this.style.display='none'">
+                </a>
+                <a href="https://www.instagram.com/garagecafe.1110/" aria-label="Instagram">
+                    <img src="GRG/Icons/instagram.png" alt="Instagram" onerror="this.style.display='none'">
+                </a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul class="footer-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="menu.html">Menu</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Opening Hours</h3>
+            <div class="hours-list">
+                <div class="hours-item">
+                    <span class="day">Sunday - Tuesday</span>
+                    <span class="time closed">Closed</span>
+                </div>
+                <div class="hours-item">
+                    <span class="day">Wednesday - Saturday</span>
+                    <span class="time">5–9 PM</span>
+                </div>
+            </div>
         </div>
     </div>
-    <div class="footer-section">
-        <h3>Quick Links</h3>
-        <ul class="footer-links">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="about.html">About Us</a></li>
-            <li><a href="menu.html">Menu</a></li>
-            <li><a href="blog.html">Blog</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
-    </div>
-    <div class="footer-section">
-        <h3>Services</h3>
-        <ul class="footer-links">
-            <li><a href="#">Dine In</a></li>
-            <li><a href="#">Meal Pre-Orders</a></li>
-            <li><a href="#">Event Coffee Setups</a></li>
-            <li><a href="#">Study Space</a></li>
-        </ul>
-    </div>
-</div>
-<div class="copyright">&copy; 2025 Garage Café | www.visitgaragecafe.com</div>
+    <div class="copyright">&copy; 2025 Garage Café | www.visitgaragecafe.com</div>
 </footer>
 
 <div class="scroll-top" id="scrollTop">↑</div>
 
 <script>
-    // Hamburger menu toggle
     const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('navMenu');
+    const navMenu   = document.getElementById('navMenu');
 
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
+    hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); navMenu.classList.toggle('active'); });
+    document.querySelectorAll('nav ul li a').forEach(link => {
+        link.addEventListener('click', () => { hamburger.classList.remove('active'); navMenu.classList.remove('active'); });
     });
-
-    // Close menu when clicking on a link
-    const navLinks = document.querySelectorAll('nav ul li a');
-    navLinks.forEach(link => {
-        link.addEventListener('click', function() {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
-        });
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', function(event) {
-        const isClickInsideNav = navMenu.contains(event.target);
-        const isClickOnHamburger = hamburger.contains(event.target);
-
-        if (!isClickInsideNav && !isClickOnHamburger && navMenu.classList.contains('active')) {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
+    document.addEventListener('click', e => {
+        if (!navMenu.contains(e.target) && !hamburger.contains(e.target) && navMenu.classList.contains('active')) {
+            hamburger.classList.remove('active'); navMenu.classList.remove('active');
         }
     });
+    window.addEventListener('scroll', () => {
+        document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 100);
+        document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 300);
+    });
+    document.getElementById('scrollTop').addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); });
 
-    // Navbar scroll effect
-    window.addEventListener('scroll', function() {
-        const navbar = document.getElementById('navbar');
-        if (window.scrollY > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
+    async function submitForm() {
+        const firstName = document.getElementById('fFirstName').value.trim();
+        const lastName  = document.getElementById('fLastName').value.trim();
+        const email     = document.getElementById('fEmail').value.trim();
+        const message   = document.getElementById('fMessage').value.trim();
+        const subject   = document.getElementById('fSubject').value || 'General Inquiry';
+        const toast     = document.getElementById('formToast');
+        const btn       = document.getElementById('formSubmitBtn');
+
+        toast.className  = 'form-toast';
+        toast.textContent = '';
+
+        if (!firstName || !lastName || !email || !message) {
+            toast.textContent = 'Please fill in all required fields.';
+            toast.className = 'form-toast error';
+            return;
         }
-    });
 
-    // Scroll to top button
-    const scrollTop = document.getElementById('scrollTop');
-
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 300) {
-            scrollTop.classList.add('visible');
-        } else {
-            scrollTop.classList.remove('visible');
+        const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRe.test(email)) {
+            toast.textContent = 'Please enter a valid email address.';
+            toast.className = 'form-toast error';
+            return;
         }
-    });
 
-    scrollTop.addEventListener('click', function() {
-        window.scrollTo({
-            top: 0,
-            behavior: 'smooth'
-        });
-    });
+        btn.disabled    = true;
+        btn.textContent = 'Sending…';
+
+        try {
+            const res = await fetch('https://api.web3forms.com/submit', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                body: JSON.stringify({
+                    access_key: '4e97ace7-1949-4d47-a68c-4999552cdfd8',
+                    subject:    `[Garage Café] ${subject} — ${firstName} ${lastName}`,
+                    from_name:  `${firstName} ${lastName}`,
+                    replyto:    email,
+                    name:       `${firstName} ${lastName}`,
+                    email:      email,
+                    topic:      subject,
+                    message:    message
+                })
+            });
+
+            const data = await res.json();
+
+            if (data.success) {
+                toast.textContent = 'Message sent! We\'ll get back to you soon.';
+                toast.className = 'form-toast success';
+                ['fFirstName','fLastName','fEmail','fMessage'].forEach(id => document.getElementById(id).value = '');
+                document.getElementById('fSubject').value = '';
+            } else {
+                throw new Error(data.message || 'Submission failed');
+            }
+        } catch (err) {
+            toast.textContent = 'Something went wrong. Please try again or call us directly.';
+            toast.className = 'form-toast error';
+        }
+
+        btn.disabled    = false;
+        btn.textContent = 'Send Message';
+    }
 </script>
 
 </body>
