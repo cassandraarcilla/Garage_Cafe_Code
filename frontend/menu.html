@@ -368,8 +368,14 @@
     <div class="scroll-top" id="scrollTop">↑</div>
 
     <script>
-        const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        const BACKEND_URL = IS_LOCAL ? '' : 'https://garage-cafe-code.onrender.com';
+        // ── BACKEND URL FIX ────────────────────────────────────────────
+        // Always use the full localhost URL locally so classmates on any
+        // port or device work correctly. Everyone else hits Render directly.
+        const hostname    = window.location.hostname;
+        const port        = window.location.port;
+        const IS_LOCAL    = (hostname === 'localhost' || hostname === '127.0.0.1') &&
+                            (port === '3000' || port === '5500' || port === '');
+        const BACKEND_URL = IS_LOCAL ? 'http://localhost:3000' : 'https://garage-cafe-code.onrender.com';
         const API = BACKEND_URL + '/api/menuitems';
 
         const CATEGORY_ORDER = ['Coffee Based', 'Specials', 'Non-Coffee', 'Frappe', 'Yogurt', 'Food'];
