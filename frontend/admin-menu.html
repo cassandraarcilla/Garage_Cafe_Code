@@ -9,6 +9,24 @@
         :root { --dark-brown:#2C1810; --medium-brown:#5D4037; --light-brown:#8D6E63; --lighter-brown:#BCAAA4; --off-white:#F5F5DC; --cream:#FFF8E7; --accent-gold:#D4AF37; --success:#2e7d32; --danger:#c62828; --warning:#e65100; }
         * { margin:0; padding:0; box-sizing:border-box; }
         body { font-family:'Roboto',sans-serif; background:#f5efe8; color:var(--dark-brown); display:flex; min-height:100vh; }
+
+        /* ── LOGIN ── */
+        .login-overlay { position:fixed; inset:0; background:var(--cream); z-index:999; display:flex; align-items:center; justify-content:center; padding:1rem; }
+        .login-overlay.hidden { display:none; }
+        .login-box { background:white; border-radius:25px; padding:3rem; width:100%; max-width:420px; box-shadow:0 10px 40px rgba(44,24,16,0.12); }
+        .login-box .logo { text-align:center; margin-bottom:2rem; }
+        .login-box .logo .icon { font-size:3rem; display:block; margin-bottom:0.5rem; }
+        .login-box .logo h2 { font-family:'Yeseva One',serif; font-size:1.8rem; color:var(--dark-brown); }
+        .login-box .logo p { color:var(--light-brown); font-size:0.9rem; margin-top:0.3rem; }
+        .login-box label { display:block; font-size:0.82rem; font-weight:600; color:var(--medium-brown); text-transform:uppercase; letter-spacing:0.3px; margin-bottom:0.4rem; margin-top:1rem; }
+        .login-box input { width:100%; padding:0.85rem 1rem; border:2px solid #e0d5c8; border-radius:10px; font-family:'Roboto',sans-serif; font-size:0.95rem; color:var(--dark-brown); background:#faf7f3; transition:border-color 0.2s; }
+        .login-box input:focus { outline:none; border-color:var(--accent-gold); background:white; }
+        .login-box .btn-login { width:100%; margin-top:1.5rem; padding:0.9rem; background:var(--accent-gold); color:var(--dark-brown); border:none; border-radius:10px; font-family:'Roboto',sans-serif; font-size:1rem; font-weight:700; cursor:pointer; transition:all 0.2s; letter-spacing:0.3px; }
+        .login-box .btn-login:hover { background:#c9a227; transform:translateY(-1px); }
+        .login-error { background:#ffebee; color:#c62828; padding:0.8rem 1rem; border-radius:10px; font-size:0.88rem; margin-top:1rem; border-left:4px solid #c62828; display:none; }
+        .login-error.show { display:block; }
+
+        /* ── MAIN LAYOUT ── */
         .sidebar { width:260px; background:#1e0f09; color:var(--off-white); display:flex; flex-direction:column; padding:2rem 0; position:fixed; height:100vh; z-index:100; overflow-y:auto; }
         .sidebar-logo { text-align:center; padding:0 1.5rem 2rem; border-bottom:1px solid rgba(188,170,164,0.2); }
         .sidebar-logo .icon { font-size:2.5rem; margin-bottom:0.5rem; }
@@ -17,6 +35,9 @@
         .sidebar nav { flex:1; padding:1.5rem 0; }
         .sidebar nav a { display:flex; align-items:center; gap:0.8rem; padding:0.85rem 1.5rem; color:var(--lighter-brown); text-decoration:none; font-size:0.95rem; transition:all 0.2s; border-left:3px solid transparent; }
         .sidebar nav a:hover, .sidebar nav a.active { background:rgba(212,175,55,0.1); color:var(--off-white); border-left-color:var(--accent-gold); }
+        .sidebar-footer { padding:1.5rem; border-top:1px solid rgba(188,170,164,0.2); }
+        .btn-logout { width:100%; padding:0.7rem; background:rgba(198,40,40,0.15); color:#ef9a9a; border:1px solid rgba(198,40,40,0.3); border-radius:8px; font-family:'Roboto',sans-serif; font-size:0.88rem; font-weight:600; cursor:pointer; transition:all 0.2s; }
+        .btn-logout:hover { background:rgba(198,40,40,0.3); color:#ffcdd2; }
         .main { margin-left:260px; flex:1; display:flex; flex-direction:column; min-width:0; }
         .topbar { background:white; padding:1rem 2rem; border-bottom:1px solid #e0d5c8; display:flex; justify-content:space-between; align-items:center; position:sticky; top:0; z-index:50; }
         .topbar h1 { font-family:'Yeseva One',serif; font-size:1.5rem; color:var(--dark-brown); }
@@ -116,20 +137,42 @@
 </head>
 <body>
 
+<!-- ── LOGIN OVERLAY ── -->
+<div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+        <div class="logo">
+            <span class="icon"></span>
+            <h2>Garage Café</h2>
+            <p>Admin Panel – Menu Items</p>
+        </div>
+        <label for="loginUser">Username</label>
+        <input type="text" id="loginUser" placeholder="Username" autocomplete="username">
+        <label for="loginPass">Password</label>
+        <input type="password" id="loginPass" placeholder="Password" autocomplete="current-password">
+        <div class="login-error" id="loginError">Invalid username or password.</div>
+        <button class="btn-login" onclick="doLogin()">Login</button>
+    </div>
+</div>
+
+<!-- ── SIDEBAR ── -->
 <aside class="sidebar">
     <div class="sidebar-logo">
-        <div class="icon">☕</div>
+        <div class="icon"></div>
         <h2>Garage Café</h2>
         <p>Admin Panel</p>
     </div>
     <nav>
-        <a href="admin-menu.html" class="active">🍽️ &nbsp;Menu Items</a>
-        <a href="admin-blog.html">📝 &nbsp;Blog Posts</a>
-        <a href="menu.html" target="_blank">👁️ &nbsp;View Menu</a>
-        <a href="index.html" target="_blank">🏠 &nbsp;View Site</a>
+        <a href="admin-menu.html" class="active"> &nbsp;Menu Items</a>
+        <a href="admin-blog.html"> &nbsp;Blog Posts</a>
+        <a href="menu.html" target="_blank"> &nbsp;View Menu</a>
+        <a href="index.html" target="_blank"> &nbsp;View Site</a>
     </nav>
+    <div class="sidebar-footer">
+        <button class="btn-logout" onclick="doLogout()"> &nbsp;Logout</button>
+    </div>
 </aside>
 
+<!-- ── MAIN ── -->
 <div class="main">
     <div class="topbar">
         <h1>Menu Items</h1>
@@ -148,7 +191,7 @@
             <div class="table-header">
                 <h3>All Menu Items</h3>
                 <div class="filter-row">
-                    <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search..." oninput="renderTable()">
+                    <input type="text" class="search-input" id="searchInput" placeholder="Search..." oninput="renderTable()">
                     <select class="filter-select" id="filterCat" onchange="renderTable()">
                         <option value="">All Categories</option>
                         <option>Coffee Based</option>
@@ -274,12 +317,56 @@
 <div id="toast"></div>
 
 <script>
+    // ── CREDENTIALS (same as admin-blog) ──────────────────────────────
+    const ADMIN_USERNAME = 'admin';
+    const ADMIN_PASSWORD = 'garage123';
+
+    // ── LOGIN LOGIC ───────────────────────────────────────────────────
+    function checkAuth() {
+        if (sessionStorage.getItem('adminLoggedIn') === 'true') {
+            document.getElementById('loginOverlay').classList.add('hidden');
+        }
+        // else overlay remains visible
+    }
+
+    function doLogin() {
+        const user = document.getElementById('loginUser').value.trim();
+        const pass = document.getElementById('loginPass').value;
+        const err  = document.getElementById('loginError');
+        if (user === ADMIN_USERNAME && pass === ADMIN_PASSWORD) {
+            sessionStorage.setItem('adminLoggedIn', 'true');
+            document.getElementById('loginOverlay').classList.add('hidden');
+            err.classList.remove('show');
+            loadItems();
+        } else {
+            err.classList.add('show');
+        }
+    }
+
+    function doLogout() {
+        sessionStorage.removeItem('adminLoggedIn');
+        document.getElementById('loginUser').value = '';
+        document.getElementById('loginPass').value = '';
+        document.getElementById('loginOverlay').classList.remove('hidden');
+    }
+
+    // Allow pressing Enter in the password field to submit
+    document.addEventListener('DOMContentLoaded', () => {
+        checkAuth();
+        document.getElementById('loginPass').addEventListener('keydown', e => {
+            if (e.key === 'Enter') doLogin();
+        });
+        document.getElementById('loginUser').addEventListener('keydown', e => {
+            if (e.key === 'Enter') document.getElementById('loginPass').focus();
+        });
+        if (sessionStorage.getItem('adminLoggedIn') === 'true') loadItems();
+    });
+
     // ── API CONFIG ─────────────────────────────────────────────────────
     const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
     const BACKEND_URL = IS_LOCAL ? '' : 'https://garage-cafe-code.onrender.com';
     const API = BACKEND_URL + '/api';
 
-    // Resolve image URLs — handles both old relative paths and new absolute URLs
     function resolveImg(url) {
         if (!url) return '';
         if (url.startsWith('http')) return url;
@@ -288,8 +375,6 @@
 
     let allItems = [];
     let editingId = null;
-
-    document.addEventListener('DOMContentLoaded', loadItems);
 
     async function loadItems() {
         const MAX_RETRIES = 5;
@@ -485,7 +570,6 @@
             const method = editingId ? 'PUT' : 'POST';
             const res = await fetch(url, { method, body: fd });
             if (!res.ok) {
-                // Try to parse JSON error from server, fall back to status text
                 let errMsg = `Server error ${res.status}`;
                 try {
                     const ct = res.headers.get('content-type') || '';
