@@ -40,7 +40,7 @@ nav .container { max-width:1400px; margin:0 auto; padding:0 3rem; display:flex; 
 .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(9px, -9px); }
 
 nav ul { display:flex; list-style:none; gap:2.5rem; }
-nav a { color:var(--lighter-brown); text-decoration:none; font-weight:500; letter-spacing:1px; position:relative; transition:color 0.3s ease; padding:0.5rem 0; }
+nav a { color:var(--lighter-brown); text-decoration:none; font-weight:500; font-size:1rem; letter-spacing:1px; position:relative; transition:color 0.3s ease; padding:0.5rem 0; }
 nav a::after { content:''; position:absolute; bottom:0; left:0; width:0; height:2px; background:var(--accent-gold); transition:width 0.3s ease; }
 nav a:hover::after, nav a.active::after { width:100%; }
 nav a:hover, nav a.active { color:var(--off-white); }
@@ -128,7 +128,6 @@ footer { background:linear-gradient(to bottom,var(--dark-brown),#0f0805); color:
 .footer-section p, .footer-section a { color:var(--lighter-brown); text-decoration:none; display:block; margin-bottom:0.5rem; transition:all 0.3s ease; }
 .footer-section a:hover { color:var(--off-white); padding-left:5px; }
 .footer-links { list-style:none; padding:0; margin:0; }
-.footer-links li { margin-bottom:0.8rem; }
 .footer-social { display:flex; gap:0.8rem; margin-top:1rem; align-items:center; }
 .footer-social a { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; background:rgba(188,170,164,0.15); border-radius:50%; padding:8px; transition:background 0.3s ease, transform 0.3s ease; }
 .footer-social a:hover { background:rgba(212,175,55,0.25); transform:translateY(-3px); }
@@ -153,9 +152,12 @@ footer { background:linear-gradient(to bottom,var(--dark-brown),#0f0805); color:
 @keyframes slideUp { 0%{opacity:0;transform:translateY(20px);} 100%{opacity:1;transform:translateY(0);} }
 
 /* RESPONSIVE */
+
+/* 1920px+ — very large / ultrawide desktops */
 @media screen and (min-width: 1920px) {
     nav .container { max-width:1800px; padding:0 4rem; }
     nav ul { gap:3.5rem; }
+    nav a { font-size:1.1rem; }
     .logo img { height:60px; }
     .page-hero { padding:15rem 4rem 6rem; }
     .page-hero h1 { font-size:5.5rem; }
@@ -166,13 +168,16 @@ footer { background:linear-gradient(to bottom,var(--dark-brown),#0f0805); color:
     .copyright { max-width:1800px; }
 }
 
+/* 1440px–1919px — large desktop */
 @media screen and (min-width: 1440px) and (max-width: 1919px) {
     nav .container { max-width:1600px; padding:0 3.5rem; }
+    nav ul { gap:2.5rem; }
     .container { max-width:1600px; }
     .footer-grid { max-width:1600px; }
     .copyright { max-width:1600px; }
 }
 
+/* 1280px–1439px */
 @media screen and (min-width: 1280px) and (max-width: 1439px) {
     nav .container { max-width:1400px; padding:0 3rem; }
     .container { max-width:1400px; }
@@ -180,6 +185,7 @@ footer { background:linear-gradient(to bottom,var(--dark-brown),#0f0805); color:
     .copyright { max-width:1400px; }
 }
 
+/* 1024px–1279px */
 @media screen and (min-width: 1024px) and (max-width: 1279px) {
     nav .container { max-width:1200px; padding:0 2.5rem; }
     .container { max-width:1200px; }
@@ -189,6 +195,7 @@ footer { background:linear-gradient(to bottom,var(--dark-brown),#0f0805); color:
     .copyright { max-width:1200px; }
 }
 
+/* Tablet & below */
 @media screen and (max-width: 1024px) {
     .hamburger { display:flex; }
     nav ul { position:fixed; top:0; right:-100%; width:300px; height:100vh; background:rgba(44,24,16,0.98); flex-direction:column; justify-content:flex-start; align-items:flex-start; padding-top:100px; padding-left:2rem; gap:2.5rem; transition:right 0.3s ease; box-shadow:-5px 0 20px rgba(0,0,0,0.3); z-index:1000; }
@@ -490,7 +497,7 @@ gtag('config', 'G-90Z65E4SVZ');
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify({
-                    access_key: '4e97ace7-1949-4d47-a68c-4999552cdfd8',
+                    access_key: '4e97ace7-1949-4d47-a68c-4999552cdfd8' || '9TIEAaXwRyKPcutuspPk6mRT96I',
                     subject:    `[Garage Café] ${subject} — ${firstName} ${lastName}`,
                     from_name:  `${firstName} ${lastName}`,
                     replyto:    email,
