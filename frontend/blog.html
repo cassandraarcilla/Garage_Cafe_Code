@@ -60,7 +60,7 @@
 
         /* Blog Grid */
         .blog-section { padding: 6rem 3rem; min-height: 50vh; }
-        .blog-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 3rem; }
+        .blog-grid { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
 
         /* Skeleton Loading */
         @keyframes shimmer { 0% { background-position: -800px 0; } 100% { background-position: 800px 0; } }
@@ -163,7 +163,7 @@
         @media screen and (min-width: 1440px) and (max-width: 1919px) {
             nav .container { max-width: 1600px; padding: 0 3.5rem; }
             nav ul { gap: 2.5rem; }
-            .blog-grid { max-width: 1600px; grid-template-columns: repeat(4, 1fr); gap: 3rem; }
+            .blog-grid { max-width: 1600px; grid-template-columns: repeat(3, 1fr); gap: 3rem; }
             .footer-grid { max-width: 1600px; }
             .copyright { max-width: 1600px; }
         }
@@ -202,7 +202,7 @@
         @media screen and (max-width: 768px) {
             .page-header { padding: 11rem 2rem 4rem; }
             .page-header h1 { font-size: 2.5rem; }
-            .blog-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .blog-grid { grid-template-columns: 1fr; gap: 1.5rem; }
             .blog-section { padding: 4rem 1.5rem; }
             footer { padding: 3rem 1.5rem 1.5rem; }
         }
@@ -347,7 +347,13 @@
 
     const API = `${BASE_URL}/api/blogs`;
 
-    function getBlogsPerPage() { return window.innerWidth <= 1024 ? 3 : 6; }
+    function getBlogsPerPage() {
+        const w = window.innerWidth;
+        if (w <= 768) return 3;
+        if (w <= 1024) return 4;
+        if (w < 1920) return 6;
+        return 8;
+    }
 
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('navMenu');

@@ -128,10 +128,10 @@ footer { background:linear-gradient(to bottom,var(--dark-brown),#0f0805); color:
 .footer-section p, .footer-section a { color:var(--lighter-brown); text-decoration:none; display:block; margin-bottom:0.5rem; transition:all 0.3s ease; }
 .footer-section a:hover { color:var(--off-white); padding-left:5px; }
 .footer-links { list-style:none; padding:0; margin:0; }
-.footer-social { display:flex; gap:0.8rem; margin-top:1rem; align-items:center; }
-.footer-social a { display:inline-flex; align-items:center; justify-content:center; width:40px; height:40px; background:rgba(188,170,164,0.15); border-radius:50%; padding:8px; transition:background 0.3s ease, transform 0.3s ease; }
-.footer-social a:hover { background:rgba(212,175,55,0.25); transform:translateY(-3px); }
-.footer-social img { width:100%; height:100%; object-fit:contain; filter:brightness(0) invert(1); display:block; }
+.footer-social { display:flex; gap:1rem; margin-top:1rem; }
+.footer-social a { width:45px; height:45px; background:linear-gradient(135deg, var(--medium-brown), var(--light-brown)); border-radius:50%; display:flex; align-items:center; justify-content:center; transition:all 0.4s ease; box-shadow:0 4px 10px rgba(0,0,0,0.2); padding:10px; }
+.footer-social a:hover { background:linear-gradient(135deg, var(--accent-gold), var(--light-brown)); transform:translateY(-5px) rotate(5deg); box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+.footer-social img { width:100%; height:100%; object-fit:contain; filter:brightness(0) invert(1); }
 
 /* Opening Hours — single column */
 .hours-list { margin-top: 1rem; display: flex; flex-direction: column; gap: 0; }
@@ -497,7 +497,7 @@ gtag('config', 'G-90Z65E4SVZ');
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                 body: JSON.stringify({
-                    access_key: '4e97ace7-1949-4d47-a68c-4999552cdfd8' || '9TIEAaXwRyKPcutuspPk6mRT96I',
+                    access_key: '4e97ace7-1949-4d47-a68c-4999552cdfd8',
                     subject:    `[Garage Café] ${subject} — ${firstName} ${lastName}`,
                     from_name:  `${firstName} ${lastName}`,
                     replyto:    email,
