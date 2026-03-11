@@ -178,7 +178,7 @@ app.get('/', (req, res) => {
     return res.sendFile(path.join(FRONTEND_DIR, 'index.html'));
   }
   res.json({
-    status: 'Garage Cafe API is running ☕',
+    status: 'Garage Cafe API is running',
     cloudinary: CLOUDINARY_READY ? 'connected' : 'NOT CONFIGURED — images will not save',
     endpoints: { menu: 'GET /api/menuitems', adminMenu: 'GET /api/admin/menuitems', blogs: 'GET /api/blogs', health: 'GET /health' }
   });

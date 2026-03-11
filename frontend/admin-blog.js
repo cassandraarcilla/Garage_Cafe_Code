@@ -17,7 +17,7 @@ const quill = new Quill('#editor', {
     }
 });
 
-// AUTO SWITCH: Local vs Render
+// AUTO SWITCH: Local vs Render — FIXED: must match blog.html and blog-single.html
 const BASE_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
     ? "http://localhost:3000"
     : "https://garage-cafe-code.onrender.com";
@@ -29,33 +29,11 @@ console.log('API URL:', API);
 // Helper function to properly construct image URLs
 function getFullImageUrl(imageUrl) {
     if (!imageUrl) return '';
-    
-    console.log('Original imageUrl:', imageUrl);
-    
-    // If it's already a full URL, return as is
-    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) {
-        console.log('Already full URL:', imageUrl);
-        return imageUrl;
-    }
-    
-    // If it's a local GRG file
-    if (imageUrl.startsWith('GRG/')) {
-        console.log('Local GRG file:', imageUrl);
-        return imageUrl;
-    }
-    
-    // If it starts with /uploads, construct full URL to backend
-    if (imageUrl.startsWith('/uploads/')) {
-        const fullUrl = `${BASE_URL}${imageUrl}`;
-        console.log('Constructed upload URL:', fullUrl);
-        return fullUrl;
-    }
-    
-    // Clean the path and construct URL
+    if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) return imageUrl;
+    if (imageUrl.startsWith('GRG/')) return imageUrl;
+    if (imageUrl.startsWith('/uploads/')) return `${BASE_URL}${imageUrl}`;
     const cleanPath = imageUrl.replace(/^\.\/|^\.\.\/|^\/+/, '');
-    const fullUrl = `${BASE_URL}/${cleanPath}`;
-    console.log('Constructed URL:', fullUrl);
-    return fullUrl;
+    return `${BASE_URL}/${cleanPath}`;
 }
 
 // Load blogs
@@ -64,14 +42,10 @@ async function loadBlogs() {
         console.log('Fetching blogs from:', API);
         const res = await fetch(API, {
             method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-            }
+            headers: { 'Accept': 'application/json' }
         });
         
-        if (!res.ok) {
-            throw new Error(`HTTP error! status: ${res.status}`);
-        }
+        if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
         
         const blogs = await res.json();
         console.log('Blogs loaded:', blogs.length);
@@ -85,9 +59,6 @@ async function loadBlogs() {
         
         blogs.forEach(blog => {
             const row = document.createElement('tr');
-
-            // PHOTO COLUMN REMOVED - No image preview in table
-
             row.innerHTML = `
                 <td>${blog.title}</td>
                 <td>${blog.author}</td>
@@ -130,6 +101,12 @@ blogForm.addEventListener('submit', async e => {
         formData.append('image', image);
     }
 
+    // Show saving state
+    const saveBtn = blogForm.querySelector('button[type="submit"]');
+    const originalText = saveBtn.textContent;
+    saveBtn.textContent = 'Saving…';
+    saveBtn.disabled = true;
+
     try {
         console.log('Saving blog to:', id ? `${API}/${id}` : API);
         const res = await fetch(id ? `${API}/${id}` : API, {
@@ -155,7 +132,6 @@ blogForm.addEventListener('submit', async e => {
                 previewLabel.style.display = 'none';
             }
             
-            // Reload blogs
             loadBlogs();
         } else {
             const errorText = await res.text();
@@ -165,6 +141,9 @@ blogForm.addEventListener('submit', async e => {
     } catch (error) {
         console.error('Error saving blog:', error);
         alert('Error saving blog. Check your connection and try again.');
+    } finally {
+        saveBtn.textContent = originalText;
+        saveBtn.disabled = false;
     }
 });
 
@@ -176,12 +155,7 @@ async function editBlog(id) {
         const blogs = await res.json();
         const blog = blogs.find(b => b._id === id);
 
-        if (!blog) {
-            alert('Blog not found');
-            return;
-        }
-
-        console.log('Blog data:', blog);
+        if (!blog) { alert('Blog not found'); return; }
 
         document.getElementById('blogId').value = blog._id;
         document.getElementById('title').value = blog.title;
@@ -189,7 +163,6 @@ async function editBlog(id) {
         document.getElementById('category').value = blog.category;
         quill.root.innerHTML = blog.content;
 
-        // Show current image
         const preview = document.getElementById('currentImagePreview');
         const previewLabel = document.getElementById('currentImageLabel');
         
@@ -198,10 +171,8 @@ async function editBlog(id) {
             preview.src = fullImageUrl;
             preview.style.display = 'block';
             previewLabel.style.display = 'block';
-            console.log('Preview image set to:', fullImageUrl);
         }
 
-        // Scroll to form
         window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (error) {
         console.error('Error editing blog:', error);
@@ -211,17 +182,13 @@ async function editBlog(id) {
 
 // Delete blog
 async function deleteBlog(id) {
-    if (!confirm('Are you sure you want to delete this blog? This action cannot be undone.')) {
-        return;
-    }
+    if (!confirm('Are you sure you want to delete this blog? This action cannot be undone.')) return;
     
     try {
         console.log('Deleting blog:', id);
         const res = await fetch(`${API}/${id}`, { 
             method: 'DELETE',
-            headers: {
-                'Accept': 'application/json',
-            }
+            headers: { 'Accept': 'application/json' }
         });
         
         if (res.ok || res.status === 204) {
@@ -230,7 +197,6 @@ async function deleteBlog(id) {
             loadBlogs();
         } else {
             const error = await res.text();
-            console.error('Delete failed:', error);
             alert('Failed to delete blog: ' + error);
         }
     } catch (error) {
@@ -243,11 +209,10 @@ async function deleteBlog(id) {
 document.addEventListener('DOMContentLoaded', function() {
     if (sessionStorage.getItem('adminLoggedIn') === 'true') {
         console.log('User logged in, loading blogs...');
-        setTimeout(loadBlogs, 500); // Small delay to ensure DOM is ready
+        setTimeout(loadBlogs, 500);
     }
 });
 
-// Make functions available globally
 window.editBlog = editBlog;
 window.deleteBlog = deleteBlog;
 window.loadBlogs = loadBlogs;
