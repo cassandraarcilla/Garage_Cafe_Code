@@ -391,14 +391,16 @@
             const blogCard = document.createElement('article');
             blogCard.className = 'blog-card';
             blogCard.style.animationDelay = `${(i + 1) * 0.1}s`;
-            blogCard.onclick = () => window.location.href = `blog-single.html?id=${blog._id}`;
+            const _slug = blog.slug || blog.title.toLowerCase().replace(/[^a-z0-9\s-]/g,'').trim().replace(/\s+/g,'-');
+            const _url = `/blog/${_slug}/`;
+            blogCard.onclick = () => window.location.href = _url;
 
             const tempDiv = document.createElement('div');
             tempDiv.innerHTML = blog.excerpt || '';
             const cleanExcerpt = tempDiv.textContent || tempDiv.innerText || '';
             const fullImageUrl = getImageUrl(blog.imageUrl);
 
-            blogCard.innerHTML = `<div class="blog-image-container"><img src="${fullImageUrl}" alt="${blog.title}" class="blog-image" onerror="this.onerror=null; this.src='GRG/BLOG/blog_header.jpg';"></div><div class="blog-content"><div class="blog-meta"><span class="blog-author">By ${blog.author}</span><span class="blog-category">${blog.category}</span></div><h3>${blog.title}</h3><div class="blog-excerpt">${cleanExcerpt}</div><a href="blog-single.html?id=${blog._id}" class="read-more">Read More <span class="read-more-arrow">→</span></a></div>`;
+            blogCard.innerHTML = `<div class="blog-image-container"><img src="${fullImageUrl}" alt="${blog.title}" class="blog-image" onerror="this.onerror=null; this.src='GRG/BLOG/blog_header.jpg';"></div><div class="blog-content"><div class="blog-meta"><span class="blog-author">By ${blog.author}</span><span class="blog-category">${blog.category}</span></div><h3>${blog.title}</h3><div class="blog-excerpt">${cleanExcerpt}</div><a href="${_url}" class="read-more">Read More <span class="read-more-arrow">→</span></a></div>`;
             blogGrid.appendChild(blogCard);
         });
 

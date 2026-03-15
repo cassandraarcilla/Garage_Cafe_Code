@@ -554,9 +554,9 @@
 </head>
 <body>
     <nav>
-        <a href="index.html">HOME</a>
-        <a href="blog.html">BLOG FEED</a>
-        <a href="menu.html">MENU</a>
+        <a href="/index.html">HOME</a>
+        <a href="/blog.html">BLOG FEED</a>
+        <a href="/menu.html">MENU</a>
     </nav>
 
     <div id="blogContainer">
@@ -597,9 +597,7 @@
 <script>
     const BASE_URL = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
         ? "http://localhost:3000"
-        : "https://garage-cafe.onrender.com";
-
-    const API = `${BASE_URL}/api/blogs`;
+        : "https://garage-cafe-code.onrender.com";
 
     const scrollTopBtn = document.getElementById('scrollTop');
     window.addEventListener('scroll', () => {
@@ -612,78 +610,87 @@
         if (imageUrl.startsWith('http://') || imageUrl.startsWith('https://')) return imageUrl;
         if (imageUrl.startsWith('GRG/')) return imageUrl;
         if (imageUrl.startsWith('/uploads/')) return `${BASE_URL}${imageUrl}`;
-        const cleanPath = imageUrl.replace(/^\.\/|^\.\.\/|^\/+/, '');
+        const cleanPath = imageUrl.replace(/^(\.\.?\/|\/+)/, '');
         return `${BASE_URL}/${cleanPath}`;
     }
 
-    const params = new URLSearchParams(window.location.search);
-    const blogId = params.get('id');
+    function toSlug(title) {
+        return title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
+    }
+
+    // Read slug from /blog/<slug>/ path
+    const _parts = window.location.pathname.replace(/^\/|\/$/g, '').split('/');
+    const _slug  = _parts.length >= 2 ? decodeURIComponent(_parts[_parts.length - 1]) : null;
+    const _id    = new URLSearchParams(window.location.search).get('id');
     const container = document.getElementById('blogContainer');
 
-    async function loadBlog() {
-        if (!blogId) {
-            container.innerHTML = `
-                <div class="post-header" style="background-image: url('GRG/BLOG/blog_header.jpg')">
-                    <h1>Blog Not Found</h1>
+    function showError(title, msg) {
+        container.innerHTML = `
+            <div class="post-header" style="background-image: url('GRG/BLOG/blog_header.jpg')">
+                <h1>${title}</h1>
+            </div>
+            <article class="post-container">
+                <p>${msg}</p>
+                <a href="/blog.html" class="back-link">\u2190 BACK TO ALL STORIES</a>
+            </article>`;
+    }
+
+    function renderBlog(blog) {
+        document.getElementById('pageTitle').innerText = `${blog.title} | Garage Caf\u00e9`;
+        const img = blog.imageUrl ? getFullImageUrl(blog.imageUrl) : 'GRG/BLOG/blog_header.jpg';
+        container.innerHTML = `
+            <div class="post-header" style="background-image: url('${img}')">
+                <h1>${blog.title}</h1>
+            </div>
+            <article class="post-container">
+                <div class="meta">
+                    <span class="meta-author">By ${blog.author}</span>
+                    <span class="category-tag">${blog.category}</span>
                 </div>
-                <article class="post-container">
-                    <p>Invalid blog link.</p>
-                    <a href="blog.html" class="back-link">← BACK TO ALL STORIES</a>
-                </article>
-            `;
-            return;
-        }
+                <div class="content">${blog.content || '<p>No content available.</p>'}</div>
+                <a href="/blog.html" class="back-link">\u2190 BACK TO ALL STORIES</a>
+            </article>`;
+        setTimeout(() => {
+            document.querySelectorAll('.content img').forEach(i => {
+                const s = i.getAttribute('src');
+                if (s && !s.startsWith('http') && !s.startsWith('data:') && !s.startsWith('GRG/'))
+                    i.src = getFullImageUrl(s);
+                i.onerror = function(){ this.style.display = 'none'; };
+            });
+        }, 100);
+    }
 
+    async function loadBlog() {
+        if (!_slug && !_id) { showError('Blog Not Found', 'Invalid blog link.'); return; }
         try {
-            const res = await fetch(API);
-            if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+            let blog = null;
 
-            const blogs = await res.json();
-            const blog = blogs.find(b => b._id === blogId);
+            // 1. Try slug API route first
+            if (_slug) {
+                const r = await fetch(`${BASE_URL}/api/blogs/slug/${encodeURIComponent(_slug)}`);
+                if (r.ok) blog = await r.json();
+                else if (r.status !== 404) throw new Error(`HTTP ${r.status}`);
+            }
+
+            // 2. Fallback: fetch all and match by slug or id
+            //    Works for old posts that have no slug saved in DB yet
+            if (!blog) {
+                const r = await fetch(`${BASE_URL}/api/blogs`);
+                if (!r.ok) throw new Error(`HTTP ${r.status}`);
+                const all = await r.json();
+                if (_slug) {
+                    blog = all.find(b => (b.slug || toSlug(b.title)) === _slug);
+                }
+                if (!blog && _id) {
+                    blog = all.find(b => b._id === _id);
+                }
+            }
 
             if (!blog) throw new Error('Blog not found');
-
-            document.getElementById('pageTitle').innerText = `${blog.title} | Garage Café`;
-
-            const headerImageUrl = getFullImageUrl(blog.imageUrl);
-
-            container.innerHTML = `
-                <div class="post-header" style="background-image: url('${headerImageUrl}')">
-                    <h1>${blog.title}</h1>
-                </div>
-                <article class="post-container">
-                    <div class="meta">
-                        <span class="meta-author">By ${blog.author}</span>
-                        <span class="category-tag">${blog.category}</span>
-                    </div>
-                    <div class="content">
-                        ${blog.content || '<p>No content available.</p>'}
-                    </div>
-                    <a href="blog.html" class="back-link">← BACK TO ALL STORIES</a>
-                </article>
-            `;
-
-            setTimeout(() => {
-                document.querySelectorAll('.content img').forEach(img => {
-                    const src = img.getAttribute('src');
-                    if (src && !src.startsWith('http') && !src.startsWith('data:') && !src.startsWith('GRG/')) {
-                        img.src = getFullImageUrl(src);
-                    }
-                    img.onerror = function() { this.style.display = 'none'; };
-                });
-            }, 100);
-
-        } catch (err) {
-            console.error('Error loading blog:', err);
-            container.innerHTML = `
-                <div class="post-header" style="background-image: url('GRG/BLOG/blog_header.jpg')">
-                    <h1>Error Loading Blog</h1>
-                </div>
-                <article class="post-container">
-                    <p>Unable to load this blog. ${err.message}</p>
-                    <a href="blog.html" class="back-link">← BACK TO ALL STORIES</a>
-                </article>
-            `;
+            renderBlog(blog);
+        } catch(err) {
+            console.error('loadBlog error:', err);
+            showError('Error Loading Blog', `Unable to load this blog. ${err.message}`);
         }
     }
 

@@ -79,6 +79,13 @@ const FRONTEND_DIR = path.join(__dirname, '../frontend');
 
 if (!IS_RENDER && fs.existsSync(FRONTEND_DIR)) {
   console.log('Local mode: serving frontend from', FRONTEND_DIR);
+  // /blog/<slug>/ must be registered BEFORE static so Express doesn't
+  // serve index.html for unknown paths before this route runs
+  app.get('/blog/:slug', (req, res) => {
+    const f = path.join(FRONTEND_DIR, 'blog-single.html');
+    if (fs.existsSync(f)) return res.sendFile(f);
+    res.status(404).send('blog-single.html not found');
+  });
   app.use(express.static(FRONTEND_DIR));
 } else {
   console.log('Production mode: API only (frontend on Hostinger)');
@@ -96,6 +103,7 @@ mongoose.connect(MONGO_URI)
 // ── SCHEMAS ───────────────────────────────────────────────────────────
 const blogSchema = new mongoose.Schema({
   title:         { type: String, required: true },
+  slug:          { type: String, unique: true, sparse: true },
   author:        { type: String, required: true },
   category:      { type: String },
   excerpt:       { type: String },
@@ -202,10 +210,32 @@ app.get('/api/cloudinary-test', async (req, res) => {
   }
 });
 
+// ── SLUG HELPERS ─────────────────────────────────────────────────────
+function toSlug(title) {
+  return title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
+}
+async function uniqueSlug(base, excludeId = null) {
+  let slug = base, n = 2;
+  while (true) {
+    const q = { slug };
+    if (excludeId) q._id = { $ne: excludeId };
+    if (!await Blog.findOne(q)) return slug;
+    slug = `${base}-${n++}`;
+  }
+}
+
 // ── BLOG ROUTES ───────────────────────────────────────────────────────
 app.get('/api/blogs', async (req, res) => {
   try { res.json(await Blog.find().sort({ createdAt: -1 })); }
   catch (err) { res.status(500).json({ message: err.message }); }
+});
+
+app.get('/api/blogs/slug/:slug', async (req, res) => {
+  try {
+    const blog = await Blog.findOne({ slug: req.params.slug });
+    if (!blog) return res.status(404).json({ message: 'Blog not found' });
+    res.json(blog);
+  } catch (err) { res.status(500).json({ message: err.message }); }
 });
 
 app.get('/api/blogs/:id', async (req, res) => {
@@ -218,7 +248,7 @@ app.get('/api/blogs/:id', async (req, res) => {
 
 app.post('/api/blogs', handleUpload(uploadBlog.single('image')), async (req, res) => {
   try {
-    const blogData = { title: req.body.title, author: req.body.author, category: req.body.category, excerpt: req.body.excerpt, content: req.body.content };
+    const blogData = { title: req.body.title, slug: await uniqueSlug(toSlug(req.body.title)), author: req.body.author, category: req.body.category, excerpt: req.body.excerpt, content: req.body.content };
     if (req.file) {
       blogData.imageUrl      = getCloudinaryUrl(req.file);
       blogData.imagePublicId = getCloudinaryPublicId(req.file);
@@ -230,7 +260,7 @@ app.post('/api/blogs', handleUpload(uploadBlog.single('image')), async (req, res
 
 app.put('/api/blogs/:id', handleUpload(uploadBlog.single('image')), async (req, res) => {
   try {
-    const updateData = { title: req.body.title, author: req.body.author, category: req.body.category, excerpt: req.body.excerpt, content: req.body.content };
+    const updateData = { title: req.body.title, slug: await uniqueSlug(toSlug(req.body.title), req.params.id), author: req.body.author, category: req.body.category, excerpt: req.body.excerpt, content: req.body.content };
     if (req.file) {
       const existing = await Blog.findById(req.params.id);
       if (existing?.imagePublicId) await deleteCloudinaryImage(existing.imagePublicId);
