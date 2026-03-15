@@ -7,7 +7,7 @@
 <meta name="description" content="Read the latest from Garage Café Mabalacat - coffee tips, local stories, and updates from your neighborhood café near Metro Clark Homes.">
 <meta name="keywords" content="local café Mawaque, coffee shop Mabalacat City, Garage Café Pampanga, community café, support local business, study café near me">
 <meta name="google-site-verification" content="V0YQPBmwBNB9DKfbnGSBiypyLKOI9rSlFgJZc8A22uc" />
-<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Lato:wght@300;400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Yeseva+One&family=Lato:wght@300;400;700;900&family=Roboto:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="icon" href="GRG/Icons/Garage Cafe logo ICON.png" type="image/png">
 <style>
     :root {
@@ -44,7 +44,7 @@
     .hamburger.active span:nth-child(2) { opacity: 0; }
     .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(9px, -9px); }
     nav ul { display: flex; list-style: none; gap: 2.5rem; }
-    nav a { color: var(--lighter-brown); text-decoration: none; font-weight: 500; font-size: 1rem; letter-spacing: 1px; position: relative; transition: color 0.3s ease; padding: 0.5rem 0; }
+    nav a { color: var(--lighter-brown); text-decoration: none; font-family: 'Roboto', Arial, sans-serif; font-weight: 500; letter-spacing: 1px; position: relative; transition: color 0.3s ease; padding: 0.5rem 0; }
     nav a::after { content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 2px; background: var(--accent-gold); transition: width 0.3s ease; }
     nav a:hover::after, nav a.active::after { width: 100%; }
     nav a:hover, nav a.active { color: var(--off-white); }
@@ -448,7 +448,6 @@
         if (!blogGrid) return;
         showSkeletons();
 
-        // Show wake-up banner after 4s if Render free tier is spinning up
         const wakeupTimer = setTimeout(() => {
             const banner = document.getElementById('wakeupBanner');
             if (banner) banner.classList.add('show');
