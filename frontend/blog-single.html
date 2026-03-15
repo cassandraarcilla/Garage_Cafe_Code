@@ -618,10 +618,14 @@
         return title.toLowerCase().replace(/[^a-z0-9\s-]/g, '').trim().replace(/\s+/g, '-');
     }
 
-    // Read slug from /blog/<slug>/ path
-    const _parts = window.location.pathname.replace(/^\/|\/$/g, '').split('/');
-    const _slug  = _parts.length >= 2 ? decodeURIComponent(_parts[_parts.length - 1]) : null;
-    const _id    = new URLSearchParams(window.location.search).get('id');
+    // Read slug from /blog/<slug>/ path OR ?slug= query param (Hostinger uses the latter via .htaccess rewrite)
+    const _params = new URLSearchParams(window.location.search);
+    const _parts  = window.location.pathname.replace(/^\/|\/$/g, '').split('/');
+    const _pathSlug = (_parts.length >= 2 && _parts[0] === 'blog')
+        ? decodeURIComponent(_parts[_parts.length - 1])
+        : null;
+    const _slug = _pathSlug || _params.get('slug') || null;
+    const _id   = _params.get('id');
     const container = document.getElementById('blogContainer');
 
     function showError(title, msg) {

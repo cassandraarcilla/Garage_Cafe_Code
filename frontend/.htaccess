@@ -6,5 +6,5 @@ RewriteCond %{REQUEST_FILENAME} -f [OR]
 RewriteCond %{REQUEST_FILENAME} -d
 RewriteRule ^ - [L]
 
-# Route /blog/<slug>/ to blog-single.html
-RewriteRule ^blog/([a-z0-9-]+)/?$ /blog-single.html [L]
+# Route /blog/<slug>/ to blog-single.html, passing slug as query param
+RewriteRule ^blog/([a-z0-9-]+)/?$ /blog-single.html?slug=$1 [QSA,L]
